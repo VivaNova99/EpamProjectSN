@@ -15,7 +15,7 @@
 
  CREATE TABLE ForumThemes (
    id INT PRIMARY KEY,
-   order INT,
+   themes_order INT,
    name VARCHAR(50) NOT NULL
  );
 
