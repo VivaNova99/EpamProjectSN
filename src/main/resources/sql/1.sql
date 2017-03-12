@@ -13,6 +13,7 @@
    description VARCHAR(20) NOT NULL
  );
 
+
  CREATE TABLE ForumThemes (
    id INT PRIMARY KEY,
    themes_order INT,
