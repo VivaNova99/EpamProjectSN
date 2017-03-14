@@ -2,27 +2,29 @@ package model;
 
 import lombok.Value;
 
+import java.time.LocalDateTime;
+
 @Value
 public class WallMessages {
 
     private int id;
 //    id INT AUTO_INCREMENT PRIMARY KEY,
-    private int senderUserId;
+    private User senderUserId;
 //    sender_user_id int NOT NULL,
-    private int recieverUserId;
+    private User recieverUserId;
 //    reciever_user_id int NOT NULL,
     private String text;
 //    text VARCHAR(500) NOT NULL,
     private String picture;
 //    picture VARCHAR(100) NOT NULL,
-    private
+    private LocalDateTime dateTime;
 //    date_time DATETIME NOT NULL,
-    private int forumThemesId;
+    private ForumThemes forumThemesId;
 //    forum_themes_id INT,
-    private int parentMessageId;
+    private WallMessages parentMessageId;
 //    parent_message_id INT,
-    private int status;
-//    status INT,
+    private MessagesStatus status;
+//    status_id INT,
 //
 //    FOREIGN KEY (parent_message_id) REFERENCES WallMessages(id),
 //    FOREIGN KEY (status) REFERENCES MessagesStatus(id)
