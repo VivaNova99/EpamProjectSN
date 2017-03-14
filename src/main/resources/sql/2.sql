@@ -19,9 +19,14 @@ INSERT INTO User (
     'Иван',
     'Петров',
     1989-03-08,
-    1,
+    3,
     'ivan@mail.ru',
     'qwerty',
     'ссылка на фото профиля Ивана Петрова',
     'Совсем один',
-    'СПб')
+    'СПб');
+
+
+INSERT INTO ForumThemes (id, themes_order, name) VALUES (1, 10, 'Про детей');
+INSERT INTO ForumThemes (id, themes_order, name) VALUES (2, 20, 'Про взрослых');
+INSERT INTO ForumThemes (id, themes_order, name) VALUES (3, 30, 'Прочее')
