@@ -2,8 +2,12 @@ package model;
 
 import lombok.Value;
 
+import java.time.LocalDate;
+
 @Value
 public class User {
+
+    public static String FIRST_NAME_KEY = "firstName";
 
     private int id;
 //    id INT AUTO_INCREMENT PRIMARY KEY,
@@ -11,13 +15,14 @@ public class User {
 //    first_name VARCHAR(50) NOT NULL,
     private String lastName;
 //    last_name VARCHAR(50) NOT NULL,
-    private
+    private LocalDate dateOfBirth;
 //    date_of_birth DATE NOT NULL,
-    private int accessLevelId;
+    private AccessLevel accessLevel;
+//    private int accessLevelId;
 //    access_level_id int NOT NULL,
     private String email;
 //    email VARCHAR(100) NOT NULL,
-    private String password;
+    private String passwordHash ;
 //    password VARCHAR(255) NOT NULL,
     private String profilePhoto;
 //    profile_photo VARCHAR(100) NOT NULL,

@@ -41,11 +41,11 @@
    reciever_user_id int NOT NULL,
    text VARCHAR(160) NOT NULL,
    date_time DATETIME NOT NULL,
-   status INT,
+   status_id INT,
 
    FOREIGN KEY (sender_user_id) REFERENCES User(id),
    FOREIGN KEY (reciever_user_id) REFERENCES User(id),
-   FOREIGN KEY (status) REFERENCES MessagesStatus(id)
+   FOREIGN KEY (status_id) REFERENCES MessagesStatus(id)
  );
 
  CREATE TABLE WallMessages (
@@ -57,10 +57,13 @@
    date_time DATETIME NOT NULL,
    forum_themes_id INT,
    parent_message_id INT,
-   status VARCHAR(50),
+   status_id VARCHAR(50),
 
    FOREIGN KEY (parent_message_id) REFERENCES WallMessages(id),
-   FOREIGN KEY (status) REFERENCES MessagesStatus(id),
+   FOREIGN KEY (status_id) REFERENCES MessagesStatus(id),
+   FOREIGN KEY (sender_user_id) REFERENCES User(id),
+   FOREIGN KEY (reciever_user_id) REFERENCES User(id),
+   FOREIGN KEY (forum_themes_id) REFERENCES ForumThemes(id)
  );
 
  CREATE TABLE PhotoAlbum (
@@ -70,10 +73,10 @@
    album_picture VARCHAR(100) NOT NULL,
    description VARCHAR(100),
    date_time DATETIME NOT NULL,
-   status INT,
+   status_id INT,
 
    FOREIGN KEY (user_id) REFERENCES User(id),
-   FOREIGN KEY (status) REFERENCES PhotoStatus(id)
+   FOREIGN KEY (status_id) REFERENCES PhotoStatus(id)
  );
 
  CREATE TABLE Photo (
@@ -83,11 +86,11 @@
    picture VARCHAR(100) NOT NULL,
    description VARCHAR(100),
    date_time DATETIME NOT NULL,
-   status INT,
+   status_id INT,
 
    FOREIGN KEY (user_id) REFERENCES User(id),
    FOREIGN KEY (album_id) REFERENCES PhotoAlbum(id),
-   FOREIGN KEY (status) REFERENCES PhotoStatus(id)
+   FOREIGN KEY (status_id) REFERENCES PhotoStatus(id)
  )
 
 
