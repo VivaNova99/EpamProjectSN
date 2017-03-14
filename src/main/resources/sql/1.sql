@@ -13,7 +13,6 @@
    description VARCHAR(20) NOT NULL
  );
 
-
  CREATE TABLE ForumThemes (
    id INT PRIMARY KEY,
    themes_order INT,
@@ -29,7 +28,7 @@
    email VARCHAR(100) NOT NULL,
    password VARCHAR(255) NOT NULL,
    profile_photo VARCHAR(100) NOT NULL,
-   status VARCHAR(100),
+   status_on_wall VARCHAR(100),
    city VARCHAR(50),
 
    FOREIGN KEY (access_level_id) REFERENCES AccessLevel(id),
@@ -58,10 +57,10 @@
    date_time DATETIME NOT NULL,
    forum_themes_id INT,
    parent_message_id INT,
-   status INT,
+   status VARCHAR(50),
 
    FOREIGN KEY (parent_message_id) REFERENCES WallMessages(id),
-   FOREIGN KEY (status) REFERENCES MessagesStatus(id)
+   FOREIGN KEY (status) REFERENCES MessagesStatus(id),
  );
 
  CREATE TABLE PhotoAlbum (
@@ -90,6 +89,8 @@
    FOREIGN KEY (album_id) REFERENCES PhotoAlbum(id),
    FOREIGN KEY (status) REFERENCES PhotoStatus(id)
  )
+
+
 
 
 
