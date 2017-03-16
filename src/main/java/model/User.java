@@ -1,10 +1,15 @@
 package model;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class User {
 
     public static String FIRST_NAME_KEY = "firstName";
