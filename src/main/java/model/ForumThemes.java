@@ -1,8 +1,8 @@
 package model;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class ForumThemes {
 
     private int id;
