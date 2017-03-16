@@ -24,9 +24,6 @@ public class WelcomeController extends HttpServlet {
 
     public static String WELCOME_KEY = "Welcome";
 
-    @Resource(name = "jdbc/TestDB")
-    private DataSource dataSource;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
