@@ -91,7 +91,7 @@
    FOREIGN KEY (user_id) REFERENCES User(id),
    FOREIGN KEY (album_id) REFERENCES PhotoAlbum(id),
    FOREIGN KEY (status_id) REFERENCES PhotoStatus(id)
- )
+ );
 
 
 

@@ -29,4 +29,4 @@ INSERT INTO User (
 
 INSERT INTO ForumThemes (id, themes_order, name) VALUES (1, 10, 'Про детей');
 INSERT INTO ForumThemes (id, themes_order, name) VALUES (2, 20, 'Про взрослых');
-INSERT INTO ForumThemes (id, themes_order, name) VALUES (3, 30, 'Прочее')
+INSERT INTO ForumThemes (id, themes_order, name) VALUES (3, 30, 'Прочее');
