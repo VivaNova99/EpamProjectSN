@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by veraivanova on 16.03.17.
  */
-public class mySqlUserDao implements UserDao {
+public class MySqlUserDao implements UserDao {
 
     @Resource(name = "jdbc/TestDB")
     private DataSource dataSource;

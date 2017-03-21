@@ -3,6 +3,7 @@ package model;
 import lombok.Value;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Value
 public class Photo {
@@ -12,14 +13,14 @@ public class Photo {
     private User user;
 //    private int userId;
 //    user_id INT NOT NULL,
-    private PhotoAlbum album;
+    private PhotoAlbum photoAlbum;
 //    private int albumId;
 //    album_id INT,
     private String picture;
 //    picture VARCHAR(100) NOT NULL,
     private String description;
 //    description VARCHAR(100),
-    private LocalDateTime dateTime;
+    private Date dateTime;
 //    date_time DATETIME NOT NULL,
     private PhotoStatus status;
 //    status_id INT,

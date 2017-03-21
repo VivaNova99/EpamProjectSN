@@ -3,16 +3,20 @@ package model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Accessors(chain = true)
 
 public class User {
 
     public static String FIRST_NAME_KEY = "firstName";
+
+    public User(String firstName, String lastName){};
 
     private int id;
 //    id INT AUTO_INCREMENT PRIMARY KEY,

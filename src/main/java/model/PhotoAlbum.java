@@ -1,10 +1,18 @@
 package model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
 public class PhotoAlbum {
 
     private int id;
@@ -18,9 +26,13 @@ public class PhotoAlbum {
 //    album_picture VARCHAR(100) NOT NULL,
     private String description;
 //    description VARCHAR(100),
-    private LocalDateTime dateTime;
+//    private LocalDateTime dateTime;
+    private Date dateTime;
 //    date_time DATETIME NOT NULL,
     private PhotoStatus status;
+
+    public PhotoAlbum(String name) {
+    }
 //    status_id INT,
 //
 //    FOREIGN KEY (user_id) REFERENCES User(id),
