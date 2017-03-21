@@ -70,7 +70,7 @@
    id INT AUTO_INCREMENT PRIMARY KEY,
    name VARCHAR(50) NOT NULL,
    user_id INT NOT NULL,
-   album_picture VARCHAR(100) NOT NULL,
+   photo_album_picture VARCHAR(100) NOT NULL,
    description VARCHAR(100),
    date_time DATETIME NOT NULL,
    status_id INT,
@@ -82,7 +82,7 @@
  CREATE TABLE Photo (
    id INT AUTO_INCREMENT PRIMARY KEY,
    user_id INT NOT NULL,
-   album_id INT,
+   photo_album_id INT,
    picture VARCHAR(100) NOT NULL,
    description VARCHAR(100),
    date_time DATETIME NOT NULL,
