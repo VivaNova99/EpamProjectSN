@@ -1,11 +1,18 @@
 package model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
 public class Photo {
 
     private int id;

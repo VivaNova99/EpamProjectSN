@@ -27,6 +27,10 @@ public class MySqlPhotoAlbumDao implements PhotoAlbumDao {
        @Resource(name = "jdbc/TestDB")
        private DataSource dataSource;
 
+    public MySqlPhotoAlbumDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
 
 //      //для того, чтобы можно было связать с юзером по id - на вход принимает id, а выдает юзера.
 //      // Из библиотеки javaslang
