@@ -1,7 +1,7 @@
 package dao.mySql;
 
 import dao.PhotoAlbumDao;
-import javaslang.Function1;
+//import javaslang.Function1;
 import lombok.SneakyThrows;
 import model.ForumThemes;
 import model.PhotoAlbum;
