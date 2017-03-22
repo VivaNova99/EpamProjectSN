@@ -28,6 +28,10 @@ public class MySqlPhotoDao implements PhotoDao
     @Resource(name = "jdbc/TestDB")
     private DataSource dataSource;
 
+    public MySqlPhotoDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
 
 //    //для того, чтобы можно было связать с юзером по id - на вход принимает id, а выдает юзера.
 //    // Из библиотеки javaslang
