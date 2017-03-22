@@ -30,7 +30,7 @@ public class WelcomeController extends HttpServlet {
 
     public static final String WELCOME_KEY = "Welcome";
     public static final String ALL_FORUM_THEMES_KEY = "AllForumThemes";
-    public static final String ALL_PHOTO_ALBUMES_KEY = "AllPhotoAlbumes";
+    public static final String ALL_PHOTO_ALBUMS_KEY = "AllPhotoAlbumes";
     public static final String ALL_PHOTOS_KEY = "AllPhotos";
 
     private ForumThemesDao forumThemesDao;
@@ -40,8 +40,8 @@ public class WelcomeController extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         forumThemesDao = (ForumThemesDao) config.getServletContext().getAttribute("ForumThemesDao");
-        photoAlbumDao = (PhotoAlbumDao) config.getServletContext().getAttribute("PhotoAlbumDao");
-        photoDao = (PhotoDao) config.getServletContext().getAttribute("PhotoDao");
+//        photoAlbumDao = (PhotoAlbumDao) config.getServletContext().getAttribute("PhotoAlbumDao");
+//        photoDao = (PhotoDao) config.getServletContext().getAttribute("PhotoDao");
     }
 
 
@@ -58,8 +58,8 @@ public class WelcomeController extends HttpServlet {
 
 //        Collection<ForumThemes> all = forumThemesDao.getAll(); - лучше сразу поместим в запрос
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemesDao.getAll());
-        req.setAttribute(ALL_PHOTO_ALBUMES_KEY, photoAlbumDao.getAll());
-        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
+//        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
+//        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
 
 //        Context initContext = new InitialContext();
 //        Context envContext  = (Context)initContext.lookup("java:/comp/env");

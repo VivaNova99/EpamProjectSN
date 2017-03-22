@@ -24,8 +24,8 @@ public class Injector implements ServletContextListener{
 //        sce.getServletContext().setAttribute("UserDao", mySqlUserDao);
         sce.getServletContext().setAttribute("UserDao", new MySqlUserDao());
         sce.getServletContext().setAttribute("ForumThemesDao", new MySqlForumThemesDao());
-        sce.getServletContext().setAttribute("PhotoAlbumDao", new MySqlPhotoAlbumDao());
-        sce.getServletContext().setAttribute("PhotoDao", new MySqlPhotoDao());
+//        sce.getServletContext().setAttribute("PhotoAlbumDao", new MySqlPhotoAlbumDao());
+//        sce.getServletContext().setAttribute("PhotoDao", new MySqlPhotoDao());
 //        sce.getServletContext().setAttribute("PhotoAlbumDao", new MySqlPhotoAlbumDao(
 //                integer -> mySqlUserDao.get(integer).get()
 //        ));

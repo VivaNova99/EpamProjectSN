@@ -27,7 +27,8 @@ public class dbIniter implements ServletContextListener {
     @SneakyThrows
     public void contextInitialized(ServletContextEvent sce) {
         Pattern pattern = Pattern.compile("^\\d+\\.sql$");
-        Path sqlDirPath = Paths.get(sce.getServletContext().getContextPath(), "/sql");
+        Path sqlDirPath = Paths.get("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/resources/sql");
+//        Path sqlDirPath = Paths.get(sce.getServletContext().getContextPath(), "/sql");
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
             DirectoryStream<Path> paths = Files.newDirectoryStream(sqlDirPath);
