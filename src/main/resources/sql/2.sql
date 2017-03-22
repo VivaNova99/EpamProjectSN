@@ -31,9 +31,9 @@ INSERT INTO PhotoAlbum (name, user_id, photo_album_picture, description, date_ti
 
 
 INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id)
-    VALUES (2, 1, 'Ссылка на фото 1 альбома 1', 'Описание фото 1 альбома 1', '2017-03-21 01:00:00', 3);
+    VALUES (1, 1, 'Ссылка на фото 1 альбома 1', 'Описание фото 1 альбома 1', '2017-03-21 01:00:00', 3);
 INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id)
-    VALUES (2, 2, 'Ссылка на фото 1 альбома 2', 'Описание фото 1 альбома 2', '2017-03-21 01:00:01', 3);
+    VALUES (2, 2, 'Ссылка на фото 1 альбома 2', 'Описание фото 1 альбома 2', '2017-03-21 01:00:01', 2);
 INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id)
     VALUES (2, 2, 'Ссылка на фото 2 альбома 2', 'Описание фото 2 альбома 2', '2017-03-21 01:00:03', 3);
 

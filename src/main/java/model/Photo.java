@@ -30,9 +30,41 @@ public class Photo {
     private Date dateTime;
 //    date_time DATETIME NOT NULL,
     private PhotoStatus status;
+
+
 //    status_id INT,
 //
 //    FOREIGN KEY (user_id) REFERENCES User(id),
 //    FOREIGN KEY (album_id) REFERENCES PhotoAlbum(id),
 //    FOREIGN KEY (status_id) REFERENCES PhotoStatus(id)
+
+    public int getId() {
+        return id;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public PhotoStatus getStatus() {
+        return status;
+    }
+
+    public String getUserFirstNameAndLastName(){
+        return user.getFirstNameAndLastName();
+    }
+
+    public String getPhotoAlbumName(){
+        return photoAlbum.getName();
+    }
+
 }
+
