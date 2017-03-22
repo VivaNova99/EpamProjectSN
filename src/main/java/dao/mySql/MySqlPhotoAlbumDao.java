@@ -62,6 +62,7 @@ public class MySqlPhotoAlbumDao implements PhotoAlbumDao {
                      "pa.id, " +
                      "name, " +
                      "pa.user_id, " +
+                     "u.id, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "photo_album_picture, " +
@@ -73,12 +74,21 @@ public class MySqlPhotoAlbumDao implements PhotoAlbumDao {
                 photoAlbums.add(new PhotoAlbum(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
+
+//                        new User(
+//                                resultSet.getString("first_name"),
+//                                resultSet.getString("last_name")
+//                        ).setId(resultSet.getInt("user_id")),
+
                         new User(
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
+
 //                        getUserById.apply(resultSet.getInt("user_id")),
+
 //                        new User().setId(resultSet.getInt("user_id")),
+
                         resultSet.getString("photo_album_picture"),
                         resultSet.getString("description"),
                         (Date) simpleFormatter.parse(resultSet.getString("date_time")),
