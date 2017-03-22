@@ -30,7 +30,7 @@ public class WelcomeController extends HttpServlet {
 
     public static final String WELCOME_KEY = "Welcome";
     public static final String ALL_FORUM_THEMES_KEY = "AllForumThemes";
-    public static final String ALL_PHOTO_ALBUMS_KEY = "AllPhotoAlbumes";
+    public static final String ALL_PHOTO_ALBUMS_KEY = "AllPhotoAlbums";
     public static final String ALL_PHOTOS_KEY = "AllPhotos";
 
     private ForumThemesDao forumThemesDao;

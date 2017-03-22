@@ -32,6 +32,7 @@ public class PhotoAlbum {
     private PhotoStatus status;
 
     public PhotoAlbum(String name) {
+        this.name = name;
     }
 
 
