@@ -33,8 +33,14 @@ public class PhotoAlbum {
 
     public PhotoAlbum(String name) {
     }
+
+
 //    status_id INT,
 //
 //    FOREIGN KEY (user_id) REFERENCES User(id),
 //    FOREIGN KEY (status) REFERENCES PhotoStatus(id)
+
+    public String getUserFirstNameAndLastName(){
+        return user.getFirstNameAndLastName();
+    }
 }

@@ -16,7 +16,11 @@ public class User {
 
     public static String FIRST_NAME_KEY = "firstName";
 
-    public User(String firstName, String lastName){};
+    public User(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+    };
+
 
     private int id;
 //    id INT AUTO_INCREMENT PRIMARY KEY,
@@ -39,7 +43,12 @@ public class User {
 //    status_on_wall VARCHAR(100),
     private String city;
 //    city VARCHAR(50),
+    //private String firstNameAndLastName = firstName + " " + lastName;
 //
 //    FOREIGN KEY (access_level_id) REFERENCES AccessLevel(id),
 //    UNIQUE (email)
+
+    public String getFirstNameAndLastName(){
+        return firstName + " " + lastName;
+    };
 }
