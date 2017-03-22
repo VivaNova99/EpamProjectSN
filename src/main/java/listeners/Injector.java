@@ -1,19 +1,19 @@
 package listeners;
 
 import dao.mySql.MySqlForumThemesDao;
-import dao.mySql.MySqlPhotoAlbumDao;
-import dao.mySql.MySqlPhotoDao;
 import dao.mySql.MySqlUserDao;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
-/**
- * Created by veraivanova on 17.03.17.
- */
+@WebListener
 public class Injector implements ServletContextListener{
+
+    @Resource(name = "jdbc/TestDB")
+    private DataSource dataSource;
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -22,8 +22,8 @@ public class Injector implements ServletContextListener{
 //       // MySqlPhotoAlbumDao mySqlPhotoAlbumDao = new MySqlPhotoAlbumDao();
 //
 //        sce.getServletContext().setAttribute("UserDao", mySqlUserDao);
-        sce.getServletContext().setAttribute("UserDao", new MySqlUserDao());
-        sce.getServletContext().setAttribute("ForumThemesDao", new MySqlForumThemesDao());
+        sce.getServletContext().setAttribute("UserDao", new MySqlUserDao(dataSource));
+        sce.getServletContext().setAttribute("ForumThemesDao", new MySqlForumThemesDao(dataSource));
 //        sce.getServletContext().setAttribute("PhotoAlbumDao", new MySqlPhotoAlbumDao());
 //        sce.getServletContext().setAttribute("PhotoDao", new MySqlPhotoDao());
 //        sce.getServletContext().setAttribute("PhotoAlbumDao", new MySqlPhotoAlbumDao(

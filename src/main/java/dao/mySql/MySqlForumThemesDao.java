@@ -2,11 +2,8 @@ package dao.mySql;
 
 import dao.ForumThemesDao;
 import lombok.SneakyThrows;
-import model.AccessLevel;
 import model.ForumThemes;
-import model.User;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,8 +17,12 @@ import java.util.List;
  */
 public class MySqlForumThemesDao implements ForumThemesDao {
 
-    @Resource(name = "jdbc/TestDB")
+
     private DataSource dataSource;
+
+    public MySqlForumThemesDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
 
     @Override

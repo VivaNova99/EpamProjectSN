@@ -16,8 +16,11 @@ import java.util.List;
  */
 public class MySqlUserDao implements UserDao {
 
-    @Resource(name = "jdbc/TestDB")
     private DataSource dataSource;
+
+    public MySqlUserDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
 
     @Override
