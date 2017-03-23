@@ -1,7 +1,6 @@
 package dao.H2;
 
 import dao.PhotoAlbumDao;
-//import javaslang.Function1;
 import lombok.SneakyThrows;
 import model.PhotoAlbum;
 import model.PhotoStatus;
@@ -30,16 +29,6 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
         this.dataSource = dataSource;
     }
 
-
-//      //для того, чтобы можно было связать с юзером по id - на вход принимает id, а выдает юзера.
-//      // Из библиотеки javaslang
-//    Function1<Integer, User> getUserById;
-//
-//    public MySqlPhotoAlbumDao(Function1<Integer, User> getUserById) {
-//        this.getUserById = getUserById;
-//    }
-
-
     @Override
     public int save() {
         return 0;
@@ -47,7 +36,6 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
 
     @Override
     public void remove(int id) {
-
     }
 
     @Override
@@ -73,30 +61,16 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                 photoAlbums.add(new PhotoAlbum(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
-
-//                        new User(
-//                                resultSet.getString("first_name"),
-//                                resultSet.getString("last_name")
-//                        ).setId(resultSet.getInt("user_id")),
-
                         new User(
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
-
-//                        getUserById.apply(resultSet.getInt("user_id")),
-
-//                        new User().setId(resultSet.getInt("user_id")),
-
                         resultSet.getString("photo_album_picture"),
                         resultSet.getString("description"),
-                        (Date) simpleFormatter.parse(resultSet.getString("date_time")),
-//                        resultSet.("date_time").toLocalTime(),
+                        simpleFormatter.parse(resultSet.getString("date_time")),
                         PhotoStatus.valueOf(
                                 resultSet.getInt("status_id") - 1)
                                 .orElseThrow(() -> new RuntimeException("нет такого статуса"))
-
-
                 ));
             }
             return photoAlbums;

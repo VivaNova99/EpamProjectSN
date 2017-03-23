@@ -28,7 +28,6 @@ public class dbIniter implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         Pattern pattern = Pattern.compile("^\\d+\\.sql$");
         Path sqlDirPath = Paths.get("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/resources/sql");
-//        Path sqlDirPath = Paths.get(sce.getServletContext().getContextPath(), "/sql");
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
             DirectoryStream<Path> paths = Files.newDirectoryStream(sqlDirPath);
@@ -39,7 +38,7 @@ public class dbIniter implements ServletContextListener {
                                 .collect(Collectors.joining())
                     );
             }
-            statement.executeBatch(); //this.getClass().getResourceAsStream("/sql")
+            statement.executeBatch();
         }
     }
 }

@@ -12,15 +12,3 @@ public enum AccessLevel{
                 .findAny();
     }
 }
-
-
-//import lombok.Value;
-//
-//@Value
-//public class AccessLevel {
-//
-//    private int id;
-////    id INT PRIMARY KEY,
-//    private String description;
-////    description VARCHAR(20) NOT NULL
-//}

@@ -1,16 +1,15 @@
 package model;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public enum MessageStatus{
-    UNREAD, STANDART, DELETED
+    UNREAD, STANDART, DELETED;
+
+    public static Optional<MessageStatus> valueOf(int id) {
+        return Arrays.stream(values())
+                .filter(messageStatus -> messageStatus.ordinal() == id)
+                .findAny();
+    }
 }
 
-//import lombok.Value;
-//
-//@Value
-//public class MessagesStatus {
-//
-//    private int id;
-////    id INT PRIMARY KEY,
-//    private String description;
-////    description VARCHAR(20) NOT NULL
-//}
