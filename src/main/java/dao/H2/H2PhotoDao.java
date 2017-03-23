@@ -1,7 +1,6 @@
 package dao.H2;
 
 import dao.PhotoDao;
-//import javaslang.Function1;
 import lombok.SneakyThrows;
 import model.Photo;
 import model.PhotoAlbum;
@@ -32,19 +31,6 @@ public class H2PhotoDao implements PhotoDao
         this.dataSource = dataSource;
     }
 
-
-//    //для того, чтобы можно было связать с юзером по id - на вход принимает id, а выдает юзера.
-//    // Из библиотеки javaslang
-//    Function1<Integer, User> getUserById;
-//    Function1<Integer, PhotoAlbum> getPhotoAlbumById;
-//
-//    public MySqlPhotoDao(Function1<Integer, User> getUserById, Function1<Integer, PhotoAlbum> getPhotoAlbumById) {
-//
-//        this.getUserById = getUserById;
-//        this.getPhotoAlbumById = getPhotoAlbumById;
-//
-//    }
-
     @Override
     public int save() {
         return 0;
@@ -52,7 +38,6 @@ public class H2PhotoDao implements PhotoDao
 
     @Override
     public void remove(int id) {
-
     }
 
     @Override
@@ -84,19 +69,13 @@ public class H2PhotoDao implements PhotoDao
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
-//                        getUserById.apply(resultSet.getInt("user_id")),
-//                        new User().setId(resultSet.getInt("user_id")),
                         new PhotoAlbum(resultSet.getString("name")),
-//                        getPhotoAlbumById.apply(resultSet.getInt("photo_album_id")),
                         resultSet.getString("picture"),
                         resultSet.getString("description"),
-                        (Date) simpleFormatter.parse(resultSet.getString("date_time")),
-//                        resultSet.("date_time").toLocalTime(),
+                        simpleFormatter.parse(resultSet.getString("date_time")),
                         PhotoStatus.valueOf(
                                 resultSet.getInt("status_id") - 1)
                                 .orElseThrow(() -> new RuntimeException("нет такого статуса"))
-
-
                 ));
             }
             return photos;
