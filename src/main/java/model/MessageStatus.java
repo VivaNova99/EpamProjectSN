@@ -1,6 +1,6 @@
 package model;
 
-public enum MessagesStatus{
+public enum MessageStatus{
     UNREAD, STANDART, DELETED
 }
 

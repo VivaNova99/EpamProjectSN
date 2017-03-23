@@ -5,7 +5,7 @@ import lombok.Value;
 import java.time.LocalDateTime;
 
 @Value
-public class WallMessages {
+public class WallMessage {
 
     private int id;
 //    id INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,11 +19,11 @@ public class WallMessages {
 //    picture VARCHAR(100) NOT NULL,
     private LocalDateTime dateTime;
 //    date_time DATETIME NOT NULL,
-    private ForumThemes forumThemesId;
+    private ForumTheme forumThemeId;
 //    forum_themes_id INT,
-    private WallMessages parentMessageId;
+    private WallMessage parentMessageId;
 //    parent_message_id INT,
-    private MessagesStatus status;
+    private MessageStatus status;
 //    status_id INT,
 //
 //    FOREIGN KEY (parent_message_id) REFERENCES WallMessages(id),

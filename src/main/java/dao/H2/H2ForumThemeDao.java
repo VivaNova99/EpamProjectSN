@@ -1,8 +1,8 @@
-package dao.mySql;
+package dao.H2;
 
-import dao.ForumThemesDao;
+import dao.ForumThemeDao;
 import lombok.SneakyThrows;
-import model.ForumThemes;
+import model.ForumTheme;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -15,12 +15,12 @@ import java.util.List;
 /**
  * Created by veraivanova on 17.03.17.
  */
-public class MySqlForumThemesDao implements ForumThemesDao {
+public class H2ForumThemeDao implements ForumThemeDao {
 
 
     private DataSource dataSource;
 
-    public MySqlForumThemesDao(DataSource dataSource) {
+    public H2ForumThemeDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -37,20 +37,20 @@ public class MySqlForumThemesDao implements ForumThemesDao {
 
     @Override
     @SneakyThrows
-    public Collection<ForumThemes> getAll() {
+    public Collection<ForumTheme> getAll() {
 
-        List<ForumThemes> forumThemes = new ArrayList<>();
+        List<ForumTheme> forumThemes = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT " +
                      "id, " +
-                     "themes_order, " +
-                     "name FROM ForumThemes")) {
+                     "theme_order, " +
+                     "name FROM ForumTheme")) {
             while (resultSet.next()){
-                forumThemes.add(new ForumThemes(
+                forumThemes.add(new ForumTheme(
                         resultSet.getInt("id"),
-                        resultSet.getInt("themes_order"),
+                        resultSet.getInt("theme_order"),
                         resultSet.getString("name")
                 ));
             }

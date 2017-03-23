@@ -1,6 +1,5 @@
 package dao;
 
-import model.ForumThemes;
 import model.Photo;
 
 import java.util.Collection;

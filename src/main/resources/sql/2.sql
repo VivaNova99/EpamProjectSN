@@ -11,11 +11,11 @@ VALUES ('Маша', 'Васильева', '1985-08-01', 2, 'maria@mail.ru', 'qwe
 
 
 
-INSERT INTO ForumThemes (id, themes_order, name)
+INSERT INTO ForumTheme (id, theme_order, name)
     VALUES (1, 10, 'Про детей');
-INSERT INTO ForumThemes (id, themes_order, name)
+INSERT INTO ForumTheme (id, theme_order, name)
     VALUES (2, 20, 'Про взрослых');
-INSERT INTO ForumThemes (id, themes_order, name)
+INSERT INTO ForumTheme (id, theme_order, name)
     VALUES (3, 30, 'Прочее');
 
 

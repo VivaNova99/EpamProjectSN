@@ -1,4 +1,4 @@
-package dao.mySql;
+package dao.H2;
 
 import dao.PhotoDao;
 //import javaslang.Function1;
@@ -22,13 +22,13 @@ import java.util.List;
 /**
  * Created by veraivanova on 19.03.17.
  */
-public class MySqlPhotoDao implements PhotoDao
+public class H2PhotoDao implements PhotoDao
 {
 
     @Resource(name = "jdbc/TestDB")
     private DataSource dataSource;
 
-    public MySqlPhotoDao(DataSource dataSource) {
+    public H2PhotoDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
