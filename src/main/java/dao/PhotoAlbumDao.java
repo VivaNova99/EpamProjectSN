@@ -1,6 +1,5 @@
 package dao;
 
-import model.Photo;
 import model.PhotoAlbum;
 
 import java.util.Collection;

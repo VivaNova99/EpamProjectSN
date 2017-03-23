@@ -1,10 +1,10 @@
 package controllers;
 
-import dao.ForumThemesDao;
+import dao.ForumThemeDao;
 import dao.PhotoAlbumDao;
 import dao.PhotoDao;
 import lombok.SneakyThrows;
-import model.ForumThemes;
+import model.ForumTheme;
 
 import javax.annotation.Resource;
 import javax.jws.WebService;
@@ -33,13 +33,13 @@ public class WelcomeController extends HttpServlet {
     public static final String ALL_PHOTO_ALBUMS_KEY = "AllPhotoAlbums";
     public static final String ALL_PHOTOS_KEY = "AllPhotos";
 
-    private ForumThemesDao forumThemesDao;
+    private ForumThemeDao forumThemeDao;
     private PhotoAlbumDao photoAlbumDao;
     private PhotoDao photoDao;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        forumThemesDao = (ForumThemesDao) config.getServletContext().getAttribute("ForumThemesDao");
+        forumThemeDao = (ForumThemeDao) config.getServletContext().getAttribute("ForumThemeDao");
         photoAlbumDao = (PhotoAlbumDao) config.getServletContext().getAttribute("PhotoAlbumDao");
         photoDao = (PhotoDao) config.getServletContext().getAttribute("PhotoDao");
     }
@@ -57,7 +57,7 @@ public class WelcomeController extends HttpServlet {
         req.setAttribute(WELCOME_KEY, s);
 
 //        Collection<ForumThemes> all = forumThemesDao.getAll(); - лучше сразу поместим в запрос
-        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemesDao.getAll());
+        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
         req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
         req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
 

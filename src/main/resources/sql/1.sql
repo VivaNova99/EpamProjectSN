@@ -3,7 +3,7 @@
    description VARCHAR(20) NOT NULL
  );
 
- CREATE TABLE MessagesStatus (
+ CREATE TABLE MessageStatus (
    id INT PRIMARY KEY,
    description VARCHAR(20) NOT NULL
  );
@@ -13,9 +13,9 @@
    description VARCHAR(20) NOT NULL
  );
 
- CREATE TABLE ForumThemes (
+ CREATE TABLE ForumTheme (
    id INT PRIMARY KEY,
-   themes_order INT,
+   theme_order INT,
    name VARCHAR(50) NOT NULL
  );
 
@@ -35,7 +35,7 @@
    UNIQUE (email)
  );
 
- CREATE TABLE PrivateMessages (
+ CREATE TABLE PrivateMessage (
    id INT AUTO_INCREMENT PRIMARY KEY,
    sender_user_id int NOT NULL,
    reciever_user_id int NOT NULL,
@@ -45,25 +45,25 @@
 
    FOREIGN KEY (sender_user_id) REFERENCES User(id),
    FOREIGN KEY (reciever_user_id) REFERENCES User(id),
-   FOREIGN KEY (status_id) REFERENCES MessagesStatus(id)
+   FOREIGN KEY (status_id) REFERENCES MessageStatus(id)
  );
 
- CREATE TABLE WallMessages (
+ CREATE TABLE WallMessage (
    id INT AUTO_INCREMENT PRIMARY KEY,
    sender_user_id int NOT NULL,
    reciever_user_id int NOT NULL,
    text VARCHAR(500) NOT NULL,
    picture VARCHAR(100) NOT NULL,
    date_time DATETIME NOT NULL,
-   forum_themes_id INT,
+   forum_theme_id INT,
    parent_message_id INT,
    status_id VARCHAR(50),
 
-   FOREIGN KEY (parent_message_id) REFERENCES WallMessages(id),
-   FOREIGN KEY (status_id) REFERENCES MessagesStatus(id),
+   FOREIGN KEY (parent_message_id) REFERENCES WallMessage(id),
+   FOREIGN KEY (status_id) REFERENCES MessageStatus(id),
    FOREIGN KEY (sender_user_id) REFERENCES User(id),
    FOREIGN KEY (reciever_user_id) REFERENCES User(id),
-   FOREIGN KEY (forum_themes_id) REFERENCES ForumThemes(id)
+   FOREIGN KEY (forum_theme_id) REFERENCES ForumTheme(id)
  );
 
  CREATE TABLE PhotoAlbum (

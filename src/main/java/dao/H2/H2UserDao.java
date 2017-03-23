@@ -1,11 +1,10 @@
-package dao.mySql;
+package dao.H2;
 
 import dao.UserDao;
 import lombok.SneakyThrows;
 import model.AccessLevel;
 import model.User;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,16 +13,17 @@ import java.util.List;
 /**
  * Created by veraivanova on 16.03.17.
  */
-public class MySqlUserDao implements UserDao {
+public class H2UserDao implements UserDao {
 
     private DataSource dataSource;
 
-    public MySqlUserDao(DataSource dataSource) {
+    public H2UserDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
 
     @Override
+
     @SneakyThrows
     public int create(User user) {
         try (Connection connection = dataSource.getConnection();

@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ForumThemes {
+public class ForumTheme {
 
     private int id;
 //    id INT PRIMARY KEY,
-    private int themesOrder;
+    private int themeOrder;
 //    themes_order INT,
     private String name;
 //    name VARCHAR(50) NOT NULL

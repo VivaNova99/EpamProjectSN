@@ -1,9 +1,9 @@
 package listeners;
 
-import dao.mySql.MySqlForumThemesDao;
-import dao.mySql.MySqlPhotoAlbumDao;
-import dao.mySql.MySqlPhotoDao;
-import dao.mySql.MySqlUserDao;
+import dao.H2.H2ForumThemeDao;
+import dao.H2.H2PhotoAlbumDao;
+import dao.H2.H2PhotoDao;
+import dao.H2.H2UserDao;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContextEvent;
@@ -25,10 +25,10 @@ public class Injector implements ServletContextListener{
 //
 //        sce.getServletContext().setAttribute("UserDao", mySqlUserDao);
 
-        sce.getServletContext().setAttribute("UserDao", new MySqlUserDao(dataSource));
-        sce.getServletContext().setAttribute("ForumThemesDao", new MySqlForumThemesDao(dataSource));
-        sce.getServletContext().setAttribute("PhotoAlbumDao", new MySqlPhotoAlbumDao(dataSource));
-        sce.getServletContext().setAttribute("PhotoDao", new MySqlPhotoDao(dataSource));
+        sce.getServletContext().setAttribute("UserDao", new H2UserDao(dataSource));
+        sce.getServletContext().setAttribute("ForumThemeDao", new H2ForumThemeDao(dataSource));
+        sce.getServletContext().setAttribute("PhotoAlbumDao", new H2PhotoAlbumDao(dataSource));
+        sce.getServletContext().setAttribute("PhotoDao", new H2PhotoDao(dataSource));
 
 
 //        sce.getServletContext().setAttribute("PhotoAlbumDao", new MySqlPhotoAlbumDao(

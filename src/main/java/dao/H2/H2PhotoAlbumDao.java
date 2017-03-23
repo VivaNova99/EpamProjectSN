@@ -1,9 +1,8 @@
-package dao.mySql;
+package dao.H2;
 
 import dao.PhotoAlbumDao;
 //import javaslang.Function1;
 import lombok.SneakyThrows;
-import model.ForumThemes;
 import model.PhotoAlbum;
 import model.PhotoStatus;
 import model.User;
@@ -22,12 +21,12 @@ import java.util.List;
 /**
  * Created by veraivanova on 18.03.17.
  */
-public class MySqlPhotoAlbumDao implements PhotoAlbumDao {
+public class H2PhotoAlbumDao implements PhotoAlbumDao {
 
        @Resource(name = "jdbc/TestDB")
        private DataSource dataSource;
 
-    public MySqlPhotoAlbumDao(DataSource dataSource) {
+    public H2PhotoAlbumDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

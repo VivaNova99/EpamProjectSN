@@ -5,7 +5,7 @@ import lombok.Value;
 import java.time.LocalDateTime;
 
 @Value
-public class PrivateMessages {
+public class PrivateMessage {
 
     private int id;
 //    id INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,7 +19,7 @@ public class PrivateMessages {
 //    text VARCHAR(160) NOT NULL,
     private LocalDateTime dateTime;
 //    date_time DATETIME NOT NULL,
-    private MessagesStatus status;
+    private MessageStatus status;
 //    status_id INT,
 //
 //    FOREIGN KEY (sender_user_id) REFERENCES User(id),
