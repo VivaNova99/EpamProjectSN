@@ -51,9 +51,8 @@
  CREATE TABLE WallMessage (
    id INT AUTO_INCREMENT PRIMARY KEY,
    sender_user_id int NOT NULL,
-   reciever_user_id int NOT NULL,
    text VARCHAR(500) NOT NULL,
-   picture VARCHAR(100) NOT NULL,
+   picture VARCHAR(100),
    date_time DATETIME NOT NULL,
    forum_theme_id INT,
    parent_message_id INT,
@@ -62,7 +61,6 @@
    FOREIGN KEY (parent_message_id) REFERENCES WallMessage(id),
    FOREIGN KEY (status_id) REFERENCES MessageStatus(id),
    FOREIGN KEY (sender_user_id) REFERENCES User(id),
-   FOREIGN KEY (reciever_user_id) REFERENCES User(id),
    FOREIGN KEY (forum_theme_id) REFERENCES ForumTheme(id)
  );
 

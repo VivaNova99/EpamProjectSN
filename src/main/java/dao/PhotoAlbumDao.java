@@ -12,7 +12,7 @@ public interface PhotoAlbumDao {
     int save();
     default Optional<PhotoAlbum> get(int id){
         return getAll().stream()
-                .filter(photo -> photo.getId() == id)
+                .filter(photoAlbum -> photoAlbum.getId() == id)
                 .findAny();
     };
     // update - если понадобится, делать отдельные апдейты по отдельным полям

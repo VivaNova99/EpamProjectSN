@@ -1,20 +1,43 @@
 package model;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Accessors(chain = true)
+
 public class WallMessage {
 
     private int id;
-    private User senderUserId;
-    private User recieverUserId;
+    private User senderUser;
     private String text;
     private String picture;
-    private LocalDateTime dateTime;
-    private ForumTheme forumThemeId;
-    private WallMessage parentMessageId;
+    private Date dateTime;
+    private ForumTheme forumTheme;
+    private WallMessage parentMessage;
     private MessageStatus status;
 
+    public WallMessage(String text) {
+        this.text = text;
+    }
+
+    public String getSenderUserFirstNameAndLastName(){
+        return senderUser.getFirstNameAndLastName();
+    }
+
+    public String getForumThemeName() {
+        return forumTheme.getName();
+    }
+
+    public String getParentMessageText() {
+        return parentMessage.getText();
+    }
 }
+
+

@@ -3,6 +3,9 @@ package controllers;
 import dao.ForumThemeDao;
 import dao.PhotoAlbumDao;
 import dao.PhotoDao;
+import dao.UserDao;
+import dao.PrivateMessageDao;
+import dao.WallMessageDao;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,19 +23,28 @@ import static model.User.FIRST_NAME_KEY;
 public class WelcomeController extends HttpServlet {
 
     public static final String WELCOME_KEY = "Welcome";
+    public static final String ALL_USERS_KEY = "AllUser";
     public static final String ALL_FORUM_THEMES_KEY = "AllForumThemes";
     public static final String ALL_PHOTO_ALBUMS_KEY = "AllPhotoAlbums";
     public static final String ALL_PHOTOS_KEY = "AllPhotos";
+    public static final String ALL_PRIVATE_MESSAGES_KEY = "AllPrivateMessages";
+    public static final String ALL_WALL_MESSAGES_KEY = "AllWallMessages";
 
+    private UserDao userDao;
     private ForumThemeDao forumThemeDao;
     private PhotoAlbumDao photoAlbumDao;
     private PhotoDao photoDao;
+    private PrivateMessageDao privateMessageDao;
+    private WallMessageDao wallMessageDao;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
+        userDao = (UserDao) config.getServletContext().getAttribute("UserDao");
         forumThemeDao = (ForumThemeDao) config.getServletContext().getAttribute("ForumThemeDao");
         photoAlbumDao = (PhotoAlbumDao) config.getServletContext().getAttribute("PhotoAlbumDao");
         photoDao = (PhotoDao) config.getServletContext().getAttribute("PhotoDao");
+        privateMessageDao = (PrivateMessageDao) config.getServletContext().getAttribute("PrivateMessageDao");
+        wallMessageDao = (WallMessageDao) config.getServletContext().getAttribute("WallMessageDao");
     }
 
 
@@ -47,9 +59,12 @@ public class WelcomeController extends HttpServlet {
 
         req.setAttribute(WELCOME_KEY, s);
 
+        req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
         req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
         req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
+        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
+        req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
 
 
         req.getRequestDispatcher("/WEB-INF/index.jsp")

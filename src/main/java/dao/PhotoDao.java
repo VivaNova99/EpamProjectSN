@@ -5,9 +5,7 @@ import model.Photo;
 import java.util.Collection;
 import java.util.Optional;
 
-/**
- * Created by veraivanova on 18.03.17.
- */
+
 public interface PhotoDao {
     int save();
     default Optional<Photo> get(int id){
