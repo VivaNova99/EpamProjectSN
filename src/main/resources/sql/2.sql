@@ -1,6 +1,6 @@
 INSERT INTO AccessLevel(id, description) VALUES (1, 'ADMIN');
 INSERT INTO AccessLevel(id, description) VALUES (2, 'MODERATOR');
-INSERT INTO AccessLevel(id, description) VALUES (3, 'STANDART_USER');
+INSERT INTO AccessLevel(id, description) VALUES (3, 'STANDARD_USER');
 INSERT INTO AccessLevel(id, description) VALUES (4, 'DELETED_USER');
 
 
@@ -49,8 +49,11 @@ INSERT INTO PrivateMessage (sender_user_id, reciever_user_id, text, date_time, s
     VALUES (2, 1, 'Привет, привет!))', '2017-03-23 20:05:00', 1);
 
 
-INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, parent_message_id, status_id)
-    VALUES (2, 'Моя первая запись', 'Ссылка на фото 2 альбома 2', '2017-03-24 01:00:02', 3, NULL, 2);
-INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, parent_message_id, status_id)
-    VALUES (1, 'Просто ответ', NULL , '2017-03-24 01:05:02', 3, 1, 2);
+INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, is_parent, parent_message_id, status_id)
+    VALUES (2, 'Запись для того, чтобы на нее ссылаться', NULL , '2017-03-24 01:00:02', 3, TRUE, 1, 2);
+/*может быть, поставить null в parent_message_id, тогда запись будет, но не будет выводиться?*/
+INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, is_parent, parent_message_id, status_id)
+    VALUES (2, 'Моя первая запись', NULL , '2017-03-24 01:01:02', 3, TRUE , 1, 2);
+INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, is_parent, parent_message_id, status_id)
+    VALUES (1, 'Просто ответ', NULL , '2017-03-24 01:05:02', 3, FALSE, 2, 2);
 

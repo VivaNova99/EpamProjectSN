@@ -55,6 +55,7 @@
    picture VARCHAR(100),
    date_time DATETIME NOT NULL,
    forum_theme_id INT,
+   is_parent BOOLEAN,
    parent_message_id INT,
    status_id VARCHAR(50),
 
