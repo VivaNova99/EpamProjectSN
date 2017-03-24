@@ -53,7 +53,7 @@ INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_i
     VALUES (2, 'Запись для того, чтобы на нее ссылаться', NULL , '2017-03-24 01:00:02', 3, TRUE, 1, 2);
 /*может быть, поставить null в parent_message_id, тогда запись будет, но не будет выводиться?*/
 INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, is_parent, parent_message_id, status_id)
-    VALUES (2, 'Моя первая запись', NULL , '2017-03-24 01:01:02', 3, TRUE , 1, 2);
+    VALUES (2, 'Моя первая запись', 'Ссылка на фото 2 альбома 2', '2017-03-24 01:01:02', 3, TRUE , 1, 2);
 INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, is_parent, parent_message_id, status_id)
     VALUES (1, 'Просто ответ', NULL , '2017-03-24 01:05:02', 3, FALSE, 2, 2);
 
