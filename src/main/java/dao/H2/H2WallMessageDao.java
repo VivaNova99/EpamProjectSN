@@ -53,7 +53,8 @@ public class H2WallMessageDao implements WallMessageDao {
                      "wm.picture," +
                      "wm.date_time, " +
                      "wm.forum_theme_id, " +
-                     "ft.name, " +
+                     "ft.name," +
+                     "wm.is_parent, " +
                      "wm.parent_message_id, " +
                      "wmparent.id, " +
                      "wmparent.text, " +
@@ -76,6 +77,7 @@ public class H2WallMessageDao implements WallMessageDao {
                         new ForumTheme(
                                 resultSet.getString("name")
                         ),
+                        resultSet.getBoolean("is_parent"),
                         new WallMessage(
                                 resultSet.getString("text")
                         ),

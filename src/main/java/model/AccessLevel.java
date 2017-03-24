@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum AccessLevel{
-    ADMIN, MODERATOR, STANDART_USER, DELETED_USER;
+    ADMIN, MODERATOR, STANDARD_USER, DELETED_USER;
 
     public static Optional<AccessLevel> valueOf(int id) {
         return Arrays.stream(values())
