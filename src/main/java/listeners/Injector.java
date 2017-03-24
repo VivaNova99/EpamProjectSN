@@ -1,9 +1,6 @@
 package listeners;
 
-import dao.H2.H2ForumThemeDao;
-import dao.H2.H2PhotoAlbumDao;
-import dao.H2.H2PhotoDao;
-import dao.H2.H2UserDao;
+import dao.H2.*;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContextEvent;
@@ -24,6 +21,8 @@ public class Injector implements ServletContextListener{
         sce.getServletContext().setAttribute("ForumThemeDao", new H2ForumThemeDao(dataSource));
         sce.getServletContext().setAttribute("PhotoAlbumDao", new H2PhotoAlbumDao(dataSource));
         sce.getServletContext().setAttribute("PhotoDao", new H2PhotoDao(dataSource));
+        sce.getServletContext().setAttribute("PrivateMessageDao", new H2PrivateMessageDao(dataSource));
+        sce.getServletContext().setAttribute("WallMessageDao", new H2WallMessageDao(dataSource));
 
     }
 }

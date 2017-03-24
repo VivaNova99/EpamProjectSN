@@ -1,10 +1,8 @@
 package dao.H2;
 
-import dao.PhotoAlbumDao;
+import dao.PrivateMessageDao;
 import lombok.SneakyThrows;
-import model.PhotoAlbum;
-import model.PhotoStatus;
-import model.User;
+import model.*;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -17,16 +15,17 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by veraivanova on 18.03.17.
+ * Created by veraivanova on 23.03.17.
  */
-public class H2PhotoAlbumDao implements PhotoAlbumDao {
+public class H2PrivateMessageDao implements PrivateMessageDao {
 
-       @Resource(name = "jdbc/TestDB")
-       private DataSource dataSource;
+    @Resource(name = "jdbc/TestDB")
+    private DataSource dataSource;
 
-    public H2PhotoAlbumDao(DataSource dataSource) {
+    public H2PrivateMessageDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+
 
     @Override
     public int save() {
@@ -35,46 +34,52 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
 
     @Override
     public void remove(int id) {
+
     }
 
     @Override
     @SneakyThrows
-    public Collection<PhotoAlbum> getAll() {
-        List<PhotoAlbum> photoAlbums = new ArrayList<>();
+    public Collection<PrivateMessage> getAll() {
+        List<PrivateMessage> privateMessages = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT " +
-                     "pa.id, " +
-                     "name, " +
-                     "pa.user_id, " +
-                     "u.id, " +
-                     "u.first_name, " +
-                     "u.last_name, " +
-                     "photo_album_picture, " +
-                     "description, " +
+                     "pm.id, " +
+                     "pm.sender_user_id, " +
+                     "u1.id, " +
+                     "u1.first_name, " +
+                     "u1.last_name, " +
+                     "pm.reciever_user_id, " +
+                     "u2.id, " +
+                     "u2.first_name, " +
+                     "u2.last_name, " +
+                     "text," +
                      "date_time, " +
                      "status_id " +
-                     "FROM PhotoAlbum pa, User u " +
-                     "WHERE pa.user_id = u.id")) {
+                     "FROM PrivateMessage pm " +
+                     "JOIN User u1 ON pm.sender_user_id = u1.id " +
+                     "JOIN User u2 ON pm.reciever_user_id = u2.id ")) {
             while (resultSet.next()){
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                photoAlbums.add(new PhotoAlbum(
+                privateMessages.add(new PrivateMessage(
                         resultSet.getInt("id"),
-                        resultSet.getString("name"),
                         new User(
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
-                        resultSet.getString("photo_album_picture"),
-                        resultSet.getString("description"),
+                        new User(
+                                resultSet.getString("first_name"),
+                                resultSet.getString("last_name")
+                        ),
+                        resultSet.getString("text"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
-                        PhotoStatus.valueOf(
+                        MessageStatus.valueOf(
                                 resultSet.getInt("status_id") - 1)
                                 .orElseThrow(() -> new RuntimeException("нет такого статуса"))
                 ));
             }
-            return photoAlbums;
+            return privateMessages;
         }
     }
 }

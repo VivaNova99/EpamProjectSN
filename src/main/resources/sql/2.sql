@@ -37,3 +37,20 @@ INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, sta
 INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id)
     VALUES (2, 2, 'Ссылка на фото 2 альбома 2', 'Описание фото 2 альбома 2', '2017-03-21 01:00:03', 3);
 
+
+INSERT INTO MessageStatus (id, description) VALUES (1, 'UNREAD');
+INSERT INTO MessageStatus (id, description) VALUES (2, 'STANDARD');
+INSERT INTO MessageStatus (id, description) VALUES (3, 'DELETED');
+
+
+INSERT INTO PrivateMessage (sender_user_id, reciever_user_id, text, date_time, status_id)
+    VALUES (1, 2, 'Маша, привет!', '2017-03-23 20:00:00', 2);
+INSERT INTO PrivateMessage (sender_user_id, reciever_user_id, text, date_time, status_id)
+    VALUES (2, 1, 'Привет, привет!))', '2017-03-23 20:05:00', 1);
+
+
+INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, parent_message_id, status_id)
+    VALUES (2, 'Моя первая запись', 'Ссылка на фото 2 альбома 2', '2017-03-24 01:00:02', 3, NULL, 2);
+INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, parent_message_id, status_id)
+    VALUES (1, 'Просто ответ', NULL , '2017-03-24 01:05:02', 3, 1, 2);
+
