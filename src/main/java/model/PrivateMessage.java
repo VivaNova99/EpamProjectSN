@@ -15,7 +15,7 @@ public class PrivateMessage {
 
     private int id;
     private User senderUser;
-    private User recieverUser;
+    private User receiverUser;
     private String text;
     private Date dateTime;
     private MessageStatus status;
@@ -28,8 +28,8 @@ public class PrivateMessage {
         return senderUser.getFirstNameAndLastName();
     }
 
-    public String getRecieverUserFirstNameAndLastName(){
-        return recieverUser.getFirstNameAndLastName();
+    public String getReceiverUserFirstNameAndLastName(){
+        return receiverUser.getFirstNameAndLastName();
     }
 
 }

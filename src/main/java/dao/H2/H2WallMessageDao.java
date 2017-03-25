@@ -49,15 +49,16 @@ public class H2WallMessageDao implements WallMessageDao {
                      "u.id, " +
                      "u.first_name, " +
                      "u.last_name, " +
-                     "wm.text, " +
+                     "wm.text as message_text, " +
                      "wm.picture," +
                      "wm.date_time, " +
                      "wm.forum_theme_id, " +
+                     "wm.message_header, " +
                      "ft.name," +
                      "wm.is_parent, " +
                      "wm.parent_message_id, " +
                      "wmparent.id, " +
-                     "wmparent.text, " +
+                     "wmparent.text as parent_message_text, " +
                      "wm.status_id " +
                      "FROM WallMessage wm " +
                      "JOIN User u ON wm.sender_user_id = u.id " +
@@ -71,15 +72,16 @@ public class H2WallMessageDao implements WallMessageDao {
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
-                        resultSet.getString("text"),
+                        resultSet.getString("message_text"),
                         resultSet.getString("picture"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         new ForumTheme(
                                 resultSet.getString("name")
                         ),
+                        resultSet.getString("message_header"),
                         resultSet.getBoolean("is_parent"),
                         new WallMessage(
-                                resultSet.getString("text")
+                                resultSet.getString("parent_message_text")
                         ),
                         MessageStatus.valueOf(
                                 resultSet.getInt("status_id") - 1)

@@ -38,13 +38,13 @@
  CREATE TABLE PrivateMessage (
    id INT AUTO_INCREMENT PRIMARY KEY,
    sender_user_id int NOT NULL,
-   reciever_user_id int NOT NULL,
+   receiver_user_id int NOT NULL,
    text VARCHAR(160) NOT NULL,
    date_time DATETIME NOT NULL,
    status_id INT,
 
    FOREIGN KEY (sender_user_id) REFERENCES User(id),
-   FOREIGN KEY (reciever_user_id) REFERENCES User(id),
+   FOREIGN KEY (receiver_user_id) REFERENCES User(id),
    FOREIGN KEY (status_id) REFERENCES MessageStatus(id)
  );
 
@@ -55,6 +55,7 @@
    picture VARCHAR(100),
    date_time DATETIME NOT NULL,
    forum_theme_id INT,
+   message_header VARCHAR(50),
    is_parent BOOLEAN,
    parent_message_id INT,
    status_id VARCHAR(50),
