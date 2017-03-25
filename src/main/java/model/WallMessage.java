@@ -20,6 +20,7 @@ public class WallMessage {
     private String picture;
     private Date dateTime;
     private ForumTheme forumTheme;
+    private String messageHeader;
     private boolean parent;
     private WallMessage parentMessage;
     private MessageStatus status;

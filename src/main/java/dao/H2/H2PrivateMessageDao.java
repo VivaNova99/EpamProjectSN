@@ -48,29 +48,29 @@ public class H2PrivateMessageDao implements PrivateMessageDao {
                      "pm.id, " +
                      "pm.sender_user_id, " +
                      "u1.id, " +
-                     "u1.first_name, " +
-                     "u1.last_name, " +
-                     "pm.reciever_user_id, " +
+                     "u1.first_name as sender_first_name, " +
+                     "u1.last_name as sender_last_name, " +
+                     "pm.receiver_user_id," +
                      "u2.id, " +
-                     "u2.first_name, " +
-                     "u2.last_name, " +
+                     "u2.first_name as receiver_first_name, " +
+                     "u2.last_name as receiver_last_name, " +
                      "text," +
                      "date_time, " +
                      "status_id " +
                      "FROM PrivateMessage pm " +
                      "JOIN User u1 ON pm.sender_user_id = u1.id " +
-                     "JOIN User u2 ON pm.reciever_user_id = u2.id ")) {
+                     "JOIN User u2 ON pm.receiver_user_id = u2.id ")) {
             while (resultSet.next()){
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 privateMessages.add(new PrivateMessage(
                         resultSet.getInt("id"),
                         new User(
-                                resultSet.getString("first_name"),
-                                resultSet.getString("last_name")
+                                resultSet.getString("sender_first_name"),
+                                resultSet.getString("sender_last_name")
                         ),
                         new User(
-                                resultSet.getString("first_name"),
-                                resultSet.getString("last_name")
+                                resultSet.getString("receiver_first_name"),
+                                resultSet.getString("receiver_last_name")
                         ),
                         resultSet.getString("text"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
