@@ -4,3 +4,4 @@ build
 gradle.properties
 gradle
 
+!/src/main/webapp/WEB-INF/index.jsp
