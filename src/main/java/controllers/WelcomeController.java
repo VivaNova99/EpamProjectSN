@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 import static model.User.FIRST_NAME_KEY;
@@ -50,14 +51,17 @@ public class WelcomeController extends HttpServlet {
 
 
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-                .map(o -> String.format("Здравствуйте, %s", o))
-                .orElse("Здравствуйте!");
+//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
+//                .map(o -> String.format("Здравствуйте, %s", o))
+//                .orElse("Здравствуйте!");
 
-        req.setAttribute(WELCOME_KEY, s);
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
+                .map(o -> true)
+                .orElse(false);
+
+//        req.setAttribute(WELCOME_KEY, s);
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
@@ -66,8 +70,14 @@ public class WelcomeController extends HttpServlet {
         req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
 
-
-        req.getRequestDispatcher("/WEB-INF/index.jsp")
+        if (b == true) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
                 .forward(req, resp);
+        }
+        else {req.getRequestDispatcher("/WEB-INF/unreg-forum.jsp")
+                .forward(req, resp);
+        }
+
+//        req.getRequestDispatcher("/WEB-INF/index.jsp")
+//                .forward(req, resp);
     }
 }
