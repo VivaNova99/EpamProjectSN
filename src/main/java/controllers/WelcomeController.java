@@ -17,7 +17,8 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 
-import static model.User.FIRST_NAME_KEY;
+//import static model.User.FIRST_NAME_KEY;
+import static model.User.ID_KEY;
 
 
 @WebServlet("/")
@@ -57,7 +58,11 @@ public class WelcomeController extends HttpServlet {
 //                .map(o -> String.format("Здравствуйте, %s", o))
 //                .orElse("Здравствуйте!");
 
-        boolean b = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
+        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
+                .map(o -> String.format("/WEB-INF/reg-user-own-page/%s.jsp", o)).
+                orElse("/WEB-INF/unreg-forum.jsp");
+
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
                 .map(o -> true)
                 .orElse(false);
 
@@ -70,12 +75,14 @@ public class WelcomeController extends HttpServlet {
         req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
 
-        if (b == true) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
-                .forward(req, resp);
-        }
-        else {req.getRequestDispatcher("/WEB-INF/unreg-forum.jsp")
-                .forward(req, resp);
-        }
+//        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
+//                .forward(req, resp);
+//        }
+//        else {req.getRequestDispatcher("/WEB-INF/unreg-forum.jsp")
+//                .forward(req, resp);
+//        }
+
+        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
 
 //        req.getRequestDispatcher("/WEB-INF/index.jsp")
 //                .forward(req, resp);
