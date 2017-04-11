@@ -14,7 +14,7 @@
  );
 
  CREATE TABLE ForumTheme (
-   id INT PRIMARY KEY,
+   id INT AUTO_INCREMENT PRIMARY KEY,
    theme_order INT,
    name VARCHAR(50) NOT NULL
  );

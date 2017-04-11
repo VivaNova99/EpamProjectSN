@@ -4,7 +4,8 @@
 <%@ page import="model.*" %>
 <html>
 <head>
-    <title>${requestScope.get(WelcomeController.WELCOME_KEY)} Добро пожаловать</title>
+    <title> Добро пожаловать </title>
+    <%--<title>${requestScope.get(WelcomeController.WELCOME_KEY)} Добро пожаловать</title>--%>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spirax">
     <%--<link rel="stylesheet" href="../styles/main.css">--%>

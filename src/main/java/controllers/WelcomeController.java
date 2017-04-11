@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 
-//import static model.User.FIRST_NAME_KEY;
+import static model.User.FIRST_NAME_KEY;
 import static model.User.ID_KEY;
 
 
@@ -54,19 +54,20 @@ public class WelcomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-//                .map(o -> String.format("Здравствуйте, %s", o))
-//                .orElse("Здравствуйте!");
+        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
+                .map(o -> String.format("Здравствуйте, %s", o))
+                .orElse("Здравствуйте!");
 
         String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
                 .map(o -> String.format("/WEB-INF/reg-user-own-page/%s.jsp", o)).
-                orElse("/WEB-INF/unreg-forum.jsp");
+//                orElse("/WEB-INF/unreg-forum.jsp");
+                orElse("/WEB-INF/test.jsp");
 
-        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-                .map(o -> true)
-                .orElse(false);
+//        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
+//                .map(o -> true)
+//                .orElse(false);
 
-//        req.setAttribute(WELCOME_KEY, s);
+        req.setAttribute(WELCOME_KEY, s);
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
