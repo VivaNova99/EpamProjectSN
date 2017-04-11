@@ -1,0 +1,21 @@
+.header-reg-user {
+    position: relative;
+    width: 100%;
+    min-height: 40px;
+    background-color: burlywood;
+}
+
+.header-reg-user ul {
+    display: inline-block;
+}
+
+.exit {
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    vertical-align: baseline;
+}
+
+.exit .fa.fa-sign-out {
+    padding-left: 5px;
+}

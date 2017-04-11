@@ -9,11 +9,6 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spirax">
-
-    <style>
-        <%@include file="../styles/main.css" %>
-    </style>
 
 </head>
 <body>

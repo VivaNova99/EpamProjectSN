@@ -13,14 +13,19 @@
 
     <style>
         <%@include file="../styles/main.css" %>
+        <%@include file="../styles/header-reg-user.css" %>
     </style>
     <script src="https://use.fontawesome.com/63b5a6d443.js"></script>
 </head>
 <body>
 
 <div class="header-reg-user">
-    <div class="logo">W-only</div>
-    <div class="exit">Выйти<i class="fa fa-sign-out" aria-hidden="true"></i></div>
+
+    <ul>
+        <li class="logo">W-only</li>
+        <li class="exit"><a href="index.jsp">Выйти<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+    </ul>
+
 </div>
 
 </body>

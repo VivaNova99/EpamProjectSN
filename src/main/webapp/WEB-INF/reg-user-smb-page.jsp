@@ -12,5 +12,9 @@
 </head>
 <body>
 
+<header class="reg-user">
+    <%@ include file="header-reg-user.jsp" %>
+</header>
+
 </body>
 </html>
