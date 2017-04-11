@@ -21,8 +21,11 @@
     <%@ include file="header-reg-user.jsp" %>
 </header>
 
+<aside>
+    <%@ include file="sidebar-reg-user.jsp" %>
+</aside>
 
-
+<section>
 <%
     Collection<ForumTheme> forumThemes = (Collection<ForumTheme>) request.getAttribute(WelcomeController.ALL_FORUM_THEMES_KEY);
 %>
@@ -224,6 +227,8 @@
     %>
 
 </table>
+
+</section>
 
 </body>
 
