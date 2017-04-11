@@ -16,5 +16,9 @@
     <%@ include file="header-reg-user.jsp" %>
 </header>
 
+<aside class="reg-user">
+    <%@ include file="sidebar-reg-user.jsp" %>
+</aside>
+
 </body>
 </html>
