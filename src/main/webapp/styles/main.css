@@ -1,6 +1,9 @@
-@import "/styles/index.css";
+li {
+    list-style-type: none;
+}
 
 .logo {
     font-family: 'Spirax', cursive;
     font-size: 60px;
+    color: darkgreen;
 }

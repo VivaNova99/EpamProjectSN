@@ -8,7 +8,6 @@
     <%--<title>${requestScope.get(WelcomeController.WELCOME_KEY)} Добро пожаловать</title>--%>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spirax">
-    <%--<link rel="stylesheet" href="../styles/main.css">--%>
 
     <style>
         <%@include file="../styles/main.css" %>
@@ -17,8 +16,8 @@
 </head>
 <body>
 
-<header>
-    <div class="logo">W-only</div>
+<header class="unreg">
+    <%@ include file="header-unreg.jsp" %>
 </header>
 
 

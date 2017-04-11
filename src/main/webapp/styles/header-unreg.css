@@ -1,0 +1,17 @@
+.header-unreg {
+    position: relative;
+    width: 100%;
+    min-height: 40px;
+    background-color: burlywood;
+}
+
+.header-unreg ul {
+    display: inline-block;
+}
+
+.enter-or-register {
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    vertical-align: baseline;
+}
