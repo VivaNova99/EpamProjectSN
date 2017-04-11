@@ -7,8 +7,21 @@
 <head>
     <%--<title><%=request.getAttribute(WelcomeController.WELCOME_KEY) %> Добро пожаловать</title>--%>
     <title>${requestScope.get(WelcomeController.WELCOME_KEY)} Добро пожаловать</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spirax">
+
+        <style>
+            <%@include file="../styles/main.css" %>
+        </style>
+
 </head>
 <body>
+
+<header>
+    <%@ include file="header-unreg.jsp" %>
+    <%@ include file="header-reg-user.jsp" %>
+</header>
+
+
 
 <%
     Collection<ForumTheme> forumThemes = (Collection<ForumTheme>) request.getAttribute(WelcomeController.ALL_FORUM_THEMES_KEY);
