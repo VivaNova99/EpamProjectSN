@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 public class User {
 
-//    public static String FIRST_NAME_KEY = "firstName";
+    public static String FIRST_NAME_KEY = "firstName";
     public static int ID_KEY = 0;
 
     public User(String firstName, String lastName){
