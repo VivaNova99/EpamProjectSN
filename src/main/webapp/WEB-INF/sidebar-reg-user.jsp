@@ -14,14 +14,15 @@
 
 <div class="sidebar-reg-user">
     <ul>
-        <li><i class="fa fa-home" aria-hidden="true"></i>Моя страница</li>
-        <li><i class="fa fa-newspaper-o" aria-hidden="true"></i>Новости</li>
-        <li><i class="fa fa-comments" aria-hidden="true"></i>Сообщения</li>
-        <li><i class="fa fa-users" aria-hidden="true"></i>Друзья</li>
-        <li><i class="fa fa-picture-o" aria-hidden="true"></i>Фотографии</li>
-        <li><i class="fa fa-book" aria-hidden="true"></i>Фотоальбомы</li>
-        <li><i class="fa fa-commenting-o" aria-hidden="true"></i>Мои темы</li>
-        <li><i class="fa fa-comments-o" aria-hidden="true"></i>Мои ответы</li>
+        <li><a href="reg-user-own-page.jsp"><i class="fa fa-home" aria-hidden="true"></i>Моя страница</a></li>
+        <li><a href="reg-user-news.jsp"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Новости</a></li>
+        <li><a href="reg-user-private-messages.jsp"><i class="fa fa-comments" aria-hidden="true"></i>Сообщения</a></li>
+        <li><a href="reg-user-all-friends.jsp"><i class="fa fa-users" aria-hidden="true"></i>Друзья</a></li>
+        <li><a href="reg-user-photos.jsp"><i class="fa fa-picture-o" aria-hidden="true"></i>Фотографии</a></li>
+        <li><a href="reg-user-photoalbums.jsp"><i class="fa fa-book" aria-hidden="true"></i>Фотоальбомы</a></li>
+        <li><a href="reg-user-forum.jsp"><i class="fa fa-comments-o" aria-hidden="true"></i>Форум</a></li>
+        <li><a href="reg-user-themes.jsp"><i class="fa fa-commenting" aria-hidden="true"></i>Мои темы</a> <i class="fa fa-commenting" aria-hidden="true"></i>Мои темы</li>
+        <li><a href="reg-user-answers.jsp"><i class="fa fa-commenting-o" aria-hidden="true"></i>Мои ответы</a></li>
     </ul>
 </div>
 
