@@ -10,14 +10,6 @@
 <head>
     <title></title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spirax">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <style>
-        <%@include file="../styles/main.css" %>
-        <%@include file="../styles/sidebar-reg-user.css" %>
-    </style>
-
 </head>
 <body>
 
