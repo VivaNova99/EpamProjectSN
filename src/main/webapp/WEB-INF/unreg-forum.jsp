@@ -7,6 +7,16 @@
     <title> Добро пожаловать </title>
     <%--<title>${requestScope.get(WelcomeController.WELCOME_KEY)} Добро пожаловать</title>--%>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spirax">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        <%@include file="../styles/main.css" %>
+        <%@include file="../styles/forum-themes.css" %>
+        <%@include file="../styles/unreg-forum.css" %>
+    </style>
+
+
 </head>
 <body>
 
@@ -15,10 +25,8 @@
 </header>
 
 
-<section class="forum-themes">
-
+<section class="unreg-forum-themes">
     <%@ include file="forum-themes.jsp" %>
-
 </section>
 
 </body>
