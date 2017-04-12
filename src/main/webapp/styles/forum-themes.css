@@ -5,3 +5,23 @@ div.forum-themes {
     padding-right: 15px;
     background-color: antiquewhite;
 }
+
+.forum-themes ul {
+    border: 1px solid sienna;
+}
+
+.forum-themes h2 {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background-color: burlywood;
+}
+
+.forum-themes h3 {
+    padding-top: 5px;
+    background-color: bisque;
+}
+
+.forum-themes p {
+    padding-bottom: 5px;
+    background-color: antiquewhite;
+}
