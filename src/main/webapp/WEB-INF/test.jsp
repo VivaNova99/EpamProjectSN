@@ -26,6 +26,9 @@
 </aside>
 
 <section>
+
+    <%@ include file="forum-themes.jsp" %>
+
 <%
     Collection<ForumTheme> forumThemes = (Collection<ForumTheme>) request.getAttribute(WelcomeController.ALL_FORUM_THEMES_KEY);
 %>

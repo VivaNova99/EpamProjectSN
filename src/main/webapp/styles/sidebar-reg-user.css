@@ -1,0 +1,33 @@
+div.sidebar-reg-user{
+    width: 250px;
+    float: left;
+    height: 100%;
+    background-color: burlywood;
+}
+
+div.sidebar-reg-user > ul > li {
+    /*height: 12px;*/
+    /*color: darkgreen;*/
+    /*font: 14px Arial;*/
+    /*font-weight: 400;*/
+    /*text-transform: uppercase;*/
+
+    border: 1px solid darkolivegreen;
+    line-height: 47px;
+}/*боковое меню*/
+
+div.sidebar-reg-user > ul > li > a {
+    color: darkgreen;
+    font: 14px Arial;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+
+div.sidebar-reg-user > ul > li > a > i{
+    margin-right: 23px;
+    margin-left: 31px;
+    color: darkgreen;
+    font-size: 14px;
+    font-weight: 400;
+} /*значки в боковом меню*/

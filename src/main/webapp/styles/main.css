@@ -1,6 +1,22 @@
+body, img, form, a, ul {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+img {
+    display: block; /* иначе выдается вниз из-за стандартных отступов браузера */
+}
+
+a {
+    text-decoration: none;
+}
+
 li {
     list-style-type: none;
 }
+
+
 
 .logo {
     font-family: 'Spirax', cursive;

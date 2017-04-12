@@ -9,6 +9,13 @@
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spirax">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        <%@include file="../styles/main.css" %>
+        <%@include file="../styles/sidebar-reg-user.css" %>
+    </style>
 </head>
 <body>
 
@@ -21,7 +28,7 @@
         <li><a href="reg-user-photos.jsp"><i class="fa fa-picture-o" aria-hidden="true"></i>Фотографии</a></li>
         <li><a href="reg-user-photoalbums.jsp"><i class="fa fa-book" aria-hidden="true"></i>Фотоальбомы</a></li>
         <li><a href="reg-user-forum.jsp"><i class="fa fa-comments-o" aria-hidden="true"></i>Форум</a></li>
-        <li><a href="reg-user-themes.jsp"><i class="fa fa-commenting" aria-hidden="true"></i>Мои темы</a> <i class="fa fa-commenting" aria-hidden="true"></i>Мои темы</li>
+        <li><a href="reg-user-themes.jsp"><i class="fa fa-commenting" aria-hidden="true"></i>Мои темы</a></li>
         <li><a href="reg-user-answers.jsp"><i class="fa fa-commenting-o" aria-hidden="true"></i>Мои ответы</a></li>
     </ul>
 </div>
