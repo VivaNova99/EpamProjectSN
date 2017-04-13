@@ -19,4 +19,6 @@ public interface WallMessageDao {
     void remove(int id);
 
     Collection<WallMessage> getAll();
+
+    Collection<WallMessage> getLast10();
 }
