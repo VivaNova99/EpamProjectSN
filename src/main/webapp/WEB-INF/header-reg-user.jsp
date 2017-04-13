@@ -26,7 +26,7 @@
 
     <ul>
         <li class="logo">W-only</li>
-        <li class="exit"><a href="index.jsp">Выйти<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+        <li class="exit"><a href="unreg-forum.jsp">Выйти<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
     </ul>
 
 </div>

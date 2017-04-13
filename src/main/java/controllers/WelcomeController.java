@@ -62,7 +62,8 @@ public class WelcomeController extends HttpServlet {
                 .map(o -> String.format("/WEB-INF/reg-user-own-page/%s.jsp", o)).
 //                orElse("/WEB-INF/unreg-forum.jsp");
 //                orElse("/WEB-INF/test.jsp");
-                orElse("/WEB-INF/reg-user-own-page.jsp");
+//                orElse("/WEB-INF/reg-user-own-page.jsp");
+                orElse("/WEB-INF/index.jsp");
 
 //        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
 //                .map(o -> true)

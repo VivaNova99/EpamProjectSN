@@ -10,24 +10,24 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spirax">
 
         <style>
-            <%@include file="../styles/main.css" %>
+            <%@include file="styles/main.css" %>
         </style>
 
 </head>
 <body>
 
 <header>
-    <%@ include file="header-unreg.jsp" %>
-    <%@ include file="header-reg-user.jsp" %>
+    <%@ include file="WEB-INF/header-unreg.jsp" %>
+    <%@ include file="WEB-INF/header-reg-user.jsp" %>
 </header>
 
 <aside>
-    <%@ include file="sidebar-reg-user.jsp" %>
+    <%@ include file="WEB-INF/sidebar-reg-user.jsp" %>
 </aside>
 
 <section>
 
-    <%@ include file="forum-themes.jsp" %>
+    <%@ include file="WEB-INF/forum-themes.jsp" %>
 
 <%
     Collection<ForumTheme> forumThemes = (Collection<ForumTheme>) request.getAttribute(WelcomeController.ALL_FORUM_THEMES_KEY);
