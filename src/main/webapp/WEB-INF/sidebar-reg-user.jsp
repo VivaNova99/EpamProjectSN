@@ -22,7 +22,7 @@
 <div class="sidebar-reg-user">
     <ul>
         <li><a href="reg-user-own-page.jsp"><i class="fa fa-home" aria-hidden="true"></i>Моя страница</a></li>
-        <li><a href="reg-user-news.jsp"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Новости</a></li>
+        <li><a href="reg-user-news"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Новости</a></li>
         <li><a href="reg-user-private-messages.jsp"><i class="fa fa-comments" aria-hidden="true"></i>Сообщения</a></li>
         <li><a href="reg-user-all-friends.jsp"><i class="fa fa-users" aria-hidden="true"></i>Друзья</a></li>
         <li><a href="reg-user-photos.jsp"><i class="fa fa-picture-o" aria-hidden="true"></i>Фотографии</a></li>
