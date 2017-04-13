@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-        <%@include file="../styles/main.css" %>
-        <%@include file="../styles/forum-themes.css" %>
-        <%@include file="../styles/unreg-forum.css" %>
+        <%@include file="styles/main.css" %>
+        <%@include file="styles/forum-themes.css" %>
+        <%@include file="styles/unreg-forum.css" %>
     </style>
 
 
@@ -21,12 +21,12 @@
 <body>
 
 <header class="unreg">
-    <%@ include file="header-unreg.jsp" %>
+    <%@ include file="WEB-INF/header-unreg.jsp" %>
 </header>
 
 
 <section class="unreg-forum-themes">
-    <%@ include file="forum-themes.jsp" %>
+    <%@ include file="WEB-INF/forum-themes.jsp" %>
 </section>
 
 </body>

@@ -8,16 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
-
+    <title></title>
 </head>
 <body>
 
-<header class="unreg">
-    <%@ include file="header-unreg.jsp" %>
+<header class="reg-user">
+    <%@ include file="WEB-INF/header-reg-user.jsp" %>
 </header>
 
-<body>
+<aside class="reg-user">
+    <%@ include file="WEB-INF/sidebar-reg-user.jsp" %>
+</aside>
 
 </body>
 </html>
