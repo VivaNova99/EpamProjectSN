@@ -120,6 +120,7 @@ public class H2WallMessageDao implements WallMessageDao {
                      "JOIN User u ON wm.sender_user_id = u.id " +
                      "JOIN ForumTheme ft ON wm.forum_theme_id = ft.id " +
                      "JOIN WallMessage wmparent ON wm.parent_message_id = wmparent.id " +
+                     "WHERE wm.sender_user_id <> 1 " +
                      "ORDER BY date_time DESC LIMIT 10")) {
             while (resultSet.next()){
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
