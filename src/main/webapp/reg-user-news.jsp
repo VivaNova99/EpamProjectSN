@@ -38,19 +38,19 @@ import="controllers.NewsController" %>
             <th>Status</th>
         </tr>
         <%
-            for (WallMessage wallMessage: last10WallMessages) {
+            for (WallMessage last10WallMessage: last10WallMessages) {
         %>
         <tr>
-            <td><%=wallMessage.getId()%></td>
-            <td><%=wallMessage.getSenderUserFirstNameAndLastName()%></td>
-            <td><%=wallMessage.getText()%></td>
-            <td><%=wallMessage.getPicture()%></td>
-            <td><%=wallMessage.getDateTime()%></td>
-            <td><%=wallMessage.getForumThemeName()%></td>
-            <td><%=wallMessage.getMessageHeader()%></td>
-            <td><%=wallMessage.getParent()%></td>
-            <td><%=wallMessage.getParentMessageText()%></td>
-            <td><%=wallMessage.getStatus()%></td>
+            <td><%=last10WallMessage.getId()%></td>
+            <td><%=last10WallMessage.getSenderUserFirstNameAndLastName()%></td>
+            <td><%=last10WallMessage.getText()%></td>
+            <td><%=last10WallMessage.getPicture()%></td>
+            <td><%=last10WallMessage.getDateTime()%></td>
+            <td><%=last10WallMessage.getForumThemeName()%></td>
+            <td><%=last10WallMessage.getMessageHeader()%></td>
+            <td><%=last10WallMessage.getParent()%></td>
+            <td><%=last10WallMessage.getParentMessageText()%></td>
+            <td><%=last10WallMessage.getStatus()%></td>
         </tr>
         <%
             }

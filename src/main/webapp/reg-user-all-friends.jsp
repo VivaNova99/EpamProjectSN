@@ -1,4 +1,5 @@
-<%@ page import="controllers.FriendsController" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+         import="controllers.FriendsController" %>
 <%@ page import="model.*" %>
 <%@ page import="java.util.Collection" %><%--
   Created by IntelliJ IDEA.
