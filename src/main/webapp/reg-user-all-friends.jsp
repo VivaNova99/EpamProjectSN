@@ -26,7 +26,7 @@
 <section>
 
     <%
-        Collection<User> users = (Collection<User>) request.getAttribute(FriendsController.ALL_USERS_KEY);
+        Collection<User> friends = (Collection<User>) request.getAttribute(FriendsController.ALL_FRIENDS_KEY);
     %>
 
     <table>
@@ -43,19 +43,19 @@
             <th>City</th>
         </tr>
             <%
-        for (User user: users) {
+        for (User friend: friends) {
     %>
         <tr>
-            <td><%=user.getId()%></td>
-            <td><%=user.getFirstName()%></td>
-            <td><%=user.getLastName()%></td>
-            <td><%=user.getDateOfBirth()%></td>
-            <td><%=user.getAccessLevel()%></td>
-            <td><%=user.getEmail()%></td>
-            <td><%=user.getPasswordHash()%></td>
-            <td><%=user.getProfilePhoto()%></td>
-            <td><%=user.getStatusOnWall()%></td>
-            <td><%=user.getCity()%></td>
+            <td><%=friend.getId()%></td>
+            <td><%=friend.getFirstName()%></td>
+            <td><%=friend.getLastName()%></td>
+            <td><%=friend.getDateOfBirth()%></td>
+            <td><%=friend.getAccessLevel()%></td>
+            <td><%=friend.getEmail()%></td>
+            <td><%=friend.getPasswordHash()%></td>
+            <td><%=friend.getProfilePhoto()%></td>
+            <td><%=friend.getStatusOnWall()%></td>
+            <td><%=friend.getCity()%></td>
         </tr>
             <%
         }

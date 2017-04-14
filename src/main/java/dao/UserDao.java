@@ -24,4 +24,6 @@ public interface UserDao {
     // объект остается
 
     List<User> getAll();
+
+    List<User> getAllFriends();
 }
