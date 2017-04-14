@@ -25,6 +25,7 @@ public class FriendsController extends HttpServlet {
     public static final String ALL_PHOTOS_KEY = "AllPhotos";
 //    public static final String ALL_PRIVATE_MESSAGES_KEY = "AllPrivateMessages";
 //    public static final String ALL_WALL_MESSAGES_KEY = "AllWallMessages";
+    public static final String ALL_FRIENDS_KEY = "AllFriends";
 
     private UserDao userDao;
 //    private ForumThemeDao forumThemeDao;
@@ -70,6 +71,7 @@ public class FriendsController extends HttpServlet {
         req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
 //        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
 //        req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
+        req.setAttribute(ALL_FRIENDS_KEY, userDao.getAllFriends());
 
 //        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
 //                .forward(req, resp);
