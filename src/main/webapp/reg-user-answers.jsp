@@ -19,7 +19,7 @@
 <section>
 
         <%
-        Collection<WallMessage> AnswersWallMessages = (Collection<WallMessage>) request.getAttribute(AnswersController.USER_ANSWERS_KEY);
+        Collection<WallMessage> answersWallMessages = (Collection<WallMessage>) request.getAttribute(AnswersController.USER_ANSWERS_KEY);
     %>
 
     <table>
@@ -36,7 +36,7 @@
             <th>Status</th>
         </tr>
             <%
-            for (WallMessage answersWallMessage: AnswersWallMessages) {
+            for (WallMessage answersWallMessage: answersWallMessages) {
         %>
         <tr>
             <td><%=answersWallMessage.getId()%></td>
