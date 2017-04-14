@@ -171,13 +171,14 @@ public class H2WallMessageDao implements WallMessageDao {
                      "wm.is_parent, " +
                      "wm.parent_message_id, " +
                      "wmparent.id, " +
+                     "wmparent.sender_user_id," +
                      "wmparent.text as parent_message_text, " +
                      "wm.status_id " +
                      "FROM WallMessage wm " +
                      "JOIN User u ON wm.sender_user_id = u.id " +
                      "JOIN ForumTheme ft ON wm.forum_theme_id = ft.id " +
                      "JOIN WallMessage wmparent ON wm.parent_message_id = wmparent.id " +
-                     "WHERE wm.is_parent = FALSE")) {
+                     "WHERE wm.is_parent = FALSE AND wmparent.sender_user_id = 2")) {
             while (resultSet.next()){
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 AnswersWallMessages.add(new WallMessage(
