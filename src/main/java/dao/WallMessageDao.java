@@ -21,4 +21,6 @@ public interface WallMessageDao {
     Collection<WallMessage> getAll();
 
     Collection<WallMessage> getLast10();
+
+    Collection<WallMessage> getAnswers();
 }
