@@ -1,6 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java"
-import="controllers.NewsController" %>
+import="controllers.MyNewsController" %>
 <%@ page import="model.*" %>
 <%@ page import="java.util.Collection" %>
 
@@ -21,7 +21,7 @@ import="controllers.NewsController" %>
 <section>
 
     <%
-        Collection<WallMessage> last10WallMessages = (Collection<WallMessage>) request.getAttribute(NewsController.LAST_10_WALL_MESSAGES_KEY);
+        Collection<WallMessage> last10WallMessages = (Collection<WallMessage>) request.getAttribute(MyNewsController.LAST_10_WALL_MESSAGES_KEY);
     %>
 
     <table>

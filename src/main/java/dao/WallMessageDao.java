@@ -22,8 +22,10 @@ public interface WallMessageDao {
 
     Collection<WallMessage> getLast10();
 
-    Collection<WallMessage> getAnswers();
+    Collection<WallMessage> getMyAnswers();
 
-    Collection<WallMessage> getThisTheme();
+    Collection<WallMessage> getThisForumTheme();
+
+    Collection<WallMessage> getThisForumTopic();
 
 }

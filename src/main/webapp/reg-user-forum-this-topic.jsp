@@ -21,5 +21,9 @@
     <%@ include file="WEB-INF/sidebar-reg-user.jsp" %>
 </aside>
 
+<section class="reg-user">
+    <%@ include file="WEB-INF/forum-this-topic.jsp" %>
+</section>
+
 </body>
 </html>

@@ -16,7 +16,7 @@ import static model.User.ID_KEY;
 
 
 @WebServlet("/forum-this-theme")
-public class ThemeController extends HttpServlet {
+public class ForumThemeController extends HttpServlet {
 
     public static final String WELCOME_KEY = "Welcome";
     public static final String ALL_USERS_KEY = "AllUser";
@@ -72,7 +72,7 @@ public class ThemeController extends HttpServlet {
 //        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
 //        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
-        req.setAttribute(THIS_THEME_WALL_MESSAGES_KEY, wallMessageDao.getThisTheme());
+        req.setAttribute(THIS_THEME_WALL_MESSAGES_KEY, wallMessageDao.getThisForumTheme());
 
         if (b) {req.getRequestDispatcher("/reg-user-forum-this-theme.jsp")
                 .forward(req, resp);

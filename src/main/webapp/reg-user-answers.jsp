@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"
-         import="controllers.AnswersController" %>
+         import="controllers.MyAnswersController" %>
 <%@ page import="model.*" %>
 <%@ page import="java.util.Collection"%>
 <html>
@@ -19,7 +19,7 @@
 <section>
 
         <%
-        Collection<WallMessage> answersWallMessages = (Collection<WallMessage>) request.getAttribute(AnswersController.USER_ANSWERS_KEY);
+        Collection<WallMessage> answersWallMessages = (Collection<WallMessage>) request.getAttribute(MyAnswersController.USER_ANSWERS_KEY);
     %>
 
     <table>

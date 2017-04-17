@@ -12,11 +12,10 @@ import java.io.IOException;
 import java.util.Optional;
 
 import static model.User.FIRST_NAME_KEY;
-import static model.User.ID_KEY;
 
 
 @WebServlet("/reg-user-answers")
-public class AnswersController extends HttpServlet {
+public class MyAnswersController extends HttpServlet {
 
     public static final String WELCOME_KEY = "Welcome";
     public static final String ALL_USERS_KEY = "AllUser";
@@ -71,7 +70,7 @@ public class AnswersController extends HttpServlet {
         req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
 //        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
-        req.setAttribute(USER_ANSWERS_KEY, wallMessageDao.getAnswers());
+        req.setAttribute(USER_ANSWERS_KEY, wallMessageDao.getMyAnswers());
 
 //        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
 //                .forward(req, resp);
