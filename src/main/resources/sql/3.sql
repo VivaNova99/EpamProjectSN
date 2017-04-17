@@ -1,28 +1,45 @@
 
 INSERT INTO User (first_name, last_name, date_of_birth, access_level_id, email, password, profile_photo, status_on_wall, city)
-VALUES ('Иван', 'Петров', '1989-03-08', 3, 'ivan@mail.ru', 'qwerty', 'ссылка на фото профиля Ивана Петрова', 'Совсем один', 'СПб');
+    VALUES ('Иван', 'Петров', '1989-03-08', 3, 'ivan@mail.ru', 'qwerty', 'ссылка на фото профиля Ивана Петрова', 'Совсем один', 'СПб');
 INSERT INTO User (first_name, last_name, date_of_birth, access_level_id, email, password, profile_photo, status_on_wall, city)
-VALUES ('Маша', 'Васильева', '1985-08-01', 2, 'maria@mail.ru', 'qwerty11', 'ссылка на фото профиля Маши Васильевой', 'Очень занятой человек', 'город на Неве');
+    VALUES ('Маша', 'Васильева', '1985-08-01', 2, 'maria@mail.ru', 'qwerty11', 'ссылка на фото профиля Маши Васильевой', 'Очень занятой человек', 'город на Неве');
+INSERT INTO User (first_name, last_name, date_of_birth, access_level_id, email, password, profile_photo, status_on_wall, city)
+    VALUES ('Катя', 'Смирнова', '1986-03-02', 3, 'katja@mail.ru', 'qwertyqwerty', 'ссылка на фото профиля Кати Смирновой', 'Люблю все новое ))', 'Москва');
 
 
 INSERT INTO PhotoAlbum (name, user_id, photo_album_picture, description, date_time, status_id)
-VALUES ('Альбом 1', 1, 'Ссылка на фото альбома 1', 'Описание альбома 1', '2017-03-21 00:00:00', 3);
+    VALUES ('Альбом 1', 1, 'Ссылка на фото альбома 1', 'Описание альбома 1', '2017-03-21 00:00:00', 3);
 INSERT INTO PhotoAlbum (name, user_id, photo_album_picture, description, date_time, status_id)
-VALUES ('Альбом 2', 2, 'Ссылка на фото альбома 2', 'Описание альбома 2', '2017-03-21 00:00:01', 3);
+    VALUES ('Альбом 2', 2, 'Ссылка на фото альбома 2', 'Описание альбома 2', '2017-03-21 00:00:01', 3);
+INSERT INTO PhotoAlbum (name, user_id, photo_album_picture, description, date_time, status_id)
+    VALUES ('Альбом 3', 3, 'Ссылка на фото альбома 3', 'Описание альбома 3', '2017-04-17 00:00:01', 3);
+INSERT INTO PhotoAlbum (name, user_id, photo_album_picture, description, date_time, status_id)
+    VALUES ('Альбом 4', 1, 'Ссылка на фото альбома 4', 'Описание альбома 4', '2017-04-17 00:05:01', 3);
 
 
 INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id)
-VALUES (1, 1, 'Ссылка на фото 1 альбома 1', 'Описание фото 1 альбома 1', '2017-03-21 01:00:00', 3);
+    VALUES (1, 1, 'Ссылка на фото 1 альбома 1', 'Описание фото 1 альбома 1', '2017-03-21 01:00:00', 3);
 INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id)
-VALUES (2, 2, 'Ссылка на фото 1 альбома 2', 'Описание фото 1 альбома 2', '2017-03-21 01:00:01', 2);
+    VALUES (2, 2, 'Ссылка на фото 1 альбома 2', 'Описание фото 1 альбома 2', '2017-03-21 01:00:01', 2);
 INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id)
-VALUES (2, 2, 'Ссылка на фото 2 альбома 2', 'Описание фото 2 альбома 2', '2017-03-21 01:00:03', 3);
+    VALUES (2, 2, 'Ссылка на фото 2 альбома 2', 'Описание фото 2 альбома 2', '2017-03-21 01:00:03', 3);
+INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id)
+    VALUES (1, 4, 'Ссылка на фото 1 альбома 4', 'Описание фото 1 альбома 4', '2017-04-17 01:00:03', 3);
+INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id)
+    VALUES (3, 3, 'Ссылка на фото 1 альбома 3', 'Описание фото 1 альбома 3', '2017-04-17 05:00:03', 3);
 
 
 INSERT INTO PrivateMessage (sender_user_id, receiver_user_id, text, date_time, status_id)
     VALUES (1, 2, 'Маша, привет!', '2017-03-23 20:00:00', 2);
 INSERT INTO PrivateMessage (sender_user_id, receiver_user_id, text, date_time, status_id)
     VALUES (2, 1, 'Привет, привет!))', '2017-03-23 20:05:00', 1);
+INSERT INTO PrivateMessage (sender_user_id, receiver_user_id, text, date_time, status_id)
+    VALUES (2, 3, 'Добро пожаловать!', '2017-04-17 20:05:00', 1);
+INSERT INTO PrivateMessage (sender_user_id, receiver_user_id, text, date_time, status_id)
+    VALUES (3, 2, 'Спасибо ))', '2017-04-17 21:05:00', 1);
+INSERT INTO PrivateMessage (sender_user_id, receiver_user_id, text, date_time, status_id)
+    VALUES (3, 1, 'Здесь пока мало народу, да?', '2017-04-17 22:05:00', 1);
+
 
 
 INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, message_header, is_parent, parent_message_id, status_id)
@@ -34,5 +51,9 @@ INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_i
     VALUES (1, 'Просто ответ', NULL , '2017-03-24 01:05:02', 3, NULL, FALSE, 2, 2);
 INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, message_header, is_parent, parent_message_id, status_id)
     VALUES (1, 'Как вставить фото? Не понимаю', NULL , '2017-04-15 01:05:02', 41, 'Как вставить фото?', TRUE, 1, 2);
+INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, message_header, is_parent, parent_message_id, status_id)
+    VALUES (3, 'Собственно, сабж', NULL , '2017-04-17 01:05:02', 41, 'Как стать модератором?', TRUE, 1, 2);
+INSERT INTO WallMessage (sender_user_id, text, picture, date_time, forum_theme_id, message_header, is_parent, parent_message_id, status_id)
+    VALUES (2, 'А обычная загрузка не работает?', NULL , '2017-04-17 02:05:02', 41, 'Как вставить фото?', FALSE, 4, 2);
 
 

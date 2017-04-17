@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"
-         import="controllers.FriendsController" %>
+         import="controllers.MyFriendsController" %>
 <%@ page import="model.*" %>
 <%@ page import="java.util.Collection" %><%--
   Created by IntelliJ IDEA.
@@ -26,7 +26,7 @@
 <section>
 
     <%
-        Collection<User> friends = (Collection<User>) request.getAttribute(FriendsController.ALL_FRIENDS_KEY);
+        Collection<User> friends = (Collection<User>) request.getAttribute(MyFriendsController.ALL_FRIENDS_KEY);
     %>
 
     <table>
