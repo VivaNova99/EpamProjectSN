@@ -17,4 +17,7 @@ public interface PrivateMessageDao {
     void remove(int id);
 
     Collection<PrivateMessage> getAll();
+
+    Collection<PrivateMessage> getMyPrivateMessages();
+
 }
