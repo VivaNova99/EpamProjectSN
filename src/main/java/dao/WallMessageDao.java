@@ -30,4 +30,6 @@ public interface WallMessageDao {
 
     Collection<WallMessage> getLast10ForUser();
 
+    Collection<WallMessage> getMyThemes();
+
 }

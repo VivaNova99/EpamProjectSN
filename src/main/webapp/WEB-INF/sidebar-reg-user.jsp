@@ -28,7 +28,7 @@
         <li><a href="user-photos"><i class="fa fa-picture-o" aria-hidden="true"></i>Фотографии</a></li>
         <li><a href="user-photoalbums"><i class="fa fa-book" aria-hidden="true"></i>Фотоальбомы</a></li>
         <li><a href="reg-user-forum.jsp"><i class="fa fa-comments-o" aria-hidden="true"></i>Форум</a></li>
-        <li><a href="reg-user-themes.jsp"><i class="fa fa-commenting" aria-hidden="true"></i>Мои темы</a></li>
+        <li><a href="my-themes"><i class="fa fa-commenting" aria-hidden="true"></i>Мои темы</a></li>
         <li><a href="reg-user-answers"><i class="fa fa-commenting-o" aria-hidden="true"></i>Мои ответы</a></li>
     </ul>
 </div>
