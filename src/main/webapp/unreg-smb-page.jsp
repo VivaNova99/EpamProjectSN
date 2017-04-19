@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title></title>
 
 </head>
 <body>
@@ -17,6 +17,9 @@
     <%@ include file="WEB-INF/header-unreg.jsp" %>
 </header>
 
+<section class="unreg">
+    <%@ include file="WEB-INF/user-page.jsp" %>
+</section>
 
 </body>
 </html>

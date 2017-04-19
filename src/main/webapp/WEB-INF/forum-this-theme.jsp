@@ -26,31 +26,23 @@
 
     <table>
         <tr>
-            <th>Id</th>
+            <th>Message Header</th>
             <th>Sender User</th>
+            <th>Date and time</th>
             <th>Text</th>
             <th>Picture</th>
-            <th>Date and time</th>
             <th>Forum Theme</th>
-            <th>Message Header</th>
-            <th>Is Parent?</th>
-            <th>Parent Message</th>
-            <th>Status</th>
         </tr>
         <%
             for (WallMessage thisThemeWallMessage: thisThemeWallMessages) {
         %>
         <tr>
-            <td><%=thisThemeWallMessage.getId()%></td>
+            <td><a href="forum-this-topic"><%=thisThemeWallMessage.getMessageHeader()%></a></td>
             <td><%=thisThemeWallMessage.getSenderUserFirstNameAndLastName()%></td>
+            <td><%=thisThemeWallMessage.getDateTime()%></td>
             <td><%=thisThemeWallMessage.getText()%></td>
             <td><%=thisThemeWallMessage.getPicture()%></td>
-            <td><%=thisThemeWallMessage.getDateTime()%></td>
             <td><%=thisThemeWallMessage.getForumThemeName()%></td>
-            <td><a href="forum-this-topic"><%=thisThemeWallMessage.getMessageHeader()%></a></td>
-            <td><%=thisThemeWallMessage.getParent()%></td>
-            <td><%=thisThemeWallMessage.getParentMessageText()%></td>
-            <td><%=thisThemeWallMessage.getStatus()%></td>
         </tr>
         <%
             }

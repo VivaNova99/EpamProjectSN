@@ -17,4 +17,7 @@ public interface PhotoDao {
     void remove(int id);
 
     Collection<Photo> getAll();
+
+    Collection<Photo> getLast5();
+
 }

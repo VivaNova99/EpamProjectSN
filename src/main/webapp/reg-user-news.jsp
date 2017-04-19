@@ -26,31 +26,23 @@ import="controllers.MyNewsController" %>
 
     <table>
         <tr>
-            <th>Id</th>
             <th>Sender User</th>
-            <th>Text</th>
-            <th>Picture</th>
             <th>Date and time</th>
             <th>Forum Theme</th>
             <th>Message Header</th>
-            <th>Is Parent?</th>
-            <th>Parent Message</th>
-            <th>Status</th>
+            <th>Text</th>
+            <th>Picture</th>
         </tr>
         <%
             for (WallMessage last10WallMessage: last10WallMessages) {
         %>
         <tr>
-            <td><%=last10WallMessage.getId()%></td>
             <td><%=last10WallMessage.getSenderUserFirstNameAndLastName()%></td>
-            <td><%=last10WallMessage.getText()%></td>
-            <td><%=last10WallMessage.getPicture()%></td>
             <td><%=last10WallMessage.getDateTime()%></td>
             <td><%=last10WallMessage.getForumThemeName()%></td>
             <td><%=last10WallMessage.getMessageHeader()%></td>
-            <td><%=last10WallMessage.getParent()%></td>
-            <td><%=last10WallMessage.getParentMessageText()%></td>
-            <td><%=last10WallMessage.getStatus()%></td>
+            <td><%=last10WallMessage.getText()%></td>
+            <td><%=last10WallMessage.getPicture()%></td>
         </tr>
         <%
             }

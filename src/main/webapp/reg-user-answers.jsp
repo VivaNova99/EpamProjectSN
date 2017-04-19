@@ -24,31 +24,24 @@
 
     <table>
         <tr>
-            <th>Id</th>
             <th>Sender User</th>
-            <th>Text</th>
-            <th>Picture</th>
             <th>Date and time</th>
             <th>Forum Theme</th>
             <th>Message Header</th>
-            <th>Is Parent?</th>
-            <th>Parent Message</th>
-            <th>Status</th>
+            <th>Text</th>
+            <th>Picture</th>
         </tr>
             <%
             for (WallMessage answersWallMessage: answersWallMessages) {
         %>
         <tr>
-            <td><%=answersWallMessage.getId()%></td>
+
             <td><%=answersWallMessage.getSenderUserFirstNameAndLastName()%></td>
-            <td><%=answersWallMessage.getText()%></td>
-            <td><%=answersWallMessage.getPicture()%></td>
             <td><%=answersWallMessage.getDateTime()%></td>
             <td><%=answersWallMessage.getForumThemeName()%></td>
             <td><%=answersWallMessage.getMessageHeader()%></td>
-            <td><%=answersWallMessage.getParent()%></td>
-            <td><%=answersWallMessage.getParentMessageText()%></td>
-            <td><%=answersWallMessage.getStatus()%></td>
+            <td><%=answersWallMessage.getText()%></td>
+            <td><%=answersWallMessage.getPicture()%></td>
         </tr>
             <%
             }

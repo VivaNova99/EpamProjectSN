@@ -80,4 +80,51 @@ public class H2PhotoDao implements PhotoDao
             return photos;
         }
     }
+
+
+    @Override
+    @SneakyThrows
+    public Collection<Photo> getLast5() {
+        List<Photo> last5Photos = new ArrayList<>();
+
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT " +
+                     "p.id, " +
+                     "p.user_id, " +
+                     "u.first_name, " +
+                     "u.last_name, " +
+                     "p.photo_album_id, " +
+                     "pa.name," +
+                     "p.picture, " +
+                     "p.description, " +
+                     "p.date_time, " +
+                     "p.status_id " +
+                     "FROM Photo p " +
+                     "JOIN User u ON p.user_id = u.id " +
+                     "JOIN PhotoAlbum pa ON p.photo_album_id = pa.id " +
+                     "WHERE p.user_id = 1 " +
+                     "ORDER BY date_time DESC LIMIT 5")) {
+            while (resultSet.next()){
+                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                last5Photos.add(new Photo(
+                        resultSet.getInt("id"),
+                        new User(
+                                resultSet.getString("first_name"),
+                                resultSet.getString("last_name")
+                        ),
+                        new PhotoAlbum(resultSet.getString("name")),
+                        resultSet.getString("picture"),
+                        resultSet.getString("description"),
+                        simpleFormatter.parse(resultSet.getString("date_time")),
+                        PhotoStatus.valueOf(
+                                resultSet.getInt("status_id") - 1)
+                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+                ));
+            }
+            return last5Photos;
+        }
+    }
+
+
 }
