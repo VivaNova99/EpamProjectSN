@@ -23,7 +23,7 @@
     <ul>
         <li><a href="my-page"><i class="fa fa-home" aria-hidden="true"></i>Моя страница</a></li>
         <li><a href="reg-user-news"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Новости</a></li>
-        <li><a href="reg-user-private-messages.jsp"><i class="fa fa-comments" aria-hidden="true"></i>Сообщения</a></li>
+        <li><a href="reg-user-private-messages"><i class="fa fa-comments" aria-hidden="true"></i>Сообщения</a></li>
         <li><a href="reg-user-all-friends"><i class="fa fa-users" aria-hidden="true"></i>Друзья</a></li>
         <li><a href="user-photos"><i class="fa fa-picture-o" aria-hidden="true"></i>Фотографии</a></li>
         <li><a href="user-photoalbums"><i class="fa fa-book" aria-hidden="true"></i>Фотоальбомы</a></li>
