@@ -19,4 +19,7 @@ public interface PhotoAlbumDao {
     void remove(int id);
 
     Collection<PhotoAlbum> getAll();
+
+    Collection<PhotoAlbum> getUserPhotoAlbums();
+
 }

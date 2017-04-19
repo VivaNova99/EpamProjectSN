@@ -11,6 +11,9 @@
     <%@ include file="WEB-INF/header-unreg.jsp" %>
 </header>
 
+<section class="unreg">
+    <%@ include file="WEB-INF/user-photoalbums.jsp" %>
+</section>
 
 </body>
 </html>
