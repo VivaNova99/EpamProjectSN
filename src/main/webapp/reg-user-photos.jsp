@@ -20,5 +20,9 @@
     <%@ include file="WEB-INF/sidebar-reg-user.jsp" %>
 </aside>
 
+<section class="reg-user">
+    <%@ include file="WEB-INF/user-photos.jsp" %>
+</section>
+
 </body>
 </html>

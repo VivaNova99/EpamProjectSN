@@ -20,4 +20,6 @@ public interface PhotoDao {
 
     Collection<Photo> getLast5();
 
+    Collection<Photo> getUserPhotos();
+
 }

@@ -5,12 +5,15 @@
     <title></title>
 
 </head>
+<body>
 
 <header class="unreg">
     <%@ include file="WEB-INF/header-unreg.jsp" %>
 </header>
 
-<body>
+<section class="unreg">
+    <%@ include file="WEB-INF/user-photos.jsp" %>
+</section>
 
 </body>
 </html>
