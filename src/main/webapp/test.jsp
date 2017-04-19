@@ -161,7 +161,6 @@
 </table>
 
 
-
 <%
     Collection<PrivateMessage> privateMessages = (Collection<PrivateMessage>) request.getAttribute(WelcomeController.ALL_PRIVATE_MESSAGES_KEY);
 %>

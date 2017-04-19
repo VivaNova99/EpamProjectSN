@@ -26,31 +26,23 @@
 
     <table>
         <tr>
-            <th>Id</th>
-            <th>Sender User</th>
-            <th>Text</th>
-            <th>Picture</th>
-            <th>Date and time</th>
             <th>Forum Theme</th>
             <th>Message Header</th>
-            <th>Is Parent?</th>
-            <th>Parent Message</th>
-            <th>Status</th>
+            <th>Sender User</th>
+            <th>Date and time</th>
+            <th>Text</th>
+            <th>Picture</th>
         </tr>
         <%
             for (WallMessage thisTopicWallMessage: thisTopicWallMessages) {
         %>
         <tr>
-            <td><%=thisTopicWallMessage.getId()%></td>
-            <td><%=thisTopicWallMessage.getSenderUserFirstNameAndLastName()%></td>
-            <td><%=thisTopicWallMessage.getText()%></td>
-            <td><%=thisTopicWallMessage.getPicture()%></td>
-            <td><%=thisTopicWallMessage.getDateTime()%></td>
             <td><%=thisTopicWallMessage.getForumThemeName()%></td>
             <td><%=thisTopicWallMessage.getMessageHeader()%></td>
-            <td><%=thisTopicWallMessage.getParent()%></td>
-            <td><%=thisTopicWallMessage.getParentMessageText()%></td>
-            <td><%=thisTopicWallMessage.getStatus()%></td>
+            <td><%=thisTopicWallMessage.getSenderUserFirstNameAndLastName()%></td>
+            <td><%=thisTopicWallMessage.getDateTime()%></td>
+            <td><%=thisTopicWallMessage.getText()%></td>
+            <td><%=thisTopicWallMessage.getPicture()%></td>
         </tr>
         <%
             }

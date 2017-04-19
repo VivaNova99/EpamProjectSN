@@ -31,31 +31,19 @@
 
     <table>
         <tr>
-            <th>Id</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Date of birth</th>
-            <th>Access Level</th>
-            <th>Email</th>
-            <th>Password hash</th>
             <th>Profile photo</th>
             <th>Status on wall</th>
-            <th>City</th>
         </tr>
             <%
         for (User friend: friends) {
     %>
         <tr>
-            <td><%=friend.getId()%></td>
             <td><%=friend.getFirstName()%></td>
             <td><%=friend.getLastName()%></td>
-            <td><%=friend.getDateOfBirth()%></td>
-            <td><%=friend.getAccessLevel()%></td>
-            <td><%=friend.getEmail()%></td>
-            <td><%=friend.getPasswordHash()%></td>
             <td><%=friend.getProfilePhoto()%></td>
             <td><%=friend.getStatusOnWall()%></td>
-            <td><%=friend.getCity()%></td>
         </tr>
             <%
         }

@@ -28,4 +28,6 @@ public interface WallMessageDao {
 
     Collection<WallMessage> getThisForumTopic();
 
+    Collection<WallMessage> getLast10ForUser();
+
 }
