@@ -4,6 +4,8 @@
 <%@ page import="model.WallMessage" %>
 <%@ page import="model.Photo" %>
 <%@ page import="controllers.UserPhotosController" %>
+<%@ page import="controllers.UserPhotoAlbumsController" %>
+<%@ page import="model.PhotoAlbum" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -12,24 +14,22 @@
 <body>
 
 <%
-    Collection<Photo> userPhotos = (Collection<Photo>) request.getAttribute(UserPhotosController.USER_PHOTOS_KEY);
+    Collection<PhotoAlbum> userPhotoAlbums = (Collection<PhotoAlbum>) request.getAttribute(UserPhotoAlbumsController.USER_PHOTOALBUMS_KEY);
 %>
 
 <table>
     <tr>
-        <th>Picture</th>
+        <th>Album Picture</th>
+        <th>Name</th>
         <th>Description</th>
-        <th>Date and time</th>
-        <th>PhotoAlbum</th>
     </tr>
     <%
-        for (Photo userPhoto: userPhotos) {
+        for (PhotoAlbum userPhotoAlbum: userPhotoAlbums) {
     %>
     <tr>
-        <td><%=userPhoto.getPicture()%></td>
-        <td><%=userPhoto.getDescription()%></td>
-        <td><%=userPhoto.getDateTime()%></td>
-        <td><%=userPhoto.getPhotoAlbumName()%></td>
+        <td><%=userPhotoAlbum.getAlbumPicture()%></td>
+        <td><%=userPhotoAlbum.getName()%></td>
+        <td><%=userPhotoAlbum.getDescription()%></td>
     </tr>
     <%
         }

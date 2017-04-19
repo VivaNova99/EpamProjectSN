@@ -26,7 +26,7 @@
         <li><a href="reg-user-private-messages.jsp"><i class="fa fa-comments" aria-hidden="true"></i>Сообщения</a></li>
         <li><a href="reg-user-all-friends"><i class="fa fa-users" aria-hidden="true"></i>Друзья</a></li>
         <li><a href="user-photos"><i class="fa fa-picture-o" aria-hidden="true"></i>Фотографии</a></li>
-        <li><a href="reg-user-photoalbums.jsp"><i class="fa fa-book" aria-hidden="true"></i>Фотоальбомы</a></li>
+        <li><a href="user-photoalbums"><i class="fa fa-book" aria-hidden="true"></i>Фотоальбомы</a></li>
         <li><a href="reg-user-forum.jsp"><i class="fa fa-comments-o" aria-hidden="true"></i>Форум</a></li>
         <li><a href="reg-user-themes.jsp"><i class="fa fa-commenting" aria-hidden="true"></i>Мои темы</a></li>
         <li><a href="reg-user-answers"><i class="fa fa-commenting-o" aria-hidden="true"></i>Мои ответы</a></li>
