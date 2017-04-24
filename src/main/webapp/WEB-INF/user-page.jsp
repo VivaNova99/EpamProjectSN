@@ -11,13 +11,11 @@
 <body>
 
 <%
-    Collection<User> users = (Collection<User>) request.getAttribute(UserOwnPageController.USER_INFO_KEY);
+    User user = (User) request.getAttribute(UserOwnPageController.USER_INFO_KEY);
 %>
 
 <table>
-        <%
-        for (User user: users) {
-    %>
+
     <tr>
         <td><%=user.getFirstName()%></td>
         <td><%=user.getLastName()%></td>
@@ -26,9 +24,7 @@
         <td><%=user.getStatusOnWall()%></td>
         <td><%=user.getCity()%></td>
     </tr>
-        <%
-        }
-    %>
+
 </table>
 
 

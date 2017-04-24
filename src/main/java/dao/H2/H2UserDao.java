@@ -37,12 +37,12 @@ public class H2UserDao implements UserDao {
                              "profile_photo, " +
                              "status_on_wall, " +
                              "city) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setObject(1, user.getFirstName());
             preparedStatement.setObject(2, user.getLastName());
             preparedStatement.setObject(3, user.getDateOfBirth());
-            preparedStatement.setObject(4, user.getAccessLevel().ordinal()+1);
+            preparedStatement.setObject(4, user.getAccessLevel().ordinal() + 1);
             //т.к. ordinal с нуля, а у нас база с автоинкрементом (у меня - не автоинкремент!)
             // TODO - переделать ordinal на спец. поле
             preparedStatement.setObject(5, user.getEmail());
@@ -56,8 +56,7 @@ public class H2UserDao implements UserDao {
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     user.setId(generatedKeys.getInt(1));
-                }
-                else {
+                } else {
                     throw new SQLException("Ошибка при создании профиля, нет такого ID");
                 }
             }
@@ -77,19 +76,19 @@ public class H2UserDao implements UserDao {
         List<User> users = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT " +
-                "id, " +
-                "first_name, " +
-                "last_name, " +
-                "date_of_birth, " +
-                "access_level_id, " +
-                "email, " +
-                "password, " +
-                "profile_photo, " +
-                "status_on_wall, " +
-                "city FROM User")) {
-            while (resultSet.next()){
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT " +
+                     "id, " +
+                     "first_name, " +
+                     "last_name, " +
+                     "date_of_birth, " +
+                     "access_level_id, " +
+                     "email, " +
+                     "password, " +
+                     "profile_photo, " +
+                     "status_on_wall, " +
+                     "city FROM User")) {
+            while (resultSet.next()) {
                 users.add(new User(
                         resultSet.getInt("id"),
                         resultSet.getString("first_name"),
@@ -105,7 +104,7 @@ public class H2UserDao implements UserDao {
                         resultSet.getString("profile_photo"),
                         resultSet.getString("status_on_wall"),
                         resultSet.getString("city")
-                        ));
+                ));
             }
             return users;
         }
@@ -129,7 +128,7 @@ public class H2UserDao implements UserDao {
                      "profile_photo, " +
                      "status_on_wall, " +
                      "city FROM User WHERE id <> 1")) {
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 friends.add(new User(
                         resultSet.getInt("id"),
                         resultSet.getString("first_name"),
@@ -154,8 +153,8 @@ public class H2UserDao implements UserDao {
 
     @Override
     @SneakyThrows
-    public List<User> getUser() {
-        List<User> user = new ArrayList<>();
+    public User getUser() {
+//        List<User> user = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
@@ -172,24 +171,24 @@ public class H2UserDao implements UserDao {
                      "city " +
                      "FROM User " +
                      "WHERE id = 1")) {
-            while (resultSet.next()){
-                user.add(new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getDate("date_of_birth").toLocalDate(),
+            resultSet.next();
+            User user = new User(
+                    resultSet.getInt("id"),
+                    resultSet.getString("first_name"),
+                    resultSet.getString("last_name"),
+                    resultSet.getDate("date_of_birth").toLocalDate(),
 //                        resultSet.getInt("access_level_id"), -достанет только id
-                        AccessLevel.valueOf(
-                                resultSet.getInt("access_level_id") - 1)
-                                .orElseThrow(() -> new RuntimeException("нет такого уровня доступа")),
-                        resultSet.getString("email"),
-                        resultSet.getString("password"),// todo вообще убрать вывод пароля?
-                        // сделать отдельный кейс по проверке соответствия пользователя паролю?
-                        resultSet.getString("profile_photo"),
-                        resultSet.getString("status_on_wall"),
-                        resultSet.getString("city")
-                ));
-            }
+                    AccessLevel.valueOf(
+                            resultSet.getInt("access_level_id") - 1)
+                            .orElseThrow(() -> new RuntimeException("нет такого уровня доступа")),
+                    resultSet.getString("email"),
+                    resultSet.getString("password"),// todo вообще убрать вывод пароля?
+                    // сделать отдельный кейс по проверке соответствия пользователя паролю?
+                    resultSet.getString("profile_photo"),
+                    resultSet.getString("status_on_wall"),
+                    resultSet.getString("city")
+            );
+
             return user;
         }
     }
