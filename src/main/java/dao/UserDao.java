@@ -27,5 +27,5 @@ public interface UserDao {
 
     List<User> getAllFriends();
 
-    List<User> getUser();
+    User getUser();
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -22,6 +23,15 @@ public class PrivateMessage {
 
     public int getId() {
         return id;
+    }
+
+    public String getDateTime() {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy hh:mm").format(this.dateTime);
+        }
+        catch (NullPointerException e) {
+            return "Дата и время не определены";
+        }
     }
 
     public String getSenderUserFirstNameAndLastName(){
