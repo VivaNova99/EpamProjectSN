@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.sql.Blob;
 import java.time.LocalDate;
 
 @Data
@@ -30,7 +31,7 @@ public class User {
     private AccessLevel accessLevel;
     private String email;
     private String passwordHash;
-    private String profilePhoto;
+    private Blob profilePhoto;
     private String statusOnWall;
     private String city;
 //    UNIQUE (email)

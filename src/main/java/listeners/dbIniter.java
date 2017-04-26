@@ -1,5 +1,6 @@
 package listeners;
 
+import dao.H2.H2InsertPicture;
 import lombok.SneakyThrows;
 
 import javax.annotation.Resource;
@@ -13,7 +14,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.Statement;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -39,6 +39,12 @@ public class dbIniter implements ServletContextListener {
                     );
             }
             statement.executeBatch();
+
+            H2InsertPicture h2InsertPicture = new H2InsertPicture(dataSource);
+            h2InsertPicture.insertDefaultPictureIntoUserProfilePhoto();
+            h2InsertPicture.insertDefaultPictureIntoPhotoAlbumPhotoAlbumPicture();
+            h2InsertPicture.insertDefaultPictureIntoPhotoPicture();
+
         }
     }
 }

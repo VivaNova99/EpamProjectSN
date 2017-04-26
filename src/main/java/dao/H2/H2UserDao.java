@@ -6,6 +6,9 @@ import model.AccessLevel;
 import model.User;
 
 import javax.sql.DataSource;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +104,7 @@ public class H2UserDao implements UserDao {
                         resultSet.getString("email"),
                         resultSet.getString("password"),// todo вообще убрать вывод пароля?
                         // сделать отдельный кейс по проверке соответствия пользователя паролю?
-                        resultSet.getString("profile_photo"),
+                        resultSet.getBlob("profile_photo"),
                         resultSet.getString("status_on_wall"),
                         resultSet.getString("city")
                 ));
@@ -141,7 +144,7 @@ public class H2UserDao implements UserDao {
                         resultSet.getString("email"),
                         resultSet.getString("password"),// todo вообще убрать вывод пароля?
                         // сделать отдельный кейс по проверке соответствия пользователя паролю?
-                        resultSet.getString("profile_photo"),
+                        resultSet.getBlob("profile_photo"),
                         resultSet.getString("status_on_wall"),
                         resultSet.getString("city")
                 ));
@@ -172,6 +175,22 @@ public class H2UserDao implements UserDao {
                      "FROM User " +
                      "WHERE id = 1")) {
             resultSet.next();
+
+            File image = new File("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/webapp/img/temp/default_large.jpg");
+            FileOutputStream fos = new FileOutputStream(image);
+
+            byte[] buffer = new byte[1];
+            InputStream is = resultSet.getBinaryStream(8);
+            if (is != null) {
+                while (is.read(buffer) > 0) {
+                    fos.write(buffer);
+                }
+
+            }
+            fos.close();
+
+
+
             User user = new User(
                     resultSet.getInt("id"),
                     resultSet.getString("first_name"),
@@ -184,10 +203,11 @@ public class H2UserDao implements UserDao {
                     resultSet.getString("email"),
                     resultSet.getString("password"),// todo вообще убрать вывод пароля?
                     // сделать отдельный кейс по проверке соответствия пользователя паролю?
-                    resultSet.getString("profile_photo"),
+                    resultSet.getBlob("profile_photo"),
                     resultSet.getString("status_on_wall"),
                     resultSet.getString("city")
             );
+
 
             return user;
         }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,7 +19,7 @@ public class WallMessage {
     private int id;
     private User senderUser;
     private String text;
-    private String picture;
+    private Blob picture;
     private Date dateTime;
     private ForumTheme forumTheme;
     private String messageHeader;
