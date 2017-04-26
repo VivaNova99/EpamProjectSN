@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,7 +18,7 @@ public class Photo {
     private int id;
     private User user;
     private PhotoAlbum photoAlbum;
-    private String picture;
+    private Blob picture;
     private String description;
     private Date dateTime;
     private PhotoStatus status;
@@ -27,7 +28,7 @@ public class Photo {
         return id;
     }
 
-    public String getPicture() {
+    public Blob getPicture() {
         return picture;
     }
 

@@ -69,7 +69,7 @@ public class H2PhotoDao implements PhotoDao
                                 resultSet.getString("last_name")
                         ),
                         new PhotoAlbum(resultSet.getString("name")),
-                        resultSet.getString("picture"),
+                        resultSet.getBlob("picture"),
                         resultSet.getString("description"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         PhotoStatus.valueOf(
@@ -114,7 +114,7 @@ public class H2PhotoDao implements PhotoDao
                                 resultSet.getString("last_name")
                         ),
                         new PhotoAlbum(resultSet.getString("name")),
-                        resultSet.getString("picture"),
+                        resultSet.getBlob("picture"),
                         resultSet.getString("description"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         PhotoStatus.valueOf(
@@ -159,7 +159,7 @@ public class H2PhotoDao implements PhotoDao
                                 resultSet.getString("last_name")
                         ),
                         new PhotoAlbum(resultSet.getString("name")),
-                        resultSet.getString("picture"),
+                        resultSet.getBlob("picture"),
                         resultSet.getString("description"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         PhotoStatus.valueOf(

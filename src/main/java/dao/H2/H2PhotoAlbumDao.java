@@ -66,7 +66,7 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
-                        resultSet.getString("photo_album_picture"),
+                        resultSet.getBlob("photo_album_picture"),
                         resultSet.getString("description"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         PhotoStatus.valueOf(
@@ -110,7 +110,7 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
-                        resultSet.getString("photo_album_picture"),
+                        resultSet.getBlob("photo_album_picture"),
                         resultSet.getString("description"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         PhotoStatus.valueOf(

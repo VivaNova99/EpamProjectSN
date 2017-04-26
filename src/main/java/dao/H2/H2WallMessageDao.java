@@ -71,7 +71,7 @@ public class H2WallMessageDao implements WallMessageDao {
                                 resultSet.getString("last_name")
                         ),
                         resultSet.getString("message_text"),
-                        resultSet.getString("picture"),
+                        resultSet.getBlob("picture"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         new ForumTheme(
                                 resultSet.getString("name")
@@ -129,7 +129,7 @@ public class H2WallMessageDao implements WallMessageDao {
                                 resultSet.getString("last_name")
                         ),
                         resultSet.getString("message_text"),
-                        resultSet.getString("picture"),
+                        resultSet.getBlob("picture"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         new ForumTheme(
                                 resultSet.getString("name")
@@ -188,7 +188,7 @@ public class H2WallMessageDao implements WallMessageDao {
                                 resultSet.getString("last_name")
                         ),
                         resultSet.getString("message_text"),
-                        resultSet.getString("picture"),
+                        resultSet.getBlob("picture"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         new ForumTheme(
                                 resultSet.getString("name")
@@ -248,7 +248,7 @@ public class H2WallMessageDao implements WallMessageDao {
                                 resultSet.getString("last_name")
                         ),
                         resultSet.getString("message_text"),
-                        resultSet.getString("picture"),
+                        resultSet.getBlob("picture"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         new ForumTheme(
                                 resultSet.getString("name")
@@ -308,7 +308,7 @@ public class H2WallMessageDao implements WallMessageDao {
                                 resultSet.getString("last_name")
                         ),
                         resultSet.getString("message_text"),
-                        resultSet.getString("picture"),
+                        resultSet.getBlob("picture"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         new ForumTheme(
                                 resultSet.getString("name")
@@ -367,7 +367,7 @@ public class H2WallMessageDao implements WallMessageDao {
                                 resultSet.getString("last_name")
                         ),
                         resultSet.getString("message_text"),
-                        resultSet.getString("picture"),
+                        resultSet.getBlob("picture"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         new ForumTheme(
                                 resultSet.getString("name")
@@ -426,7 +426,7 @@ public class H2WallMessageDao implements WallMessageDao {
                                 resultSet.getString("last_name")
                         ),
                         resultSet.getString("message_text"),
-                        resultSet.getString("picture"),
+                        resultSet.getBlob("picture"),
                         simpleFormatter.parse(resultSet.getString("date_time")),
                         new ForumTheme(
                                 resultSet.getString("name")
