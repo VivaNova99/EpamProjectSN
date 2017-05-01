@@ -14,15 +14,15 @@
 <body>
 
 <header class="reg-user">
-    <%@ include file="WEB-INF/header-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/header-reg-user.jsp" %>
 </header>
 
 <aside class="reg-user">
-    <%@ include file="WEB-INF/sidebar-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
 </aside>
 
 <section class="reg-user">
-    <%@ include file="WEB-INF/forum-this-topic.jsp" %>
+    <%@ include file="WEB-INF/additional/forum-this-topic.jsp" %>
 </section>
 
 </body>

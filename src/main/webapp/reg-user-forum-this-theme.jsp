@@ -11,15 +11,15 @@
 <body>
 
 <header class="reg-user">
-    <%@ include file="WEB-INF/header-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/header-reg-user.jsp" %>
 </header>
 
 <aside class="reg-user">
-    <%@ include file="WEB-INF/sidebar-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
 </aside>
 
 <section>
-    <%@ include file="WEB-INF/forum-this-theme.jsp" %>
+    <%@ include file="WEB-INF/additional/forum-this-theme.jsp" %>
 </section>
 
 </body>

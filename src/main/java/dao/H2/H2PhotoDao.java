@@ -10,6 +10,7 @@ import model.User;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -17,9 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by veraivanova on 19.03.17.
- */
+
 public class H2PhotoDao implements PhotoDao
 {
 
@@ -61,6 +60,11 @@ public class H2PhotoDao implements PhotoDao
                      "JOIN User u ON p.user_id = u.id " +
                      "JOIN PhotoAlbum pa ON p.photo_album_id = pa.id")) {
             while (resultSet.next()){
+
+                //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+//                h2SavePictureFromDatabase.savePhotoFromDatabaseIntoFile(resultSet);
+
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 photos.add(new Photo(
                         resultSet.getInt("id"),
@@ -106,6 +110,11 @@ public class H2PhotoDao implements PhotoDao
                      "WHERE p.user_id = 1 " +
                      "ORDER BY date_time DESC LIMIT 5")) {
             while (resultSet.next()){
+
+                //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+//                h2SavePictureFromDatabase.savePhotoFromDatabaseIntoFile(resultSet);
+
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 last5Photos.add(new Photo(
                         resultSet.getInt("id"),
@@ -151,6 +160,11 @@ public class H2PhotoDao implements PhotoDao
                      "WHERE p.user_id = 1 " +
                      "ORDER BY date_time DESC")) {
             while (resultSet.next()){
+
+                //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+//                h2SavePictureFromDatabase.savePhotoFromDatabaseIntoFile(resultSet);
+
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 UserPhotos.add(new Photo(
                         resultSet.getInt("id"),
@@ -171,6 +185,23 @@ public class H2PhotoDao implements PhotoDao
         }
     }
 
+
+    @Override
+    @SneakyThrows
+    public ResultSet transferPhotoPicture(int photoPictureId) {
+
+
+        Connection connection = dataSource.getConnection();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT picture FROM Photo WHERE id = ?");
+        preparedStatement.setInt(1, photoPictureId);
+
+        ResultSet photoPictureResultSet = preparedStatement.executeQuery();
+        photoPictureResultSet.next();
+
+        return photoPictureResultSet;
+
+    }
 
 
 }

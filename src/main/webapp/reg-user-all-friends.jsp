@@ -16,11 +16,11 @@
 <body>
 
 <header class="reg-user">
-    <%@ include file="WEB-INF/header-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/header-reg-user.jsp" %>
 </header>
 
 <aside class="reg-user">
-    <%@ include file="WEB-INF/sidebar-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
 </aside>
 
 <section>
@@ -42,7 +42,7 @@
         <tr>
             <td><%=friend.getFirstName()%></td>
             <td><%=friend.getLastName()%></td>
-            <td><%=friend.getProfilePhoto()%></td>
+            <td><img src="users_profile_picture?user_id=<%=friend.getId()%>" /></td>
             <td><%=friend.getStatusOnWall()%></td>
         </tr>
             <%

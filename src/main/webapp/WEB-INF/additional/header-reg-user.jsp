@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-        <%@include file="../styles/main.css" %>
-        <%@include file="../styles/header-reg-user.css" %>
+        <%@include file="../../styles/main.css" %>
+        <%@include file="../../styles/header-reg-user.css" %>
     </style>
 
 </head>
@@ -26,7 +26,7 @@
 
     <ul>
         <li class="logo">W-only</li>
-        <li class="exit"><a href="unreg-forum.jsp">Выйти<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+        <li class="exit"><a href="../../unreg-forum.jsp">Выйти<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
     </ul>
 
 </div>

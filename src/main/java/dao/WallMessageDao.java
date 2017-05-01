@@ -1,7 +1,9 @@
 package dao;
 
+import lombok.SneakyThrows;
 import model.WallMessage;
 
+import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -32,4 +34,5 @@ public interface WallMessageDao {
 
     Collection<WallMessage> getMyThemes();
 
+    ResultSet transferWallMessagePicture(int wallMessagePictureId);
 }

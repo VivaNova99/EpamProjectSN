@@ -11,11 +11,11 @@ import="controllers.MyNewsController" %>
 <body>
 
 <header class="reg-user">
-    <%@ include file="WEB-INF/header-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/header-reg-user.jsp" %>
 </header>
 
 <aside class="reg-user">
-    <%@ include file="WEB-INF/sidebar-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
 </aside>
 
 <section>
@@ -42,7 +42,8 @@ import="controllers.MyNewsController" %>
             <td><%=last10WallMessage.getForumThemeName()%></td>
             <td><%=last10WallMessage.getMessageHeader()%></td>
             <td><%=last10WallMessage.getText()%></td>
-            <td><%=last10WallMessage.getPicture()%></td>
+            <td><img src="wall_message_picture?wall_message_picture_id=<%=last10WallMessage.getId()%>" /></td>
+
         </tr>
         <%
             }

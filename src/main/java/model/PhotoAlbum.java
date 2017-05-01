@@ -15,6 +15,12 @@ import java.util.Date;
 @Accessors(chain = true)
 public class PhotoAlbum {
 
+    public static String ID_KEY = "photoalbum_id";
+
+    public int getId(){
+        return id;
+    }
+
     private int id;
     private String name;
     private User user;
@@ -23,10 +29,14 @@ public class PhotoAlbum {
     private Date dateTime;
     private PhotoStatus status;
 
+    //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//    private String pathToFile;
+
     public PhotoAlbum(String name) {
 
         this.name = name;
     }
+
 
     public String getDateTime() {
         try {
@@ -42,4 +52,9 @@ public class PhotoAlbum {
         return user.getFirstNameAndLastName();
 
     }
+
+    //для проверки, что подстановка метода в путь в jsp работает
+//    public String getFakePath(String param) {
+//        return param;
+//    }
 }

@@ -7,8 +7,12 @@ import model.PhotoStatus;
 import model.User;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -16,9 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by veraivanova on 18.03.17.
- */
+
 public class H2PhotoAlbumDao implements PhotoAlbumDao {
 
        @Resource(name = "jdbc/TestDB")
@@ -58,6 +60,11 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                      "FROM PhotoAlbum pa, User u " +
                      "WHERE pa.user_id = u.id")) {
             while (resultSet.next()){
+
+//                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+//                String pathname = h2SavePictureFromDatabase.savePhotoAlbumPictureFromDatabaseIntoFile(resultSet);
+
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 photoAlbums.add(new PhotoAlbum(
                         resultSet.getInt("id"),
@@ -72,6 +79,9 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                         PhotoStatus.valueOf(
                                 resultSet.getInt("status_id") - 1)
                                 .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+
+                        //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                        pathname
                 ));
             }
             return photoAlbums;
@@ -102,6 +112,11 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                      "WHERE pa.user_id = 1 " +
                      "ORDER BY date_time DESC")) {
             while (resultSet.next()){
+
+                //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+//                String pathname = h2SavePictureFromDatabase.savePhotoAlbumPictureFromDatabaseIntoFile(resultSet);
+
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 userPhotoAlbums.add(new PhotoAlbum(
                         resultSet.getInt("id"),
@@ -116,10 +131,31 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                         PhotoStatus.valueOf(
                                 resultSet.getInt("status_id") - 1)
                                 .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+
+                        //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                        pathname
                 ));
             }
             return userPhotoAlbums;
         }
+    }
+
+
+    @Override
+    @SneakyThrows
+    public ResultSet transferPhotoalbumPicture(int photoalbumPictureId) {
+
+
+            Connection connection = dataSource.getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT photo_album_picture FROM PhotoAlbum WHERE id = ?");
+            preparedStatement.setInt(1, photoalbumPictureId);
+
+            ResultSet photoalbumPictureResultSet = preparedStatement.executeQuery();
+            photoalbumPictureResultSet.next();
+
+        return photoalbumPictureResultSet;
+
     }
 
 

@@ -1,7 +1,9 @@
 package dao;
 
+import lombok.SneakyThrows;
 import model.Photo;
 
+import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -22,4 +24,5 @@ public interface PhotoDao {
 
     Collection<Photo> getUserPhotos();
 
+    ResultSet transferPhotoPicture(int photoPictureId);
 }

@@ -18,12 +18,6 @@ public class User {
     public static String FIRST_NAME_KEY = "firstName";
     public static int ID_KEY = 0;
 
-    public User(String firstName, String lastName){
-        this.firstName = firstName;
-        this.lastName = lastName;
-    };
-
-
     private int id;
     private String firstName;
     private String lastName;
@@ -35,6 +29,13 @@ public class User {
     private String statusOnWall;
     private String city;
 //    UNIQUE (email)
+
+
+    public User(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+    };
+
 
     public String getFirstNameAndLastName(){
 

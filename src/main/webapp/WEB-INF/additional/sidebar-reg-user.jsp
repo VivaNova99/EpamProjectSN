@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-        <%@include file="../styles/main.css" %>
-        <%@include file="../styles/sidebar-reg-user.css" %>
+        <%@include file="../../styles/main.css" %>
+        <%@include file="../../styles/sidebar-reg-user.css" %>
     </style>
 </head>
 <body>
@@ -27,7 +27,7 @@
         <li><a href="reg-user-all-friends"><i class="fa fa-users" aria-hidden="true"></i>Друзья</a></li>
         <li><a href="user-photos"><i class="fa fa-picture-o" aria-hidden="true"></i>Фотографии</a></li>
         <li><a href="user-photoalbums"><i class="fa fa-book" aria-hidden="true"></i>Фотоальбомы</a></li>
-        <li><a href="reg-user-forum.jsp"><i class="fa fa-comments-o" aria-hidden="true"></i>Форум</a></li>
+        <li><a href="../../reg-user-forum.jsp"><i class="fa fa-comments-o" aria-hidden="true"></i>Форум</a></li>
         <li><a href="my-themes"><i class="fa fa-commenting" aria-hidden="true"></i>Мои темы</a></li>
         <li><a href="reg-user-answers"><i class="fa fa-commenting-o" aria-hidden="true"></i>Мои ответы</a></li>
     </ul>

@@ -17,17 +17,20 @@
 <body>
 
 <header>
-    <%@ include file="WEB-INF/header-unreg.jsp" %>
-    <%@ include file="WEB-INF/header-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/header-unreg.jsp" %>
+    <%@ include file="WEB-INF/additional/header-reg-user.jsp" %>
 </header>
 
 <aside>
-    <%@ include file="WEB-INF/sidebar-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
 </aside>
 
 <section>
 
-    <%@ include file="WEB-INF/forum-themes.jsp" %>
+    <%@ include file="WEB-INF/additional/forum-themes.jsp" %>
+
+    <img src="http://minionomaniya.ru/wp-content/uploads/2015/08/%D0%9C%D0%B8%D0%BD%D1%8C%D0%BE%D0%BD-%D0%91%D0%BE%D0%B1.jpg">
+    <img src="/img/default_large.png" width="200" height="200">
 
 <%
     Collection<ForumTheme> forumThemes = (Collection<ForumTheme>) request.getAttribute(WelcomeController.ALL_FORUM_THEMES_KEY);
@@ -83,7 +86,7 @@
         <td><%=user.getAccessLevel()%></td>
         <td><%=user.getEmail()%></td>
         <td><%=user.getPasswordHash()%></td>
-        <td><%=user.getProfilePhoto()%></td>
+        <td><img src="users_profile_picture?user_id=<%=user.getId()%>" /></td>
         <td><%=user.getStatusOnWall()%></td>
         <td><%=user.getCity()%></td>
     </tr>
@@ -115,7 +118,7 @@
         <td><%=photoAlbum.getId()%></td>
         <td><%=photoAlbum.getName()%></td>
         <td><%=photoAlbum.getUserFirstNameAndLastName()%></td>
-        <td><%=photoAlbum.getAlbumPicture()%></td>
+        <td><img src="photoalbum_picture?photoalbum_id=<%=photoAlbum.getId()%>" /></td>
         <td><%=photoAlbum.getDescription()%></td>
         <td><%=photoAlbum.getDateTime()%></td>
         <td><%=photoAlbum.getStatus()%></td>
@@ -149,7 +152,7 @@
         <td><%=photo.getId()%></td>
         <td><%=photo.getUserFirstNameAndLastName()%></td>
         <td><%=photo.getPhotoAlbumName()%></td>
-        <td><%=photo.getPicture()%></td>
+        <td><img src="photo_picture?photo_id=<%=photo.getId()%>" /></td>
         <td><%=photo.getDescription()%></td>
         <td><%=photo.getDateTime()%></td>
         <td><%=photo.getStatus()%></td>
@@ -216,7 +219,7 @@
         <td><%=wallMessage.getId()%></td>
         <td><%=wallMessage.getSenderUserFirstNameAndLastName()%></td>
         <td><%=wallMessage.getText()%></td>
-        <td><%=wallMessage.getPicture()%></td>
+        <td><img src="wall_message_picture?wall_message_picture_id=<%=wallMessage.getId()%>" /></td>
         <td><%=wallMessage.getDateTime()%></td>
         <td><%=wallMessage.getForumThemeName()%></td>
         <td><%=wallMessage.getMessageHeader()%></td>
