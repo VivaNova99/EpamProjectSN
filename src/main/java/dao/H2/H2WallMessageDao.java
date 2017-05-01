@@ -7,6 +7,7 @@ import model.*;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -443,6 +444,24 @@ public class H2WallMessageDao implements WallMessageDao {
             }
             return myThemesWallMessages;
         }
+    }
+
+
+    @Override
+    @SneakyThrows
+    public ResultSet transferWallMessagePicture(int wallMessagePictureId) {
+
+
+        Connection connection = dataSource.getConnection();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT picture FROM WallMessage WHERE id = ?");
+        preparedStatement.setInt(1, wallMessagePictureId);
+
+        ResultSet wallMessagePictureResultSet = preparedStatement.executeQuery();
+        wallMessagePictureResultSet.next();
+
+        return wallMessagePictureResultSet;
+
     }
 
 

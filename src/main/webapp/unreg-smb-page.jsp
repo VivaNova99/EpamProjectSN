@@ -14,11 +14,11 @@
 <body>
 
 <header class="unreg">
-    <%@ include file="WEB-INF/header-unreg.jsp" %>
+    <%@ include file="WEB-INF/additional/header-unreg.jsp" %>
 </header>
 
 <section class="unreg">
-    <%@ include file="WEB-INF/user-page.jsp" %>
+    <%@ include file="WEB-INF/additional/user-page.jsp" %>
 </section>
 
 </body>

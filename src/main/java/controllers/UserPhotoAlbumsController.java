@@ -28,11 +28,11 @@ public class UserPhotoAlbumsController extends HttpServlet {
     public static final String USER_PHOTOALBUMS_KEY = "UserPhotoalbums";
 
     private UserDao userDao;
-    private ForumThemeDao forumThemeDao;
+//    private ForumThemeDao forumThemeDao;
     private PhotoAlbumDao photoAlbumDao;
     private PhotoDao photoDao;
-    private PrivateMessageDao privateMessageDao;
-    private WallMessageDao wallMessageDao;
+//    private PrivateMessageDao privateMessageDao;
+//    private WallMessageDao wallMessageDao;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -49,7 +49,6 @@ public class UserPhotoAlbumsController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("!!!!!"+this);
         String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
                 .map(o -> String.format("Здравствуйте, %s", o))
                 .orElse("Здравствуйте!");

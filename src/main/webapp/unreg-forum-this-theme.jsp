@@ -11,11 +11,11 @@
 <body>
 
 <header class="unreg">
-    <%@ include file="WEB-INF/header-unreg.jsp" %>
+    <%@ include file="WEB-INF/additional/header-unreg.jsp" %>
 </header>
 
 <section>
-    <%@ include file="WEB-INF/forum-this-theme.jsp" %>
+    <%@ include file="WEB-INF/additional/forum-this-theme.jsp" %>
 </section>
 
 </body>

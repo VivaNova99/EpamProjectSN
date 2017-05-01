@@ -50,7 +50,6 @@ public class ForumTopicController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("!!!!!"+this);
         String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
                 .map(o -> String.format("Здравствуйте, %s", o))
                 .orElse("Здравствуйте!");

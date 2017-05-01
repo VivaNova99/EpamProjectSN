@@ -20,7 +20,7 @@
         <td><%=user.getFirstName()%></td>
         <td><%=user.getLastName()%></td>
         <td><%=user.getDateOfBirth()%></td>
-        <td><%=user.getProfilePhoto()%></td>
+        <td><img src="users_profile_picture?user_id=<%=user.getId()%>" /></td>
         <td><%=user.getStatusOnWall()%></td>
         <td><%=user.getCity()%></td>
     </tr>
@@ -40,7 +40,7 @@
         <td><%=last10ForUserWallMessage.getDateTime()%></td>
         <td><%=last10ForUserWallMessage.getMessageHeader()%></td>
         <td><%=last10ForUserWallMessage.getText()%></td>
-        <td><%=last10ForUserWallMessage.getPicture()%></td>
+        <td><img src="wall_message_picture?wall_message_picture_id=<%=last10ForUserWallMessage.getId()%>" /></td>
     </tr>
     <%
         }
@@ -57,7 +57,7 @@
         for (Photo last5ForUserPhoto: last5ForUserPhotos) {
     %>
     <tr>
-        <td><%=last5ForUserPhoto.getPicture()%></td>
+        <td><img src="photo_picture?photo_id=<%=last5ForUserPhoto.getId()%>" /></td>
     </tr>
     <%
         }

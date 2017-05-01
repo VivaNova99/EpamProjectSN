@@ -1,7 +1,9 @@
 package dao;
 
+import lombok.SneakyThrows;
 import model.User;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,4 +30,6 @@ public interface UserDao {
     List<User> getAllFriends();
 
     User getUser();
+
+    ResultSet transferUsersProfilePicture(int usersProfilePictureId);
 }

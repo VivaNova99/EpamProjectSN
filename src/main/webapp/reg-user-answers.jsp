@@ -9,11 +9,11 @@
 <body>
 
 <header class="reg-user">
-    <%@ include file="WEB-INF/header-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/header-reg-user.jsp" %>
 </header>
 
 <aside class="reg-user">
-    <%@ include file="WEB-INF/sidebar-reg-user.jsp" %>
+    <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
 </aside>
 
 <section>
@@ -41,7 +41,7 @@
             <td><%=answersWallMessage.getForumThemeName()%></td>
             <td><%=answersWallMessage.getMessageHeader()%></td>
             <td><%=answersWallMessage.getText()%></td>
-            <td><%=answersWallMessage.getPicture()%></td>
+            <td><img src="wall_message_picture?wall_message_picture_id=<%=answersWallMessage.getId()%>" /></td>
         </tr>
             <%
             }

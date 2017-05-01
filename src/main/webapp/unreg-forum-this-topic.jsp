@@ -8,11 +8,11 @@
 <body>
 
 <header class="unreg">
-    <%@ include file="WEB-INF/header-unreg.jsp" %>
+    <%@ include file="WEB-INF/additional/header-unreg.jsp" %>
 </header>
 
 <section class="unreg">
-    <%@ include file="WEB-INF/forum-this-topic.jsp" %>
+    <%@ include file="WEB-INF/additional/forum-this-topic.jsp" %>
 </section>
 
 </body>

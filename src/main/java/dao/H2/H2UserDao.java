@@ -6,16 +6,11 @@ import model.AccessLevel;
 import model.User;
 
 import javax.sql.DataSource;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by veraivanova on 16.03.17.
- */
+
 public class H2UserDao implements UserDao {
 
     private DataSource dataSource;
@@ -92,6 +87,11 @@ public class H2UserDao implements UserDao {
                      "status_on_wall, " +
                      "city FROM User")) {
             while (resultSet.next()) {
+
+                //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+//                h2SavePictureFromDatabase.saveUserProfilePhotoFromDatabaseIntoFile(resultSet);
+
                 users.add(new User(
                         resultSet.getInt("id"),
                         resultSet.getString("first_name"),
@@ -131,7 +131,13 @@ public class H2UserDao implements UserDao {
                      "profile_photo, " +
                      "status_on_wall, " +
                      "city FROM User WHERE id <> 1")) {
+
             while (resultSet.next()) {
+
+                //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+//                h2SavePictureFromDatabase.saveUserProfilePhotoFromDatabaseIntoFile(resultSet);
+
                 friends.add(new User(
                         resultSet.getInt("id"),
                         resultSet.getString("first_name"),
@@ -157,7 +163,6 @@ public class H2UserDao implements UserDao {
     @Override
     @SneakyThrows
     public User getUser() {
-//        List<User> user = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
@@ -174,22 +179,12 @@ public class H2UserDao implements UserDao {
                      "city " +
                      "FROM User " +
                      "WHERE id = 1")) {
+
             resultSet.next();
 
-            File image = new File("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/webapp/img/temp/default_large.jpg");
-            FileOutputStream fos = new FileOutputStream(image);
-
-            byte[] buffer = new byte[1];
-            InputStream is = resultSet.getBinaryStream(8);
-            if (is != null) {
-                while (is.read(buffer) > 0) {
-                    fos.write(buffer);
-                }
-
-            }
-            fos.close();
-
-
+            //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//            H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+//            h2SavePictureFromDatabase.saveUserProfilePhotoFromDatabaseIntoFile(resultSet);
 
             User user = new User(
                     resultSet.getInt("id"),
@@ -208,10 +203,27 @@ public class H2UserDao implements UserDao {
                     resultSet.getString("city")
             );
 
-
             return user;
         }
     }
+
+    @Override
+    @SneakyThrows
+    public ResultSet transferUsersProfilePicture(int usersProfilePictureId) {
+
+
+        Connection connection = dataSource.getConnection();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT profile_photo FROM User WHERE id = ?");
+        preparedStatement.setInt(1, usersProfilePictureId);
+
+        ResultSet usersProfilePicturePictureResultSet = preparedStatement.executeQuery();
+        usersProfilePicturePictureResultSet.next();
+
+        return usersProfilePicturePictureResultSet;
+
+    }
+
 
 
 }

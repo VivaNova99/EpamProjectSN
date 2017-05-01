@@ -1,6 +1,6 @@
 package listeners;
 
-import dao.H2.H2InsertPicture;
+import dao.H2.H2InsertPictureIntoDatabase;
 import lombok.SneakyThrows;
 
 import javax.annotation.Resource;
@@ -40,10 +40,14 @@ public class dbIniter implements ServletContextListener {
             }
             statement.executeBatch();
 
-            H2InsertPicture h2InsertPicture = new H2InsertPicture(dataSource);
+            H2InsertPictureIntoDatabase h2InsertPicture = new H2InsertPictureIntoDatabase(dataSource);
             h2InsertPicture.insertDefaultPictureIntoUserProfilePhoto();
             h2InsertPicture.insertDefaultPictureIntoPhotoAlbumPhotoAlbumPicture();
             h2InsertPicture.insertDefaultPictureIntoPhotoPicture();
+            h2InsertPicture.insertPictureOneIntoPhotoAlbumPhotoAlbumPicture();
+            h2InsertPicture.insertPictureTwoIntoPhotoAlbumPhotoAlbumPicture();
+            h2InsertPicture.insertPictureThreeIntoPhotoAlbumPhotoAlbumPicture();
+            h2InsertPicture.insertPictureFourIntoPhotoAlbumPhotoAlbumPicture();
 
         }
     }
