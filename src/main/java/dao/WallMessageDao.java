@@ -26,9 +26,9 @@ public interface WallMessageDao {
 
     Collection<WallMessage> getMyAnswers();
 
-    Collection<WallMessage> getThisForumTheme(int thisForumThemeId);
+    Collection<WallMessage> getThisForumTheme(int thisForumThemeOrder);
 
-    Collection<WallMessage> getThisForumTopic();
+    Collection<WallMessage> getThisForumTopic(int thisForumTopicId);
 
     Collection<WallMessage> getLast10ForUser();
 

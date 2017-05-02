@@ -51,9 +51,9 @@ public class ForumThemeController extends HttpServlet {
 //                orElse("test.jsp");
 ////                orElse("/WEB-INF/index.jsp");
 
-        String thisForumThemeIdOrder = req.getParameter("this_forum_theme_order");
+        String thisForumThemeIdOrderString = req.getParameter("this_forum_theme_order");
 
-        int thisForumThemeOrder = parseInt(thisForumThemeIdOrder);
+        int thisForumThemeOrder = parseInt(thisForumThemeIdOrderString);
 
         boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
                 .map(o -> true)
