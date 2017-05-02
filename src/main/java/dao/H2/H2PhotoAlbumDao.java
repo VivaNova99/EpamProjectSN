@@ -145,16 +145,20 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
     @SneakyThrows
     public ResultSet transferPhotoalbumPicture(int photoalbumPictureId) {
 
+        try (Connection connection = dataSource.getConnection();
 
-            Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement
+                    ("SELECT photo_album_picture FROM PhotoAlbum WHERE id = ?")) {
 
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT photo_album_picture FROM PhotoAlbum WHERE id = ?");
-            preparedStatement.setInt(1, photoalbumPictureId);
+                preparedStatement.setInt(1, photoalbumPictureId);
 
-            ResultSet photoalbumPictureResultSet = preparedStatement.executeQuery();
-            photoalbumPictureResultSet.next();
+                ResultSet photoalbumPictureResultSet = preparedStatement.executeQuery();
+                photoalbumPictureResultSet.next();
 
-        return photoalbumPictureResultSet;
+                return photoalbumPictureResultSet;
+
+
+            }
 
     }
 
