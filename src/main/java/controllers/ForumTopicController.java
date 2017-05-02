@@ -24,7 +24,6 @@ public class ForumTopicController extends HttpServlet {
     public static final String ALL_FORUM_THEMES_KEY = "AllForumThemes";
     public static final String ALL_PHOTO_ALBUMS_KEY = "AllPhotoAlbums";
     public static final String ALL_PHOTOS_KEY = "AllPhotos";
-//    public static final String ALL_PRIVATE_MESSAGES_KEY = "AllPrivateMessages";
     public static final String ALL_WALL_MESSAGES_KEY = "AllWallMessages";
     public static final String THIS_TOPIC_WALL_MESSAGES_KEY = "ThisTopicWallMessages";
 
@@ -33,7 +32,6 @@ public class ForumTopicController extends HttpServlet {
     private ForumThemeDao forumThemeDao;
     private PhotoAlbumDao photoAlbumDao;
     private PhotoDao photoDao;
-//    private PrivateMessageDao privateMessageDao;
     private WallMessageDao wallMessageDao;
 
     @Override
@@ -42,7 +40,6 @@ public class ForumTopicController extends HttpServlet {
         forumThemeDao = (ForumThemeDao) config.getServletContext().getAttribute("ForumThemeDao");
         photoAlbumDao = (PhotoAlbumDao) config.getServletContext().getAttribute("PhotoAlbumDao");
         photoDao = (PhotoDao) config.getServletContext().getAttribute("PhotoDao");
-//        privateMessageDao = (PrivateMessageDao) config.getServletContext().getAttribute("PrivateMessageDao");
         wallMessageDao = (WallMessageDao) config.getServletContext().getAttribute("WallMessageDao");
     }
 
@@ -54,11 +51,7 @@ public class ForumTopicController extends HttpServlet {
         String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
                 .map(o -> String.format("Здравствуйте, %s", o))
                 .orElse("Здравствуйте!");
-//
-//        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
-//                orElse("test.jsp");
-////                orElse("/WEB-INF/index.jsp");
+
 
         String thisForumTopicIdString = req.getParameter("this_forum_topic_id");
 
@@ -73,9 +66,6 @@ public class ForumTopicController extends HttpServlet {
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
-//        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
-//        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
-//        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
         req.setAttribute(THIS_TOPIC_WALL_MESSAGES_KEY, wallMessageDao.getThisForumTopic(thisForumTopicId));
 
