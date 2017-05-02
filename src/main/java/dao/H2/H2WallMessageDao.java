@@ -335,12 +335,11 @@ public class H2WallMessageDao implements WallMessageDao {
 
     @Override
     @SneakyThrows
-    public Collection<WallMessage> getThisForumTopic() {
+    public Collection<WallMessage> getThisForumTopic(int thisForumTopicId) {
         List<WallMessage> thisTopicWallMessages = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT " +
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
                      "wm.id, " +
                      "wm.sender_user_id, " +
                      "u.id, " +
@@ -362,8 +361,13 @@ public class H2WallMessageDao implements WallMessageDao {
                      "JOIN User u ON wm.sender_user_id = u.id " +
                      "JOIN ForumTheme ft ON wm.forum_theme_id = ft.id " +
                      "JOIN WallMessage wmparent ON wm.parent_message_id = wmparent.id " +
-                     "WHERE wm.id = 4 OR wm.parent_message_id = 4 " +
+                     "WHERE wm.id = ? OR wm.parent_message_id = ? " +
                      "ORDER BY date_time ASC")) {
+
+            preparedStatement.setInt(1, thisForumTopicId);
+            preparedStatement.setInt(2, thisForumTopicId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
             while (resultSet.next()){
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 thisTopicWallMessages.add(new WallMessage(

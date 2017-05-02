@@ -37,7 +37,7 @@
             for (WallMessage thisThemeWallMessage: thisThemeWallMessages) {
         %>
         <tr>
-            <td><a href="forum-this-topic"><%=thisThemeWallMessage.getMessageHeader()%></a></td>
+            <td><a href="forum-this-topic?this_forum_topic_id=<%=thisThemeWallMessage.getId()%>"><%=thisThemeWallMessage.getMessageHeader()%></a></td>
             <td><%=thisThemeWallMessage.getSenderUserFirstNameAndLastName()%></td>
             <td><%=thisThemeWallMessage.getDateTime()%></td>
             <td><%=thisThemeWallMessage.getText()%></td>

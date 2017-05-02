@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+import static java.lang.Integer.parseInt;
 import static model.User.FIRST_NAME_KEY;
 import static model.User.ID_KEY;
 
@@ -59,6 +60,11 @@ public class ForumTopicController extends HttpServlet {
 //                orElse("test.jsp");
 ////                orElse("/WEB-INF/index.jsp");
 
+        String thisForumTopicIdString = req.getParameter("this_forum_topic_id");
+
+        int thisForumTopicId = parseInt(thisForumTopicIdString);
+
+
         boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
                 .map(o -> true)
                 .orElse(false);
@@ -71,7 +77,7 @@ public class ForumTopicController extends HttpServlet {
 //        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
 //        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
-        req.setAttribute(THIS_TOPIC_WALL_MESSAGES_KEY, wallMessageDao.getThisForumTopic());
+        req.setAttribute(THIS_TOPIC_WALL_MESSAGES_KEY, wallMessageDao.getThisForumTopic(thisForumTopicId));
 
         if (b) {req.getRequestDispatcher("/reg-user-forum-this-topic.jsp")
                 .forward(req, resp);
