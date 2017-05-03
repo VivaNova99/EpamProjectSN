@@ -46,6 +46,7 @@ public class H2WallMessageDao implements WallMessageDao {
                      "wm.id, " +
                      "wm.sender_user_id, " +
                      "u.id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "wm.text as message_text, " +
@@ -67,7 +68,8 @@ public class H2WallMessageDao implements WallMessageDao {
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 wallMessages.add(new WallMessage(
                         resultSet.getInt("id"),
-                        new User(
+                        new User(resultSet.getInt("sender_user_id"),
+                                resultSet.getBlob("profile_photo"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
@@ -102,6 +104,7 @@ public class H2WallMessageDao implements WallMessageDao {
                      "wm.id, " +
                      "wm.sender_user_id, " +
                      "u.id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "wm.text as message_text, " +
@@ -125,7 +128,8 @@ public class H2WallMessageDao implements WallMessageDao {
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 last10WallMessages.add(new WallMessage(
                         resultSet.getInt("id"),
-                        new User(
+                        new User(resultSet.getInt("sender_user_id"),
+                                resultSet.getBlob("profile_photo"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
@@ -161,6 +165,7 @@ public class H2WallMessageDao implements WallMessageDao {
                      "wm.id, " +
                      "wm.sender_user_id, " +
                      "u.id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "wm.text as message_text, " +
@@ -184,7 +189,8 @@ public class H2WallMessageDao implements WallMessageDao {
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 myAnswersWallMessages.add(new WallMessage(
                         resultSet.getInt("id"),
-                        new User(
+                        new User(resultSet.getInt("sender_user_id"),
+                                resultSet.getBlob("profile_photo"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
@@ -209,65 +215,6 @@ public class H2WallMessageDao implements WallMessageDao {
     }
 
 
-//    @Override
-//    @SneakyThrows
-//    public Collection<WallMessage> getThisForumTheme() {
-//        List<WallMessage> thisThemeWallMessages = new ArrayList<>();
-//
-//        try (Connection connection = dataSource.getConnection();
-//             Statement statement = connection.createStatement();
-//             ResultSet resultSet = statement.executeQuery("SELECT " +
-//                     "wm.id, " +
-//                     "wm.sender_user_id, " +
-//                     "u.id, " +
-//                     "u.first_name, " +
-//                     "u.last_name, " +
-//                     "wm.text as message_text, " +
-//                     "wm.picture," +
-//                     "wm.date_time, " +
-//                     "wm.forum_theme_id, " +
-//                     "wm.message_header, " +
-//                     "ft.name," +
-//                     "wm.is_parent, " +
-//                     "wm.parent_message_id, " +
-//                     "wmparent.id, " +
-//                     "wmparent.text as parent_message_text, " +
-//                     "wm.status_id, " +
-//                     "ft.theme_order " +
-//                     "FROM WallMessage wm " +
-//                     "JOIN User u ON wm.sender_user_id = u.id " +
-//                     "JOIN ForumTheme ft ON wm.forum_theme_id = ft.id " +
-//                     "JOIN WallMessage wmparent ON wm.parent_message_id = wmparent.id " +
-//                     "WHERE ft.theme_order = 310 AND wm.parent_message_id = 1 " +
-//                     "ORDER BY date_time DESC LIMIT 50")) {
-//            while (resultSet.next()){
-//                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                thisThemeWallMessages.add(new WallMessage(
-//                        resultSet.getInt("id"),
-//                        new User(
-//                                resultSet.getString("first_name"),
-//                                resultSet.getString("last_name")
-//                        ),
-//                        resultSet.getString("message_text"),
-//                        resultSet.getBlob("picture"),
-//                        simpleFormatter.parse(resultSet.getString("date_time")),
-//                        new ForumTheme(
-//                                resultSet.getString("name")
-//                        ),
-//                        resultSet.getString("message_header"),
-//                        resultSet.getBoolean("is_parent"),
-//                        new WallMessage(
-//                                resultSet.getString("parent_message_text")
-//                        ),
-//                        MessageStatus.valueOf(
-//                                resultSet.getInt("status_id") - 1)
-//                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
-//                ));
-//            }
-//            return thisThemeWallMessages;
-//        }
-//    }
-
     @Override
     @SneakyThrows
     public Collection<WallMessage> getThisForumTheme(int thisForumThemeOrder) {
@@ -278,6 +225,7 @@ public class H2WallMessageDao implements WallMessageDao {
                      "wm.id, " +
                      "wm.sender_user_id, " +
                      "u.id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "wm.text as message_text, " +
@@ -307,6 +255,8 @@ public class H2WallMessageDao implements WallMessageDao {
                     thisThemeWallMessages.add(new WallMessage(
                             resultSet.getInt("id"),
                             new User(
+                                    resultSet.getInt("sender_user_id"),
+                                    resultSet.getBlob("profile_photo"),
                                     resultSet.getString("first_name"),
                                     resultSet.getString("last_name")
                             ),
@@ -343,6 +293,7 @@ public class H2WallMessageDao implements WallMessageDao {
                      "wm.id, " +
                      "wm.sender_user_id, " +
                      "u.id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "wm.text as message_text, " +
@@ -372,7 +323,8 @@ public class H2WallMessageDao implements WallMessageDao {
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 thisTopicWallMessages.add(new WallMessage(
                         resultSet.getInt("id"),
-                        new User(
+                        new User(resultSet.getInt("sender_user_id"),
+                                resultSet.getBlob("profile_photo"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
@@ -408,6 +360,7 @@ public class H2WallMessageDao implements WallMessageDao {
                      "wm.id, " +
                      "wm.sender_user_id, " +
                      "u.id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "wm.text as message_text, " +
@@ -432,6 +385,8 @@ public class H2WallMessageDao implements WallMessageDao {
                 last10ForUserWallMessages.add(new WallMessage(
                         resultSet.getInt("id"),
                         new User(
+                                resultSet.getInt("sender_user_id"),
+                                resultSet.getBlob("profile_photo"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
@@ -467,6 +422,7 @@ public class H2WallMessageDao implements WallMessageDao {
                      "wm.id, " +
                      "wm.sender_user_id, " +
                      "u.id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "wm.text as message_text, " +
@@ -491,6 +447,8 @@ public class H2WallMessageDao implements WallMessageDao {
                 myThemesWallMessages.add(new WallMessage(
                         resultSet.getInt("id"),
                         new User(
+                                resultSet.getInt("sender_user_id"),
+                                resultSet.getBlob("profile_photo"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
@@ -519,12 +477,11 @@ public class H2WallMessageDao implements WallMessageDao {
     @SneakyThrows
     public ResultSet transferWallMessagePicture(int wallMessagePictureId) {
 
+//        TODO: добавить try with resources
 
         Connection connection = dataSource.getConnection();
-
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT picture FROM WallMessage WHERE id = ?");
         preparedStatement.setInt(1, wallMessagePictureId);
-
         ResultSet wallMessagePictureResultSet = preparedStatement.executeQuery();
         wallMessagePictureResultSet.next();
 

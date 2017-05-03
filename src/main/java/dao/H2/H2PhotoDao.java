@@ -48,6 +48,7 @@ public class H2PhotoDao implements PhotoDao
              ResultSet resultSet = statement.executeQuery("SELECT " +
                      "p.id, " +
                      "p.user_id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "p.photo_album_id, " +
@@ -69,6 +70,8 @@ public class H2PhotoDao implements PhotoDao
                 photos.add(new Photo(
                         resultSet.getInt("id"),
                         new User(
+                                resultSet.getInt("user_id"),
+                                resultSet.getBlob("profile_photo"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
@@ -96,6 +99,7 @@ public class H2PhotoDao implements PhotoDao
              ResultSet resultSet = statement.executeQuery("SELECT " +
                      "p.id, " +
                      "p.user_id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "p.photo_album_id, " +
@@ -119,6 +123,8 @@ public class H2PhotoDao implements PhotoDao
                 last5Photos.add(new Photo(
                         resultSet.getInt("id"),
                         new User(
+                                resultSet.getInt("user_id"),
+                                resultSet.getBlob("profile_photo"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
@@ -146,6 +152,7 @@ public class H2PhotoDao implements PhotoDao
              ResultSet resultSet = statement.executeQuery("SELECT " +
                      "p.id, " +
                      "p.user_id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "p.photo_album_id, " +
@@ -169,6 +176,8 @@ public class H2PhotoDao implements PhotoDao
                 UserPhotos.add(new Photo(
                         resultSet.getInt("id"),
                         new User(
+                                resultSet.getInt("user_id"),
+                                resultSet.getBlob("profile_photo"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),

@@ -48,6 +48,8 @@ public class dbIniter implements ServletContextListener {
             h2InsertPicture.insertPictureTwoIntoPhotoAlbumPhotoAlbumPicture();
             h2InsertPicture.insertPictureThreeIntoPhotoAlbumPhotoAlbumPicture();
             h2InsertPicture.insertPictureFourIntoPhotoAlbumPhotoAlbumPicture();
+            h2InsertPicture.insertQuestionPictureIntoWallMessagePicture();
+            h2InsertPicture.insertAnswerPictureIntoWallMessagePicture();
 
         }
     }

@@ -13,7 +13,6 @@
     <style>
         <%@include file="styles/main.css" %>
         <%@include file="styles/forum-themes.css" %>
-        <%@include file="styles/unreg-forum.css" %>
     </style>
 
 

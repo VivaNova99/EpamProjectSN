@@ -25,3 +25,9 @@ div.forum-themes {
     padding-bottom: 5px;
     background-color: antiquewhite;
 }
+
+
+
+.unreg-forum-themes div.forum-themes {
+    margin-left: 0;
+}

@@ -20,7 +20,7 @@
     <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
 </aside>
 
-<section class="reg-user">
+<section class="reg-user-user-page">
     <%@ include file="WEB-INF/additional/user-page.jsp" %>
 </section>
 

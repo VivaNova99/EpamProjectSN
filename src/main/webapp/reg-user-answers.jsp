@@ -35,7 +35,7 @@
             for (WallMessage answersWallMessage: answersWallMessages) {
         %>
         <tr>
-
+            <td><img src="users_profile_picture?user_id=<%=answersWallMessage.getSenderUserId()%>" /></td>
             <td><%=answersWallMessage.getSenderUserFirstNameAndLastName()%></td>
             <td><%=answersWallMessage.getDateTime()%></td>
             <td><%=answersWallMessage.getForumThemeName()%></td>

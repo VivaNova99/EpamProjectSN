@@ -211,6 +211,7 @@ public class H2UserDao implements UserDao {
     @SneakyThrows
     public ResultSet transferUsersProfilePicture(int usersProfilePictureId) {
 
+        //TODO: добавить try with resources
 
         Connection connection = dataSource.getConnection();
 

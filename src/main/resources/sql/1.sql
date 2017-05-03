@@ -66,6 +66,9 @@
    FOREIGN KEY (forum_theme_id) REFERENCES ForumTheme(id)
  );
 
+/*TODO: предусмотреть поле для ссылки на форумный топик
+TODO: добавить поле boolean, нужно ли выносить запись на форум*/
+
  CREATE TABLE PhotoAlbum (
    id INT AUTO_INCREMENT PRIMARY KEY,
    name VARCHAR(50) NOT NULL,

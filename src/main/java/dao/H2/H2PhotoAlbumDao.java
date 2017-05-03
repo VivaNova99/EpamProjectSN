@@ -51,6 +51,7 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                      "name, " +
                      "pa.user_id, " +
                      "u.id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "photo_album_picture, " +
@@ -70,6 +71,8 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         new User(
+                                resultSet.getInt("user_id"),
+                                resultSet.getBlob("profile_photo"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
@@ -101,6 +104,7 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                      "name, " +
                      "pa.user_id, " +
                      "u.id, " +
+                     "u.profile_photo, " +
                      "u.first_name, " +
                      "u.last_name, " +
                      "photo_album_picture, " +
@@ -122,6 +126,8 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         new User(
+                                resultSet.getInt("user_id"),
+                                resultSet.getBlob("profile_photo"),
                                 resultSet.getString("first_name"),
                                 resultSet.getString("last_name")
                         ),
@@ -141,24 +147,38 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
     }
 
 
+//    @Override
+//    @SneakyThrows
+//    public ResultSet transferPhotoalbumPicture(int photoalbumPictureId) {
+//
+//        try (Connection connection = dataSource.getConnection();
+//
+//            PreparedStatement preparedStatement = connection.prepareStatement
+//                    ("SELECT photo_album_picture FROM PhotoAlbum WHERE id = ?")) {
+//
+//                preparedStatement.setInt(1, photoalbumPictureId);
+//
+//                ResultSet photoalbumPictureResultSet = preparedStatement.executeQuery();
+//                photoalbumPictureResultSet.next();
+//
+//                return photoalbumPictureResultSet;
+//
+//
+//            }
+//
+//    }
+
     @Override
     @SneakyThrows
     public ResultSet transferPhotoalbumPicture(int photoalbumPictureId) {
 
-        try (Connection connection = dataSource.getConnection();
+        Connection connection = dataSource.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT photo_album_picture FROM PhotoAlbum WHERE id = ?");
+        preparedStatement.setInt(1, photoalbumPictureId);
+        ResultSet photoalbumPictureResultSet = preparedStatement.executeQuery();
+        photoalbumPictureResultSet.next();
 
-            PreparedStatement preparedStatement = connection.prepareStatement
-                    ("SELECT photo_album_picture FROM PhotoAlbum WHERE id = ?")) {
-
-                preparedStatement.setInt(1, photoalbumPictureId);
-
-                ResultSet photoalbumPictureResultSet = preparedStatement.executeQuery();
-                photoalbumPictureResultSet.next();
-
-                return photoalbumPictureResultSet;
-
-
-            }
+        return photoalbumPictureResultSet;
 
     }
 

@@ -47,11 +47,13 @@ public class H2PrivateMessageDao implements PrivateMessageDao {
              ResultSet resultSet = statement.executeQuery("SELECT " +
                      "pm.id, " +
                      "pm.sender_user_id, " +
-                     "u1.id, " +
+                     "u1.id as sender_user_id, " +
+                     "u1.profile_photo as sender_profile_photo, " +
                      "u1.first_name as sender_first_name, " +
                      "u1.last_name as sender_last_name, " +
                      "pm.receiver_user_id," +
-                     "u2.id, " +
+                     "u2.id as receiver_user_id, " +
+                     "u2.profile_photo as receiver_profile_photo, " +
                      "u2.first_name as receiver_first_name, " +
                      "u2.last_name as receiver_last_name, " +
                      "text," +
@@ -65,10 +67,14 @@ public class H2PrivateMessageDao implements PrivateMessageDao {
                 privateMessages.add(new PrivateMessage(
                         resultSet.getInt("id"),
                         new User(
+                                resultSet.getInt("sender_user_id"),
+                                resultSet.getBlob("sender_profile_photo"),
                                 resultSet.getString("sender_first_name"),
                                 resultSet.getString("sender_last_name")
                         ),
                         new User(
+                                resultSet.getInt("receiver_user_id"),
+                                resultSet.getBlob("receiver_profile_photo"),
                                 resultSet.getString("receiver_first_name"),
                                 resultSet.getString("receiver_last_name")
                         ),
@@ -94,11 +100,13 @@ public class H2PrivateMessageDao implements PrivateMessageDao {
              ResultSet resultSet = statement.executeQuery("SELECT " +
                      "pm.id, " +
                      "pm.sender_user_id, " +
-                     "u1.id, " +
+                     "u1.id as sender_user_id, " +
+                     "u1.profile_photo as sender_profile_photo, " +
                      "u1.first_name as sender_first_name, " +
                      "u1.last_name as sender_last_name, " +
                      "pm.receiver_user_id," +
-                     "u2.id, " +
+                     "u2.id as receiver_user_id, " +
+                     "u2.profile_photo as receiver_profile_photo, " +
                      "u2.first_name as receiver_first_name, " +
                      "u2.last_name as receiver_last_name, " +
                      "text," +
@@ -114,10 +122,14 @@ public class H2PrivateMessageDao implements PrivateMessageDao {
                 myPrivateMessages.add(new PrivateMessage(
                         resultSet.getInt("id"),
                         new User(
+                                resultSet.getInt("sender_user_id"),
+                                resultSet.getBlob("sender_profile_photo"),
                                 resultSet.getString("sender_first_name"),
                                 resultSet.getString("sender_last_name")
                         ),
                         new User(
+                                resultSet.getInt("receiver_user_id"),
+                                resultSet.getBlob("receiver_profile_photo"),
                                 resultSet.getString("receiver_first_name"),
                                 resultSet.getString("receiver_last_name")
                         ),
