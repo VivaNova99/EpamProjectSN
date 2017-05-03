@@ -1,0 +1,82 @@
+div.user-page {
+    padding-top: 15px;
+    margin-left: 250px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: antiquewhite;
+}
+
+.user-profile-picture,
+.user-info
+/*.user-first-name,*/
+/*.user-last-name,*/
+/*.user-status-on-wall,*/
+/*.user-dob,*/
+/*.user-city */
+{
+    display: inline-block;
+}
+
+div.user-profile-picture > img {
+    width: 25%;
+    min-width: 250px;
+    /*padding-bottom: 20px;*/
+}
+
+div.user-name {
+    position: relative;
+    top: -150px;
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+div.user-status-on-wall {
+    position: relative;
+    top: -140px;
+    margin-left: 20px;
+}
+
+div.user-dob {
+    position: relative;
+    top: -50px;
+    margin-left: 100px;
+}
+div.user-dob:before {
+    content: "День рождения ";
+    color: gray;
+
+}
+
+div.user-city {
+    position: relative;
+    top: -40px;
+    margin-left: 100px;
+}
+div.user-city:before {
+    content: "Город ";
+    color: gray;
+}
+
+div.user-last-5-photos {
+    padding-top: 20px;
+}
+
+div.user-last-5-photos div.user-last-photo img {
+    display: inline-block;
+    padding-top: 5px;
+    width: 15%;
+}
+
+div.user-last-10-wall-messages {
+    padding-top: 40px;
+}
+
+td.user-last-wall-message-date-time:after {
+    content: " Вы написали: ";
+}
+
+
+
+.unreg-smb-page .user-page{
+    margin-left: 0;
+}

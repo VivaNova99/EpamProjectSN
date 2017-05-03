@@ -34,6 +34,8 @@ public class PrivateMessage {
         }
     }
 
+    public int getSenderUserId() { return senderUser.getId(); }
+
     public String getSenderUserFirstNameAndLastName(){
         return senderUser.getFirstNameAndLastName();
     }

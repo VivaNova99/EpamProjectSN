@@ -31,10 +31,16 @@ public class User {
 //    UNIQUE (email)
 
 
-    public User(String firstName, String lastName){
+    public User(int id, Blob profilePhoto, String firstName, String lastName){
+        this.id = id;
+        this.profilePhoto = profilePhoto;
         this.firstName = firstName;
         this.lastName = lastName;
     };
+//
+//    public Blob getBlob() {
+//        return null;
+//    }
 
 
     public String getFirstNameAndLastName(){
@@ -42,4 +48,5 @@ public class User {
         return firstName + " " + lastName;
 
     };
+
 }

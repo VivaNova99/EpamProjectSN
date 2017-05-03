@@ -39,6 +39,7 @@
         <tr>
             <td><%=thisTopicWallMessage.getForumThemeName()%></td>
             <td><%=thisTopicWallMessage.getMessageHeader()%></td>
+            <td><img src="users_profile_picture?user_id=<%=thisTopicWallMessage.getSenderUserId()%>" /></td>
             <td><%=thisTopicWallMessage.getSenderUserFirstNameAndLastName()%></td>
             <td><%=thisTopicWallMessage.getDateTime()%></td>
             <td><%=thisTopicWallMessage.getText()%></td>

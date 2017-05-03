@@ -37,6 +37,7 @@ import="controllers.MyNewsController" %>
             for (WallMessage last10WallMessage: last10WallMessages) {
         %>
         <tr>
+            <td><img src="users_profile_picture?user_id=<%=last10WallMessage.getSenderUserId()%>" /></td>
             <td><%=last10WallMessage.getSenderUserFirstNameAndLastName()%></td>
             <td><%=last10WallMessage.getDateTime()%></td>
             <td><%=last10WallMessage.getForumThemeName()%></td>

@@ -165,4 +165,46 @@ public class H2InsertPictureIntoDatabase {
     }
 
 
+    @SneakyThrows
+    public void insertQuestionPictureIntoWallMessagePicture() {
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE WallMessage set picture = ? WHERE id = 2 OR id = 4"
+             )){
+
+            File file = new File("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/webapp/img/question.jpg");
+            FileInputStream fileInputStream = new FileInputStream(file);
+            preparedStatement.setBinaryStream(1, fileInputStream, (int)file.length());
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        }
+
+    }
+
+
+    @SneakyThrows
+    public void insertAnswerPictureIntoWallMessagePicture() {
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE WallMessage set picture = ? WHERE id = 3 OR id = 6"
+             )){
+
+            File file = new File("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/webapp/img/answer.jpg");
+            FileInputStream fileInputStream = new FileInputStream(file);
+            preparedStatement.setBinaryStream(1, fileInputStream, (int)file.length());
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        }
+
+    }
+
+
 }
