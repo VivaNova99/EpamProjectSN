@@ -32,6 +32,9 @@ public interface WallMessageDao {
 
     Collection<WallMessage> getLast10ForUser();
 
+    @SneakyThrows
+    Collection<WallMessage> getLast10ForUser(int someUserId);
+
     Collection<WallMessage> getMyThemes();
 
     ResultSet transferWallMessagePicture(int wallMessagePictureId);

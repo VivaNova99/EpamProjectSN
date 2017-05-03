@@ -39,8 +39,10 @@
         <tr>
             <td><%=thisTopicWallMessage.getForumThemeName()%></td>
             <td><%=thisTopicWallMessage.getMessageHeader()%></td>
-            <td><img src="users_profile_picture?user_id=<%=thisTopicWallMessage.getSenderUserId()%>" /></td>
-            <td><%=thisTopicWallMessage.getSenderUserFirstNameAndLastName()%></td>
+            <td><a href="smb-page?some_user_id=<%=thisTopicWallMessage.getSenderUserId()%>">
+                <img src="users_profile_picture?user_id=<%=thisTopicWallMessage.getSenderUserId()%>" /></a></td>
+            <td><a href="smb-page?some_user_id=<%=thisTopicWallMessage.getSenderUserId()%>">
+                <%=thisTopicWallMessage.getSenderUserFirstNameAndLastName()%></a></td>
             <td><%=thisTopicWallMessage.getDateTime()%></td>
             <td><%=thisTopicWallMessage.getText()%></td>
             <td><%=thisTopicWallMessage.getPicture()%></td>

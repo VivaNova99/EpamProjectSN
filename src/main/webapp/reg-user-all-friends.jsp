@@ -29,22 +29,28 @@
         Collection<User> friends = (Collection<User>) request.getAttribute(MyFriendsController.ALL_FRIENDS_KEY);
     %>
 
-    <table>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Profile photo</th>
-            <th>Status on wall</th>
-        </tr>
+    <%--<table>--%>
+        <%--<tr>--%>
+            <%--<th>First Name</th>--%>
+            <%--<th>Last Name</th>--%>
+            <%--<th>Profile photo</th>--%>
+            <%--<th>Status on wall</th>--%>
+        <%--</tr>--%>
             <%
         for (User friend: friends) {
     %>
-        <tr>
-            <td><%=friend.getFirstName()%></td>
-            <td><%=friend.getLastName()%></td>
-            <td><img src="users_profile_picture?user_id=<%=friend.getId()%>" /></td>
-            <td><%=friend.getStatusOnWall()%></td>
-        </tr>
+        <%--<tr>--%>
+            <%--<td><%=friend.getFirstName()%></td>--%>
+            <%--<td><%=friend.getLastName()%></td>--%>
+            <%--<td><img src="users_profile_picture?user_id=<%=friend.getId()%>" /></td>--%>
+            <%--<td><%=friend.getStatusOnWall()%></td>--%>
+        <%--</tr>--%>
+
+    <div><a href="smb-page?some_user_id=<%=friend.getId()%>"><img src="users_profile_picture?user_id=<%=friend.getId()%>" /></a></div>
+    <div><a href="smb-page?some_user_id=<%=friend.getId()%>"><%=friend.getFirstName()%> <%=friend.getLastName()%></a></div>
+    <div><%=friend.getStatusOnWall()%></div>
+
+
             <%
         }
     %>

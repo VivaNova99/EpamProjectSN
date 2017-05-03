@@ -18,8 +18,8 @@ div.user-page {
 }
 
 div.user-profile-picture > img {
-    width: 25%;
-    min-width: 250px;
+    /*width: 25%;*/
+    height: 250px;
     /*padding-bottom: 20px;*/
 }
 
@@ -57,14 +57,24 @@ div.user-city:before {
     color: gray;
 }
 
-div.user-last-5-photos {
+
+.my-photos {
+    font-size: 20px;
+}
+
+.user-last-5-photos {
     padding-top: 20px;
 }
 
-div.user-last-5-photos div.user-last-photo img {
+.user-last-5-photos .user-last-photo img {
     display: inline-block;
     padding-top: 5px;
     width: 15%;
+}
+
+
+.my-notes {
+    font-size: 20px;
 }
 
 div.user-last-10-wall-messages {
@@ -73,6 +83,15 @@ div.user-last-10-wall-messages {
 
 td.user-last-wall-message-date-time:after {
     content: " Вы написали: ";
+}
+
+td.smb-user-last-10-wall-messages:after {
+    content: " Написал(а): ";
+}
+
+td.user-last-wall-message-picture > img {
+    /*width: 25%;*/
+    max-height: 250px;
 }
 
 

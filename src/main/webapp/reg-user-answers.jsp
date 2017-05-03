@@ -35,7 +35,10 @@
             for (WallMessage answersWallMessage: answersWallMessages) {
         %>
         <tr>
-            <td><img src="users_profile_picture?user_id=<%=answersWallMessage.getSenderUserId()%>" /></td>
+            <td><a href="smb-page?some_user_id=<%=answersWallMessage.getSenderUserId()%>">
+                <img src="users_profile_picture?user_id=<%=answersWallMessage.getSenderUserId()%>" /></a></td>
+            <td><a href="smb-page?some_user_id=<%=answersWallMessage.getSenderUserId()%>">
+                <%=answersWallMessage.getSenderUserFirstNameAndLastName()%></a></td>
             <td><%=answersWallMessage.getSenderUserFirstNameAndLastName()%></td>
             <td><%=answersWallMessage.getDateTime()%></td>
             <td><%=answersWallMessage.getForumThemeName()%></td>

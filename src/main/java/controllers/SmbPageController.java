@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+import static java.lang.Integer.parseInt;
 import static model.User.FIRST_NAME_KEY;
 
 
@@ -21,14 +22,16 @@ public class SmbPageController extends HttpServlet {
 
     public static final String WELCOME_KEY = "Welcome";
     public static final String ALL_USERS_KEY = "AllUser";
-//    public static final String ALL_FORUM_THEMES_KEY = "AllForumThemes";
-//    public static final String ALL_PHOTO_ALBUMS_KEY = "AllPhotoAlbums";
+////    public static final String ALL_FORUM_THEMES_KEY = "AllForumThemes";
+////    public static final String ALL_PHOTO_ALBUMS_KEY = "AllPhotoAlbums";
     public static final String ALL_PHOTOS_KEY = "AllPhotos";
-//    public static final String ALL_PRIVATE_MESSAGES_KEY = "AllPrivateMessages";
+////    public static final String ALL_PRIVATE_MESSAGES_KEY = "AllPrivateMessages";
     public static final String ALL_WALL_MESSAGES_KEY = "AllWallMessages";
     public static final String USER_INFO_KEY = "UserInfo";
-    public static final String LAST_10_FOR_USER_WALL_MESSAGES_KEY = "Last10ForUserWallMessages";
-    public static final String LAST_5_FOR_USER_PHOTOS_KEY = "Last5ForUserPhotos";
+    public static final String LAST_10_FOR_SOME_USER_WALL_MESSAGES_KEY = "Last10ForUserWallMessages";
+    public static final String LAST_5_FOR_SOME_USER_PHOTOS_KEY = "Last5ForUserPhotos";
+    public static final String SOME_USER_INFO_KEY = "SomeUserPage";
+
 
     private UserDao userDao;
 //    private ForumThemeDao forumThemeDao;
@@ -65,17 +68,24 @@ public class SmbPageController extends HttpServlet {
 //                .map(o -> true)
 //                .orElse(false);
 
+        String someUserIdString = req.getParameter("some_user_id");
+
+        int someUserId = parseInt(someUserIdString);
+
+        req.setAttribute(SOME_USER_INFO_KEY, userDao.getUser(someUserId));
+
+
         req.setAttribute(WELCOME_KEY, s);
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
-//        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
-//        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
+////        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
+////        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
         req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
-//        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
+////        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
         req.setAttribute(USER_INFO_KEY, userDao.getUser());
-        req.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser());
-        req.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5());
+        req.setAttribute(LAST_10_FOR_SOME_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(someUserId));
+        req.setAttribute(LAST_5_FOR_SOME_USER_PHOTOS_KEY, photoDao.getLast5(someUserId));
 
 //        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
 //                .forward(req, resp);
