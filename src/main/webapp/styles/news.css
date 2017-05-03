@@ -1,0 +1,47 @@
+section.news{
+    padding-top: 15px;
+    margin-left: 250px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: antiquewhite;
+}
+
+section.news > ul > li > ul > li.profile-picture {
+
+}
+section.news > ul > li > ul > li.profile-picture > a > img {
+    height: 40px;
+}
+
+section.news > ul > li > ul > li.name {
+
+}
+
+section.news > ul > li > ul > li.date-time {
+
+}
+section.news > ul > li > ul > li.date-time:after {
+    content: " Написал(а): ";
+}
+
+section.news > ul > li > ul > li.forum-theme {
+
+}
+
+section.news > ul > li > ul > li.header {
+
+}
+
+section.news > ul > li > ul > li.text {
+
+}
+
+section.news > ul > li > ul > li.picture {
+
+}
+
+section.news > ul > li > ul > li.picture > img {
+    max-height: 250px;
+}
+
+

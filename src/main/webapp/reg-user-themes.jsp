@@ -44,7 +44,7 @@
             <td><%=myTheme.getMessageHeader()%></td>
             <td><%=myTheme.getDateTime()%></td>
             <td><%=myTheme.getText()%></td>
-            <td><%=myTheme.getPicture()%></td>
+            <td><img src="wall_message_picture?wall_message_picture_id=<%=myTheme.getId()%>" /></td>
         </tr>
         <%
             }

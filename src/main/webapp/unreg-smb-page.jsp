@@ -18,7 +18,7 @@
 </header>
 
 <section class="unreg-smb-page">
-    <%@ include file="WEB-INF/additional/user-page.jsp" %>
+    <%@ include file="WEB-INF/additional/smb-page.jsp" %>
 </section>
 
 </body>

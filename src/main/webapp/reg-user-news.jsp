@@ -7,6 +7,12 @@ import="controllers.MyNewsController" %>
 <html>
 <head>
     <title></title>
+
+    <style>
+        <%@include file="styles/main.css" %>
+        <%@include file="styles/news.css" %>
+    </style>
+
 </head>
 <body>
 
@@ -18,40 +24,37 @@ import="controllers.MyNewsController" %>
     <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
 </aside>
 
-<section>
+<section class="news">
 
     <%
         Collection<WallMessage> last10WallMessages = (Collection<WallMessage>) request.getAttribute(MyNewsController.LAST_10_WALL_MESSAGES_KEY);
     %>
 
-    <table>
-        <tr>
-            <th>Sender User</th>
-            <th>Date and time</th>
-            <th>Forum Theme</th>
-            <th>Message Header</th>
-            <th>Text</th>
-            <th>Picture</th>
-        </tr>
+    <ul>
         <%
             for (WallMessage last10WallMessage: last10WallMessages) {
         %>
-        <tr>
-            <td><img src="users_profile_picture?user_id=<%=last10WallMessage.getSenderUserId()%>" /></td>
-            <td><%=last10WallMessage.getSenderUserFirstNameAndLastName()%></td>
-            <td><%=last10WallMessage.getDateTime()%></td>
-            <td><%=last10WallMessage.getForumThemeName()%></td>
-            <td><%=last10WallMessage.getMessageHeader()%></td>
-            <td><%=last10WallMessage.getText()%></td>
-            <td><img src="wall_message_picture?wall_message_picture_id=<%=last10WallMessage.getId()%>" /></td>
+        <li>
+            <ul>
+                <li class="profile-picture"><a href="smb-page?some_user_id=<%=last10WallMessage.getSenderUserId()%>">
+                    <img src="users_profile_picture?user_id=<%=last10WallMessage.getSenderUserId()%>" /></a></li>
+                <li class="name"><a href="smb-page?some_user_id=<%=last10WallMessage.getSenderUserId()%>">
+                    <%=last10WallMessage.getSenderUserFirstNameAndLastName()%></a></li>
+                <li class="forum-theme"><%=last10WallMessage.getForumThemeName()%></li>
+                <li class="date-time"><%=last10WallMessage.getDateTime()%></li>
 
-        </tr>
+                <li class="header"><%=last10WallMessage.getMessageHeader()%></li>
+                <li class="text"><%=last10WallMessage.getText()%></li>
+                <li class="picture"><img src="wall_message_picture?wall_message_picture_id=<%=last10WallMessage.getId()%>" /></li>
+            </ul>
+        </li>
         <%
             }
         %>
 
-    </table>
 
+
+    </ul>
 
 </section>
 

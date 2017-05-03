@@ -31,5 +31,7 @@ public interface UserDao {
 
     User getUser();
 
+    User getUser(int someUserId);
+
     ResultSet transferUsersProfilePicture(int usersProfilePictureId);
 }

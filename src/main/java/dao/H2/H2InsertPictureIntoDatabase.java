@@ -9,9 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.sql.*;
 
-/**
- * Created by veraivanova on 25.04.17.
- */
+
 public class H2InsertPictureIntoDatabase {
 
     private DataSource dataSource;
@@ -171,6 +169,7 @@ public class H2InsertPictureIntoDatabase {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "UPDATE WallMessage set picture = ? WHERE id = 2 OR id = 4"
+//                     "UPDATE WallMessage set picture = ? WHERE is_parent = TRUE"
              )){
 
             File file = new File("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/webapp/img/question.jpg");
@@ -192,6 +191,7 @@ public class H2InsertPictureIntoDatabase {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "UPDATE WallMessage set picture = ? WHERE id = 3 OR id = 6"
+//                     "UPDATE WallMessage set picture = ? WHERE is_parent = FALSE"
              )){
 
             File file = new File("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/webapp/img/answer.jpg");

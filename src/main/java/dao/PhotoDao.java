@@ -22,6 +22,9 @@ public interface PhotoDao {
 
     Collection<Photo> getLast5();
 
+    @SneakyThrows
+    Collection<Photo> getLast5(int someUserId);
+
     Collection<Photo> getUserPhotos();
 
     ResultSet transferPhotoPicture(int photoPictureId);

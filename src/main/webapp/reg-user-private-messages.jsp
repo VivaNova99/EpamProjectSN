@@ -39,8 +39,10 @@
             for (PrivateMessage myPrivateMessage: myPrivateMessages) {
         %>
         <tr>
-            <td><img src="users_profile_picture?user_id=<%=myPrivateMessage.getSenderUserId()%>" /></td>
-            <td><%=myPrivateMessage.getSenderUserFirstNameAndLastName()%></td>
+            <td><a href="smb-page?some_user_id=<%=myPrivateMessage.getSenderUserId()%>">
+                <img src="users_profile_picture?user_id=<%=myPrivateMessage.getSenderUserId()%>" /></a></td>
+            <td><a href="smb-page?some_user_id=<%=myPrivateMessage.getSenderUserId()%>">
+                <%=myPrivateMessage.getSenderUserFirstNameAndLastName()%></a></td>
             <td><%=myPrivateMessage.getReceiverUserFirstNameAndLastName()%></td>
             <td><%=myPrivateMessage.getDateTime()%></td>
             <td><%=myPrivateMessage.getText()%></td>
