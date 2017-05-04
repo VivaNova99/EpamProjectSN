@@ -11,6 +11,12 @@
 <html>
 <head>
     <title></title>
+
+    <style>
+        <%@include file="styles/main.css" %>
+        <%@include file="styles/private-messages.css" %>
+    </style>
+
 </head>
 <body>
 
@@ -22,36 +28,43 @@
     <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
 </aside>
 
-<section class="reg-user">
+<section class="reg-user private-messages">
 
     <%
         Collection<PrivateMessage> myPrivateMessages = (Collection<PrivateMessage>) request.getAttribute(MyPrivateMessageController.MY_PRIVATE_MESSAGES_KEY);
     %>
 
-    <table>
-        <tr>
-            <th>Sender User</th>
-            <th>Receiver User</th>
-            <th>Date and time</th>
-            <th>Text</th>
-        </tr>
+    <ul>
         <%
             for (PrivateMessage myPrivateMessage: myPrivateMessages) {
         %>
-        <tr>
-            <td><a href="smb-page?some_user_id=<%=myPrivateMessage.getSenderUserId()%>">
-                <img src="users_profile_picture?user_id=<%=myPrivateMessage.getSenderUserId()%>" /></a></td>
-            <td><a href="smb-page?some_user_id=<%=myPrivateMessage.getSenderUserId()%>">
-                <%=myPrivateMessage.getSenderUserFirstNameAndLastName()%></a></td>
-            <td><%=myPrivateMessage.getReceiverUserFirstNameAndLastName()%></td>
-            <td><%=myPrivateMessage.getDateTime()%></td>
-            <td><%=myPrivateMessage.getText()%></td>
-        </tr>
+        <li>
+            <ul>
+                <li>
+                    <ul class="receiver">
+                        <li class="receiver-profile-picture"><a href="smb-page?some_user_id=<%=myPrivateMessage.getReceiverUserId()%>">
+                            <img src="users_profile_picture?user_id=<%=myPrivateMessage.getReceiverUserId()%>" /></a></li>
+                        <li class="receiver-name"><a href="smb-page?some_user_id=<%=myPrivateMessage.getReceiverUserId()%>">
+                            <%=myPrivateMessage.getReceiverUserFirstNameAndLastName()%></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="sender">
+                        <li class="sender-profile-picture"><a href="smb-page?some_user_id=<%=myPrivateMessage.getSenderUserId()%>">
+                            <img src="users_profile_picture?user_id=<%=myPrivateMessage.getSenderUserId()%>" /></a></li>
+                        <li class="sender-name"><a href="smb-page?some_user_id=<%=myPrivateMessage.getSenderUserId()%>">
+                            <%=myPrivateMessage.getSenderUserFirstNameAndLastName()%></a></li>
+                    </ul>
+                </li>
+                <li class="date-time"><%=myPrivateMessage.getDateTime()%></li>
+                <li class="text"><%=myPrivateMessage.getText()%></li>
+            </ul>
+        </li>
         <%
             }
         %>
 
-    </table>
+    </ul>
 
 </section>
 

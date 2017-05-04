@@ -1,0 +1,44 @@
+section.private-messages{
+    padding-top: 15px;
+    margin-left: 250px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: bisque;
+}
+
+section.private-messages > ul > li > ul {
+    background-color: antiquewhite;
+    border: solid saddlebrown 1px;
+    margin-bottom: 20px;
+}
+
+section.private-messages ul.receiver > li,
+section.private-messages ul.sender > li {
+    display: inline-block;
+}
+
+section.private-messages li.receiver-profile-picture:before {
+    content: "Получатель: ";
+}
+
+section.private-messages li.sender-profile-picture:before {
+    content: "Отправитель: ";
+}
+
+section.private-messages li.receiver-profile-picture > a > img {
+    height: 40px;
+}
+
+section.private-messages li.sender-profile-picture > a > img {
+    height: 40px;
+}
+
+section.private-messages li.date-time:after {
+    content: " Написал(а): ";
+}
+
+section.private-messages li.text {
+    background-color: floralwhite;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

@@ -3,7 +3,14 @@ section.news{
     margin-left: 250px;
     padding-left: 15px;
     padding-right: 15px;
+    /*background-color: antiquewhite;*/
+    background-color: bisque;
+}
+
+section.news > ul > li > ul {
     background-color: antiquewhite;
+    border: solid saddlebrown 1px;
+    margin-bottom: 20px;
 }
 
 section.news > ul > li > ul > li.profile-picture {
@@ -17,6 +24,13 @@ section.news > ul > li > ul > li.name {
 
 }
 
+section.news > ul > li > ul > li.forum-theme {
+
+}
+section.news > ul > li > ul > li.forum-theme:before {
+    content: " В подфоруме ";
+}
+
 section.news > ul > li > ul > li.date-time {
 
 }
@@ -24,20 +38,22 @@ section.news > ul > li > ul > li.date-time:after {
     content: " Написал(а): ";
 }
 
-section.news > ul > li > ul > li.forum-theme {
-
-}
-
 section.news > ul > li > ul > li.header {
-
+    background-color: floralwhite;
+    padding-top: 10px;
+}
+section.news > ul > li > ul > li.header:before {
+    content: " Заголовок: ";
 }
 
 section.news > ul > li > ul > li.text {
-
+    background-color: floralwhite;
+    padding-top: 10px;
 }
 
 section.news > ul > li > ul > li.picture {
-
+    background-color: floralwhite;
+    padding-bottom: 10px;
 }
 
 section.news > ul > li > ul > li.picture > img {
