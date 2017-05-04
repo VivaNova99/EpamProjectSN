@@ -37,51 +37,56 @@
     Collection<Photo> last5ForUserPhotos = (Collection<Photo>) request.getAttribute(SmbPageController.LAST_5_FOR_SOME_USER_PHOTOS_KEY);
 %>
 
-    <div class="user-last-5-photos">
+    <section class="user-photos">
 
-        <h1>Фотографии</h1>
-        <%
-            for (Photo last5ForUserPhoto: last5ForUserPhotos) {
-        %>
+        <h1 class="my-photos">Фотографии</h1>
 
-        <div class="user-last-photo"><img src="photo_picture?photo_id=<%=last5ForUserPhoto.getId()%>"></div>
+        <ul>
+            <%
+                for (Photo last5ForUserPhoto: last5ForUserPhotos) {
+            %>
+            <li class="user-last-photo">
+                <img src="photo_picture?photo_id=<%=last5ForUserPhoto.getId()%>">
+            </li>
+            <%
+                }
+            %>
+        </ul>
 
-        <%
-            }
-        %>
-
-    </div>
+    </section>
 
 
-    <div class="smb-user-last-10-wall-messages">
+    <section class="smb-user-wall-messages">
     <%--<textarea class="whats-new" placeholder="Что у Вас нового?"></textarea>--%>
 
-<%
-    Collection<WallMessage> last10ForUserWallMessages = (Collection<WallMessage>) request.getAttribute(SmbPageController.LAST_10_FOR_SOME_USER_WALL_MESSAGES_KEY);
-%>
+        <%
+            Collection<WallMessage> last10ForUserWallMessages = (Collection<WallMessage>) request.getAttribute(UserOwnPageController.LAST_10_FOR_USER_WALL_MESSAGES_KEY);
+        %>
 
-    <table>
-        <caption>Записи</caption>
-        <%
-            for (WallMessage last10ForUserWallMessage: last10ForUserWallMessages) {
-        %>
-        <tr>
-            <td class="user-last-wall-message-header"><%=last10ForUserWallMessage.getMessageHeader()%></td>
-        </tr>
-        <tr>
-            <td class="user-last-wall-message-date-time"><%=last10ForUserWallMessage.getDateTime()%></td>
-        </tr>
-        <tr>
-            <td class="user-last-wall-message-text"><%=last10ForUserWallMessage.getText()%></td>
-        </tr>
-        <tr>
-            <td class="user-last-wall-message-picture"><img src="wall_message_picture?wall_message_picture_id=<%=last10ForUserWallMessage.getId()%>" /></td>
-        </tr>
-        <%
-            }
-        %>
-    </table>
-    </div>
+        <ul class="my-wall">
+            <li class="my-notes">Записи</li>
+            <%
+                for (WallMessage last10ForUserWallMessage: last10ForUserWallMessages) {
+            %>
+            <ul>
+                <li class="header">
+                    <%=last10ForUserWallMessage.getMessageHeader()%>
+                </li>
+                <li class="date-time">
+                    <%=last10ForUserWallMessage.getDateTime()%>
+                </li>
+                <li class="text">
+                    <%=last10ForUserWallMessage.getText()%>
+                </li>
+                <li class="picture">
+                    <img src="wall_message_picture?wall_message_picture_id=<%=last10ForUserWallMessage.getId()%>" />
+                </li>
+            </ul>
+            <%
+                }
+            %>
+        </ul>
+    </section>
 
 </div>
 

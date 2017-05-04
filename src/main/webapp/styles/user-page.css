@@ -3,11 +3,12 @@ div.user-page {
     margin-left: 250px;
     padding-left: 15px;
     padding-right: 15px;
-    background-color: antiquewhite;
+    /*background-color: antiquewhite;*/
+    background-color: bisque;
 }
 
-.user-profile-picture,
-.user-info
+div.user-profile-picture,
+section.user-info
 /*.user-first-name,*/
 /*.user-last-name,*/
 /*.user-status-on-wall,*/
@@ -15,6 +16,8 @@ div.user-page {
 /*.user-city */
 {
     display: inline-block;
+    background-color: antiquewhite;
+    border: solid saddlebrown 1px;
 }
 
 div.user-profile-picture > img {
@@ -62,11 +65,15 @@ div.user-city:before {
     font-size: 20px;
 }
 
-.user-last-5-photos {
-    padding-top: 20px;
+.user-photos {
+    margin-top: 10px;
+    border: solid saddlebrown 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: antiquewhite;
 }
 
-.user-last-5-photos .user-last-photo img {
+.user-photos .user-last-photo img {
     display: inline-block;
     padding-top: 5px;
     width: 15%;
@@ -77,19 +84,33 @@ div.user-city:before {
     font-size: 20px;
 }
 
-div.user-last-10-wall-messages {
-    padding-top: 40px;
+section.wall-messages,
+section.smb-user-wall-messages {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: solid saddlebrown 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: antiquewhite;
 }
 
-td.user-last-wall-message-date-time:after {
+section.wall-messages li.text,
+section.wall-messages li.picture,
+section.smb-user-wall-messages li.text,
+section.smb-user-wall-messages li.picture {
+    background-color: floralwhite;
+    padding-top: 10px;
+}
+
+section.wall-messages li.date-time:after {
     content: " Вы написали: ";
 }
 
-td.smb-user-last-10-wall-messages:after {
+section.smb-user-wall-messages li.date-time:after {
     content: " Написал(а): ";
 }
 
-td.user-last-wall-message-picture > img {
+section.wall-messages > ul > li > ul > li.picture > img {
     /*width: 25%;*/
     max-height: 250px;
 }
