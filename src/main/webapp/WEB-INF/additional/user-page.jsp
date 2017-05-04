@@ -62,7 +62,7 @@
 %>
 
         <ul class="my-wall">
-            <li class="my-notes">Мои записи</li>
+            <li class="my-notes"><h1>Мои записи</h1></li>
             <%
                 for (WallMessage last10ForUserWallMessage: last10ForUserWallMessages) {
             %>

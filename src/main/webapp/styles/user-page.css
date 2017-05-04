@@ -73,16 +73,15 @@ div.user-city:before {
     background-color: antiquewhite;
 }
 
-.user-photos .user-last-photo img {
+.user-photos li.user-last-photo{
     display: inline-block;
+}
+
+.user-photos .user-last-photo img {
     padding-top: 5px;
-    width: 15%;
+    height: 150px;
 }
 
-
-.my-notes {
-    font-size: 20px;
-}
 
 section.wall-messages,
 section.smb-user-wall-messages {
@@ -110,7 +109,7 @@ section.smb-user-wall-messages li.date-time:after {
     content: " Написал(а): ";
 }
 
-section.wall-messages > ul > li > ul > li.picture > img {
+section.wall-messages li.picture > img {
     /*width: 25%;*/
     max-height: 250px;
 }
