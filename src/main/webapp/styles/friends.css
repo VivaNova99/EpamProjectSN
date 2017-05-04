@@ -1,0 +1,26 @@
+section.friends{
+    padding-top: 15px;
+    margin-left: 250px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: bisque;
+}
+
+section.friends > ul > li > ul {
+    background-color: antiquewhite;
+    border: solid saddlebrown 1px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+section.friends > ul > li > ul > li {
+    display: inline-block;
+}
+
+section.friends li > a > img {
+    height: 40px;
+}
+
+section.friends li.name > a {
+    font-size: 20px;
+}
