@@ -1,0 +1,52 @@
+section.user-themes{
+    padding-top: 15px;
+    margin-left: 250px;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*background-color: antiquewhite;*/
+    background-color: bisque;
+}
+
+section.user-themes > ul > li > ul {
+    background-color: antiquewhite;
+    border: solid saddlebrown 1px;
+    margin-bottom: 20px;
+}
+
+section.user-themes > ul > li > ul > li.forum-theme {
+
+}
+section.user-themes > ul > li > ul > li.forum-theme:before {
+    content: " В подфоруме ";
+}
+
+section.user-themes > ul > li > ul > li.date-time {
+
+}
+section.user-themes > ul > li > ul > li.date-time:after {
+    content: " Вы написали: ";
+}
+
+section.user-themes > ul > li > ul > li.header {
+    background-color: floralwhite;
+    padding-top: 10px;
+}
+section.user-themes > ul > li > ul > li.header:before {
+    content: " Заголовок: ";
+}
+
+section.user-themes > ul > li > ul > li.text {
+    background-color: floralwhite;
+    padding-top: 10px;
+}
+
+section.user-themes > ul > li > ul > li.picture {
+    background-color: floralwhite;
+    padding-bottom: 10px;
+}
+
+section.user-themes > ul > li > ul > li.picture > img {
+    max-height: 250px;
+}
+
+

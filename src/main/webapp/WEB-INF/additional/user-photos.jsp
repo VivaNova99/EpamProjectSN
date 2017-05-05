@@ -8,6 +8,12 @@
 <html>
 <head>
     <title></title>
+
+    <style>
+        <%@include file="../../styles/main.css" %>
+        <%@include file="../../styles/photos.css" %>
+    </style>
+
 </head>
 <body>
 
@@ -15,27 +21,30 @@
     Collection<Photo> userPhotos = (Collection<Photo>) request.getAttribute(UserPhotosController.USER_PHOTOS_KEY);
 %>
 
-<table>
-    <tr>
-        <th>Picture</th>
-        <th>Description</th>
-        <th>Date and time</th>
-        <th>PhotoAlbum</th>
-    </tr>
-    <%
-        for (Photo userPhoto: userPhotos) {
-    %>
-    <tr>
-        <td><img src="photo_picture?photo_id=<%=userPhoto.getId()%>" /></td>
-        <td><%=userPhoto.getDescription()%></td>
-        <td><%=userPhoto.getDateTime()%></td>
-        <td><%=userPhoto.getPhotoAlbumName()%></td>
-    </tr>
-    <%
-        }
-    %>
+<section class="all-user-photos">
 
-</table>
+    <h1 class="my-photos">Мои фотографии</h1>
+
+    <ul>
+        <li>
+            <%
+                for (Photo userPhoto: userPhotos) {
+            %>
+            <ul>
+                <li class="photoalbum"><%=userPhoto.getPhotoAlbumName()%></li>
+                <li class="user-photo">
+                    <img src="photo_picture?photo_id=<%=userPhoto.getId()%>">
+                </li>
+                <li class="date-time"><%=userPhoto.getDateTime()%></li>
+                <li class="description"><%=userPhoto.getDescription()%></li>
+                <%
+                    }
+                %>
+            </ul>
+        </li>
+    </ul>
+
+</section>
 
 
 </body>

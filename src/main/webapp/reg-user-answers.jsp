@@ -5,6 +5,12 @@
 <html>
 <head>
     <title></title>
+
+    <style>
+        <%@include file="styles/main.css" %>
+        <%@include file="styles/answers.css" %>
+    </style>
+
 </head>
 <body>
 
@@ -16,42 +22,33 @@
     <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
 </aside>
 
-<section>
+<section class="answers">
 
         <%
         Collection<WallMessage> answersWallMessages = (Collection<WallMessage>) request.getAttribute(MyAnswersController.USER_ANSWERS_KEY);
     %>
 
-    <table>
-        <tr>
-            <th>Sender User</th>
-            <th>Date and time</th>
-            <th>Forum Theme</th>
-            <th>Message Header</th>
-            <th>Text</th>
-            <th>Picture</th>
-        </tr>
-            <%
+    <ul>
+        <%
             for (WallMessage answersWallMessage: answersWallMessages) {
         %>
-        <tr>
-            <td><a href="smb-page?some_user_id=<%=answersWallMessage.getSenderUserId()%>">
-                <img src="users_profile_picture?user_id=<%=answersWallMessage.getSenderUserId()%>" /></a></td>
-            <td><a href="smb-page?some_user_id=<%=answersWallMessage.getSenderUserId()%>">
-                <%=answersWallMessage.getSenderUserFirstNameAndLastName()%></a></td>
-            <td><%=answersWallMessage.getSenderUserFirstNameAndLastName()%></td>
-            <td><%=answersWallMessage.getDateTime()%></td>
-            <td><%=answersWallMessage.getForumThemeName()%></td>
-            <td><%=answersWallMessage.getMessageHeader()%></td>
-            <td><%=answersWallMessage.getText()%></td>
-            <td><img src="wall_message_picture?wall_message_picture_id=<%=answersWallMessage.getId()%>" /></td>
-        </tr>
-            <%
+        <li>
+            <ul>
+                <li class="header"><%=answersWallMessage.getMessageHeader()%></li>
+                <li class="forum-theme"><%=answersWallMessage.getForumThemeName()%></li>
+                <li class="profile-picture"><a href="smb-page?some_user_id=<%=answersWallMessage.getSenderUserId()%>">
+                    <img src="users_profile_picture?user_id=<%=answersWallMessage.getSenderUserId()%>" /></a></li>
+                <li class="name"><a href="smb-page?some_user_id=<%=answersWallMessage.getSenderUserId()%>">
+                    <%=answersWallMessage.getSenderUserFirstNameAndLastName()%></a></li>
+                <li class="date-time"><%=answersWallMessage.getDateTime()%></li>
+                <li class="text"><%=answersWallMessage.getText()%></li>
+                <li class="picture"><img src="wall_message_picture?wall_message_picture_id=<%=answersWallMessage.getId()%>" /></li>
+            </ul>
+        </li>
+        <%
             }
         %>
-
-    </table>
-
+    </ul>
 
 </section>
 

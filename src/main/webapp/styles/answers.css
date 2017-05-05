@@ -1,0 +1,64 @@
+section.answers{
+    padding-top: 15px;
+    margin-left: 250px;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*background-color: antiquewhite;*/
+    background-color: bisque;
+}
+
+section.answers > ul > li > ul {
+    background-color: antiquewhite;
+    border: solid saddlebrown 1px;
+    margin-bottom: 20px;
+}
+
+
+section.answers > ul > li > ul > li.header {
+    /*background-color: floralwhite;*/
+    padding-top: 10px;
+}
+section.answers > ul > li > ul > li.header:before {
+    content: " На Ваш вопрос: ";
+}
+
+section.answers > ul > li > ul > li.forum-theme {
+
+}
+section.answers > ul > li > ul > li.forum-theme:before {
+    content: " В подфоруме: ";
+}
+
+section.answers > ul > li > ul > li.profile-picture {
+
+}
+section.answers > ul > li > ul > li.profile-picture > a > img {
+    height: 40px;
+}
+
+section.answers > ul > li > ul > li.name {
+
+}
+
+section.answers > ul > li > ul > li.date-time {
+
+}
+section.answers > ul > li > ul > li.date-time:after {
+    content: " Ответил(а): ";
+}
+
+section.answers > ul > li > ul > li.text {
+    background-color: floralwhite;
+    padding-top: 10px;
+}
+
+section.answers > ul > li > ul > li.picture {
+    background-color: floralwhite;
+    padding-bottom: 10px;
+}
+
+section.answers > ul > li > ul > li.picture > img {
+    max-height: 250px;
+}
+
+

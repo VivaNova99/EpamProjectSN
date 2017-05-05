@@ -51,9 +51,6 @@ import="controllers.MyNewsController" %>
         <%
             }
         %>
-
-
-
     </ul>
 
 </section>
