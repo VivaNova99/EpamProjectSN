@@ -81,6 +81,9 @@
                 <li class="picture">
                     <img src="wall_message_picture?wall_message_picture_id=<%=last10ForUserWallMessage.getId()%>" />
                 </li>
+                <li class="link">
+                    <a href="forum-this-topic?this_forum_topic_id=<%=last10ForUserWallMessage.getId()%>"> ссылка на обсуждение </a>
+                </li>
             </ul>
             <%
                 }

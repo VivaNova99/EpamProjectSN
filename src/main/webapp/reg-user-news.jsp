@@ -46,6 +46,9 @@ import="controllers.MyNewsController" %>
                 <li class="header"><%=last10WallMessage.getMessageHeader()%></li>
                 <li class="text"><%=last10WallMessage.getText()%></li>
                 <li class="picture"><img src="wall_message_picture?wall_message_picture_id=<%=last10WallMessage.getId()%>" /></li>
+                <li class="link">
+                    <a href="forum-this-topic?this_forum_topic_id=<%=last10WallMessage.getId()%>"> ссылка на обсуждение </a>
+                </li>
             </ul>
         </li>
         <%

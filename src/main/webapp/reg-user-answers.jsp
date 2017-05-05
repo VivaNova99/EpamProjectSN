@@ -43,6 +43,9 @@
                 <li class="date-time"><%=answersWallMessage.getDateTime()%></li>
                 <li class="text"><%=answersWallMessage.getText()%></li>
                 <li class="picture"><img src="wall_message_picture?wall_message_picture_id=<%=answersWallMessage.getId()%>" /></li>
+                <li class="link">
+                    <a href="forum-this-topic?this_forum_topic_id=<%=answersWallMessage.getId()%>"> ссылка на обсуждение </a>
+                </li>
             </ul>
         </li>
         <%
