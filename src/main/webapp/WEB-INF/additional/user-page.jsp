@@ -27,8 +27,8 @@
     <section class="user-info">
         <div class="user-name"><%=user.getFirstName()%> <%=user.getLastName()%></div>
         <div class="user-status-on-wall"><%=user.getStatusOnWall()%></div>
-        <div class="user-dob"><%=user.getDateOfBirth()%></div>
-        <div class="user-city"><%=user.getCity()%></div>
+        <div class="user-dob">День рождения: <%=user.getDateOfBirth()%></div>
+        <div class="user-city">Город: <%=user.getCity()%></div>
     </section>
 
 <%
@@ -71,7 +71,7 @@
                         <%=last10ForUserWallMessage.getMessageHeader()%>
                     </li>
                     <li class="date-time">
-                        <%=last10ForUserWallMessage.getDateTime()%>
+                        <%=last10ForUserWallMessage.getDateTime()%> Вы написали:
                     </li>
                     <li class="text">
                         <%=last10ForUserWallMessage.getText()%>

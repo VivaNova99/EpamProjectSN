@@ -44,22 +44,12 @@ div.user-dob {
     top: -50px;
     margin-left: 100px;
 }
-div.user-dob:before {
-    content: "День рождения ";
-    color: gray;
-
-}
 
 div.user-city {
     position: relative;
     top: -40px;
     margin-left: 100px;
 }
-div.user-city:before {
-    content: "Город ";
-    color: gray;
-}
-
 
 .my-photos {
     font-size: 20px;
@@ -99,14 +89,6 @@ section.smb-user-wall-messages li.text,
 section.smb-user-wall-messages li.picture {
     background-color: floralwhite;
     padding-top: 10px;
-}
-
-section.wall-messages li.date-time:after {
-    content: " Вы написали: ";
-}
-
-section.smb-user-wall-messages li.date-time:after {
-    content: " Написал(а): ";
 }
 
 section.wall-messages li.picture > img {

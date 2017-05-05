@@ -17,24 +17,12 @@ section.private-messages ul.sender > li {
     display: inline-block;
 }
 
-section.private-messages li.receiver-profile-picture:before {
-    content: "Получатель: ";
-}
-
-section.private-messages li.sender-profile-picture:before {
-    content: "Отправитель: ";
-}
-
 section.private-messages li.receiver-profile-picture > a > img {
     height: 40px;
 }
 
 section.private-messages li.sender-profile-picture > a > img {
     height: 40px;
-}
-
-section.private-messages li.date-time:after {
-    content: " Написал(а): ";
 }
 
 section.private-messages li.text {

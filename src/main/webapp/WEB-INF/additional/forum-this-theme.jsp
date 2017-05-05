@@ -12,45 +12,42 @@
 
     <style>
         <%@include file="../../styles/main.css" %>
+        <%@include file="../../styles/forum-this-theme.css" %>
     </style>
 
 </head>
 
 <body>
 
-<div class="forum-this-theme">
+<section class="forum-this-theme">
 
     <%
         Collection<WallMessage> thisThemeWallMessages = (Collection<WallMessage>) request.getAttribute(ForumThemeController.THIS_THEME_WALL_MESSAGES_KEY);
+        String subforumName = null;
     %>
 
-    <table>
-        <tr>
-            <th>Message Header</th>
-            <th>Sender User</th>
-            <th>Date and time</th>
-            <th>Text</th>
-            <th>Picture</th>
-            <th>Forum Theme</th>
-        </tr>
+    <ul>
         <%
             for (WallMessage thisThemeWallMessage: thisThemeWallMessages) {
         %>
-        <tr>
-            <td><a href="forum-this-topic?this_forum_topic_id=<%=thisThemeWallMessage.getId()%>"><%=thisThemeWallMessage.getMessageHeader()%></a></td>
-            <td><%=thisThemeWallMessage.getSenderUserFirstNameAndLastName()%></td>
-            <td><%=thisThemeWallMessage.getDateTime()%></td>
-            <td><%=thisThemeWallMessage.getText()%></td>
-            <td><%=thisThemeWallMessage.getPicture()%></td>
-            <td><%=thisThemeWallMessage.getForumThemeName()%></td>
-        </tr>
+        <li>
+            <ul>
+                <li class="header"><a href="forum-this-topic?this_forum_topic_id=<%=thisThemeWallMessage.getId()%>"><%=thisThemeWallMessage.getMessageHeader()%></a></li>
+                <li class="name"><%=thisThemeWallMessage.getSenderUserFirstNameAndLastName()%></li>
+                <li class="date-time"><%=thisThemeWallMessage.getDateTime()%></li>
+            </ul>
+
+        </li>
         <%
+                subforumName = thisThemeWallMessage.getForumThemeName();
             }
         %>
 
-    </table>
+        <li class="forum-theme"><p1><%=subforumName%></p1></li>
 
-</div>
+    </ul>
+
+</section>
 
 </body>
 </html>

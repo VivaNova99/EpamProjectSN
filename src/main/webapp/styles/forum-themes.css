@@ -1,4 +1,4 @@
-div.forum-themes {
+section.forum-themes {
     padding-top: 15px;
     margin-left: 250px;
     padding-left: 15px;
@@ -28,6 +28,6 @@ div.forum-themes {
 
 
 
-.unreg-forum-themes div.forum-themes {
+.unreg-forum-themes section.forum-themes {
     margin-left: 0;
 }

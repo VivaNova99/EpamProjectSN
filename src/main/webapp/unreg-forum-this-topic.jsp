@@ -11,7 +11,7 @@
     <%@ include file="WEB-INF/additional/header-unreg.jsp" %>
 </header>
 
-<section class="unreg">
+<section class="unreg-forum-topic">
     <%@ include file="WEB-INF/additional/forum-this-topic.jsp" %>
 </section>
 
