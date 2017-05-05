@@ -12,48 +12,50 @@
 
     <style>
         <%@include file="../../styles/main.css" %>
+        <%@include file="../../styles/forum-this-topic.css" %>
     </style>
 
 </head>
 
 <body>
 
-<div class="forum-this-topic">
+<section class="forum-this-topic">
 
     <%
         Collection<WallMessage> thisTopicWallMessages = (Collection<WallMessage>) request.getAttribute(ForumTopicController.THIS_TOPIC_WALL_MESSAGES_KEY);
+        String subforumName = null;
+        String topicName = null;
     %>
 
-    <table>
-        <tr>
-            <th>Forum Theme</th>
-            <th>Message Header</th>
-            <th>Sender User</th>
-            <th>Date and time</th>
-            <th>Text</th>
-            <th>Picture</th>
-        </tr>
+    <ul>
         <%
             for (WallMessage thisTopicWallMessage: thisTopicWallMessages) {
         %>
-        <tr>
-            <td><%=thisTopicWallMessage.getForumThemeName()%></td>
-            <td><%=thisTopicWallMessage.getMessageHeader()%></td>
-            <td><a href="smb-page?some_user_id=<%=thisTopicWallMessage.getSenderUserId()%>">
-                <img src="users_profile_picture?user_id=<%=thisTopicWallMessage.getSenderUserId()%>" /></a></td>
-            <td><a href="smb-page?some_user_id=<%=thisTopicWallMessage.getSenderUserId()%>">
-                <%=thisTopicWallMessage.getSenderUserFirstNameAndLastName()%></a></td>
-            <td><%=thisTopicWallMessage.getDateTime()%></td>
-            <td><%=thisTopicWallMessage.getText()%></td>
-            <td><%=thisTopicWallMessage.getPicture()%></td>
-        </tr>
+        <li>
+            <ul>
+                <li class="date-time"><%=thisTopicWallMessage.getDateTime()%></li>
+                <li><a href="smb-page?some_user_id=<%=thisTopicWallMessage.getSenderUserId()%>">
+                    <img src="users_profile_picture?user_id=<%=thisTopicWallMessage.getSenderUserId()%>" /></a></li>
+                <li><a href="smb-page?some_user_id=<%=thisTopicWallMessage.getSenderUserId()%>">
+                    <%=thisTopicWallMessage.getSenderUserFirstNameAndLastName()%></a>
+                    <%=thisTopicWallMessage.getDateTime()%></li>
+                <li><%=thisTopicWallMessage.getText()%></li>
+                <li class="picture"><img src="wall_message_picture?wall_message_picture_id=<%=thisTopicWallMessage.getId()%>" /></li>
+            </ul>
+
+        </li>
         <%
+                subforumName = thisTopicWallMessage.getForumThemeName();
+                topicName = thisTopicWallMessage.getMessageHeader();
             }
         %>
 
-    </table>
+        <li class="forum-theme"><p1><%=subforumName%></p1></li>
+        <li class="forum-theme"><p2><%=topicName%></p2></li>
 
-</div>
+    </ul>
+
+</section>
 
 </body>
 </html>

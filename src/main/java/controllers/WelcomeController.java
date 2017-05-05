@@ -60,7 +60,7 @@ public class WelcomeController extends HttpServlet {
                 .orElse("Здравствуйте!");
 
         String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
+                .map(o -> String.format("reg-user-own-page/?=%s.jsp", o)).
                 orElse("test.jsp");
 //                orElse("/WEB-INF/index.jsp");
 

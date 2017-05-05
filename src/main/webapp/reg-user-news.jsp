@@ -40,10 +40,10 @@ import="controllers.MyNewsController" %>
                     <img src="users_profile_picture?user_id=<%=last10WallMessage.getSenderUserId()%>" /></a></li>
                 <li class="name"><a href="smb-page?some_user_id=<%=last10WallMessage.getSenderUserId()%>">
                     <%=last10WallMessage.getSenderUserFirstNameAndLastName()%></a></li>
-                <li class="forum-theme"><%=last10WallMessage.getForumThemeName()%></li>
-                <li class="date-time"><%=last10WallMessage.getDateTime()%></li>
+                <li class="forum-theme">В подфоруме: <%=last10WallMessage.getForumThemeName()%></li>
+                <li class="date-time"><%=last10WallMessage.getDateTime()%> написал(а): </li>
 
-                <li class="header"><%=last10WallMessage.getMessageHeader()%></li>
+                <li class="header">Заголовок: <%=last10WallMessage.getMessageHeader()%></li>
                 <li class="text"><%=last10WallMessage.getText()%></li>
                 <li class="picture"><img src="wall_message_picture?wall_message_picture_id=<%=last10WallMessage.getId()%>" /></li>
                 <li class="link">

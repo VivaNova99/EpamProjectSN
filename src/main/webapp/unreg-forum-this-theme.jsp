@@ -14,7 +14,7 @@
     <%@ include file="WEB-INF/additional/header-unreg.jsp" %>
 </header>
 
-<section>
+<section class="unreg-forum-themes">
     <%@ include file="WEB-INF/additional/forum-this-theme.jsp" %>
 </section>
 

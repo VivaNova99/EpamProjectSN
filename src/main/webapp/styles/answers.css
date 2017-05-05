@@ -18,15 +18,9 @@ section.answers > ul > li > ul > li.header {
     /*background-color: floralwhite;*/
     padding-top: 10px;
 }
-section.answers > ul > li > ul > li.header:before {
-    content: " На Ваш вопрос: ";
-}
 
 section.answers > ul > li > ul > li.forum-theme {
 
-}
-section.answers > ul > li > ul > li.forum-theme:before {
-    content: " В подфоруме: ";
 }
 
 section.answers > ul > li > ul > li.profile-picture {
@@ -42,9 +36,6 @@ section.answers > ul > li > ul > li.name {
 
 section.answers > ul > li > ul > li.date-time {
 
-}
-section.answers > ul > li > ul > li.date-time:after {
-    content: " Ответил(а): ";
 }
 
 section.answers > ul > li > ul > li.text {

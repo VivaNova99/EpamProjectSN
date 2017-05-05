@@ -31,3 +31,7 @@ section.all-user-photoalbums .user-photoalbum img {
 section.all-user-photoalbums li.description {
     padding-bottom: 40px;
 }
+
+.unreg section.all-user-photoalbums {
+    margin-left: 0;
+}

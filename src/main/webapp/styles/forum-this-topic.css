@@ -1,0 +1,12 @@
+section.forum-this-topic {
+    padding-top: 15px;
+    margin-left: 250px;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*background-color: antiquewhite;*/
+    background-color: bisque;
+}
+
+.unreg-forum-topic section.forum-this-topic{
+    margin-left: 0;
+}

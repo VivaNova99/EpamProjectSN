@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<div class="forum-themes">
+<section class="forum-themes">
 
     <ul>
         <li>
@@ -188,7 +188,7 @@
 
     </ul>
 
-</div>
+</section>
 
 </body>
 </html>

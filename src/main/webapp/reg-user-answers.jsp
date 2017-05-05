@@ -34,13 +34,13 @@
         %>
         <li>
             <ul>
-                <li class="header"><%=answersWallMessage.getMessageHeader()%></li>
-                <li class="forum-theme"><%=answersWallMessage.getForumThemeName()%></li>
+                <li class="header"> На Ваш вопрос: <%=answersWallMessage.getMessageHeader()%></li>
+                <li class="forum-theme"> В подфоруме: <%=answersWallMessage.getForumThemeName()%></li>
                 <li class="profile-picture"><a href="smb-page?some_user_id=<%=answersWallMessage.getSenderUserId()%>">
                     <img src="users_profile_picture?user_id=<%=answersWallMessage.getSenderUserId()%>" /></a></li>
                 <li class="name"><a href="smb-page?some_user_id=<%=answersWallMessage.getSenderUserId()%>">
                     <%=answersWallMessage.getSenderUserFirstNameAndLastName()%></a></li>
-                <li class="date-time"><%=answersWallMessage.getDateTime()%></li>
+                <li class="date-time"><%=answersWallMessage.getDateTime()%> Ответил(а): </li>
                 <li class="text"><%=answersWallMessage.getText()%></li>
                 <li class="picture"><img src="wall_message_picture?wall_message_picture_id=<%=answersWallMessage.getId()%>" /></li>
                 <li class="link">

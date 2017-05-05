@@ -1,0 +1,22 @@
+section.forum-this-theme {
+    padding-top: 15px;
+    margin-left: 250px;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*background-color: antiquewhite;*/
+    background-color: bisque;
+}
+
+section.forum-this-theme > ul > li > ul {
+    background-color: antiquewhite;
+    border: solid saddlebrown 1px;
+    margin-bottom: 20px;
+}
+
+section.forum-this-theme ul > li > ul > li {
+    display: inline-block;
+}
+
+.unreg-forum-themes section.forum-this-theme{
+    margin-left: 0;
+}
