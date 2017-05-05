@@ -11,6 +11,11 @@
 <html>
 <head>
     <title></title>
+
+    <style>
+        <%@include file="styles/main.css" %>
+        <%@include file="styles/user-themes.css" %>
+    </style>
 </head>
 <body>
 
@@ -22,35 +27,30 @@
     <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
 </aside>
 
-<section class="reg-user">
+<section class="user-themes">
 
     <%
         Collection<WallMessage> myThemes = (Collection<WallMessage>) request.getAttribute(MyThemesController.MY_THEMES_KEY);
     %>
 
-    <table>
-        <tr>
-            <th>Forum Theme</th>
-            <th>Message Header</th>
-            <th>Date and time</th>
-            <th>Text</th>
-            <th>Picture</th>
-        </tr>
+    <ul>
         <%
             for (WallMessage myTheme: myThemes) {
         %>
-        <tr>
-            <td><%=myTheme.getForumThemeName()%></td>
-            <td><%=myTheme.getMessageHeader()%></td>
-            <td><%=myTheme.getDateTime()%></td>
-            <td><%=myTheme.getText()%></td>
-            <td><img src="wall_message_picture?wall_message_picture_id=<%=myTheme.getId()%>" /></td>
-        </tr>
+        <li>
+            <ul>
+                <li class="forum-theme"><%=myTheme.getForumThemeName()%></li>
+                <li class="date-time"><%=myTheme.getDateTime()%></li>
+
+                <li class="header"><%=myTheme.getMessageHeader()%></li>
+                <li class="text"><%=myTheme.getText()%></li>
+                <li class="picture"><img src="wall_message_picture?wall_message_picture_id=<%=myTheme.getId()%>" /></li>
+            </ul>
+        </li>
         <%
             }
         %>
-
-    </table>
+    </ul>
 
 </section>
 

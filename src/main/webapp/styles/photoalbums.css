@@ -1,0 +1,33 @@
+section.all-user-photoalbums {
+    padding-top: 15px;
+    margin-left: 250px;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*background-color: antiquewhite;*/
+    background-color: bisque;
+}
+
+section.all-user-photoalbums ul > li {
+    /*display: inline-block;*/
+}
+
+h1.my-photoalbums {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+section.all-user-photoalbums li.photoalbum {
+    padding-bottom: 10px;
+}
+
+section.all-user-photoalbums li.user-photoalbum {
+    padding-bottom: 10px;
+}
+section.all-user-photoalbums .user-photoalbum img {
+    /*padding-top: 5px;*/
+    height: 250px;
+}
+
+section.all-user-photoalbums li.description {
+    padding-bottom: 40px;
+}

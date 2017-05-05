@@ -1,0 +1,37 @@
+section.all-user-photos {
+    padding-top: 15px;
+    margin-left: 250px;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*background-color: antiquewhite;*/
+    background-color: bisque;
+}
+
+section.all-user-photos ul > li {
+    /*display: inline-block;*/
+}
+
+h1.my-photos {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+section.all-user-photos li.photoalbum {
+    padding-bottom: 10px;
+}
+
+section.all-user-photos li.user-photo {
+    padding-bottom: 10px;
+}
+section.all-user-photos .user-photo img {
+    /*padding-top: 5px;*/
+    height: 250px;
+}
+
+section.all-user-photos li.date-time {
+    padding-bottom: 10px;
+}
+
+section.all-user-photos li.description {
+    padding-bottom: 40px;
+}
