@@ -7,6 +7,16 @@ INSERT INTO User (first_name, last_name, date_of_birth, access_level_id, email, 
     VALUES ('Катя', 'Смирнова', '1986-03-02', 3, 'katja@mail.ru', 'qwertyqwerty',  'Люблю все новое ))', 'Москва');
 
 
+INSERT INTO AccessRoles (email, role_name)
+    VALUES ('ivan@mail.ru', 'standard_user');
+INSERT INTO AccessRoles (email, role_name)
+    VALUES ('maria@mail.ru', 'moderator');
+INSERT INTO AccessRoles (email, role_name)
+    VALUES ('maria@mail.ru', 'standard_user');
+INSERT INTO AccessRoles (email, role_name)
+    VALUES ('katja@mail.ru', 'standard_user');
+
+
 INSERT INTO PhotoAlbum (name, user_id, description, date_time, status_id)
     VALUES ('Альбом 1', 1, 'Описание альбома 1', '2017-03-21 00:00:00', 3);
 INSERT INTO PhotoAlbum (name, user_id, description, date_time, status_id)

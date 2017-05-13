@@ -258,6 +258,25 @@ public class H2UserDao implements UserDao {
         }
     }
 
+    @Override
+    @SneakyThrows
+    public int getUserId(String userLogin) {
+
+        //        TODO: добавить try with resources
+
+        Connection connection = dataSource.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM User WHERE email = ?");
+        preparedStatement.setString(1, userLogin);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        {
+            resultSet.next();
+
+                int userId = resultSet.getInt("id");
+
+            return userId;
+        }
+    }
+
 
     @Override
     @SneakyThrows

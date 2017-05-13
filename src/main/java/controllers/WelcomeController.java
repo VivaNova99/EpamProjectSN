@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
@@ -54,7 +55,31 @@ public class WelcomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession(true);
+
+//        String jUserLogin = req.getParameter("j_username");
+//
+//        String jUserPassword = req.getParameter("j_password");
+//
+//        String jUserId = null;
+
+
+
+//        if (jUserLogin != null && jUserPassword != null) {
+//            String userLogin = jUserLogin.replace("%40", "@");
+//            int userId = userDao.getUserId(userLogin);
+//            jUserId = "" + userId;
+//        }
+
+
+//        String userPageOrNot = Optional.ofNullable(jUserId)
+//                .map(o -> String.format("reg-user-own-page/?j_id=%s", o)).
+//                        orElse("test.jsp");
+
+
 //        System.out.println("!!!!!"+this);
+
         String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
                 .map(o -> String.format("Здравствуйте, %s", o))
                 .orElse("Здравствуйте!");
@@ -89,4 +114,9 @@ public class WelcomeController extends HttpServlet {
 //        req.getRequestDispatcher("/WEB-INF/index.jsp")
 //                .forward(req, resp);
     }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
+
 }

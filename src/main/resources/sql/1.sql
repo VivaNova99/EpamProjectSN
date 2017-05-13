@@ -25,7 +25,7 @@
    last_name VARCHAR(50) NOT NULL,
    date_of_birth DATE NOT NULL,
    access_level_id int NOT NULL,
-   email VARCHAR(100) NOT NULL,
+   email VARCHAR(30) NOT NULL,
    password VARCHAR(255) NOT NULL,
    profile_photo BLOB,
    status_on_wall VARCHAR(100),
@@ -33,6 +33,13 @@
 
    FOREIGN KEY (access_level_id) REFERENCES AccessLevel(id),
    UNIQUE (email)
+ );
+
+ CREATE TABLE AccessRoles (
+   email VARCHAR(30) NOT NULL,
+   role_name VARCHAR(15) NOT NULL,
+   PRIMARY KEY (email, role_name),
+   FOREIGN KEY (email) REFERENCES User (email)
  );
 
  CREATE TABLE PrivateMessage (
