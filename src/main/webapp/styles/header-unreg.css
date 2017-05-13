@@ -10,7 +10,11 @@
     display: inline-block;
 }
 
-.enter-or-register {
+.header-unreg ul > li {
+    display: inline-block;
+}
+
+.please_enter, .please_register {
     position: absolute;
     right: 10px;
     top: 30px;

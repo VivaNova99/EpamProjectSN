@@ -16,8 +16,8 @@ section.user-info
 /*.user-city */
 {
     display: inline-block;
-    background-color: antiquewhite;
-    border: solid saddlebrown 1px;
+    /*background-color: antiquewhite;*/
+    /*border: solid saddlebrown 1px;*/
 }
 
 div.user-profile-picture > img {

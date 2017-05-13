@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
+import static java.lang.Integer.parseInt;
 import static model.User.FIRST_NAME_KEY;
 
 
@@ -50,9 +52,51 @@ public class UserOwnPageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-                .map(o -> String.format("Здравствуйте, %s", o))
-                .orElse("Здравствуйте!");
+
+        HttpSession session = req.getSession(true);
+
+        String jUserLogin = req.getParameter("j_username");
+
+        String jUserPassword = req.getParameter("j_password");
+
+        String jUserId = req.getParameter("j_id");
+
+
+        if (jUserId != null){
+            System.out.println("User with Id, userId="+jUserId);
+            int userId = parseInt(jUserId);
+            req.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
+            req.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
+            req.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
+            req.getRequestDispatcher("/reg-user-own-page.jsp")
+                    .forward(req, resp);
+        }
+
+        else if (jUserLogin != null && jUserPassword != null){
+            System.out.println("userLogin="+jUserLogin);
+//            String userLogin = jUserLogin.replace("%40", "@");
+            int userId = userDao.getUserId(jUserLogin);
+            jUserId = "" + userId;
+            System.out.println("User with Login, userId="+jUserId);
+            req.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
+            req.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
+            req.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
+            req.getRequestDispatcher("/reg-user-own-page.jsp")
+                    .forward(req, resp);
+        }
+
+        else {
+            req.getRequestDispatcher("/user-login-form.jsp")
+                    .forward(req, resp);
+        }
+
+        session.setAttribute("j_id", jUserId);
+        //пока не работает
+
+
+//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
+//                .map(o -> String.format("Здравствуйте, %s", o))
+//                .orElse("Здравствуйте!");
 
 //        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
 //                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
@@ -63,7 +107,7 @@ public class UserOwnPageController extends HttpServlet {
 //                .map(o -> true)
 //                .orElse(false);
 
-        req.setAttribute(WELCOME_KEY, s);
+//        req.setAttribute(WELCOME_KEY, s);
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
 //        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
@@ -71,9 +115,7 @@ public class UserOwnPageController extends HttpServlet {
         req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
 //        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
-        req.setAttribute(USER_INFO_KEY, userDao.getUser());
-        req.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser());
-        req.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5());
+
 
 //        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
 //                .forward(req, resp);
@@ -84,7 +126,5 @@ public class UserOwnPageController extends HttpServlet {
 
 //        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
 
-        req.getRequestDispatcher("/reg-user-own-page.jsp")
-                .forward(req, resp);
     }
 }
