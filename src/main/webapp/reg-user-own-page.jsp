@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: veraivanova
-  Date: 08.04.17
-  Time: 7:34
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 <html>
 <head>
     <title></title>
@@ -22,6 +16,9 @@
 
 <section class="reg-user">
     <%@ include file="WEB-INF/additional/user-page.jsp" %>
+    <%--<%session.setAttribute("j_id", session.getAttribute("j_id"));%>--%>
+    <%--<input type="hidden" name="j_id" value="<%=session.getAttribute("j_id")%>">--%>
+    <%--<input type="hidden" name="j_id" value="<%=request.getParameter("j_id")%>" />--%>
 </section>
 
 </body>

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -45,12 +46,34 @@ public class MyAnswersController extends HttpServlet {
 
 
 
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-                .map(o -> String.format("Здравствуйте, %s", o))
-                .orElse("Здравствуйте!");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession(true);
+//        HttpSession session = req.getSession();
+
+////        посмотреть, что создается кука с идентификатором сессии
+//        Cookie[] cookies = req.getCookies();
+//        for (Cookie cookie : cookies){
+//            System.out.println(cookie.getName() + " - " + cookie.getValue());
+//        }
+
+
+
+        String jUserLogin = req.getParameter("j_username");
+
+        String jUserPassword = req.getParameter("j_password");
+
+        String jUserId = req.getParameter("j_id");
+
+
+//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
+//                .map(o -> String.format("Здравствуйте, %s", o))
+//                .orElse("Здравствуйте!");
 
 //        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
 //                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
@@ -61,7 +84,11 @@ public class MyAnswersController extends HttpServlet {
 //                .map(o -> true)
 //                .orElse(false);
 
-        req.setAttribute(WELCOME_KEY, s);
+//        req.setAttribute(WELCOME_KEY, s);
+
+        int userId = userDao.getUserId(jUserLogin);
+
+        session.setAttribute("j_username", jUserLogin);
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
@@ -69,7 +96,7 @@ public class MyAnswersController extends HttpServlet {
         req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
 //        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
-        req.setAttribute(USER_ANSWERS_KEY, wallMessageDao.getMyAnswers());
+        req.setAttribute(USER_ANSWERS_KEY, wallMessageDao.getMyAnswers(userId));
 
 //        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
 //                .forward(req, resp);

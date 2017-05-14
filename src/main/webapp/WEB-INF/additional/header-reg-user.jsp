@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: veraivanova
-  Date: 11.04.17
-  Time: 5:51
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 <html>
 <head>
 
@@ -26,8 +20,10 @@
 
     <ul>
         <li class="logo">W-only</li>
-        <li class="exit"><a href="../../unreg-forum.jsp">Выйти<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+        <li class="exit"><a href="logout">Выйти<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
     </ul>
+    <%--<input type="hidden" name="j_id" value="<%=session.getAttribute("j_id")%>">--%>
+    <%--<input type="hidden" name="j_id" value="<%=request.getParameter("j_id")%>" />--%>
 
 </div>
 

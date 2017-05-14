@@ -20,6 +20,7 @@ import java.util.Optional;
 
 import static model.User.FIRST_NAME_KEY;
 import static model.User.ID_KEY;
+import static model.User.LOGIN_KEY;
 
 
 @WebServlet("/")
@@ -51,10 +52,13 @@ public class WelcomeController extends HttpServlet {
     }
 
 
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(true);
 
@@ -80,20 +84,25 @@ public class WelcomeController extends HttpServlet {
 
 //        System.out.println("!!!!!"+this);
 
-        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-                .map(o -> String.format("Здравствуйте, %s", o))
-                .orElse("Здравствуйте!");
+//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
+//                .map(o -> String.format("Здравствуйте, %s", o))
+//                .orElse("Здравствуйте!");
 
-        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-                .map(o -> String.format("reg-user-own-page/?=%s.jsp", o)).
-                orElse("test.jsp");
-//                orElse("/WEB-INF/index.jsp");
+//        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
+//                .map(o -> String.format("reg-user-own-page/?=%s.jsp", o)).
+//                orElse("test.jsp");
+////                orElse("/WEB-INF/index.jsp");
 
 //        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
 //                .map(o -> true)
 //                .orElse(false);
 
-        req.setAttribute(WELCOME_KEY, s);
+        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
+                .map(o -> String.format("my-page?j_username=%s", o)).
+                        orElse("test.jsp");
+//                orElse("/WEB-INF/index.jsp");
+
+//        req.setAttribute(WELCOME_KEY, s);
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
@@ -113,10 +122,6 @@ public class WelcomeController extends HttpServlet {
 
 //        req.getRequestDispatcher("/WEB-INF/index.jsp")
 //                .forward(req, resp);
-    }
-
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
     }
 
 }

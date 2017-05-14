@@ -21,9 +21,9 @@ public class SecurityFilter implements HttpFilter {
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
 
-//        if (session.getAttribute(KEY) != null) {
-//            chain.doFilter(request, response);
-//        }
+        if (session.getAttribute(KEY) != null) {
+            chain.doFilter(request, response);
+        }
 
 //        Map<String, String[]> parameterMap = request.getParameterMap();
 //        if (parameterMap.containsKey("j_password") && parameterMap.containsKey("j_username")){
