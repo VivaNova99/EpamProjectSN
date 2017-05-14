@@ -1,21 +1,22 @@
 package controllers;
 
-import dao.*;
+import dao.PhotoDao;
+import dao.UserDao;
+import dao.WallMessageDao;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Optional;
 
 import static java.lang.Integer.parseInt;
-import static model.User.FIRST_NAME_KEY;
+import static model.User.LOGIN_KEY;
 
 
-@WebServlet("/my-page")
-public class UserOwnPageController extends HttpServlet {
+//@WebServlet("/login")
+public class AutorizationController extends HttpServlet {
 
     public static final String WELCOME_KEY = "Welcome";
     public static final String ALL_USERS_KEY = "AllUser";
@@ -57,6 +58,10 @@ public class UserOwnPageController extends HttpServlet {
         HttpSession session = req.getSession(true);
 //        HttpSession session = req.getSession();
 
+        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("j_username")))
+                .map(o -> String.format("my-page?j_username=%s", o)).
+                orElse("error.jsp");
+
 ////        посмотреть, что создается кука с идентификатором сессии
 //        Cookie[] cookies = req.getCookies();
 //        for (Cookie cookie : cookies){
@@ -65,29 +70,11 @@ public class UserOwnPageController extends HttpServlet {
 
 
 
-        String jUserLogin = req.getParameter("j_username");
-
-        String jUserPassword = req.getParameter("j_password");
-
-        String jUserId = req.getParameter("j_id");
-
-//        System.out.println("userLogin="+jUserLogin);
-
-
-        int userId = userDao.getUserId(jUserLogin);
-
-        session.setAttribute("j_username", jUserLogin);
-
-        req.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
-        req.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
-        req.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
-
-        req.setAttribute(ALL_USERS_KEY, userDao.getAll());
-        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
-        req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
-
-        req.getRequestDispatcher("reg-user-own-page.jsp").forward(req, resp);
-
+//        String jUserLogin = req.getParameter("j_username");
+//
+//        String jUserPassword = req.getParameter("j_password");
+//
+//        String jUserId = req.getParameter("j_id");
 
 
 //        if (!(jUserId == null) && !(jUserId.equals(""))){
@@ -156,24 +143,16 @@ public class UserOwnPageController extends HttpServlet {
 //            req.getRequestDispatcher("/user-login-form.jsp")
 //                    .forward(req, resp);
 //        }
+//
+////        session.setAttribute("j_id", jUserId);
+////        //пока не работает
+////        session.setAttribute("j_username", jUserLogin);
+////        //пока не работает
+////        session.setAttribute("j_password", jUserPassword);
+////        //пока не работает
 
-//        session.setAttribute("j_id", jUserId);
-//        //пока не работает
-//        session.setAttribute("j_username", jUserLogin);
-//        //пока не работает
-//        session.setAttribute("j_password", jUserPassword);
-//        //пока не работает
 
 
-
-//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-//                .map(o -> String.format("Здравствуйте, %s", o))
-//                .orElse("Здравствуйте!");
-
-//        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
-//                orElse("test.jsp");
-//                orElse("/WEB-INF/index.jsp");
 
 //        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
 //                .map(o -> true)
@@ -181,7 +160,12 @@ public class UserOwnPageController extends HttpServlet {
 
 //        req.setAttribute(WELCOME_KEY, s);
 
-
+        req.setAttribute(ALL_USERS_KEY, userDao.getAll());
+//        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
+//        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
+        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
+//        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
+        req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
 
 
 //        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
@@ -191,7 +175,7 @@ public class UserOwnPageController extends HttpServlet {
 //                .forward(req, resp);
 //        }
 
-//        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
+        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
 
     }
 }

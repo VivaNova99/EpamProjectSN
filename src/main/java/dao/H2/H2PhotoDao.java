@@ -255,6 +255,62 @@ public class H2PhotoDao implements PhotoDao
 
     @Override
     @SneakyThrows
+    public Collection<Photo> getUserPhotos(int userId) {
+        List<Photo> UserPhotos = new ArrayList<>();
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                     "p.id, " +
+                     "p.user_id, " +
+                     "u.profile_photo, " +
+                     "u.first_name, " +
+                     "u.last_name, " +
+                     "p.photo_album_id, " +
+                     "pa.name," +
+                     "p.picture, " +
+                     "p.description, " +
+                     "p.date_time, " +
+                     "p.status_id " +
+                     "FROM Photo p " +
+                     "JOIN User u ON p.user_id = u.id " +
+                     "JOIN PhotoAlbum pa ON p.photo_album_id = pa.id " +
+                     "WHERE p.user_id = ? " +
+                     "ORDER BY date_time DESC")) {
+
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+
+                //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+//                h2SavePictureFromDatabase.savePhotoFromDatabaseIntoFile(resultSet);
+
+                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                UserPhotos.add(new Photo(
+                        resultSet.getInt("id"),
+                        new User(
+                                resultSet.getInt("user_id"),
+                                resultSet.getBlob("profile_photo"),
+                                resultSet.getString("first_name"),
+                                resultSet.getString("last_name")
+                        ),
+                        new PhotoAlbum(resultSet.getString("name")),
+                        resultSet.getBlob("picture"),
+                        resultSet.getString("description"),
+                        simpleFormatter.parse(resultSet.getString("date_time")),
+                        PhotoStatus.valueOf(
+                                resultSet.getInt("status_id") - 1)
+                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+                ));
+            }
+            return UserPhotos;
+        }
+    }
+
+
+    @Override
+    @SneakyThrows
     public ResultSet transferPhotoPicture(int photoPictureId) {
 
 //        TODO: добавить try with resources

@@ -153,6 +153,69 @@ public class H2WallMessageDao implements WallMessageDao {
         }
     }
 
+    @Override
+    @SneakyThrows
+    public Collection<WallMessage> getLast10(int userId) {
+        List<WallMessage> last10WallMessages = new ArrayList<>();
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                     "wm.id, " +
+                     "wm.sender_user_id, " +
+                     "u.id, " +
+                     "u.profile_photo, " +
+                     "u.first_name, " +
+                     "u.last_name, " +
+                     "wm.text as message_text, " +
+                     "wm.picture," +
+                     "wm.date_time, " +
+                     "wm.forum_theme_id, " +
+                     "wm.message_header, " +
+                     "ft.name," +
+                     "wm.is_parent, " +
+                     "wm.parent_message_id, " +
+                     "wmparent.id, " +
+                     "wmparent.text as parent_message_text, " +
+                     "wm.status_id " +
+                     "FROM WallMessage wm " +
+                     "JOIN User u ON wm.sender_user_id = u.id " +
+                     "JOIN ForumTheme ft ON wm.forum_theme_id = ft.id " +
+                     "JOIN WallMessage wmparent ON wm.parent_message_id = wmparent.id " +
+                     "WHERE wm.sender_user_id <> ? AND wm.id <> 1 AND wm.parent_message_id = 1 " +
+                     "ORDER BY date_time DESC LIMIT 10")) {
+
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                last10WallMessages.add(new WallMessage(
+                        resultSet.getInt("id"),
+                        new User(resultSet.getInt("sender_user_id"),
+                                resultSet.getBlob("profile_photo"),
+                                resultSet.getString("first_name"),
+                                resultSet.getString("last_name")
+                        ),
+                        resultSet.getString("message_text"),
+                        resultSet.getBlob("picture"),
+                        simpleFormatter.parse(resultSet.getString("date_time")),
+                        new ForumTheme(
+                                resultSet.getString("name")
+                        ),
+                        resultSet.getString("message_header"),
+                        resultSet.getBoolean("is_parent"),
+                        new WallMessage(
+                                resultSet.getString("parent_message_text")
+                        ),
+                        MessageStatus.valueOf(
+                                resultSet.getInt("status_id") - 1)
+                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+                ));
+            }
+            return last10WallMessages;
+        }
+    }
+
 
     @Override
     @SneakyThrows
@@ -217,8 +280,74 @@ public class H2WallMessageDao implements WallMessageDao {
 
     @Override
     @SneakyThrows
+    public Collection<WallMessage> getMyAnswers(int userId) {
+        List<WallMessage> myAnswersWallMessages = new ArrayList<>();
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                     "wm.id, " +
+                     "wm.sender_user_id, " +
+                     "u.id, " +
+                     "u.profile_photo, " +
+                     "u.first_name, " +
+                     "u.last_name, " +
+                     "wm.text as message_text, " +
+                     "wm.picture," +
+                     "wm.date_time, " +
+                     "wm.forum_theme_id, " +
+                     "wm.message_header, " +
+                     "ft.name," +
+                     "wm.is_parent, " +
+                     "wm.parent_message_id, " +
+                     "wmparent.id, " +
+                     "wmparent.sender_user_id," +
+                     "wmparent.text as parent_message_text, " +
+                     "wm.status_id " +
+                     "FROM WallMessage wm " +
+                     "JOIN User u ON wm.sender_user_id = u.id " +
+                     "JOIN ForumTheme ft ON wm.forum_theme_id = ft.id " +
+                     "JOIN WallMessage wmparent ON wm.parent_message_id = wmparent.id " +
+                     "WHERE wm.is_parent = FALSE AND wmparent.sender_user_id = ?")) {
+
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                myAnswersWallMessages.add(new WallMessage(
+                        resultSet.getInt("id"),
+                        new User(resultSet.getInt("sender_user_id"),
+                                resultSet.getBlob("profile_photo"),
+                                resultSet.getString("first_name"),
+                                resultSet.getString("last_name")
+                        ),
+                        resultSet.getString("message_text"),
+                        resultSet.getBlob("picture"),
+                        simpleFormatter.parse(resultSet.getString("date_time")),
+                        new ForumTheme(
+                                resultSet.getString("name")
+                        ),
+                        resultSet.getString("message_header"),
+                        resultSet.getBoolean("is_parent"),
+                        new WallMessage(
+                                resultSet.getString("parent_message_text")
+                        ),
+                        MessageStatus.valueOf(
+                                resultSet.getInt("status_id") - 1)
+                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+                ));
+            }
+            return myAnswersWallMessages;
+        }
+    }
+
+
+    @Override
+    @SneakyThrows
     public Collection<WallMessage> getThisForumTheme(int thisForumThemeOrder) {
         List<WallMessage> thisThemeWallMessages = new ArrayList<>();
+
+        //TODO: здесь есть try with resources. Добавить так же в остальные!
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
@@ -509,6 +638,71 @@ public class H2WallMessageDao implements WallMessageDao {
                      "JOIN ForumTheme ft ON wm.forum_theme_id = ft.id " +
                      "JOIN WallMessage wmparent ON wm.parent_message_id = wmparent.id " +
                      "WHERE wm.is_parent = TRUE AND wm.sender_user_id = 1")) {
+            while (resultSet.next()){
+                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                myThemesWallMessages.add(new WallMessage(
+                        resultSet.getInt("id"),
+                        new User(
+                                resultSet.getInt("sender_user_id"),
+                                resultSet.getBlob("profile_photo"),
+                                resultSet.getString("first_name"),
+                                resultSet.getString("last_name")
+                        ),
+                        resultSet.getString("message_text"),
+                        resultSet.getBlob("picture"),
+                        simpleFormatter.parse(resultSet.getString("date_time")),
+                        new ForumTheme(
+                                resultSet.getString("name")
+                        ),
+                        resultSet.getString("message_header"),
+                        resultSet.getBoolean("is_parent"),
+                        new WallMessage(
+                                resultSet.getString("parent_message_text")
+                        ),
+                        MessageStatus.valueOf(
+                                resultSet.getInt("status_id") - 1)
+                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+                ));
+            }
+            return myThemesWallMessages;
+        }
+    }
+
+
+    @Override
+    @SneakyThrows
+    public Collection<WallMessage> getMyThemes(int userId) {
+        List<WallMessage> myThemesWallMessages = new ArrayList<>();
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                     "wm.id, " +
+                     "wm.sender_user_id, " +
+                     "u.id, " +
+                     "u.profile_photo, " +
+                     "u.first_name, " +
+                     "u.last_name, " +
+                     "wm.text as message_text, " +
+                     "wm.picture," +
+                     "wm.date_time, " +
+                     "wm.forum_theme_id, " +
+                     "wm.message_header, " +
+                     "ft.name," +
+                     "wm.is_parent, " +
+                     "wm.parent_message_id, " +
+                     "wmparent.id, " +
+                     "wmparent.sender_user_id," +
+                     "wmparent.text as parent_message_text, " +
+                     "wm.status_id " +
+                     "FROM WallMessage wm " +
+                     "JOIN User u ON wm.sender_user_id = u.id " +
+                     "JOIN ForumTheme ft ON wm.forum_theme_id = ft.id " +
+                     "JOIN WallMessage wmparent ON wm.parent_message_id = wmparent.id " +
+                     "WHERE wm.is_parent = TRUE AND wm.sender_user_id = ?")) {
+
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
             while (resultSet.next()){
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 myThemesWallMessages.add(new WallMessage(

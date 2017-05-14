@@ -147,6 +147,64 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
     }
 
 
+    @Override
+    @SneakyThrows
+    public Collection<PhotoAlbum> getUserPhotoAlbums(int userId) {
+        List<PhotoAlbum> userPhotoAlbums = new ArrayList<>();
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                     "pa.id, " +
+                     "name, " +
+                     "pa.user_id, " +
+                     "u.id, " +
+                     "u.profile_photo, " +
+                     "u.first_name, " +
+                     "u.last_name, " +
+                     "photo_album_picture, " +
+                     "description, " +
+                     "date_time, " +
+                     "status_id " +
+                     "FROM PhotoAlbum pa " +
+                     "JOIN User u ON pa.user_id = u.id " +
+                     "WHERE pa.user_id = ? " +
+                     "ORDER BY date_time DESC")) {
+
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+
+                //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+//                String pathname = h2SavePictureFromDatabase.savePhotoAlbumPictureFromDatabaseIntoFile(resultSet);
+
+                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                userPhotoAlbums.add(new PhotoAlbum(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        new User(
+                                resultSet.getInt("user_id"),
+                                resultSet.getBlob("profile_photo"),
+                                resultSet.getString("first_name"),
+                                resultSet.getString("last_name")
+                        ),
+                        resultSet.getBlob("photo_album_picture"),
+                        resultSet.getString("description"),
+                        simpleFormatter.parse(resultSet.getString("date_time")),
+                        PhotoStatus.valueOf(
+                                resultSet.getInt("status_id") - 1)
+                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+
+                        //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//                        pathname
+                ));
+            }
+            return userPhotoAlbums;
+        }
+    }
+
+
 //    @Override
 //    @SneakyThrows
 //    public ResultSet transferPhotoalbumPicture(int photoalbumPictureId) {

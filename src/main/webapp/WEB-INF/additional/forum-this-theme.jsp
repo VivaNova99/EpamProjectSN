@@ -1,5 +1,5 @@
 
-<%@ page contentType="text/html;charset=UTF-8" language="java"
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="true"
          import="controllers.ForumThemeController" %>
 <%@ page import="model.*" %>
 <%@ page import="java.util.Collection"%>

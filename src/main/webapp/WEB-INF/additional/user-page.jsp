@@ -3,7 +3,7 @@
 <%@ page import="java.util.Collection" %>
 <%@ page import="model.WallMessage" %>
 <%@ page import="model.Photo" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 <html>
 <head>
     <title></title>
@@ -90,6 +90,8 @@
     </section>
 
 </div>
+<%--<input type="hidden" name="j_id" value="<%=session.getAttribute("j_id")%>">--%>
+<%--<input type="hidden" name="j_id" value="<%=request.getParameter("j_id")%>" />--%>
 
 </body>
 </html>

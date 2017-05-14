@@ -1,7 +1,7 @@
 <%@ page import="java.util.Collection" %>
 <%@ page import="controllers.UserPhotoAlbumsController" %>
 <%@ page import="model.PhotoAlbum" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 <html>
 <head>
     <title></title>

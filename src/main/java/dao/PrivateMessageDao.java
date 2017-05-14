@@ -1,5 +1,6 @@
 package dao;
 
+import lombok.SneakyThrows;
 import model.PrivateMessage;
 
 import java.util.Collection;
@@ -20,4 +21,6 @@ public interface PrivateMessageDao {
 
     Collection<PrivateMessage> getMyPrivateMessages();
 
+    @SneakyThrows
+    Collection<PrivateMessage> getMyPrivateMessages(int userId);
 }
