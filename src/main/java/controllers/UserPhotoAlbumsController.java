@@ -67,7 +67,7 @@ public class UserPhotoAlbumsController extends HttpServlet {
 //                orElse("test.jsp");
 //                orElse("/WEB-INF/index.jsp");
 
-        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
+        boolean b = Optional.ofNullable(req.getSession().getAttribute("j_username"))
                 .map(o -> true)
                 .orElse(false);
 

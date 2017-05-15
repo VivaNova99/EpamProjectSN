@@ -29,8 +29,14 @@ public class PhotoAlbumPicture extends HttpServlet {
 //        photoDao = (PhotoDao) config.getServletContext().getAttribute("PhotoDao");
     }
 
+
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
+
     @Override
-    public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String photoalbumPictureIdString = request.getParameter("photoalbum_id");
 

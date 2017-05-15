@@ -22,12 +22,10 @@ public interface PhotoDao {
 
     Collection<Photo> getLast5();
 
-    @SneakyThrows
     Collection<Photo> getLast5(int someUserId);
 
     Collection<Photo> getUserPhotos();
 
-    @SneakyThrows
     Collection<Photo> getUserPhotos(int userId);
 
     ResultSet transferPhotoPicture(int photoPictureId);

@@ -28,10 +28,15 @@ public class PhotoPicture extends HttpServlet {
         photoDao = (PhotoDao) config.getServletContext().getAttribute("PhotoDao");
     }
 
-    @Override
-    public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        //Проверить, что параметр передается в сессии - не передается
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
+
+    @Override
+    public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         HttpSession session = request.getSession();
 
 

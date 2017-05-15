@@ -347,6 +347,8 @@ public class H2WallMessageDao implements WallMessageDao {
     public Collection<WallMessage> getThisForumTheme(int thisForumThemeOrder) {
         List<WallMessage> thisThemeWallMessages = new ArrayList<>();
 
+        //TODO: здесь есть try with resources. Добавить так же в остальные!
+
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
                      "wm.id, " +
@@ -543,8 +545,10 @@ public class H2WallMessageDao implements WallMessageDao {
     public Collection<WallMessage> getLast10ForUser(int someUserId) {
         List<WallMessage> last10ForUserWallMessages = new ArrayList<>();
 
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+        //        TODO: добавить try with resources
+
+        Connection connection = dataSource.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
                 "wm.id, " +
                 "wm.sender_user_id, " +
                 "u.id, " +
@@ -567,11 +571,11 @@ public class H2WallMessageDao implements WallMessageDao {
                 "JOIN ForumTheme ft ON wm.forum_theme_id = ft.id " +
                 "JOIN WallMessage wmparent ON wm.parent_message_id = wmparent.id " +
                 "WHERE wm.sender_user_id = ? AND wm.id <> 1 AND wm.parent_message_id = 1 " +
-                "ORDER BY date_time DESC LIMIT 10")) {
-
+                "ORDER BY date_time DESC LIMIT 10");
         preparedStatement.setInt(1, someUserId);
         ResultSet resultSet = preparedStatement.executeQuery();
 
+        {
             while (resultSet.next()){
                 SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 last10ForUserWallMessages.add(new WallMessage(
@@ -734,15 +738,15 @@ public class H2WallMessageDao implements WallMessageDao {
     @SneakyThrows
     public ResultSet transferWallMessagePicture(int wallMessagePictureId) {
 
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
-                     "picture FROM WallMessage WHERE id = ?")) {
-            preparedStatement.setInt(1, wallMessagePictureId);
-            ResultSet wallMessagePictureResultSet = preparedStatement.executeQuery();
-            wallMessagePictureResultSet.next();
+//        TODO: добавить try with resources
 
-            return wallMessagePictureResultSet;
-        }
+        Connection connection = dataSource.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT picture FROM WallMessage WHERE id = ?");
+        preparedStatement.setInt(1, wallMessagePictureId);
+        ResultSet wallMessagePictureResultSet = preparedStatement.executeQuery();
+        wallMessagePictureResultSet.next();
+
+        return wallMessagePictureResultSet;
 
     }
 
