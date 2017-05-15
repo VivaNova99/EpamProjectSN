@@ -30,6 +30,12 @@ public class WallMessagePicture extends HttpServlet {
         wallMessageDao = (WallMessageDao) config.getServletContext().getAttribute("WallMessageDao");
     }
 
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
+
     @Override
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

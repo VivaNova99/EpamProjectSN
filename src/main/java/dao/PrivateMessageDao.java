@@ -21,6 +21,5 @@ public interface PrivateMessageDao {
 
     Collection<PrivateMessage> getMyPrivateMessages();
 
-    @SneakyThrows
     Collection<PrivateMessage> getMyPrivateMessages(int userId);
 }

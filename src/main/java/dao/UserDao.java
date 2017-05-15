@@ -29,7 +29,6 @@ public interface UserDao {
 
     List<User> getAllFriends();
 
-    @SneakyThrows
     List<User> getAllFriends(int userId);
 
     User getUser();
