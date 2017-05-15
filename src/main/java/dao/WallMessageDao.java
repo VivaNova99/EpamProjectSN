@@ -24,12 +24,10 @@ public interface WallMessageDao {
 
     Collection<WallMessage> getLast10();
 
-    @SneakyThrows
     Collection<WallMessage> getLast10(int userId);
 
     Collection<WallMessage> getMyAnswers();
 
-    @SneakyThrows
     Collection<WallMessage> getMyAnswers(int userId);
 
     Collection<WallMessage> getThisForumTheme(int thisForumThemeOrder);
@@ -42,7 +40,6 @@ public interface WallMessageDao {
 
     Collection<WallMessage> getMyThemes();
 
-    @SneakyThrows
     Collection<WallMessage> getMyThemes(int userId);
 
     ResultSet transferWallMessagePicture(int wallMessagePictureId);

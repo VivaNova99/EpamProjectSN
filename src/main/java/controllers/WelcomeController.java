@@ -99,7 +99,7 @@ public class WelcomeController extends HttpServlet {
 
         String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
                 .map(o -> String.format("my-page?j_username=%s", o)).
-                        orElse("test.jsp");
+                        orElse("unreg-forum.jsp");
 //                orElse("/WEB-INF/index.jsp");
 
 //        req.setAttribute(WELCOME_KEY, s);

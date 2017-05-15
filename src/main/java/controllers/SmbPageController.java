@@ -15,6 +15,7 @@ import java.util.Optional;
 
 import static java.lang.Integer.parseInt;
 import static model.User.FIRST_NAME_KEY;
+import static model.User.LOGIN_KEY;
 
 
 @WebServlet("/smb-page")
@@ -55,18 +56,19 @@ public class SmbPageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-                .map(o -> String.format("Здравствуйте, %s", o))
-                .orElse("Здравствуйте!");
+
+//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
+//                .map(o -> String.format("Здравствуйте, %s", o))
+//                .orElse("Здравствуйте!");
 
 //        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
 //                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
 //                orElse("test.jsp");
 //                orElse("/WEB-INF/index.jsp");
 
-//        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> true)
-//                .orElse(false);
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
+                .map(o -> true)
+                .orElse(false);
 
         String someUserIdString = req.getParameter("some_user_id");
 
@@ -75,7 +77,7 @@ public class SmbPageController extends HttpServlet {
         req.setAttribute(SOME_USER_INFO_KEY, userDao.getUser(someUserId));
 
 
-        req.setAttribute(WELCOME_KEY, s);
+//        req.setAttribute(WELCOME_KEY, s);
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
 ////        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
@@ -96,7 +98,14 @@ public class SmbPageController extends HttpServlet {
 
 //        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
 
-        req.getRequestDispatcher("/reg-user-smb-page.jsp")
+//        req.getRequestDispatcher("/reg-user-smb-page.jsp")
+//                .forward(req, resp);
+
+        if (b) {req.getRequestDispatcher("/reg-user-smb-page.jsp")
                 .forward(req, resp);
+        }
+        else {req.getRequestDispatcher("/unreg-smb-page.jsp")
+                .forward(req, resp);
+        }
     }
 }

@@ -261,10 +261,8 @@ public class H2UserDao implements UserDao {
     @SneakyThrows
     public User getUser(int someUserId) {
 
-        //        TODO: добавить try with resources
-
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
                      "id, " +
                      "first_name, " +
                      "last_name, " +
@@ -276,10 +274,11 @@ public class H2UserDao implements UserDao {
                      "status_on_wall, " +
                      "city " +
                      "FROM User " +
-                     "WHERE id = ?");
+                     "WHERE id = ?")) {
+
         preparedStatement.setInt(1, someUserId);
         ResultSet resultSet = preparedStatement.executeQuery();
-        {
+
                  resultSet.next();
 
             //                Для выгрузки фотографий из базы данных при помощи временных файлов
@@ -307,17 +306,18 @@ public class H2UserDao implements UserDao {
         }
     }
 
+
     @Override
     @SneakyThrows
     public int getUserId(String userLogin) {
 
-        //        TODO: добавить try with resources
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                     "id FROM User WHERE email = ?")) {
 
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM User WHERE email = ?");
         preparedStatement.setString(1, userLogin);
         ResultSet resultSet = preparedStatement.executeQuery();
-        {
+
             resultSet.next();
 
                 int userId = resultSet.getInt("id");
@@ -331,17 +331,17 @@ public class H2UserDao implements UserDao {
     @SneakyThrows
     public ResultSet transferUsersProfilePicture(int usersProfilePictureId) {
 
-        //TODO: добавить try with resources
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                     "profile_photo FROM User WHERE id = ?")) {
 
-        Connection connection = dataSource.getConnection();
+                preparedStatement.setInt(1, usersProfilePictureId);
 
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT profile_photo FROM User WHERE id = ?");
-        preparedStatement.setInt(1, usersProfilePictureId);
+                ResultSet usersProfilePicturePictureResultSet = preparedStatement.executeQuery();
+                usersProfilePicturePictureResultSet.next();
 
-        ResultSet usersProfilePicturePictureResultSet = preparedStatement.executeQuery();
-        usersProfilePicturePictureResultSet.next();
-
-        return usersProfilePicturePictureResultSet;
+                return usersProfilePicturePictureResultSet;
+        }
 
     }
 
