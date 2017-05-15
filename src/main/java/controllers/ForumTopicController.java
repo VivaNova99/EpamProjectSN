@@ -14,6 +14,7 @@ import java.util.Optional;
 import static java.lang.Integer.parseInt;
 import static model.User.FIRST_NAME_KEY;
 import static model.User.ID_KEY;
+import static model.User.LOGIN_KEY;
 
 
 @WebServlet("/forum-this-topic")
@@ -48,9 +49,10 @@ public class ForumTopicController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-                .map(o -> String.format("Здравствуйте, %s", o))
-                .orElse("Здравствуйте!");
+
+//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
+//                .map(o -> String.format("Здравствуйте, %s", o))
+//                .orElse("Здравствуйте!");
 
 
         String thisForumTopicIdString = req.getParameter("this_forum_topic_id");
@@ -58,11 +60,11 @@ public class ForumTopicController extends HttpServlet {
         int thisForumTopicId = parseInt(thisForumTopicIdString);
 
 
-        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
                 .map(o -> true)
                 .orElse(false);
 
-        req.setAttribute(WELCOME_KEY, s);
+//        req.setAttribute(WELCOME_KEY, s);
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());

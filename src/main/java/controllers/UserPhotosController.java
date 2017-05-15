@@ -14,6 +14,7 @@ import java.util.Optional;
 
 import static model.User.FIRST_NAME_KEY;
 import static model.User.ID_KEY;
+import static model.User.LOGIN_KEY;
 
 
 @WebServlet("/user-photos")
@@ -65,9 +66,9 @@ public class UserPhotosController extends HttpServlet {
 //                orElse("test.jsp");
 ////                orElse("/WEB-INF/index.jsp");
 
-//        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> true)
-//                .orElse(false);
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
+                .map(o -> true)
+                .orElse(false);
 
 
         String jUserLogin = req.getParameter("j_username");
@@ -91,16 +92,16 @@ public class UserPhotosController extends HttpServlet {
 //        req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
         req.setAttribute(USER_PHOTOS_KEY, photoDao.getUserPhotos(userId));
 
-//        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
-//                .forward(req, resp);
-//        }
-//        else {req.getRequestDispatcher("/WEB-INF/unreg-forum.jsp")
-//                .forward(req, resp);
-//        }
+        if (b) {req.getRequestDispatcher("reg-user-photos.jsp")
+                .forward(req, resp);
+        }
+        else {req.getRequestDispatcher("unreg-user-photos.jsp")
+                .forward(req, resp);
+        }
 
 //        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
 
-        req.getRequestDispatcher("reg-user-photos.jsp")
-                .forward(req, resp);
+//        req.getRequestDispatcher("reg-user-photos.jsp")
+//                .forward(req, resp);
     }
 }

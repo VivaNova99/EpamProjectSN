@@ -53,6 +53,9 @@ public class MyAnswersController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //TODO: когда будет более продвинутая авторизация, нужно, чтобы из всех сервлетов для зарегистрированных
+        // пользователей при отсутствии авторизации вылетало на login page
+
         HttpSession session = req.getSession(true);
 //        HttpSession session = req.getSession();
 
