@@ -9,6 +9,15 @@
     <short-name>sn4w</short-name>
     <uri>http://sn4w.com</uri>
 
-    <!-- Invoke 'Generate' action to add tags or functions -->
+    <tag>
+        <name>listOfFriends</name>
+        <tag-class>tags.regUserAllFriends</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>friends</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
 
 </taglib>
