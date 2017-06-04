@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -63,7 +65,13 @@ public class RegistrationController extends HttpServlet {
 
         HttpSession session = req.getSession(true);
 
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+
+//        String firstName = new String((req.getParameter("first_name")).getBytes("UTF-8"), "UTF-8");
+
         User user = new User(
+//                StandardCharsets.UTF_8.decode(Charset.forName("UTF-8").encode(req.getParameter("first_name"))).toString(),
                 req.getParameter("first_name"),
                 req.getParameter("last_name"),
                 LocalDate.parse(req.getParameter("date_of_birth")),
@@ -74,9 +82,6 @@ public class RegistrationController extends HttpServlet {
                 req.getParameter("city"));
 
         int userId = userDao.create(user);
-
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=UTF-8");
 
         session.setAttribute("j_username", req.getParameter("email"));
         req.setAttribute("j_username", req.getParameter("email"));
