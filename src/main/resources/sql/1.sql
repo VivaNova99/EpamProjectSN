@@ -23,7 +23,7 @@
    id INT AUTO_INCREMENT PRIMARY KEY,
    first_name VARCHAR(50) NOT NULL,
    last_name VARCHAR(50) NOT NULL,
-   date_of_birth DATE NOT NULL,
+   date_of_birth DATE,
    access_level_id int NOT NULL,
    email VARCHAR(30) NOT NULL,
    password VARCHAR(255) NOT NULL,

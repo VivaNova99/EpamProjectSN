@@ -2,6 +2,7 @@
          import="controllers.MyFriendsController" %>
 <%@ page import="model.*" %>
 <%@ page import="java.util.Collection" %>
+<%@ taglib uri="/WEB-INF/mytaglib.tld" prefix="mytaglib"%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -31,9 +32,10 @@
     %>
 
     <ul>
-            <%
-        for (User friend: friends) {
-    %>
+
+        <%
+            for (User friend: friends) {
+        %>
         <li>
             <ul>
                 <li><a href="smb-page?some_user_id=<%=friend.getId()%>"><img src="users_profile_picture?user_id=<%=friend.getId()%>" /></a></li>
@@ -41,9 +43,11 @@
                 <li><%=friend.getStatusOnWall()%></li>
             </ul>
         </li>
-            <%
-        }
-    %>
+        <%
+            }
+        %>
+
+    <%--<mytaglib:listOfFriends friends="${friends}"/>--%>
 
     </ul>
 

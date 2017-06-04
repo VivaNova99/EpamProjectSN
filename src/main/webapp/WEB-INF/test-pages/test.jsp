@@ -10,24 +10,24 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spirax">
 
         <style>
-            <%@include file="styles/main.css" %>
+            <%@include file="../../styles/main.css" %>
         </style>
 
 </head>
 <body>
 
 <header>
-    <%@ include file="WEB-INF/additional/header-unreg.jsp" %>
-    <%@ include file="WEB-INF/additional/header-reg-user.jsp" %>
+    <%@ include file="../additional/header-unreg.jsp" %>
+    <%@ include file="../additional/header-reg-user.jsp" %>
 </header>
 
 <aside>
-    <%@ include file="WEB-INF/additional/sidebar-reg-user.jsp" %>
+    <%@ include file="../additional/sidebar-reg-user.jsp" %>
 </aside>
 
 <section>
 
-    <%@ include file="WEB-INF/additional/forum-themes.jsp" %>
+    <%@ include file="../additional/forum-themes.jsp" %>
 
     <img src="http://minionomaniya.ru/wp-content/uploads/2015/08/%D0%9C%D0%B8%D0%BD%D1%8C%D0%BE%D0%BD-%D0%91%D0%BE%D0%B1.jpg">
     <img src="/img/default_large.png" width="200" height="200">

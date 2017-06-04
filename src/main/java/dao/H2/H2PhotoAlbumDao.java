@@ -19,12 +19,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 
 public class H2PhotoAlbumDao implements PhotoAlbumDao {
 
-       @Resource(name = "jdbc/TestDB")
-       private DataSource dataSource;
+    @Resource(name = "jdbc/TestDB")
+    private DataSource dataSource;
 
     public H2PhotoAlbumDao(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -60,7 +61,7 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                      "status_id " +
                      "FROM PhotoAlbum pa, User u " +
                      "WHERE pa.user_id = u.id")) {
-            while (resultSet.next()){
+            while (resultSet.next()) {
 
 //                Для выгрузки фотографий из базы данных при помощи временных файлов
 //                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
@@ -115,7 +116,7 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
                      "JOIN User u ON pa.user_id = u.id " +
                      "WHERE pa.user_id = 1 " +
                      "ORDER BY date_time DESC")) {
-            while (resultSet.next()){
+            while (resultSet.next()) {
 
                 //                Для выгрузки фотографий из базы данных при помощи временных файлов
 //                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
@@ -173,7 +174,7 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
 
                 //                Для выгрузки фотографий из базы данных при помощи временных файлов
 //                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
@@ -230,6 +231,8 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
     @SneakyThrows
     public ResultSet transferPhotoalbumPicture(int photoalbumPictureId) {
 
+        //        TODO: добавить try with resources
+
         Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT photo_album_picture FROM PhotoAlbum WHERE id = ?");
         preparedStatement.setInt(1, photoalbumPictureId);
@@ -237,6 +240,20 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
         photoalbumPictureResultSet.next();
 
         return photoalbumPictureResultSet;
+
+
+//        try (Connection connection = dataSource.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement("SELECT photo_album_picture FROM PhotoAlbum WHERE id = ?")) {
+//
+//            preparedStatement.setInt(1, photoalbumPictureId);
+//            try (ResultSet photoalbumPictureResultSet = preparedStatement.executeQuery()) {
+//
+//                photoalbumPictureResultSet.next();
+//
+//                return photoalbumPictureResultSet;
+//            }
+//
+//        }
 
     }
 

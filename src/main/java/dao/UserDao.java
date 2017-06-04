@@ -35,6 +35,9 @@ public interface UserDao {
 
     User getUser(int someUserId);
 
+    @SneakyThrows
+    User getUserTest(int someUserId);
+
     int getUserId(String userLogin);
 
     ResultSet transferUsersProfilePicture(int usersProfilePictureId);

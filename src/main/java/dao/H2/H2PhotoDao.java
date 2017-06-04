@@ -147,10 +147,8 @@ public class H2PhotoDao implements PhotoDao
     public Collection<Photo> getLast5(int someUserId) {
         List<Photo> last5Photos = new ArrayList<>();
 
-        //        TODO: добавить try with resources
-
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
                 "p.id, " +
                 "p.user_id, " +
                 "u.profile_photo, " +
@@ -166,11 +164,11 @@ public class H2PhotoDao implements PhotoDao
                 "JOIN User u ON p.user_id = u.id " +
                 "JOIN PhotoAlbum pa ON p.photo_album_id = pa.id " +
                 "WHERE p.user_id = ? " +
-                "ORDER BY date_time DESC LIMIT 5");
+                "ORDER BY date_time DESC LIMIT 5")){
+
         preparedStatement.setInt(1, someUserId);
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        {
             while (resultSet.next()){
 
                 //                Для выгрузки фотографий из базы данных при помощи временных файлов
@@ -326,6 +324,21 @@ public class H2PhotoDao implements PhotoDao
         return photoPictureResultSet;
 
     }
+
+//    ResultSet photoPictureResultSet;
+//
+//        try (Connection connection = dataSource.getConnection();
+//    PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+//            "picture FROM Photo WHERE id = ?")) {
+//    preparedStatement.setInt(1, photoPictureId);
+//
+//    photoPictureResultSet = preparedStatement.executeQuery();
+//    while (photoPictureResultSet.next()){}
+//
+//}
+//        return photoPictureResultSet;
+
+
 
 
 }
