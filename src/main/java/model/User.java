@@ -73,7 +73,6 @@ public class User {
 
     //test for registration
     public User(String firstName, String lastName, AccessLevel accessLevel, String email, String passwordHash, String statusOnWall, String city) {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.accessLevel = accessLevel;
@@ -82,6 +81,28 @@ public class User {
         this.statusOnWall = statusOnWall;
         this.city = city;
     }
+
+    public User(int id, String firstName, String lastName, LocalDate dateOfBirth, AccessLevel accessLevel, String email, String passwordHash, String statusOnWall, String city) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.accessLevel = accessLevel;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.statusOnWall = statusOnWall;
+        this.city = city;
+    }
+
+//
+//    public User(String firstName, String lastName, AccessLevel accessLevel, String passwordHash, String statusOnWall, String city) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.accessLevel = accessLevel;
+//        this.passwordHash = passwordHash;
+//        this.statusOnWall = statusOnWall;
+//        this.city = city;
+//    }
 //
 //    public Blob getBlob() {
 //        return null;

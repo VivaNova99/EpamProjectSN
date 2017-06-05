@@ -26,6 +26,10 @@ div.user-profile-picture > img {
     /*padding-bottom: 20px;*/
 }
 
+section.user-info {
+    margin-left: 50px;
+}
+
 div.user-name {
     position: relative;
     top: -150px;

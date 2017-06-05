@@ -60,14 +60,17 @@ public class PhotoPicture extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        OutputStream outputStream = response.getOutputStream();
+        try (OutputStream outputStream = response.getOutputStream()) {
 
-        while ((read = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, read);
+            if (inputStream != null) {
+                while ((read = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, read);
+                }
+            }
+
+            outputStream.flush();
+//            outputStream.close();
         }
-
-        outputStream.flush();
-        outputStream.close();
 
 
     }

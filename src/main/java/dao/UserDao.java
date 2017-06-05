@@ -1,6 +1,5 @@
 package dao;
 
-import lombok.SneakyThrows;
 import model.User;
 
 import java.sql.ResultSet;
@@ -22,6 +21,9 @@ public interface UserDao {
     // а для предварительной работы можно, метод-заглушка.
     // Если юзера с таким id нет, то без Optional упадет метод get()
 //    update(User user); - есть ли смысл апдейтить всего юзера, если нужно апдейтить одно поле
+
+    void update(User user);
+
     void remove(User user); //удаление в базе той сущности, которая соответствует данному объекту,
     // объект остается
 
@@ -35,7 +37,6 @@ public interface UserDao {
 
     User getUser(int someUserId);
 
-    @SneakyThrows
     User getUserTest(int someUserId);
 
     int getUserId(String userLogin);
