@@ -95,7 +95,7 @@ public class ChangeUserInfoController extends HttpServlet {
         session.setAttribute("j_username", req.getParameter("email"));
         req.setAttribute("j_username", req.getParameter("email"));
 
-        req.setAttribute(USER_INFO_KEY, userDao.getUserTest(userId));
+//        req.setAttribute(USER_INFO_KEY, userDao.getUserTest(userId));
 
 
 //        req.getRequestDispatcher("/WEB-INF/test-pages/test-registration.jsp").forward(req, resp);
@@ -213,7 +213,7 @@ public class ChangeUserInfoController extends HttpServlet {
 
 //        req.setAttribute(WELCOME_KEY, s);
 
-        req.setAttribute(ALL_USERS_KEY, userDao.getAll());
+//        req.setAttribute(ALL_USERS_KEY, userDao.getAll());
 //        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
 //        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
 //        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
