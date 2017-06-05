@@ -88,14 +88,8 @@ public class H2UserDao implements UserDao {
             FileInputStream fileInputStream = new FileInputStream(file);
 
             preparedStatement.setObject(1, user.getFirstName());
-
-            System.out.println("Name: " + user.getFirstName());
-
             preparedStatement.setObject(2, user.getLastName());
             preparedStatement.setObject(3, java.sql.Date.valueOf(user.getDateOfBirth()));
-
-            System.out.println("Date of birth: " + java.sql.Date.valueOf(user.getDateOfBirth()));
-
             preparedStatement.setObject(4, user.getAccessLevel().ordinal() + 1);
             //т.к. ordinal с нуля, а у нас база с автоинкрементом (у меня - не автоинкремент!)
             // TODO - переделать ordinal на спец. поле
@@ -117,6 +111,71 @@ public class H2UserDao implements UserDao {
         }
 
         return user.getId();
+    }
+
+
+//    @Override
+//    @SneakyThrows
+//    public void update(User user) {
+//        try (Connection connection = dataSource.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(
+//                     "UPDATE User SET first_name = ?, " +
+//                             "last_name = ?, " +
+//                             "date_of_birth = ?, " +
+//                             "password = ?, " +
+//                             "status_on_wall = ?, " +
+//                             "city = ? " +
+//                             "WHERE id = ?")) {
+//
+//            preparedStatement.setObject(1, user.getFirstName());
+//            preparedStatement.setObject(2, user.getLastName());
+//            preparedStatement.setObject(3, java.sql.Date.valueOf(user.getDateOfBirth()));
+//            preparedStatement.setObject(4, user.getPasswordHash());
+//            preparedStatement.setObject(5, user.getStatusOnWall());
+//            preparedStatement.setObject(6, user.getCity());
+//            preparedStatement.setObject(7, user.getId());
+//
+//            preparedStatement.executeUpdate();
+//
+////            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+////                if (generatedKeys.next()) {
+////                    user.setId(generatedKeys.getInt(1));
+////                } else {
+////                    throw new SQLException("Ошибка при редактировании профиля, нет такого ID");
+////                }
+////            }
+//        }
+//
+////        return user.getId();
+//    }
+
+    @Override
+    @SneakyThrows
+    public void update(User user) {
+        try (Connection connection = dataSource.getConnection()) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE User SET first_name = ?, " +
+                             "last_name = ?, " +
+                             "date_of_birth = ?, " +
+                             "password = ?, " +
+                             "status_on_wall = ?, " +
+                             "city = ? " +
+                             "WHERE id = ?");
+
+            preparedStatement.setObject(1, user.getFirstName());
+            preparedStatement.setObject(2, user.getLastName());
+            preparedStatement.setObject(3, java.sql.Date.valueOf(user.getDateOfBirth()));
+            preparedStatement.setObject(4, user.getPasswordHash());
+            preparedStatement.setObject(5, user.getStatusOnWall());
+            preparedStatement.setObject(6, user.getCity());
+            preparedStatement.setObject(7, user.getId());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new SQLException("Ошибка при редактировании профиля, нет такого ID");
+        }
+
     }
 
 
