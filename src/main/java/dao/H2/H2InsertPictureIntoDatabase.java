@@ -3,20 +3,30 @@ package dao.H2;
 import lombok.SneakyThrows;
 import model.User;
 
+import javax.annotation.Resource;
 import javax.imageio.stream.ImageInputStreamImpl;
+import javax.servlet.http.Part;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
 
 
 public class H2InsertPictureIntoDatabase {
+
+//    @Resource(name = "jdbc/TestDB")
+//    private DataSource dataSource;
 
     private DataSource dataSource;
 
     public H2InsertPictureIntoDatabase(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+
+//    public H2InsertPictureIntoDatabase() {
+//
+//    }
 
 
     @SneakyThrows
