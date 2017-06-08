@@ -23,7 +23,7 @@
     %>
 
     <div class="user-profile-picture"><img src="users_profile_picture?user_id=<%=user.getId()%>" /></div>
-    <br><a href="user-change-profile-photo-form.jsp">изменить фотографию профиля</a>
+    <br><a href="user-change-profile-photo-form.jsp?user_id=<%=user.getId()%>">изменить фотографию профиля</a>
 
     <section class="user-info">
         <div class="user-name"><%=user.getFirstName()%> <%=user.getLastName()%></div>

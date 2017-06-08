@@ -5,9 +5,11 @@ import lombok.SneakyThrows;
 import model.AccessLevel;
 import model.User;
 
+import javax.servlet.http.Part;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -501,6 +503,29 @@ public class H2UserDao implements UserDao {
         usersProfilePicturePictureResultSet.next();
 
         return usersProfilePicturePictureResultSet;
+
+    }
+
+
+    @SneakyThrows
+    public void insertUploadedPictureIntoUserProfilePhoto(int id, Part filePart) {
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE User set profile_photo = ? WHERE id = ?"
+             )){
+
+            InputStream fileInputStream = filePart.getInputStream();
+//            File file = new File("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/webapp/img/default_large.jpg");
+//            FileInputStream fileInputStream = new FileInputStream(file);
+            preparedStatement.setBinaryStream(1, fileInputStream, (int)filePart.getSize());
+            preparedStatement.setObject(2, id);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        }
 
     }
 

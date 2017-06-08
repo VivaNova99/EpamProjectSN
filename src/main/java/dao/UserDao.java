@@ -2,6 +2,7 @@ package dao;
 
 import model.User;
 
+import javax.servlet.http.Part;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
@@ -42,4 +43,6 @@ public interface UserDao {
     int getUserId(String userLogin);
 
     ResultSet transferUsersProfilePicture(int usersProfilePictureId);
+
+    void insertUploadedPictureIntoUserProfilePhoto(int usersProfilePictureId, Part upfile);
 }
