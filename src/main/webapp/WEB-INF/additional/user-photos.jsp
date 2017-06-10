@@ -33,7 +33,9 @@
             <ul>
                 <li class="photoalbum"><%=userPhoto.getPhotoAlbumName()%></li>
                 <li class="user-photo">
-                    <img src="photo_picture?photo_id=<%=userPhoto.getId()%>">
+                    <a rel="nofollow" target="_blank" href="photo_picture?photo_id=<%=userPhoto.getId()%>">
+                        <img height="250" src="photo_picture?photo_id=<%=userPhoto.getId()%>">
+                    </a>
                 </li>
                 <li class="date-time"><%=userPhoto.getDateTime()%></li>
                 <li class="description"><%=userPhoto.getDescription()%></li>
