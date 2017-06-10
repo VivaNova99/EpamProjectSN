@@ -30,6 +30,12 @@ public class WallMessagePicture extends HttpServlet {
         wallMessageDao = (WallMessageDao) config.getServletContext().getAttribute("WallMessageDao");
     }
 
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
+
     @Override
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -61,12 +67,14 @@ public class WallMessagePicture extends HttpServlet {
         }
         try (OutputStream outputStream = response.getOutputStream()) {
 
-            while ((read = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, read);
+            if (inputStream != null) {
+                while ((read = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, read);
+                }
             }
 
             outputStream.flush();
-            outputStream.close();
+//            outputStream.close();
         }
 
 

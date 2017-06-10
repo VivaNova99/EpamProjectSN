@@ -23,12 +23,14 @@
     %>
 
     <div class="user-profile-picture"><img src="users_profile_picture?user_id=<%=user.getId()%>" /></div>
+    <br><a href="user-change-profile-photo-form.jsp?user_id=<%=user.getId()%>">изменить фотографию профиля</a>
 
     <section class="user-info">
         <div class="user-name"><%=user.getFirstName()%> <%=user.getLastName()%></div>
         <div class="user-status-on-wall"><%=user.getStatusOnWall()%></div>
         <div class="user-dob">День рождения: <%=user.getDateOfBirth()%></div>
         <div class="user-city">Город: <%=user.getCity()%></div>
+        <a href="user-change-info-form.jsp?id=<%=user.getId()%>&email=<%=user.getEmail()%>&first_name=<%=user.getFirstName()%>&last_name=<%=user.getLastName()%>&status=<%=user.getStatusOnWall()%>&dob=<%=user.getDateOfBirth()%>&city=<%=user.getCity()%>">редактировать информацию профиля</a>
     </section>
 
 <%

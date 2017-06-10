@@ -5,7 +5,11 @@ import lombok.SneakyThrows;
 import model.AccessLevel;
 import model.User;
 
+import javax.servlet.http.Part;
 import javax.sql.DataSource;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +22,50 @@ public class H2UserDao implements UserDao {
     public H2UserDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+
+
+//    @Override
+//    @SneakyThrows
+//    public int create(User user) {
+//        try (Connection connection = dataSource.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(
+//                     "INSERT INTO User (" +
+//                             "first_name, " +
+//                             "last_name, " +
+//                             "date_of_birth, " +
+//                             "access_level_id, " +
+//                             "email, " +
+//                             "password, " +
+//                             "profile_photo, " +
+//                             "status_on_wall, " +
+//                             "city) " +
+//                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+//
+//            preparedStatement.setObject(1, user.getFirstName());
+//            preparedStatement.setObject(2, user.getLastName());
+//            preparedStatement.setObject(3, user.getDateOfBirth());
+//            preparedStatement.setObject(4, user.getAccessLevel().ordinal() + 1);
+//            //т.к. ordinal с нуля, а у нас база с автоинкрементом (у меня - не автоинкремент!)
+//            // TODO - переделать ordinal на спец. поле
+//            preparedStatement.setObject(5, user.getEmail());
+//            preparedStatement.setObject(6, user.getPasswordHash());
+//            preparedStatement.setObject(7, user.getProfilePhoto());
+//            preparedStatement.setObject(8, user.getStatusOnWall());
+//            preparedStatement.setObject(9, user.getCity());
+//
+//            preparedStatement.executeUpdate();
+//
+//            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+//                if (generatedKeys.next()) {
+//                    user.setId(generatedKeys.getInt(1));
+//                } else {
+//                    throw new SQLException("Ошибка при создании профиля, нет такого ID");
+//                }
+//            }
+//        }
+//
+//        return user.getId();
+//    }
 
 
     @Override
@@ -37,15 +85,19 @@ public class H2UserDao implements UserDao {
                              "city) " +
                              "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
 
+            // Для вставки фото профиля
+            File file = new File("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/webapp/img/default_large.jpg");
+            FileInputStream fileInputStream = new FileInputStream(file);
+
             preparedStatement.setObject(1, user.getFirstName());
             preparedStatement.setObject(2, user.getLastName());
-            preparedStatement.setObject(3, user.getDateOfBirth());
+            preparedStatement.setObject(3, java.sql.Date.valueOf(user.getDateOfBirth()));
             preparedStatement.setObject(4, user.getAccessLevel().ordinal() + 1);
             //т.к. ordinal с нуля, а у нас база с автоинкрементом (у меня - не автоинкремент!)
             // TODO - переделать ordinal на спец. поле
             preparedStatement.setObject(5, user.getEmail());
             preparedStatement.setObject(6, user.getPasswordHash());
-            preparedStatement.setObject(7, user.getProfilePhoto());
+            preparedStatement.setBinaryStream(7, fileInputStream, (int)file.length());
             preparedStatement.setObject(8, user.getStatusOnWall());
             preparedStatement.setObject(9, user.getCity());
 
@@ -62,6 +114,72 @@ public class H2UserDao implements UserDao {
 
         return user.getId();
     }
+
+
+//    @Override
+//    @SneakyThrows
+//    public void update(User user) {
+//        try (Connection connection = dataSource.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(
+//                     "UPDATE User SET first_name = ?, " +
+//                             "last_name = ?, " +
+//                             "date_of_birth = ?, " +
+//                             "password = ?, " +
+//                             "status_on_wall = ?, " +
+//                             "city = ? " +
+//                             "WHERE id = ?")) {
+//
+//            preparedStatement.setObject(1, user.getFirstName());
+//            preparedStatement.setObject(2, user.getLastName());
+//            preparedStatement.setObject(3, java.sql.Date.valueOf(user.getDateOfBirth()));
+//            preparedStatement.setObject(4, user.getPasswordHash());
+//            preparedStatement.setObject(5, user.getStatusOnWall());
+//            preparedStatement.setObject(6, user.getCity());
+//            preparedStatement.setObject(7, user.getId());
+//
+//            preparedStatement.executeUpdate();
+//
+////            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+////                if (generatedKeys.next()) {
+////                    user.setId(generatedKeys.getInt(1));
+////                } else {
+////                    throw new SQLException("Ошибка при редактировании профиля, нет такого ID");
+////                }
+////            }
+//        }
+//
+////        return user.getId();
+//    }
+
+    @Override
+    @SneakyThrows
+    public void update(User user) {
+        try (Connection connection = dataSource.getConnection()) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE User SET first_name = ?, " +
+                             "last_name = ?, " +
+                             "date_of_birth = ?, " +
+                             "password = ?, " +
+                             "status_on_wall = ?, " +
+                             "city = ? " +
+                             "WHERE id = ?");
+
+            preparedStatement.setObject(1, user.getFirstName());
+            preparedStatement.setObject(2, user.getLastName());
+            preparedStatement.setObject(3, java.sql.Date.valueOf(user.getDateOfBirth()));
+            preparedStatement.setObject(4, user.getPasswordHash());
+            preparedStatement.setObject(5, user.getStatusOnWall());
+            preparedStatement.setObject(6, user.getCity());
+            preparedStatement.setObject(7, user.getId());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new SQLException("Ошибка при редактировании профиля, нет такого ID");
+        }
+
+    }
+
 
     @Override
     public void remove(User user) {
@@ -274,12 +392,12 @@ public class H2UserDao implements UserDao {
                      "status_on_wall, " +
                      "city " +
                      "FROM User " +
-                     "WHERE id = ?")) {
+                     "WHERE id = ?")){
 
         preparedStatement.setInt(1, someUserId);
         ResultSet resultSet = preparedStatement.executeQuery();
 
-                 resultSet.next();
+        resultSet.next();
 
             //                Для выгрузки фотографий из базы данных при помощи временных файлов
 //            H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
@@ -309,11 +427,54 @@ public class H2UserDao implements UserDao {
 
     @Override
     @SneakyThrows
-    public int getUserId(String userLogin) {
+    public User getUserTest(int someUserId) {
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
-                     "id FROM User WHERE email = ?")) {
+                     "id, " +
+                     "first_name, " +
+                     "last_name, " +
+                     "email, " +
+                     "password, " +
+                     "status_on_wall, " +
+                     "city " +
+                     "FROM User " +
+                     "WHERE id = ?")){
+
+            preparedStatement.setInt(1, someUserId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+
+            //                Для выгрузки фотографий из базы данных при помощи временных файлов
+//            H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+//            h2SavePictureFromDatabase.saveUserProfilePhotoFromDatabaseIntoFile(resultSet);
+
+            User user = new User(
+                    resultSet.getInt("id"),
+                    resultSet.getString("first_name"),
+                    resultSet.getString("last_name"),
+                    resultSet.getString("email"),
+                    resultSet.getString("password"),// todo вообще убрать вывод пароля?
+                    // сделать отдельный кейс по проверке соответствия пользователя паролю?
+                    resultSet.getString("status_on_wall"),
+                    resultSet.getString("city")
+            );
+
+            return user;
+        }
+    }
+
+
+    @Override
+    @SneakyThrows
+    public int getUserId(String userLogin) {
+
+        //        TODO: добавить try with resources
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                     "id FROM User WHERE email = ?")){
 
         preparedStatement.setString(1, userLogin);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -331,16 +492,39 @@ public class H2UserDao implements UserDao {
     @SneakyThrows
     public ResultSet transferUsersProfilePicture(int usersProfilePictureId) {
 
+        //TODO: добавить try with resources
+
+        Connection connection = dataSource.getConnection();
+
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT profile_photo FROM User WHERE id = ?");
+        preparedStatement.setInt(1, usersProfilePictureId);
+
+        ResultSet usersProfilePicturePictureResultSet = preparedStatement.executeQuery();
+        usersProfilePicturePictureResultSet.next();
+
+        return usersProfilePicturePictureResultSet;
+
+    }
+
+
+    @SneakyThrows
+    public void insertUploadedPictureIntoUserProfilePhoto(int id, Part filePart) {
+
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
-                     "profile_photo FROM User WHERE id = ?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE User set profile_photo = ? WHERE id = ?"
+             )){
 
-                preparedStatement.setInt(1, usersProfilePictureId);
+            InputStream fileInputStream = filePart.getInputStream();
+//            File file = new File("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/webapp/img/default_large.jpg");
+//            FileInputStream fileInputStream = new FileInputStream(file);
+            preparedStatement.setBinaryStream(1, fileInputStream, (int)filePart.getSize());
+            preparedStatement.setObject(2, id);
 
-                ResultSet usersProfilePicturePictureResultSet = preparedStatement.executeQuery();
-                usersProfilePicturePictureResultSet.next();
+            preparedStatement.executeUpdate();
 
-                return usersProfilePicturePictureResultSet;
+            connection.commit();
+
         }
 
     }

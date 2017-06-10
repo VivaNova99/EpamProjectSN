@@ -164,7 +164,7 @@ public class H2PhotoDao implements PhotoDao
                 "JOIN User u ON p.user_id = u.id " +
                 "JOIN PhotoAlbum pa ON p.photo_album_id = pa.id " +
                 "WHERE p.user_id = ? " +
-                "ORDER BY date_time DESC LIMIT 5")) {
+                "ORDER BY date_time DESC LIMIT 5")){
 
         preparedStatement.setInt(1, someUserId);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -311,19 +311,34 @@ public class H2PhotoDao implements PhotoDao
     @SneakyThrows
     public ResultSet transferPhotoPicture(int photoPictureId) {
 
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
-                     "picture FROM Photo WHERE id = ?")) {
+//        TODO: добавить try with resources
 
-            preparedStatement.setInt(1, photoPictureId);
+        Connection connection = dataSource.getConnection();
 
-            ResultSet photoPictureResultSet = preparedStatement.executeQuery();
-            photoPictureResultSet.next();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT picture FROM Photo WHERE id = ?");
+        preparedStatement.setInt(1, photoPictureId);
 
-            return photoPictureResultSet;
-        }
+        ResultSet photoPictureResultSet = preparedStatement.executeQuery();
+        photoPictureResultSet.next();
+
+        return photoPictureResultSet;
 
     }
+
+//    ResultSet photoPictureResultSet;
+//
+//        try (Connection connection = dataSource.getConnection();
+//    PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+//            "picture FROM Photo WHERE id = ?")) {
+//    preparedStatement.setInt(1, photoPictureId);
+//
+//    photoPictureResultSet = preparedStatement.executeQuery();
+//    while (photoPictureResultSet.next()){}
+//
+//}
+//        return photoPictureResultSet;
+
+
 
 
 }

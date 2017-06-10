@@ -30,8 +30,14 @@ public class UsersProfilePicture extends HttpServlet {
         userDao = (UserDao) config.getServletContext().getAttribute("UserDao");
     }
 
+
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
+
     @Override
-    public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 //        //Проверить, что параметр передается в сессии - не передается
         HttpSession session = request.getSession();
@@ -59,14 +65,17 @@ public class UsersProfilePicture extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        OutputStream outputStream = response.getOutputStream();
+        try (OutputStream outputStream = response.getOutputStream()) {
 
-        while ((read = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, read);
+            if (inputStream != null) {
+                while ((read = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, read);
+                }
+            }
+
+            outputStream.flush();
+//            outputStream.close();
         }
-
-        outputStream.flush();
-        outputStream.close();
 
 
     }
