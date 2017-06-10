@@ -95,7 +95,7 @@ TODO: добавить поле boolean, нужно ли выносить зап
    photo_album_id INT,
    picture BLOB,
    description VARCHAR(100),
-   date_time DATETIME NOT NULL,
+   date_time DATETIME,
    status_id INT,
 
    FOREIGN KEY (user_id) REFERENCES User(id),

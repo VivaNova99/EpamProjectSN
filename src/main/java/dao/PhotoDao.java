@@ -2,7 +2,9 @@ package dao;
 
 import lombok.SneakyThrows;
 import model.Photo;
+import model.PhotoStatus;
 
+import javax.servlet.http.Part;
 import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.Optional;
@@ -29,4 +31,10 @@ public interface PhotoDao {
     Collection<Photo> getUserPhotos(int userId);
 
     ResultSet transferPhotoPicture(int photoPictureId);
+
+//    @SneakyThrows
+//    void insertUploadedPictureIntoUserPhotos(int userId, int photoAlbumId, Part filePart, String photoDescription, java.util.Date date, PhotoStatus photoStatus);
+
+    @SneakyThrows
+    void insertUploadedPictureIntoUserPhotos(int userId, int photoAlbumId, Part filePart, String photoDescription, java.sql.Timestamp timestamp, PhotoStatus photoStatus);
 }

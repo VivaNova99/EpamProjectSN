@@ -8,7 +8,9 @@ import model.PhotoStatus;
 import model.User;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Part;
 import javax.sql.DataSource;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -273,7 +275,7 @@ public class H2PhotoDao implements PhotoDao
                      "JOIN User u ON p.user_id = u.id " +
                      "JOIN PhotoAlbum pa ON p.photo_album_id = pa.id " +
                      "WHERE p.user_id = ? " +
-                     "ORDER BY date_time DESC")) {
+                     "ORDER BY photo_album_id, date_time DESC")) {
 
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -337,6 +339,33 @@ public class H2PhotoDao implements PhotoDao
 //
 //}
 //        return photoPictureResultSet;
+
+
+    @Override
+    @SneakyThrows
+    public void insertUploadedPictureIntoUserPhotos(int userId, int photoAlbumId, Part filePart, String photoDescription, java.sql.Timestamp timestamp, PhotoStatus photoStatus) {
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id) VALUES (?, ?, ?, ?, ?, ?)"
+             )){
+
+            InputStream fileInputStream = filePart.getInputStream();
+
+            preparedStatement.setObject(1, userId);
+            preparedStatement.setObject(2, photoAlbumId);
+            preparedStatement.setBinaryStream(3, fileInputStream, (int)filePart.getSize());
+            preparedStatement.setObject(4, photoDescription);
+            preparedStatement.setObject(5, timestamp);
+            preparedStatement.setObject(6, photoStatus.ordinal() + 1);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        }
+
+    }
 
 
 

@@ -27,6 +27,9 @@ public interface PhotoAlbumDao {
 
     Collection<PhotoAlbum> getUserPhotoAlbums(int userId);
 
+    @SneakyThrows
+    int getPhotoalbumId(String photoalbumName);
+
     ResultSet transferPhotoalbumPicture(int photoalbumPictureId);
 
 }

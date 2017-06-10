@@ -1,6 +1,8 @@
 package servlets;
 
-import dao.PhotoDao;
+import dao.UserDao;
+import dao.WallMessageDao;
+import model.WallMessage;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -18,29 +20,32 @@ import java.sql.SQLException;
 import static java.lang.Integer.parseInt;
 
 
-@WebServlet("/photo_picture")
-public class PhotoPicture extends HttpServlet {
+@WebServlet("/wall_message_picture")
+public class ShowWallMessagePicture extends HttpServlet {
 
-    private PhotoDao photoDao;
+    private WallMessageDao wallMessageDao;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        photoDao = (PhotoDao) config.getServletContext().getAttribute("PhotoDao");
+        wallMessageDao = (WallMessageDao) config.getServletContext().getAttribute("WallMessageDao");
     }
 
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
 
 
     @Override
-    public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+//        //Проверить, что параметр передается в сессии - не передается
         HttpSession session = request.getSession();
+//        String jUserId = request.getParameter("j_id");
+//        System.out.println("User with Id, userId="+jUserId);
+//        session.setAttribute("j_id", jUserId);
 
-
-        String photoPictureIdString = request.getParameter("photo_id");
+        String wallMessagePictureIdString = request.getParameter("wall_message_picture_id");
 
 //        String photoPictureIdString = Optional.ofNullable(request.getSession().getAttribute(String.valueOf(ID_KEY)))
 //                .map(o -> String.format("%s", o)).
@@ -48,15 +53,15 @@ public class PhotoPicture extends HttpServlet {
 
         response.setContentType("image/jpg");
 
-        int photoPictureId = parseInt(photoPictureIdString);
+        int wallMessagePictureId = parseInt(wallMessagePictureIdString);
 
-        ResultSet photoPictureResultSet = photoDao.transferPhotoPicture(photoPictureId);
+        ResultSet wallMessagePictureResultSet = wallMessageDao.transferWallMessagePicture(wallMessagePictureId);
 
         byte[] buffer = new byte[1];
         int read = 0;
         InputStream inputStream = null;
         try {
-            inputStream = photoPictureResultSet.getBinaryStream(1);
+            inputStream = wallMessagePictureResultSet.getBinaryStream(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
