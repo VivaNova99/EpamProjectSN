@@ -46,7 +46,9 @@
                 for (Photo last5ForUserPhoto: last5ForUserPhotos) {
             %>
             <li class="user-last-photo">
-                <img src="photo_picture?photo_id=<%=last5ForUserPhoto.getId()%>">
+                <a rel="nofollow" target="_blank" href="photo_picture?photo_id=<%=last5ForUserPhoto.getId()%>">
+                    <img height="150" src="photo_picture?photo_id=<%=last5ForUserPhoto.getId()%>">
+                </a>
             </li>
             <%
                 }
