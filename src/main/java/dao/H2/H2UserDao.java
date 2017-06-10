@@ -507,6 +507,7 @@ public class H2UserDao implements UserDao {
     }
 
 
+    @Override
     @SneakyThrows
     public void insertUploadedPictureIntoUserProfilePhoto(int id, Part filePart) {
 
@@ -520,6 +521,31 @@ public class H2UserDao implements UserDao {
 //            FileInputStream fileInputStream = new FileInputStream(file);
             preparedStatement.setBinaryStream(1, fileInputStream, (int)filePart.getSize());
             preparedStatement.setObject(2, id);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        }
+
+    }
+
+
+    @Override
+    @SneakyThrows
+    public void insertUploadedPictureIntoUserPhotos(int userId, int photoAlbumId, Part filePart) {
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO Photo (picture, user_id, photo_album_id) VALUES (?, ?, ?)"
+             )){
+
+            InputStream fileInputStream = filePart.getInputStream();
+//            File file = new File("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/webapp/img/default_large.jpg");
+//            FileInputStream fileInputStream = new FileInputStream(file);
+            preparedStatement.setBinaryStream(1, fileInputStream, (int)filePart.getSize());
+            preparedStatement.setObject(2, userId);
+            preparedStatement.setObject(3, photoAlbumId);
 
             preparedStatement.executeUpdate();
 

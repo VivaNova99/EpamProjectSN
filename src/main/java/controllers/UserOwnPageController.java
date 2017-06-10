@@ -27,6 +27,7 @@ public class UserOwnPageController extends HttpServlet {
     public static final String USER_INFO_KEY = "UserInfo";
     public static final String LAST_10_FOR_USER_WALL_MESSAGES_KEY = "Last10ForUserWallMessages";
     public static final String LAST_5_FOR_USER_PHOTOS_KEY = "Last5ForUserPhotos";
+//    public static final String USER_PHOTOALBUMS_KEY = "UserPhotoalbums";
 
     private UserDao userDao;
 //    private ForumThemeDao forumThemeDao;
@@ -77,10 +78,12 @@ public class UserOwnPageController extends HttpServlet {
         int userId = userDao.getUserId(jUserLogin);
 
         session.setAttribute("j_username", jUserLogin);
+        session.setAttribute("user_id", userId);
 
         req.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
         req.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
         req.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
+//        req.setAttribute(USER_PHOTOALBUMS_KEY, photoAlbumDao.getUserPhotoAlbums(userId));
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());

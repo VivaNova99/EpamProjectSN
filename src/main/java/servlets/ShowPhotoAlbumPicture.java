@@ -1,8 +1,6 @@
 package servlets;
 
-import dao.PhotoDao;
-import dao.UserDao;
-import model.User;
+import dao.PhotoAlbumDao;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -10,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -20,14 +17,16 @@ import java.sql.SQLException;
 import static java.lang.Integer.parseInt;
 
 
-@WebServlet("/users_profile_picture")
-public class UsersProfilePicture extends HttpServlet {
+@WebServlet("/photoalbum_picture")
+public class ShowPhotoAlbumPicture extends HttpServlet {
 
-    private UserDao userDao;
+    private PhotoAlbumDao photoAlbumDao;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        userDao = (UserDao) config.getServletContext().getAttribute("UserDao");
+//        userDao = (UserDao) config.getServletContext().getAttribute("UserDao");
+        photoAlbumDao = (PhotoAlbumDao) config.getServletContext().getAttribute("PhotoAlbumDao");
+//        photoDao = (PhotoDao) config.getServletContext().getAttribute("PhotoDao");
     }
 
 
@@ -39,29 +38,30 @@ public class UsersProfilePicture extends HttpServlet {
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        //Проверить, что параметр передается в сессии - не передается
-        HttpSession session = request.getSession();
-//        String jUserId = request.getParameter("j_id");
-//        System.out.println("User with Id, userId="+jUserId);
-//        session.setAttribute("j_id", jUserId);
+        String photoalbumPictureIdString = request.getParameter("photoalbum_id");
 
-        String usersProfilePictureIdString = request.getParameter("user_id");
-
-//        String photoPictureIdString = Optional.ofNullable(request.getSession().getAttribute(String.valueOf(ID_KEY)))
+//        String photoalbumPictureIdString = Optional.ofNullable(request.getSession().getAttribute(String.valueOf(ID_KEY)))
 //                .map(o -> String.format("%s", o)).
 //                        orElse("1");
 
         response.setContentType("image/jpg");
 
-        int usersProfilePictureId = parseInt(usersProfilePictureIdString);
+//        photoalbumPictureIdString = (String) request.getSession().getAttribute("photoalbum_id");
+//        int photoalbumPictureId = (Integer) request.getSession().getAttribute("photoalbum_id");
 
-        ResultSet usersProfilePictureResultSet = userDao.transferUsersProfilePicture(usersProfilePictureId);
+        int photoalbumPictureId = parseInt(photoalbumPictureIdString);
+
+//        System.out.println("photoalbum_id !!!  = " + request.getSession().getAttribute("photoalbum_id"));
+//        int photoalbumPictureId = parseInt(request.getParameter("photoalbum_id") != "" ? request.getParameter("photoalbum_id"): "4");
+//        System.out.println("photoalbum_id after= " + photoalbumPictureId);
+
+        ResultSet photoalbumPictureResultSet = photoAlbumDao.transferPhotoalbumPicture(photoalbumPictureId);
 
         byte[] buffer = new byte[1];
-        int read = 0;
+            int read = 0;
         InputStream inputStream = null;
         try {
-            inputStream = usersProfilePictureResultSet.getBinaryStream(1);
+            inputStream = photoalbumPictureResultSet.getBinaryStream(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
