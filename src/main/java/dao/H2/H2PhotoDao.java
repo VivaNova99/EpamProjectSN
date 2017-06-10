@@ -32,9 +32,31 @@ public class H2PhotoDao implements PhotoDao
     }
 
     @Override
-    public int save() {
-        return 0;
+    @SneakyThrows
+    public void create(int userId, int photoAlbumId, Part filePart, String photoDescription, java.sql.Timestamp timestamp, PhotoStatus photoStatus) {
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id) VALUES (?, ?, ?, ?, ?, ?)"
+             )){
+
+            InputStream fileInputStream = filePart.getInputStream();
+
+            preparedStatement.setObject(1, userId);
+            preparedStatement.setObject(2, photoAlbumId);
+            preparedStatement.setBinaryStream(3, fileInputStream, (int)filePart.getSize());
+            preparedStatement.setObject(4, photoDescription);
+            preparedStatement.setObject(5, timestamp);
+            preparedStatement.setObject(6, photoStatus.ordinal() + 1);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        }
+
     }
+
 
     @Override
     public void remove(int id) {
@@ -339,35 +361,6 @@ public class H2PhotoDao implements PhotoDao
 //
 //}
 //        return photoPictureResultSet;
-
-
-    @Override
-    @SneakyThrows
-    public void insertUploadedPictureIntoUserPhotos(int userId, int photoAlbumId, Part filePart, String photoDescription, java.sql.Timestamp timestamp, PhotoStatus photoStatus) {
-
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "INSERT INTO Photo (user_id, photo_album_id, picture, description, date_time, status_id) VALUES (?, ?, ?, ?, ?, ?)"
-             )){
-
-            InputStream fileInputStream = filePart.getInputStream();
-
-            preparedStatement.setObject(1, userId);
-            preparedStatement.setObject(2, photoAlbumId);
-            preparedStatement.setBinaryStream(3, fileInputStream, (int)filePart.getSize());
-            preparedStatement.setObject(4, photoDescription);
-            preparedStatement.setObject(5, timestamp);
-            preparedStatement.setObject(6, photoStatus.ordinal() + 1);
-
-            preparedStatement.executeUpdate();
-
-            connection.commit();
-
-        }
-
-    }
-
-
 
 
 }

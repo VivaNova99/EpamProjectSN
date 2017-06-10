@@ -80,7 +80,7 @@ public class UploadUsersPhotoPicture extends HttpServlet {
         System.out.println(request.getParameter("photoalbum_name"));
 
 
-        photoDao.insertUploadedPictureIntoUserPhotos(userId, photoAlbumId, request.getPart("upfile"), photoDescription, timestamp, photoStatus);
+        photoDao.create(userId, photoAlbumId, request.getPart("upfile"), photoDescription, timestamp, photoStatus);
 
 
         request.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
