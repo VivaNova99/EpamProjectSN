@@ -11,12 +11,16 @@ import java.util.Optional;
 
 
 public interface PhotoDao {
-    int save();
-    default Optional<Photo> get(int id){
-        return getAll().stream()
-                .filter(photo -> photo.getId() == id)
-                .findAny();
-    };
+//    int save();
+//    default Optional<Photo> get(int id){
+//        return getAll().stream()
+//                .filter(photo -> photo.getId() == id)
+//                .findAny();
+//    };
+
+    @SneakyThrows
+    void create(int userId, int photoAlbumId, Part filePart, String photoDescription, java.sql.Timestamp timestamp, PhotoStatus photoStatus);
+
     // update - если понадобится, делать отдельные апдейты по отдельным полям
     void remove(int id);
 
@@ -35,6 +39,6 @@ public interface PhotoDao {
 //    @SneakyThrows
 //    void insertUploadedPictureIntoUserPhotos(int userId, int photoAlbumId, Part filePart, String photoDescription, java.util.Date date, PhotoStatus photoStatus);
 
-    @SneakyThrows
-    void insertUploadedPictureIntoUserPhotos(int userId, int photoAlbumId, Part filePart, String photoDescription, java.sql.Timestamp timestamp, PhotoStatus photoStatus);
+//    @SneakyThrows
+//    void insertUploadedPictureIntoUserPhotos(int userId, int photoAlbumId, Part filePart, String photoDescription, java.sql.Timestamp timestamp, PhotoStatus photoStatus);
 }
