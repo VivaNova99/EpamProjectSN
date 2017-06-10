@@ -3,6 +3,7 @@
 <%@ page import="java.util.Collection" %>
 <%@ page import="model.WallMessage" %>
 <%@ page import="model.Photo" %>
+<%@ page import="controllers.UserPhotoAlbumsController" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 <html>
 <head>
@@ -52,6 +53,18 @@
                 }
             %>
         </ul>
+
+        <%--<br><a href="user-upload-photo-form.jsp?user_id=<%=user.getId()%>">Загрузить фотографии</a>--%>
+        <form method="POST" action="photoalbums_list">
+
+
+            <input type="hidden" name="user_id" value="<%=request.getParameter("user_id")%>"/>
+            <input type="hidden" name="email" value="<%=request.getParameter("email")%>"/>
+                <%--<input type="hidden" name="user_photoalbums" value="<%=request.getAttribute(UserOwnPageController.USER_PHOTOALBUMS_KEY)%>"/>--%>
+
+            <input type="submit" value="Загрузить фотографии">
+
+        </form>
 
     </section>
 

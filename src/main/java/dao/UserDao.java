@@ -1,5 +1,6 @@
 package dao;
 
+import lombok.SneakyThrows;
 import model.User;
 
 import javax.servlet.http.Part;
@@ -45,4 +46,6 @@ public interface UserDao {
     ResultSet transferUsersProfilePicture(int usersProfilePictureId);
 
     void insertUploadedPictureIntoUserProfilePhoto(int usersProfilePictureId, Part upfile);
+
+    void insertUploadedPictureIntoUserPhotos(int userId, int photoAlbumId, Part filePart);
 }
