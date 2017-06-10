@@ -3,6 +3,7 @@ package dao.H2;
 import dao.UserDao;
 import lombok.SneakyThrows;
 import model.AccessLevel;
+import model.PhotoStatus;
 import model.User;
 
 import javax.servlet.http.Part;
@@ -11,8 +12,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 
 
 public class H2UserDao implements UserDao {
@@ -528,7 +529,5 @@ public class H2UserDao implements UserDao {
         }
 
     }
-
-
 
 }

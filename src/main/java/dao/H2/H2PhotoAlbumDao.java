@@ -227,6 +227,28 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
 //
 //    }
 
+
+    @Override
+    @SneakyThrows
+    public int getPhotoalbumId(String photoalbumName) {
+
+        //        TODO: добавить try with resources
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                     "id FROM PhotoAlbum WHERE name = ?")){
+
+            preparedStatement.setString(1, photoalbumName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+
+            int photoalbumId = resultSet.getInt("id");
+
+            return photoalbumId;
+        }
+    }
+
     @Override
     @SneakyThrows
     public ResultSet transferPhotoalbumPicture(int photoalbumPictureId) {

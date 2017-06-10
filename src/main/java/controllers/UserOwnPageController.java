@@ -75,8 +75,11 @@ public class UserOwnPageController extends HttpServlet {
 
 
         int userId = userDao.getUserId(jUserLogin);
+//        String userIdString = String.valueOf(userId);
 
         session.setAttribute("j_username", jUserLogin);
+//        session.setAttribute("user_id", userId);
+        req.setAttribute("user_id", String.valueOf(userId));
 
         req.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
         req.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));

@@ -53,6 +53,19 @@
             %>
         </ul>
 
+        <form method="POST" action="photoalbums_list">
+        <%--<form method="POST" action="user-upload-photo-form.jsp">--%>
+
+
+                        <input type="hidden" name="user_id" value="<%=request.getAttribute("user_id")%>"/>
+                            <%--<input type="hidden" name="user_id" value="<%=request.getParameter("user_id")%>"/>--%>
+                        <%--<input type="hidden" name="email" value="<%=request.getParameter("email")%>"/>--%>
+                            <%--<input type="hidden" name="user_photoalbums" value="<%=request.getAttribute(UserOwnPageController.USER_PHOTOALBUMS_KEY)%>"/>--%>
+
+                        <input type="submit" value="Загрузить фотографии">
+
+        </form>
+
     </section>
 
 
