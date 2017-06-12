@@ -54,7 +54,7 @@ public class UserOwnPageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(true);
+//        HttpSession session = req.getSession(true);
 //        HttpSession session = req.getSession();
 
 ////        посмотреть, что создается кука с идентификатором сессии
@@ -65,20 +65,21 @@ public class UserOwnPageController extends HttpServlet {
 
 
 
-        String jUserLogin = req.getParameter("j_username");
+        String email = req.getParameter("email");
 
-        String jUserPassword = req.getParameter("j_password");
+        String password = req.getParameter("password");
 
-        String jUserId = req.getParameter("j_id");
+        String userIdString = req.getParameter("user_id");
 
 //        System.out.println("userLogin="+jUserLogin);
 
 
-        int userId = userDao.getUserId(jUserLogin);
+        int userId = userDao.getUserId(email);
 //        String userIdString = String.valueOf(userId);
 
-        session.setAttribute("j_username", jUserLogin);
+//        session.setAttribute("email", email);
 //        session.setAttribute("user_id", userId);
+        req.setAttribute("email", email);
         req.setAttribute("user_id", String.valueOf(userId));
 
         req.setAttribute(USER_INFO_KEY, userDao.getUser(userId));

@@ -55,11 +55,11 @@ public class AutorizationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(true);
+//        HttpSession session = req.getSession(true);
 //        HttpSession session = req.getSession();
 
-        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("j_username")))
-                .map(o -> String.format("my-page?j_username=%s", o)).
+        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
+                .map(o -> String.format("my-page?email=%s", o)).
                 orElse("error.jsp");
 
 ////        посмотреть, что создается кука с идентификатором сессии
@@ -160,6 +160,7 @@ public class AutorizationController extends HttpServlet {
 
 //        req.setAttribute(WELCOME_KEY, s);
 
+        req.setAttribute("email", req.getParameter("email"));
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
 //        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
 //        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());

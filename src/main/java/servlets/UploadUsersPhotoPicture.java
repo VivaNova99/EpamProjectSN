@@ -73,11 +73,13 @@ public class UploadUsersPhotoPicture extends HttpServlet {
 
         PhotoStatus photoStatus = PhotoStatus.PUBLIC;
 
-        System.out.println(request.getParameter("photoalbum_name"));
+//        System.out.println(request.getParameter("photoalbum_name"));
 
 
         photoDao.create(userId, photoAlbumId, request.getPart("upfile"), photoDescription, timestamp, photoStatus);
 
+        request.setAttribute("user_id", request.getParameter("user_id"));
+        request.setAttribute("email", request.getParameter("email"));
 
         request.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
         request.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
@@ -85,6 +87,7 @@ public class UploadUsersPhotoPicture extends HttpServlet {
 
 
         request.getRequestDispatcher("reg-user-own-page.jsp").forward(request, response);
+//        request.getRequestDispatcher("my-page").forward(request, response);
 
     }
 

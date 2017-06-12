@@ -70,16 +70,17 @@ public class MyFriendsController extends HttpServlet {
 //                .map(o -> true)
 //                .orElse(false);
 
-        String jUserLogin = req.getParameter("j_username");
+        String email = req.getParameter("email");
 
-        String jUserPassword = req.getParameter("j_password");
+        String password = req.getParameter("password");
 
-        String jUserId = req.getParameter("j_id");
+        String userIdString = req.getParameter("user_id");
 
 
-        int userId = userDao.getUserId(jUserLogin);
+        int userId = userDao.getUserId(email);
 
-        session.setAttribute("j_username", jUserLogin);
+        session.setAttribute("email", email);
+        req.setAttribute("email", email);
 
 //        req.setAttribute(WELCOME_KEY, s);
 

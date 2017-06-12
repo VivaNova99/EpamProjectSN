@@ -7,8 +7,10 @@
 <body>
 
 <form method="POST" action="my-page">
-    <input type="text" name="j_username" title="Login"/><br>
-    <input type="password" name="j_password" autocomplete="off" title="Password"/><br>
+    <input type="text" name="email" title="Login"/><br>
+    <input type="password" name="password" autocomplete="off" title="Password"/><br>
+    <%--<input type="text" name="j_username" title="Login"/><br>--%>
+    <%--<input type="password" name="j_password" autocomplete="off" title="Password"/><br>--%>
     <input type="submit" value="submit"/>
 </form>
 

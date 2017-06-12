@@ -26,6 +26,7 @@
     <%--<br><a href="user-change-profile-photo-form.jsp?user_id=<%=user.getId()%>">изменить фотографию профиля</a>--%>
     <form method="POST" action="user-change-profile-photo-form.jsp">
         <input type="hidden" name="user_id" value="<%=user.getId()%>"/>
+        <input type="hidden" name="email" value="<%=user.getEmail()%>"/>
         <input type="submit" value="изменить фотографию профиля">
     </form>
 
@@ -37,7 +38,7 @@
         <%--<a href="user-change-info-form.jsp?id=<%=user.getId()%>&email=<%=user.getEmail()%>&first_name=<%=user.getFirstName()%>&last_name=<%=user.getLastName()%>&status=<%=user.getStatusOnWall()%>&dob=<%=user.getDateOfBirth()%>&city=<%=user.getCity()%>">редактировать информацию профиля</a>--%>
 
         <form method="POST" action="user-change-info-form.jsp">
-            <input type="hidden" name="id" value="<%=user.getId()%>"/>
+            <input type="hidden" name="user_id" value="<%=user.getId()%>"/>
             <input type="hidden" name="email" value="<%=user.getEmail()%>"/>
             <input type="hidden" name="first_name" value="<%=user.getFirstName()%>"/>
             <input type="hidden" name="last_name" value="<%=user.getLastName()%>"/>
@@ -75,12 +76,15 @@
         <%--<form method="POST" action="user-upload-photo-form.jsp">--%>
 
 
-                        <input type="hidden" name="user_id" value="<%=request.getAttribute("user_id")%>"/>
+            <%--<input type="hidden" name="user_id" value="<%=request.getAttribute("user_id")%>"/>--%>
+            <%--<input type="hidden" name="email" value="<%=request.getAttribute("email")%>"/>--%>
+            <input type="hidden" name="user_id" value="<%=user.getId()%>"/>
+            <input type="hidden" name="email" value="<%=user.getEmail()%>"/>
                             <%--<input type="hidden" name="user_id" value="<%=request.getParameter("user_id")%>"/>--%>
                         <%--<input type="hidden" name="email" value="<%=request.getParameter("email")%>"/>--%>
                             <%--<input type="hidden" name="user_photoalbums" value="<%=request.getAttribute(UserOwnPageController.USER_PHOTOALBUMS_KEY)%>"/>--%>
 
-                        <input type="submit" value="Загрузить фотографии">
+            <input type="submit" value="Загрузить фотографии">
 
         </form>
 

@@ -14,15 +14,6 @@
     Выберите файл: <input type="file" name="upfile"><br/>
     Добавьте описание: <input type="text" name="description"><br/>
 
-
-    <%--TODO: передать параметр с номером фотоальбома--%>
-
-    <input type="hidden" name="user_id" value="<%=request.getAttribute("user_id")%>"/>
-
-    <%--<input type="hidden" name="user_id" value="<%=request.getParameter("user_id")%>"/>--%>
-    <%--<input type="hidden" name="email" value="<%=request.getParameter("email")%>"/>--%>
-
-
      <%
     Collection<PhotoAlbum> userPhotoAlbums = (Collection<PhotoAlbum>) request.getAttribute(BuildPhotoAlbumsList.USER_PHOTOALBUMS_KEY);
 %>
@@ -38,6 +29,10 @@
         %>
     </select> <br/>
 
+    <%--<input type="hidden" name="user_id" value="<%=request.getAttribute("user_id")%>"/>--%>
+
+    <input type="hidden" name="user_id" value="<%=request.getParameter("user_id")%>"/>
+    <input type="hidden" name="email" value="<%=request.getParameter("email")%>"/>
 
     <input type="submit" value="Загрузить файл">
 
