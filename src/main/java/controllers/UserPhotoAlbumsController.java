@@ -99,7 +99,7 @@ public class UserPhotoAlbumsController extends HttpServlet {
 //        session.setAttribute("user_id", req.getParameter("user_id"));
 //        session.setAttribute("email", req.getParameter("email"));
 
-        if (b) {req.getRequestDispatcher("reg-user-photoalbums.jsp")
+        if (b & !(req.getParameter("email").equals("null"))) {req.getRequestDispatcher("reg-user-photoalbums.jsp")
                 .forward(req, resp);
         }
         else {req.getRequestDispatcher("unreg-user-photoalbums.jsp")
