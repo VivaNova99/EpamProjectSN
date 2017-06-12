@@ -27,6 +27,10 @@ div.user-profile-picture > img {
 }
 
 section.user-info {
+    margin-left: 450px;
+}
+
+.unreg-user-page section.user-info{
     margin-left: 150px;
 }
 

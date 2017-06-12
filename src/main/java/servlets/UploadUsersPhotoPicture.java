@@ -53,14 +53,10 @@ public class UploadUsersPhotoPicture extends HttpServlet {
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-
-        //TODO: создать encoding filter
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
+//        HttpSession session = request.getSession();
 
         String userIdString = request.getParameter("user_id");
-        String photoAlbumIdString = request.getParameter("photo_album_id");
+//        String photoAlbumIdString = request.getParameter("photo_album_id");
 
         int userId = parseInt(userIdString);
 //        int photoAlbumId = parseInt(photoAlbumIdString);
