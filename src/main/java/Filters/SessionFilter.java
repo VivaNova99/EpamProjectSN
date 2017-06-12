@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.StringTokenizer;
 
-//@WebFilter("/*")
+@WebFilter("/*")
 public class SessionFilter implements HttpFilter {
 
 //    private static String KEY = "key";
@@ -27,28 +27,17 @@ public class SessionFilter implements HttpFilter {
 
     @Override
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+
         HttpSession session = request.getSession(true);
 
-//        String jUserLogin = request.getParameter("j_username");
-//        String jUserPassword = request.getParameter("j_password");
-//        String jUserId = request.getParameter("j_id");
+        request.setAttribute("user_id", request.getParameter("user_id"));
 
-//        session.setAttribute("j_id", jUserId);
-//        //пока не работает
-//        session.setAttribute("j_username", jUserLogin);
-//        //пока не работает
-//        session.setAttribute("j_password", jUserPassword);
-//        //пока не работает
 
-        //        посмотреть, что создается кука с идентификатором сессии
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies){
-            System.out.println(cookie.getName() + " - " + cookie.getValue());
-        }
-
-        System.out.println("parameter j_id in session = " + request.getParameter("j_id"));
-        System.out.println("parameter j_username in session = " + request.getParameter("j_username"));
-        System.out.println("parameter j_password in session = " + request.getParameter("j_password"));
+//        //        посмотреть, что создается кука с идентификатором сессии
+//        Cookie[] cookies = request.getCookies();
+//        for (Cookie cookie : cookies){
+//            System.out.println(cookie.getName() + " - " + cookie.getValue());
+//        }
 
 
         chain.doFilter(request, response);

@@ -22,15 +22,31 @@
         User user = (User) request.getAttribute(UserOwnPageController.USER_INFO_KEY);
     %>
 
-    <div class="user-profile-picture"><img src="users_profile_picture?user_id=<%=user.getId()%>" /></div>
-    <br><a href="user-change-profile-photo-form.jsp?user_id=<%=user.getId()%>">изменить фотографию профиля</a>
+    <div class="user-profile-picture"><img src="users_profile_picture?user_id=<%=user.getId()%>" /></div><br>
+    <%--<br><a href="user-change-profile-photo-form.jsp?user_id=<%=user.getId()%>">изменить фотографию профиля</a>--%>
+    <form method="POST" action="user-change-profile-photo-form.jsp">
+        <input type="hidden" name="user_id" value="<%=user.getId()%>"/>
+        <input type="submit" value="изменить фотографию профиля">
+    </form>
 
     <section class="user-info">
         <div class="user-name"><%=user.getFirstName()%> <%=user.getLastName()%></div>
         <div class="user-status-on-wall"><%=user.getStatusOnWall()%></div>
         <div class="user-dob">День рождения: <%=user.getDateOfBirth()%></div>
         <div class="user-city">Город: <%=user.getCity()%></div>
-        <a href="user-change-info-form.jsp?id=<%=user.getId()%>&email=<%=user.getEmail()%>&first_name=<%=user.getFirstName()%>&last_name=<%=user.getLastName()%>&status=<%=user.getStatusOnWall()%>&dob=<%=user.getDateOfBirth()%>&city=<%=user.getCity()%>">редактировать информацию профиля</a>
+        <%--<a href="user-change-info-form.jsp?id=<%=user.getId()%>&email=<%=user.getEmail()%>&first_name=<%=user.getFirstName()%>&last_name=<%=user.getLastName()%>&status=<%=user.getStatusOnWall()%>&dob=<%=user.getDateOfBirth()%>&city=<%=user.getCity()%>">редактировать информацию профиля</a>--%>
+
+        <form method="POST" action="user-change-info-form.jsp">
+            <input type="hidden" name="id" value="<%=user.getId()%>"/>
+            <input type="hidden" name="email" value="<%=user.getEmail()%>"/>
+            <input type="hidden" name="first_name" value="<%=user.getFirstName()%>"/>
+            <input type="hidden" name="last_name" value="<%=user.getLastName()%>"/>
+            <input type="hidden" name="status" value="<%=user.getStatusOnWall()%>"/>
+            <input type="hidden" name="dob" value="<%=user.getDateOfBirth()%>"/>
+            <input type="hidden" name="city" value="<%=user.getCity()%>"/>
+            <input type="submit" value="редактировать информацию профиля">
+        </form>
+
     </section>
 
 <%
@@ -73,6 +89,10 @@
 
     <section class="wall-messages">
         <textarea class="whats-new" placeholder="Что у Вас нового?"></textarea>
+        <%--<form method="POST" action="photoalbums_list">--%>
+            <%--<input type="hidden" name="user_id" value="<%=request.getAttribute("user_id")%>"/>--%>
+            <%--<input type="submit" value="Загрузить фотографии">--%>
+        <%--</form>--%>
 
 <%
     Collection<WallMessage> last10ForUserWallMessages = (Collection<WallMessage>) request.getAttribute(UserOwnPageController.LAST_10_FOR_USER_WALL_MESSAGES_KEY);

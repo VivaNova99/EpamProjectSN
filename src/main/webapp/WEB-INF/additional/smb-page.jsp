@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<div class="user-page">
+<div class="user-page unreg-user-page">
 
     <%
         User user = (User) request.getAttribute(SmbPageController.SOME_USER_INFO_KEY);
