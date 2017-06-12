@@ -56,7 +56,6 @@ public class AutorizationController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 //        HttpSession session = req.getSession(true);
-//        HttpSession session = req.getSession();
 
         String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
                 .map(o -> String.format("my-page?email=%s", o)).
@@ -175,6 +174,10 @@ public class AutorizationController extends HttpServlet {
 //        else {req.getRequestDispatcher("/WEB-INF/unreg-forum.jsp")
 //                .forward(req, resp);
 //        }
+
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user_id", req.getParameter("user_id"));
+//        session.setAttribute("email", req.getParameter("email"));
 
         req.getRequestDispatcher(userPageOrNot).forward(req, resp);
 

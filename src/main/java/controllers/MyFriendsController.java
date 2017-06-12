@@ -54,7 +54,7 @@ public class MyFriendsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(true);
+//        HttpSession session = req.getSession(true);
 
 
 //        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
@@ -79,7 +79,7 @@ public class MyFriendsController extends HttpServlet {
 
         int userId = userDao.getUserId(email);
 
-        session.setAttribute("email", email);
+//        session.setAttribute("email", email);
         req.setAttribute("email", email);
 
 //        req.setAttribute(WELCOME_KEY, s);
@@ -100,6 +100,10 @@ public class MyFriendsController extends HttpServlet {
 //        }
 
 //        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
+
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user_id", req.getParameter("user_id"));
+//        session.setAttribute("email", req.getParameter("email"));
 
         req.getRequestDispatcher("reg-user-all-friends.jsp")
                 .forward(req, resp);

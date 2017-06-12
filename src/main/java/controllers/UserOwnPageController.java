@@ -90,6 +90,10 @@ public class UserOwnPageController extends HttpServlet {
         req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
 
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user_id", req.getParameter("user_id"));
+//        session.setAttribute("email", req.getParameter("email"));
+
         req.getRequestDispatcher("reg-user-own-page.jsp").forward(req, resp);
 
 

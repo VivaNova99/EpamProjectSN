@@ -56,7 +56,7 @@ public class MyAnswersController extends HttpServlet {
         //TODO: когда будет более продвинутая авторизация, нужно, чтобы из всех сервлетов для зарегистрированных
         // пользователей при отсутствии авторизации вылетало на login page
 
-        HttpSession session = req.getSession(true);
+//        HttpSession session = req.getSession(true);
 //        HttpSession session = req.getSession();
 
 ////        посмотреть, что создается кука с идентификатором сессии
@@ -91,7 +91,7 @@ public class MyAnswersController extends HttpServlet {
 
         int userId = userDao.getUserId(email);
 
-        session.setAttribute("email", email);
+//        session.setAttribute("email", email);
         req.setAttribute("email", email);
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
@@ -110,6 +110,10 @@ public class MyAnswersController extends HttpServlet {
 //        }
 
 //        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
+
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user_id", req.getParameter("user_id"));
+//        session.setAttribute("email", req.getParameter("email"));
 
         req.getRequestDispatcher("reg-user-answers.jsp")
                 .forward(req, resp);

@@ -32,10 +32,10 @@ public class SessionFilter implements HttpFilter {
 
         HttpSession session = request.getSession(true);
 
-        request.setAttribute("user_id", request.getParameter("user_id"));
-        request.setAttribute("email", request.getParameter("email"));
-        session.setAttribute("user_id", request.getParameter("user_id"));
-        session.setAttribute("email", request.getParameter("email"));
+//        request.setAttribute("user_id", request.getParameter("user_id"));
+//        request.setAttribute("email", request.getParameter("email"));
+//        session.setAttribute("user_id", request.getParameter("user_id"));
+//        session.setAttribute("email", request.getParameter("email"));
 
 
 

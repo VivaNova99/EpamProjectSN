@@ -60,11 +60,6 @@ public class MyThemesController extends HttpServlet {
 //                .map(o -> String.format("Здравствуйте, %s", o))
 //                .orElse("Здравствуйте!");
 
-        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
-                orElse("test.jsp");
-//                orElse("/WEB-INF/index.jsp");
-
 //        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
 //                .map(o -> true)
 //                .orElse(false);
@@ -101,6 +96,10 @@ public class MyThemesController extends HttpServlet {
 //        }
 
 //        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
+
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user_id", req.getParameter("user_id"));
+//        session.setAttribute("email", req.getParameter("email"));
 
         req.getRequestDispatcher("reg-user-themes.jsp")
                 .forward(req, resp);

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -60,16 +61,24 @@ public class ForumTopicController extends HttpServlet {
         int thisForumTopicId = parseInt(thisForumTopicIdString);
 
 
-        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
+//        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
+        boolean b = Optional.ofNullable(req.getParameter(String.valueOf("email")))
                 .map(o -> true)
                 .orElse(false);
 
 //        req.setAttribute(WELCOME_KEY, s);
 
+        req.setAttribute("user_id", req.getParameter("user_id"));
+        req.setAttribute("email", req.getParameter("email"));
+
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
         req.setAttribute(THIS_TOPIC_WALL_MESSAGES_KEY, wallMessageDao.getThisForumTopic(thisForumTopicId));
+
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user_id", req.getParameter("user_id"));
+//        session.setAttribute("email", req.getParameter("email"));
 
         if (b) {req.getRequestDispatcher("/reg-user-forum-this-topic.jsp")
                 .forward(req, resp);
