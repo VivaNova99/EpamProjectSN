@@ -178,7 +178,7 @@ public class H2InsertPictureIntoDatabase {
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "UPDATE WallMessage set picture = ? WHERE id = 2 OR id = 4"
+                     "UPDATE WallMessage set picture = ? WHERE id = 2 OR id = 5"
 //                     "UPDATE WallMessage set picture = ? WHERE is_parent = TRUE"
              )){
 
