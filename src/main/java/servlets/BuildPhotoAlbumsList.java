@@ -68,6 +68,8 @@ public class BuildPhotoAlbumsList extends HttpServlet{
 //
 
         req.setAttribute("user_id", String.valueOf(userId));
+        req.setAttribute("email", req.getParameter("email"));
+
         req.setAttribute(USER_PHOTOALBUMS_KEY, photoAlbumDao.getUserPhotoAlbums(userId));
 
         req.getRequestDispatcher("user-upload-photo-form.jsp").forward(req, resp);

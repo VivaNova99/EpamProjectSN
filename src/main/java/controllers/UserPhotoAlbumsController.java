@@ -55,7 +55,7 @@ public class UserPhotoAlbumsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(true);
+//        HttpSession session = req.getSession(true);
 
 
 //        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
@@ -67,21 +67,22 @@ public class UserPhotoAlbumsController extends HttpServlet {
 //                orElse("test.jsp");
 //                orElse("/WEB-INF/index.jsp");
 
-        boolean b = Optional.ofNullable(req.getSession().getAttribute("j_username"))
+        boolean b = Optional.ofNullable(req.getSession().getAttribute("email"))
                 .map(o -> true)
                 .orElse(false);
 
 
-        String jUserLogin = req.getParameter("j_username");
+        String email = req.getParameter("email");
 
-        String jUserPassword = req.getParameter("j_password");
+        String password = req.getParameter("password");
 
-        String jUserId = req.getParameter("j_id");
+        String userIdString = req.getParameter("user_id");
 
 
-        int userId = userDao.getUserId(jUserLogin);
+        int userId = userDao.getUserId(email);
 
-        session.setAttribute("j_username", jUserLogin);
+//        session.setAttribute("j_username", jUserLogin);
+        req.setAttribute("email", email);
 
 //        req.setAttribute(WELCOME_KEY, s);
 

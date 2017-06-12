@@ -60,7 +60,7 @@ public class WelcomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(true);
+//        HttpSession session = req.getSession(true);
 
 //        String jUserLogin = req.getParameter("j_username");
 //
@@ -97,8 +97,9 @@ public class WelcomeController extends HttpServlet {
 //                .map(o -> true)
 //                .orElse(false);
 
-        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
-                .map(o -> String.format("my-page?j_username=%s", o)).
+//        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
+        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
+                .map(o -> String.format("my-page?email=%s", o)).
                         orElse("unreg-forum.jsp");
 //                orElse("/WEB-INF/index.jsp");
 

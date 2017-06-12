@@ -18,6 +18,8 @@ import java.util.StringTokenizer;
 @WebFilter("/*")
 public class SessionFilter implements HttpFilter {
 
+    private FilterConfig config = null;
+
 //    private static String KEY = "key";
 
     @Override
@@ -31,6 +33,10 @@ public class SessionFilter implements HttpFilter {
         HttpSession session = request.getSession(true);
 
         request.setAttribute("user_id", request.getParameter("user_id"));
+        request.setAttribute("email", request.getParameter("email"));
+        session.setAttribute("user_id", request.getParameter("user_id"));
+        session.setAttribute("email", request.getParameter("email"));
+
 
 
 //        //        посмотреть, что создается кука с идентификатором сессии
@@ -63,4 +69,10 @@ public class SessionFilter implements HttpFilter {
 //            requestDispatcher.forward(request, response);
 //        }
     }
+
+    public void destroy()
+    {
+        config = null;
+    }
+
 }

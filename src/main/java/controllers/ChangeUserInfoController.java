@@ -57,16 +57,16 @@ public class ChangeUserInfoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(true);
+//        HttpSession session = req.getSession(true);
 
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
 
 //        String firstName = new String((req.getParameter("first_name")).getBytes("UTF-8"), "UTF-8");
 
-        String idString = req.getParameter("id");
+        String userIdString = req.getParameter("user_id");
 
-        int userId = parseInt(idString);
+        int userId = parseInt(userIdString);
 
 //        System.out.println("user id = " + userId +
 //                req.getParameter("first_name") +
@@ -92,8 +92,8 @@ public class ChangeUserInfoController extends HttpServlet {
 
         userDao.update(user);
 
-        session.setAttribute("j_username", req.getParameter("email"));
-        req.setAttribute("j_username", req.getParameter("email"));
+//        session.setAttribute("email", req.getParameter("email"));
+        req.setAttribute("email", req.getParameter("email"));
 
 //        req.setAttribute(USER_INFO_KEY, userDao.getUserTest(userId));
 

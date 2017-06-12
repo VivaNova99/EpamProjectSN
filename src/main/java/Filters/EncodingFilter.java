@@ -10,6 +10,8 @@ import java.io.IOException;
 @WebFilter("/*")
 public class EncodingFilter implements HttpFilter {
 
+    private FilterConfig config = null;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         ServletContext servletContext = filterConfig.getServletContext();
@@ -32,6 +34,11 @@ public class EncodingFilter implements HttpFilter {
 //
 //        chain.doFilter(request, response);
 
+    }
+
+    public void destroy()
+    {
+        config = null;
     }
 
 }
