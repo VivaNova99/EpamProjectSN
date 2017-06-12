@@ -34,6 +34,9 @@ public interface PhotoDao {
 
     Collection<Photo> getUserPhotos(int userId);
 
+    @SneakyThrows
+    Collection<Photo> getUserPhotosInThisPhotoalbum(int userId, int photoalbumId);
+
     ResultSet transferPhotoPicture(int photoPictureId);
 
 //    @SneakyThrows
