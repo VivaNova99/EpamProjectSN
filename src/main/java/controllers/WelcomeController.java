@@ -98,7 +98,8 @@ public class WelcomeController extends HttpServlet {
 //                .orElse(false);
 
 //        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
-        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
+//        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
+        String userPageOrNot = Optional.ofNullable(req.getParameter(String.valueOf("email")))
                 .map(o -> String.format("my-page?email=%s", o)).
                         orElse("unreg-forum.jsp");
 //                orElse("/WEB-INF/index.jsp");
@@ -118,6 +119,10 @@ public class WelcomeController extends HttpServlet {
 //        else {req.getRequestDispatcher("/WEB-INF/unreg-forum.jsp")
 //                .forward(req, resp);
 //        }
+
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user_id", req.getParameter("user_id"));
+//        session.setAttribute("email", req.getParameter("email"));
 
         req.getRequestDispatcher(userPageOrNot).forward(req, resp);
 

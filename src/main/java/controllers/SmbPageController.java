@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -66,13 +67,17 @@ public class SmbPageController extends HttpServlet {
 //                orElse("test.jsp");
 //                orElse("/WEB-INF/index.jsp");
 
-        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
+//        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
+        boolean b = Optional.ofNullable(req.getParameter(String.valueOf("email")))
                 .map(o -> true)
                 .orElse(false);
 
         String someUserIdString = req.getParameter("some_user_id");
 
         int someUserId = parseInt(someUserIdString);
+
+        req.setAttribute("user_id", req.getParameter("user_id"));
+        req.setAttribute("email", req.getParameter("email"));
 
         req.setAttribute(SOME_USER_INFO_KEY, userDao.getUser(someUserId));
 
@@ -100,6 +105,10 @@ public class SmbPageController extends HttpServlet {
 
 //        req.getRequestDispatcher("/reg-user-smb-page.jsp")
 //                .forward(req, resp);
+
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user_id", req.getParameter("user_id"));
+//        session.setAttribute("email", req.getParameter("email"));
 
         if (b) {req.getRequestDispatcher("/reg-user-smb-page.jsp")
                 .forward(req, resp);

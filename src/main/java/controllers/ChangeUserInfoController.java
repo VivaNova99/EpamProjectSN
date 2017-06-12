@@ -99,6 +99,11 @@ public class ChangeUserInfoController extends HttpServlet {
 
 
 //        req.getRequestDispatcher("/WEB-INF/test-pages/test-registration.jsp").forward(req, resp);
+
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user_id", req.getParameter("user_id"));
+//        session.setAttribute("email", req.getParameter("email"));
+
         req.getRequestDispatcher("/").forward(req, resp);
 
 

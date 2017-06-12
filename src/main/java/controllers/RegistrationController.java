@@ -65,8 +65,8 @@ public class RegistrationController extends HttpServlet {
 
 //        HttpSession session = req.getSession(true);
 
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=UTF-8");
+//        req.setCharacterEncoding("UTF-8");
+//        resp.setContentType("text/html; charset=UTF-8");
 
 //        String firstName = new String((req.getParameter("first_name")).getBytes("UTF-8"), "UTF-8");
 
@@ -90,6 +90,11 @@ public class RegistrationController extends HttpServlet {
 
 
 //        req.getRequestDispatcher("/WEB-INF/test-pages/test-registration.jsp").forward(req, resp);
+
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user_id", req.getParameter("user_id"));
+//        session.setAttribute("email", req.getParameter("email"));
+
         req.getRequestDispatcher("/").forward(req, resp);
 
 

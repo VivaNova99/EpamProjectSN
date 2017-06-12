@@ -66,7 +66,8 @@ public class UserPhotosController extends HttpServlet {
 //                orElse("test.jsp");
 ////                orElse("/WEB-INF/index.jsp");
 
-        boolean b = Optional.ofNullable(req.getSession().getAttribute("email"))
+//        boolean b = Optional.ofNullable(req.getSession().getAttribute("email"))
+        boolean b = Optional.ofNullable(req.getParameter("email"))
                 .map(o -> true)
                 .orElse(false);
 
@@ -92,6 +93,10 @@ public class UserPhotosController extends HttpServlet {
 //        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
 //        req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
         req.setAttribute(USER_PHOTOS_KEY, photoDao.getUserPhotos(userId));
+
+//        HttpSession session = req.getSession();
+//        session.setAttribute("user_id", req.getParameter("user_id"));
+//        session.setAttribute("email", req.getParameter("email"));
 
         if (b) {req.getRequestDispatcher("reg-user-photos.jsp")
                 .forward(req, resp);
