@@ -77,12 +77,16 @@ public class UserPhotoAlbumsController extends HttpServlet {
 
         String password = req.getParameter("password");
 
-        String userIdString = req.getParameter("user_id");
+//        String userIdString = req.getParameter("user_id");
 
 
         int userId = userDao.getUserId(email);
 
+        String userIdString = String.valueOf(userId);
+
+
 //        session.setAttribute("j_username", jUserLogin);
+        req.setAttribute("user_id", userIdString);
         req.setAttribute("email", email);
 
 //        req.setAttribute(WELCOME_KEY, s);
@@ -98,6 +102,11 @@ public class UserPhotoAlbumsController extends HttpServlet {
 //        HttpSession session = req.getSession();
 //        session.setAttribute("user_id", req.getParameter("user_id"));
 //        session.setAttribute("email", req.getParameter("email"));
+
+        System.out.println("In UserPhotoAlbumsController: user_id - " + req.getParameter("user_id") + "," +
+                " email - " + req.getParameter("email") + ", " +
+                "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
+                " description - " + req.getParameter("description"));
 
         if (b & !(req.getParameter("email").equals("null"))) {req.getRequestDispatcher("reg-user-photoalbums.jsp")
                 .forward(req, resp);
