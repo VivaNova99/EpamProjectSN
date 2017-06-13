@@ -94,6 +94,12 @@ public class UserOwnPageController extends HttpServlet {
 //        session.setAttribute("user_id", req.getParameter("user_id"));
 //        session.setAttribute("email", req.getParameter("email"));
 
+        System.out.println("In UserOwnPageController: user_id from getUserId(email) - " + userDao.getUserId(email) + ", " +
+                "user_id - " + req.getParameter("user_id") + "," +
+                " email - " + req.getParameter("email") + ", " +
+                "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
+                " description - " + req.getParameter("description"));
+
         req.getRequestDispatcher("reg-user-own-page.jsp").forward(req, resp);
 
 

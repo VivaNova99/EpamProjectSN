@@ -469,7 +469,7 @@ public class H2UserDao implements UserDao {
 
     @Override
     @SneakyThrows
-    public int getUserId(String userLogin) {
+    public int getUserId(String email) {
 
         //        TODO: добавить try with resources
 
@@ -477,7 +477,7 @@ public class H2UserDao implements UserDao {
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
                      "id FROM User WHERE email = ?")){
 
-        preparedStatement.setString(1, userLogin);
+        preparedStatement.setString(1, email);
         ResultSet resultSet = preparedStatement.executeQuery();
 
             resultSet.next();

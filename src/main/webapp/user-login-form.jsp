@@ -12,6 +12,11 @@
     <%--<input type="text" name="j_username" title="Login"/><br>--%>
     <%--<input type="password" name="j_password" autocomplete="off" title="Password"/><br>--%>
     <input type="submit" value="submit"/>
+
+    <%System.out.println("In user-login-form.jsp: user_id - " + request.getParameter("user_id") + ", " +
+            "email - " + request.getParameter("email") + ", " +
+            "photoalbum_name - " + request.getParameter("photoalbum_name") + ", " +
+            "description - " + request.getParameter("description"));%>
 </form>
 
 <a href="/">Вернуться на главную страницу</a>

@@ -19,7 +19,12 @@
     <%--<%session.setAttribute("j_id", session.getAttribute("j_id"));%>--%>
     <%--<input type="hidden" name="j_id" value="<%=session.getAttribute("j_id")%>">--%>
     <%--<input type="hidden" name="j_id" value="<%=request.getParameter("j_id")%>" />--%>
+    <%System.out.println("In reg-user-own-page.jsp: user_id - " + request.getParameter("user_id") + ", " +
+            "email - " + request.getParameter("email") + ", " +
+            "photoalbum_name - " + request.getParameter("photoalbum_name") + ", " +
+            "description - " + request.getParameter("description"));%>
 </section>
+
 
 </body>
 </html>

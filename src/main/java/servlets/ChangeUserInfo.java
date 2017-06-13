@@ -1,4 +1,4 @@
-package controllers;
+package servlets;
 
 import dao.UserDao;
 import model.AccessLevel;
@@ -18,7 +18,7 @@ import static java.lang.Integer.parseInt;
 
 
 @WebServlet("/change-user-info")
-public class ChangeUserInfoController extends HttpServlet {
+public class ChangeUserInfo extends HttpServlet {
 
     public static final String WELCOME_KEY = "Welcome";
     public static final String ALL_USERS_KEY = "AllUser";

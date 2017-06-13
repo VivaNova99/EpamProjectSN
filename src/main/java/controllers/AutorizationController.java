@@ -167,6 +167,11 @@ public class AutorizationController extends HttpServlet {
 //        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
 
+        System.out.println("In AutorizationController: user_id - " + req.getParameter("user_id") + "," +
+                " email - " + req.getParameter("email") + ", " +
+                "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
+                " description - " + req.getParameter("description"));
+
 
 //        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
 //                .forward(req, resp);

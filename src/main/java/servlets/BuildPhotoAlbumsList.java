@@ -16,7 +16,6 @@ import java.io.OutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
-
 import static java.lang.Integer.parseInt;
 
 @WebServlet("/photoalbums_list")
@@ -70,10 +69,15 @@ public class BuildPhotoAlbumsList extends HttpServlet{
         req.setAttribute("user_id", String.valueOf(userId));
         req.setAttribute("email", req.getParameter("email"));
 
-        req.setAttribute(USER_PHOTOALBUMS_KEY, photoAlbumDao.getUserPhotoAlbums(userId));
 
-        req.getRequestDispatcher("user-upload-photo-form.jsp").forward(req, resp);
+        // TODO: добавить нотификацию "Создайте фотоальбом"
+        if((photoAlbumDao.getUserPhotoAlbums(userId)).isEmpty()){
+            req.getRequestDispatcher("user-create-photoalbum-form.jsp").forward(req, resp);
+        }
+        else {req.setAttribute(USER_PHOTOALBUMS_KEY, photoAlbumDao.getUserPhotoAlbums(userId));
 
+            req.getRequestDispatcher("user-upload-photo-form.jsp").forward(req, resp);
+        }
 
     }
 }
