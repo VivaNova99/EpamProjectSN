@@ -53,58 +53,33 @@ public class MyPrivateMessageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession();
 
-//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-//                .map(o -> String.format("Здравствуйте, %s", o))
-//                .orElse("Здравствуйте!");
+        int userId;
 
-//        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
-//                orElse("test.jsp");
-////                orElse("/WEB-INF/index.jsp");
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
+                .map(o -> true)
+                .orElse(false);
 
-//        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> true)
-//                .orElse(false);
+        if (b && !((session.getAttribute("email")).equals("null"))) {
+            String email = String.valueOf(session.getAttribute("email"));
 
+            userId = userDao.getUserId(email);
 
-        String email = req.getParameter("email");
+            req.setAttribute(ALL_USERS_KEY, userDao.getAll());
+            req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
+            req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
+            req.setAttribute(MY_PRIVATE_MESSAGES_KEY, privateMessageDao.getMyPrivateMessages(userId));
 
-        String password = req.getParameter("password");
+            req.getRequestDispatcher("reg-user-private-messages.jsp")
+                    .forward(req, resp);
+        }
+        else {
+            System.out.println("атрибут email из сессии куда-то потерялся");
 
-        String userIdString = req.getParameter("user_id");
+            req.getRequestDispatcher("unreg-forum.jsp")
+                    .forward(req, resp);
+        }
 
-
-        int userId = userDao.getUserId(email);
-
-//        session.setAttribute("email", email);
-        req.setAttribute("email", email);
-
-//        req.setAttribute(WELCOME_KEY, s);
-
-        req.setAttribute(ALL_USERS_KEY, userDao.getAll());
-//        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
-//        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
-        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
-        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
-//        req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
-        req.setAttribute(MY_PRIVATE_MESSAGES_KEY, privateMessageDao.getMyPrivateMessages(userId));
-
-//        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
-//                .forward(req, resp);
-//        }
-//        else {req.getRequestDispatcher("/WEB-INF/unreg-forum.jsp")
-//                .forward(req, resp);
-//        }
-
-//        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
-
-//        HttpSession session = req.getSession();
-//        session.setAttribute("user_id", req.getParameter("user_id"));
-//        session.setAttribute("email", req.getParameter("email"));
-
-        req.getRequestDispatcher("reg-user-private-messages.jsp")
-                .forward(req, resp);
     }
 }

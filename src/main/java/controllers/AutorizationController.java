@@ -61,105 +61,18 @@ public class AutorizationController extends HttpServlet {
                 .map(o -> String.format("my-page?email=%s", o)).
                 orElse("error.jsp");
 
-////        посмотреть, что создается кука с идентификатором сессии
-//        Cookie[] cookies = req.getCookies();
-//        for (Cookie cookie : cookies){
-//            System.out.println(cookie.getName() + " - " + cookie.getValue());
-//        }
 
-
-
-//        String jUserLogin = req.getParameter("j_username");
-//
-//        String jUserPassword = req.getParameter("j_password");
-//
-//        String jUserId = req.getParameter("j_id");
-
-
-//        if (!(jUserId == null) && !(jUserId.equals(""))){
-////        if (!(jUserId.equals("null"))){
-////        if (jUserId==null){
-//
-//            // посмотреть, что Id есть в параметрах сессии
-//            System.out.println("User with Id, userId="+jUserId);
-//
-//            int userId = parseInt(jUserId);
-//            req.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
-//            req.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
-//            req.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
-//
-//            session.setAttribute("j_id", jUserId);
-//            //пока не работает
-//            session.setAttribute("j_username", jUserLogin);
-//            //пока не работает
-//            session.setAttribute("j_password", jUserPassword);
-//            //пока не работает
-//
-//            req.getRequestDispatcher("/reg-user-own-page.jsp")
-//                    .forward(req, resp);
-//
-//            //TODO: добавить проверку пароля
-//        }
-//
-//        else if (jUserLogin != null && jUserPassword != null){
-//            System.out.println("userLogin="+jUserLogin);
-////            String userLogin = jUserLogin.replace("%40", "@");
-//            int userId = userDao.getUserId(jUserLogin);
-//            jUserId = "" + userId;
-//
-//            // посмотреть, что Id правильно вытаскивается из базы
-//            System.out.println("User with Login, userId="+jUserId);
-//
-//            req.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
-//            req.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
-//            req.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
-//
-//            session.setAttribute("j_id", jUserId);
-//            //пока не работает
-//            session.setAttribute("j_username", jUserLogin);
-//            //пока не работает
-//            session.setAttribute("j_password", jUserPassword);
-////            пока не работает
-////            req.setAttribute("j_id", jUserId);
-////            req.setAttribute("j_username", jUserLogin);
-////            req.setAttribute("j_username", jUserLogin);
-//
-//
-//            req.getRequestDispatcher("/reg-user-own-page.jsp")
-//                    .forward(req, resp);
-//
 //            //TODO: добавить проверку пароля и страницу ошибки, если нет такого логина в базе
-//        }
-//
-//        else {
-//            session.setAttribute("j_id", jUserId);
-//            //пока не работает
-//            session.setAttribute("j_username", jUserLogin);
-//            //пока не работает
-//            session.setAttribute("j_password", jUserPassword);
-//            //пока не работает
-//
-//            req.getRequestDispatcher("/user-login-form.jsp")
-//                    .forward(req, resp);
-//        }
-//
-////        session.setAttribute("j_id", jUserId);
-////        //пока не работает
-////        session.setAttribute("j_username", jUserLogin);
-////        //пока не работает
-////        session.setAttribute("j_password", jUserPassword);
-////        //пока не работает
 
 
+        String email = req.getParameter("email");
 
+        int userId = userDao.getUserId(email);
 
-//        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> true)
-//                .orElse(false);
-
-//        req.setAttribute(WELCOME_KEY, s);
+        String userIdString = String.valueOf(userId);
 
         req.setAttribute("email", req.getParameter("email"));
+        req.setAttribute("user_id", userIdString);
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
 //        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
 //        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
+import static java.lang.Integer.parseInt;
 import static model.User.FIRST_NAME_KEY;
 import static model.User.ID_KEY;
 import static model.User.LOGIN_KEY;
@@ -55,59 +56,48 @@ public class UserPhotosController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession();
 
-//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-//                .map(o -> String.format("Здравствуйте, %s", o))
-//                .orElse("Здравствуйте!");
-//
-//        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
-//                orElse("test.jsp");
-////                orElse("/WEB-INF/index.jsp");
+        int userId;
 
-//        boolean b = Optional.ofNullable(req.getSession().getAttribute("email"))
-        boolean b = Optional.ofNullable(req.getParameter("email"))
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
                 .map(o -> true)
                 .orElse(false);
 
+        if (b && !((session.getAttribute("email")).equals("null"))) {
+            String email = String.valueOf(session.getAttribute("email"));
 
-        String email = req.getParameter("email");
+            userId = userDao.getUserId(email);
 
-        String password = req.getParameter("password");
+            req.setAttribute(ALL_USERS_KEY, userDao.getAll());
+            req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
+            req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
+            req.setAttribute(USER_PHOTOS_KEY, photoDao.getUserPhotos(userId));
 
-        String userIdString = req.getParameter("user_id");
+            System.out.println("In UserPhotosController: user_id from getUserId(email) - " + userDao.getUserId(email) + ", " +
+                    "user_id - " + session.getAttribute("user_id") + "," +
+                    " email - " + session.getAttribute("email") + ", " +
+                    "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
+                    " description - " + req.getParameter("description"));
 
-
-        int userId = userDao.getUserId(email);
-
-//        session.setAttribute("email", email);
-        req.setAttribute("email", email);
-
-//        req.setAttribute(WELCOME_KEY, s);
-
-        req.setAttribute(ALL_USERS_KEY, userDao.getAll());
-//        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
-        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
-        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
-//        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
-//        req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
-        req.setAttribute(USER_PHOTOS_KEY, photoDao.getUserPhotos(userId));
-
-//        HttpSession session = req.getSession();
-//        session.setAttribute("user_id", req.getParameter("user_id"));
-//        session.setAttribute("email", req.getParameter("email"));
-
-        if (b & !(req.getParameter("email").equals("null"))) {req.getRequestDispatcher("reg-user-photos.jsp")
-                .forward(req, resp);
+            req.getRequestDispatcher("reg-user-photos.jsp")
+                    .forward(req, resp);
         }
-        else {req.getRequestDispatcher("unreg-user-photos.jsp")
-                .forward(req, resp);
+        else {
+            System.out.println("атрибут email из сессии куда-то потерялся/ или незарегистрированный пользователь");
+
+            // пока что нет просмотра фото незарегистрированным пользователем и этот параметр ниоткуда не приходит
+            String someUserIdString = req.getParameter("some_user_id");
+            int someUserId = parseInt(someUserIdString);
+
+            req.setAttribute(ALL_USERS_KEY, userDao.getAll());
+            req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
+            req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
+            req.setAttribute(USER_PHOTOS_KEY, photoDao.getUserPhotos(someUserId));
+
+            req.getRequestDispatcher("unreg-user-photos.jsp")
+                    .forward(req, resp);
         }
 
-//        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
-
-//        req.getRequestDispatcher("reg-user-photos.jsp")
-//                .forward(req, resp);
     }
 }

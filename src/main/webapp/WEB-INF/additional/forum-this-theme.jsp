@@ -32,7 +32,7 @@
         %>
         <li>
             <ul>
-                <li class="header"><a href="forum-this-topic?this_forum_topic_id=<%=thisThemeWallMessage.getId()%>&email=<%=request.getParameter("email")%>&user_id=<%=request.getParameter("user_id")%>"><%=thisThemeWallMessage.getMessageHeader()%></a></li>
+                <li class="header"><a href="forum-this-topic?this_forum_topic_id=<%=thisThemeWallMessage.getId()%>&email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><%=thisThemeWallMessage.getMessageHeader()%></a></li>
                 <li class="name"><%=thisThemeWallMessage.getSenderUserFirstNameAndLastName()%></li>
                 <li class="date-time"><%=thisThemeWallMessage.getDateTime()%></li>
             </ul>

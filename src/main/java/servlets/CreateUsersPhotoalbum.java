@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -51,26 +52,21 @@ public class CreateUsersPhotoalbum extends HttpServlet {
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
 
-//        String userIdString = request.getParameter("user_id");
+        int userId;
+        String email = String.valueOf(session.getAttribute("email"));
+//        int userId = userDao.getUserId(email);
+//        String userIdString = String.valueOf(userId);
+        String userIdString = String.valueOf(session.getAttribute("user_id"));
 
-        String email = request.getParameter("email");
+        if ((userIdString == null) | (userIdString.equals("null"))){
+            userId = userDao.getUserId(email);
+        }
 
-        int userId = userDao.getUserId(email);
-
-        String userIdString = String.valueOf(userId);
-
-//        if (userIdString == null){
-//            userId = userDao.getUserId(email);
-//        }
-//
-//        else {
-//            userId = parseInt(userIdString);
-//        }
-
-
-//        int photoAlbumId = photoAlbumDao.getPhotoalbumId(request.getParameter("photoalbum_name"));
+        else {
+            userId = parseInt(userIdString);
+        }
 
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());

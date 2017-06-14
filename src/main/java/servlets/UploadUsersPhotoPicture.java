@@ -53,16 +53,11 @@ public class UploadUsersPhotoPicture extends HttpServlet {
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
 
-        String userIdString = request.getParameter("user_id");
-//        String photoAlbumIdString = request.getParameter("photo_album_id");
+        String userIdString = String.valueOf(session.getAttribute("user_id"));
 
         int userId = parseInt(userIdString);
-//        int photoAlbumId = parseInt(photoAlbumIdString);
-
-        //временно, потом сделать выбор из списка фотоальбомов
-//        int photoAlbumId = 1;
 
         int photoAlbumId = photoAlbumDao.getPhotoalbumId(request.getParameter("photoalbum_name"));
 
@@ -73,13 +68,7 @@ public class UploadUsersPhotoPicture extends HttpServlet {
 
         PhotoStatus photoStatus = PhotoStatus.PUBLIC;
 
-//        System.out.println(request.getParameter("photoalbum_name"));
-
-
         photoDao.create(userId, photoAlbumId, request.getPart("upfile"), photoDescription, timestamp, photoStatus);
-
-        request.setAttribute("user_id", request.getParameter("user_id"));
-        request.setAttribute("email", request.getParameter("email"));
 
         request.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
         request.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));

@@ -29,7 +29,7 @@
             %>
             <ul>
                 <li class="photoalbum"><%=userPhotoAlbum.getName()%></li>
-                <li class="user-photoalbum"><a href="user-photos-in-photoalbum?email=<%=request.getParameter("email")%>&user_id=<%=request.getParameter("user_id")%>&photoalbum_id=<%=userPhotoAlbum.getId()%>">
+                <li class="user-photoalbum"><a href="user-photos-in-photoalbum?email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>&photoalbum_id=<%=userPhotoAlbum.getId()%>">
                     <img src="photoalbum_picture?photoalbum_id=<%=userPhotoAlbum.getId()%>" /></a>
                 </li>
                 <li class="description"><%=userPhotoAlbum.getDescription()%></li>
