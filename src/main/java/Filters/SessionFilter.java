@@ -22,6 +22,10 @@ public class SessionFilter implements HttpFilter {
 
 //    private static String KEY = "key";
 
+    public static boolean equals(String str1, String str2) {
+        return str1 == null ? str2 == null : str1.equals(str2);
+    }
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         ServletContext servletContext = filterConfig.getServletContext();
@@ -32,10 +36,34 @@ public class SessionFilter implements HttpFilter {
 
         HttpSession session = request.getSession(true);
 
-//        request.setAttribute("user_id", request.getParameter("user_id"));
-//        request.setAttribute("email", request.getParameter("email"));
-//        session.setAttribute("user_id", request.getParameter("user_id"));
-//        session.setAttribute("email", request.getParameter("email"));
+        boolean boolUserId = Optional.ofNullable(request.getParameter(String.valueOf("user_id")))
+                .map(o -> true)
+                .orElse(false);
+
+        boolean boolEmail = Optional.ofNullable(request.getParameter(String.valueOf("email")))
+                .map(o -> true)
+                .orElse(false);
+
+        String userIdString = request.getParameter("user_id");
+        String email = request.getParameter("email");
+
+        if (boolUserId && !(userIdString.equals("null"))){
+            session.setAttribute("user_id", request.getParameter("user_id"));
+        }
+
+        if (boolEmail && !(email.equals("null"))){
+            session.setAttribute("email", request.getParameter("email"));
+        }
+
+//        if (boolUserId){
+//            session.setAttribute("user_id", request.getParameter("user_id"));
+//        }
+//
+//        if (boolEmail){
+//            session.setAttribute("email", request.getParameter("email"));
+//        }
+
+        chain.doFilter(request, response);
 
 
 
@@ -45,8 +73,6 @@ public class SessionFilter implements HttpFilter {
 //            System.out.println(cookie.getName() + " - " + cookie.getValue());
 //        }
 
-
-        chain.doFilter(request, response);
 
 //        if (session.getAttribute(KEY) != null) {
 //            chain.doFilter(request, response);

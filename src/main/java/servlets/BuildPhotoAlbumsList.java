@@ -42,32 +42,14 @@ public class BuildPhotoAlbumsList extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession();
 
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=UTF-8");
+//        req.setCharacterEncoding("UTF-8");
+//        resp.setContentType("text/html; charset=UTF-8");
 
-        String userIdString = req.getParameter("user_id");
-
-//        System.out.println("user id = " + userIdString);
+        String userIdString = String.valueOf(session.getAttribute("user_id"));
 
         int userId = parseInt(userIdString);
-
-
-//        String jUserLogin = req.getParameter("j_username");
-//
-//        String jUserPassword = req.getParameter("j_password");
-//
-//        String jUserId = req.getParameter("j_id");
-//
-//
-//        int userId = userDao.getUserId(jUserLogin);
-//
-//        session.setAttribute("j_username", jUserLogin);
-//
-
-        req.setAttribute("user_id", String.valueOf(userId));
-        req.setAttribute("email", req.getParameter("email"));
 
 
         // TODO: добавить нотификацию "Создайте фотоальбом"

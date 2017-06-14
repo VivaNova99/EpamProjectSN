@@ -52,17 +52,11 @@ public class UploadUsersProfilePicture extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        String userIdString = request.getParameter("user_id");
+        String userIdString = String.valueOf(session.getAttribute("user_id"));
 
         int userId = parseInt(userIdString);
 
         userDao.insertUploadedPictureIntoUserProfilePhoto(userId, request.getPart("upfile"));
-
-
-        request.setAttribute("user_id", request.getParameter("user_id"));
-        request.setAttribute("email", request.getParameter("email"));
-//        session.setAttribute("user_id", request.getParameter("user_id"));
-//        session.setAttribute("email", request.getParameter("email"));
 
         request.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
         request.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));

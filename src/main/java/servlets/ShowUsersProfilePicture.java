@@ -39,17 +39,9 @@ public class ShowUsersProfilePicture extends HttpServlet {
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        //Проверить, что параметр передается в сессии - не передается
         HttpSession session = request.getSession();
-//        String jUserId = request.getParameter("j_id");
-//        System.out.println("User with Id, userId="+jUserId);
-//        session.setAttribute("j_id", jUserId);
 
-        String usersProfilePictureIdString = request.getParameter("user_id");
-
-//        String photoPictureIdString = Optional.ofNullable(request.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> String.format("%s", o)).
-//                        orElse("1");
+        String usersProfilePictureIdString = String.valueOf(session.getAttribute("user_id"));
 
         response.setContentType("image/jpg");
 

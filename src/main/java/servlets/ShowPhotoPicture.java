@@ -37,14 +37,8 @@ public class ShowPhotoPicture extends HttpServlet {
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-
 
         String photoPictureIdString = request.getParameter("photo_id");
-
-//        String photoPictureIdString = Optional.ofNullable(request.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> String.format("%s", o)).
-//                        orElse("1");
 
         response.setContentType("image/jpg");
 

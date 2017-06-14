@@ -44,56 +44,33 @@ public class ForumThemeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-//                .map(o -> String.format("Здравствуйте, %s", o))
-//                .orElse("Здравствуйте!");
-//
-//        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
-//                orElse("test.jsp");
-////                orElse("/WEB-INF/index.jsp");
-
-//        String userOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
-//                .map(o -> String.format("my-page?j_username=%s", o)).
-//                        orElse("unreg-forum.jsp");
 
         String thisForumThemeIdOrderString = req.getParameter("this_forum_theme_order");
 
         int thisForumThemeOrder = parseInt(thisForumThemeIdOrderString);
 
-//        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
-//        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
-        boolean b = Optional.ofNullable(req.getParameter(String.valueOf("email")))
+//        boolean b = Optional.ofNullable(req.getParameter(String.valueOf("email")))
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
                 .map(o -> true)
                 .orElse(false);
 
-//        req.setAttribute(WELCOME_KEY, s);
-
-        req.setAttribute("user_id", req.getParameter("user_id"));
-        req.setAttribute("email", req.getParameter("email"));
+//        req.setAttribute("user_id", req.getParameter("user_id"));
+//        req.setAttribute("email", req.getParameter("email"));
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
         req.setAttribute(THIS_THEME_WALL_MESSAGES_KEY, wallMessageDao.getThisForumTheme(thisForumThemeOrder));
 
-//        HttpSession session = req.getSession();
-//        session.setAttribute("user_id", req.getParameter("user_id"));
-//        session.setAttribute("email", req.getParameter("email"));
 
-        if (b & !(req.getParameter("email").equals("null")) ) {req.getRequestDispatcher("/reg-user-forum-this-theme.jsp")
+        if (b && !((req.getParameter("email")).equals("null")) ) {
+            req.getRequestDispatcher("/reg-user-forum-this-theme.jsp")
                 .forward(req, resp);
         }
-        else {req.getRequestDispatcher("/unreg-forum-this-theme.jsp")
+        else {
+            req.getRequestDispatcher("/unreg-forum-this-theme.jsp")
                 .forward(req, resp);
         }
-
-//        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
-
-//        req.getRequestDispatcher("/WEB-INF/index.jsp")
-//                .forward(req, resp);
-
-//        req.getRequestDispatcher(userOrNot).forward(req, resp);
 
     }
 }

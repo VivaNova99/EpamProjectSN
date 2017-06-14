@@ -24,9 +24,7 @@ public class ShowPhotoAlbumPicture extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-//        userDao = (UserDao) config.getServletContext().getAttribute("UserDao");
         photoAlbumDao = (PhotoAlbumDao) config.getServletContext().getAttribute("PhotoAlbumDao");
-//        photoDao = (PhotoDao) config.getServletContext().getAttribute("PhotoDao");
     }
 
 
@@ -40,20 +38,9 @@ public class ShowPhotoAlbumPicture extends HttpServlet {
 
         String photoalbumPictureIdString = request.getParameter("photoalbum_id");
 
-//        String photoalbumPictureIdString = Optional.ofNullable(request.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> String.format("%s", o)).
-//                        orElse("1");
-
         response.setContentType("image/jpg");
 
-//        photoalbumPictureIdString = (String) request.getSession().getAttribute("photoalbum_id");
-//        int photoalbumPictureId = (Integer) request.getSession().getAttribute("photoalbum_id");
-
         int photoalbumPictureId = parseInt(photoalbumPictureIdString);
-
-//        System.out.println("photoalbum_id !!!  = " + request.getSession().getAttribute("photoalbum_id"));
-//        int photoalbumPictureId = parseInt(request.getParameter("photoalbum_id") != "" ? request.getParameter("photoalbum_id"): "4");
-//        System.out.println("photoalbum_id after= " + photoalbumPictureId);
 
         ResultSet photoalbumPictureResultSet = photoAlbumDao.transferPhotoalbumPicture(photoalbumPictureId);
 
@@ -74,7 +61,6 @@ public class ShowPhotoAlbumPicture extends HttpServlet {
             }
 
             outputStream.flush();
-//            outputStream.close();
         }
 
 

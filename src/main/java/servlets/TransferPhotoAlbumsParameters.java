@@ -38,14 +38,16 @@ public class TransferPhotoAlbumsParameters extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String email = req.getParameter("email");
+        //TODO: сервлет, чтобы добавились атрибуты в сессию. Проверить, может, будет работать и без него
 
-        int userId = userDao.getUserId(email);
-
-        String userIdString = String.valueOf(userId);
-
-        req.setAttribute("user_id", userIdString);
-        req.setAttribute("email", req.getParameter("email"));
+//        String email = req.getParameter("email");
+//
+//        int userId = userDao.getUserId(email);
+//
+//        String userIdString = String.valueOf(userId);
+//
+//        req.setAttribute("user_id", userIdString);
+//        req.setAttribute("email", req.getParameter("email"));
 
         System.out.println("In TransferPhotoAlbumParameter: user_id - " + req.getParameter("user_id") + "," +
                 " email - " + req.getParameter("email") + ", " +

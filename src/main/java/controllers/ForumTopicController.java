@@ -51,45 +51,33 @@ public class ForumTopicController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-//                .map(o -> String.format("Здравствуйте, %s", o))
-//                .orElse("Здравствуйте!");
-
+        HttpSession session = req.getSession();
 
         String thisForumTopicIdString = req.getParameter("this_forum_topic_id");
 
         int thisForumTopicId = parseInt(thisForumTopicIdString);
 
-
 //        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
-        boolean b = Optional.ofNullable(req.getParameter(String.valueOf("email")))
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
                 .map(o -> true)
                 .orElse(false);
 
-//        req.setAttribute(WELCOME_KEY, s);
-
-        req.setAttribute("user_id", req.getParameter("user_id"));
-        req.setAttribute("email", req.getParameter("email"));
+//        req.setAttribute("user_id", req.getParameter("user_id"));
+//        req.setAttribute("email", req.getParameter("email"));
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
         req.setAttribute(THIS_TOPIC_WALL_MESSAGES_KEY, wallMessageDao.getThisForumTopic(thisForumTopicId));
 
-//        HttpSession session = req.getSession();
-//        session.setAttribute("user_id", req.getParameter("user_id"));
-//        session.setAttribute("email", req.getParameter("email"));
-
-        if (b & !(req.getParameter("email").equals("null"))) {req.getRequestDispatcher("/reg-user-forum-this-topic.jsp")
+        if (b && !((session.getAttribute("email")).equals("null"))) {
+            req.getRequestDispatcher("/reg-user-forum-this-topic.jsp")
                 .forward(req, resp);
         }
-        else {req.getRequestDispatcher("/unreg-forum-this-topic.jsp")
+        else {
+            req.getRequestDispatcher("/unreg-forum-this-topic.jsp")
                 .forward(req, resp);
         }
 
-//        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
-
-//        req.getRequestDispatcher("/WEB-INF/index.jsp")
-//                .forward(req, resp);
     }
 }

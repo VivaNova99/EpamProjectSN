@@ -39,7 +39,7 @@
         <li>
             <ul>
                 <li><a href="smb-page?some_user_id=<%=friend.getId()%>"><img src="users_profile_picture?user_id=<%=friend.getId()%>" /></a></li>
-                <li class="name"><a href="smb-page?some_user_id=<%=friend.getId()%>&email=<%=request.getParameter("email")%>&user_id=<%=request.getParameter("user_id")%>"><%=friend.getFirstName()%> <%=friend.getLastName()%></a></li>
+                <li class="name"><a href="smb-page?some_user_id=<%=friend.getId()%>&email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><%=friend.getFirstName()%> <%=friend.getLastName()%></a></li>
                 <li><%=friend.getStatusOnWall()%></li>
             </ul>
         </li>

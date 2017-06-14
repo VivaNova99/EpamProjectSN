@@ -13,8 +13,8 @@
     <%--<input type="password" name="j_password" autocomplete="off" title="Password"/><br>--%>
     <input type="submit" value="submit"/>
 
-    <%System.out.println("In user-login-form.jsp: user_id - " + request.getParameter("user_id") + ", " +
-            "email - " + request.getParameter("email") + ", " +
+    <%System.out.println("In user-login-form.jsp: user_id - " + session.getAttribute("user_id") + ", " +
+            "email - " + session.getAttribute("email") + ", " +
             "photoalbum_name - " + request.getParameter("photoalbum_name") + ", " +
             "description - " + request.getParameter("description"));%>
 </form>
