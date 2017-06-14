@@ -50,22 +50,21 @@ public class UploadUsersProfilePicture extends HttpServlet {
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
 
-        String userIdString = request.getParameter("user_id");
+        String userIdString = String.valueOf(session.getAttribute("user_id"));
 
         int userId = parseInt(userIdString);
 
         userDao.insertUploadedPictureIntoUserProfilePhoto(userId, request.getPart("upfile"));
 
-
-//        request.setAttribute("user_id", request.getParameter("user_id"));
         request.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
         request.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
         request.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
 
 
         request.getRequestDispatcher("reg-user-own-page.jsp").forward(request, response);
+//        request.getRequestDispatcher("my-page").forward(request, response);
 
     }
 

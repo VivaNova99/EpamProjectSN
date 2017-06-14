@@ -60,45 +60,8 @@ public class WelcomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(true);
-
-//        String jUserLogin = req.getParameter("j_username");
-//
-//        String jUserPassword = req.getParameter("j_password");
-//
-//        String jUserId = null;
-
-
-
-//        if (jUserLogin != null && jUserPassword != null) {
-//            String userLogin = jUserLogin.replace("%40", "@");
-//            int userId = userDao.getUserId(userLogin);
-//            jUserId = "" + userId;
-//        }
-
-
-//        String userPageOrNot = Optional.ofNullable(jUserId)
-//                .map(o -> String.format("reg-user-own-page/?j_id=%s", o)).
-//                        orElse("test.jsp");
-
-
-//        System.out.println("!!!!!"+this);
-
-//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-//                .map(o -> String.format("Здравствуйте, %s", o))
-//                .orElse("Здравствуйте!");
-
-//        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> String.format("reg-user-own-page/?=%s.jsp", o)).
-//                orElse("test.jsp");
-////                orElse("/WEB-INF/index.jsp");
-
-//        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> true)
-//                .orElse(false);
-
-        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
-                .map(o -> String.format("my-page?j_username=%s", o)).
+        String userPageOrNot = Optional.ofNullable(req.getParameter(String.valueOf("email")))
+                .map(o -> String.format("my-page?email=%s", o)).
                         orElse("unreg-forum.jsp");
 //                orElse("/WEB-INF/index.jsp");
 
@@ -111,17 +74,8 @@ public class WelcomeController extends HttpServlet {
         req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
 
-//        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
-//                .forward(req, resp);
-//        }
-//        else {req.getRequestDispatcher("/WEB-INF/unreg-forum.jsp")
-//                .forward(req, resp);
-//        }
-
         req.getRequestDispatcher(userPageOrNot).forward(req, resp);
 
-//        req.getRequestDispatcher("/WEB-INF/index.jsp")
-//                .forward(req, resp);
     }
 
 }

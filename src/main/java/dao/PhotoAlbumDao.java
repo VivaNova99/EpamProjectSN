@@ -2,22 +2,27 @@ package dao;
 
 import lombok.SneakyThrows;
 import model.PhotoAlbum;
+import model.PhotoStatus;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.Optional;
 
-/**
- * Created by veraivanova on 18.03.17.
- */
+
 public interface PhotoAlbumDao {
-    int save();
-    default Optional<PhotoAlbum> get(int id){
-        return getAll().stream()
-                .filter(photoAlbum -> photoAlbum.getId() == id)
-                .findAny();
-    };
+//    int save();
+//    default Optional<PhotoAlbum> get(int id){
+//        return getAll().stream()
+//                .filter(photoAlbum -> photoAlbum.getId() == id)
+//                .findAny();
+//    };
+
+    void createWithUserPicture(String photoAlbumName, int userId, Part filePart, String photoAlbumDescription, java.sql.Timestamp timestamp, PhotoStatus photoAlbumStatus);
+
+    void createWithDefaultPicture(String photoAlbumName, int userId, String photoAlbumDescription, java.sql.Timestamp timestamp, PhotoStatus photoAlbumStatus);
+
     // update - если понадобится, делать отдельные апдейты по отдельным полям
     void remove(int id);
 

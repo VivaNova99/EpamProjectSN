@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -57,55 +58,33 @@ public class SmbPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-//                .map(o -> String.format("Здравствуйте, %s", o))
-//                .orElse("Здравствуйте!");
-
-//        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
-//                orElse("test.jsp");
-//                orElse("/WEB-INF/index.jsp");
-
-        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(LOGIN_KEY)))
-                .map(o -> true)
-                .orElse(false);
+        HttpSession session = req.getSession();
 
         String someUserIdString = req.getParameter("some_user_id");
 
         int someUserId = parseInt(someUserIdString);
 
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
+                .map(o -> true)
+                .orElse(false);
+
         req.setAttribute(SOME_USER_INFO_KEY, userDao.getUser(someUserId));
-
-
-//        req.setAttribute(WELCOME_KEY, s);
-
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
-////        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
-////        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
         req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
-////        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
         req.setAttribute(USER_INFO_KEY, userDao.getUser());
         req.setAttribute(LAST_10_FOR_SOME_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(someUserId));
         req.setAttribute(LAST_5_FOR_SOME_USER_PHOTOS_KEY, photoDao.getLast5(someUserId));
 
-//        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
-//                .forward(req, resp);
-//        }
-//        else {req.getRequestDispatcher("/WEB-INF/unreg-forum.jsp")
-//                .forward(req, resp);
-//        }
 
-//        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
-
-//        req.getRequestDispatcher("/reg-user-smb-page.jsp")
-//                .forward(req, resp);
-
-        if (b) {req.getRequestDispatcher("/reg-user-smb-page.jsp")
+        if (b && !((String.valueOf(session.getAttribute("email"))).equals("null"))) {
+            req.getRequestDispatcher("/reg-user-smb-page.jsp")
                 .forward(req, resp);
         }
-        else {req.getRequestDispatcher("/unreg-smb-page.jsp")
-                .forward(req, resp);
+        else {
+            req.getRequestDispatcher("/unreg-smb-page.jsp")
+                    .forward(req, resp);
         }
+
     }
 }

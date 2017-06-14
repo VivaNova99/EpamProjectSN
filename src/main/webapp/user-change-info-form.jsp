@@ -13,8 +13,8 @@
     Изменить дату рождения <input type="date" name="date_of_birth" title="Date of Birth" value="<%=request.getParameter("dob")%>"/><br>
     Изменить город <input type="text" name="city" title="City" value="<%=request.getParameter("city")%>"/><br>
     Изменить статус <input type="text" name="status" title="Status" value="<%=request.getParameter("status")%>"/><br>
-    <input type="hidden" name="id" value="<%=request.getParameter("id")%>"/>
-    <input type="hidden" name="email" value="<%=request.getParameter("email")%>"/>
+    <input type="hidden" name="user_id" value="<%=session.getAttribute("user_id")%>"/>
+    <input type="hidden" name="email" value="<%=session.getAttribute("email")%>"/>
 
     <input type="submit" value="submit"/>
 

@@ -15,9 +15,12 @@ import java.time.LocalDate;
 
 public class User {
 
-    public static String FIRST_NAME_KEY = "firstName";
-    public static String ID_KEY = "j_id";
-    public static String LOGIN_KEY = "j_username";
+    public static String FIRST_NAME_KEY = "first_name";
+    public static String ID_KEY = "user_id";
+    public static String LOGIN_KEY = "email";
+
+//    public static String ID_KEY = "j_id";
+//    public static String LOGIN_KEY = "j_username";
 
     private int id;
     private String firstName;

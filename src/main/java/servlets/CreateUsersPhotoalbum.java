@@ -4,7 +4,6 @@ import dao.PhotoAlbumDao;
 import dao.PhotoDao;
 import dao.UserDao;
 import dao.WallMessageDao;
-import model.PhotoAlbum;
 import model.PhotoStatus;
 
 import javax.servlet.ServletConfig;
@@ -17,19 +16,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.Date;
 
 import static java.lang.Integer.parseInt;
 
 
-@WebServlet("/upload_users_photo_picture")
+@WebServlet("/create_users_photoalbum")
 @MultipartConfig
-public class UploadUsersPhotoPicture extends HttpServlet {
+public class CreateUsersPhotoalbum extends HttpServlet {
 
     public static final String USER_INFO_KEY = "UserInfo";
     public static final String LAST_10_FOR_USER_WALL_MESSAGES_KEY = "Last10ForUserWallMessages";
     public static final String LAST_5_FOR_USER_PHOTOS_KEY = "Last5ForUserPhotos";
+    public static final String USER_PHOTOALBUMS_KEY = "UserPhotoalbums";
 
     private UserDao userDao;
     private PhotoDao photoDao;
@@ -55,26 +54,52 @@ public class UploadUsersPhotoPicture extends HttpServlet {
 
         HttpSession session = request.getSession();
 
+        int userId;
+        String email = String.valueOf(session.getAttribute("email"));
+//        int userId = userDao.getUserId(email);
+//        String userIdString = String.valueOf(userId);
         String userIdString = String.valueOf(session.getAttribute("user_id"));
 
-        int userId = parseInt(userIdString);
+        if ((userIdString == null) | (userIdString.equals("null"))){
+            userId = userDao.getUserId(email);
+        }
 
-        int photoAlbumId = photoAlbumDao.getPhotoalbumId(request.getParameter("photoalbum_name"));
+        else {
+            userId = parseInt(userIdString);
+        }
 
         Date date = new Date();
-        java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
+        Timestamp timestamp = new Timestamp(date.getTime());
 
-        String photoDescription = request.getParameter("description");
+        String photoAlbumName = request.getParameter("photoalbum_name");
 
-        PhotoStatus photoStatus = PhotoStatus.PUBLIC;
+        String photoAlbumDescription = request.getParameter("description");
 
-        photoDao.create(userId, photoAlbumId, request.getPart("upfile"), photoDescription, timestamp, photoStatus);
+        PhotoStatus photoAlbumStatus = PhotoStatus.PUBLIC;
+
+        if (request.getPart("upfile") == null){
+            photoAlbumDao.createWithDefaultPicture(photoAlbumName, userId, photoAlbumDescription, timestamp, photoAlbumStatus);
+        }
+        else {
+            photoAlbumDao.createWithUserPicture(photoAlbumName, userId, request.getPart("upfile"), photoAlbumDescription, timestamp, photoAlbumStatus);
+        }
+
+
+        request.setAttribute("user_id", userIdString);
+        request.setAttribute("email", request.getParameter("email"));
+
+        System.out.println("In CreateUsersPhotoalbum: user_id - " + String.valueOf(userId) + "," +
+                " email - " + request.getParameter("email") + ", " +
+                "photoalbum_name - " + request.getParameter("photoalbum_name") + "," +
+                " description - " + request.getParameter("description"));
 
         request.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
         request.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
         request.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
+        request.setAttribute(USER_PHOTOALBUMS_KEY, photoAlbumDao.getUserPhotoAlbums(userId));
 
 
+//        request.getRequestDispatcher("reg-user-photoalbums.jsp").forward(request, response);
         request.getRequestDispatcher("reg-user-own-page.jsp").forward(request, response);
 //        request.getRequestDispatcher("my-page").forward(request, response);
 

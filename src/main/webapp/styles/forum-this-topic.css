@@ -1,4 +1,5 @@
 section.forum-this-topic {
+    margin-top: 70px;
     padding-top: 15px;
     margin-left: 250px;
     padding-left: 15px;
@@ -9,4 +10,18 @@ section.forum-this-topic {
 
 .unreg-forum-topic section.forum-this-topic{
     margin-left: 0;
+}
+
+section.forum-this-topic > ul > li > ul > li.profile-picture > a > img {
+    height: 40px;
+}
+
+.forum-theme {
+    position: absolute;
+    top: 90px;
+}
+
+.forum-topic {
+    position: absolute;
+    top: 120px;
 }

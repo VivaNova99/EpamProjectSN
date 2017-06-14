@@ -54,53 +54,34 @@ public class MyThemesController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession();
 
-//        String s = Optional.ofNullable(req.getSession().getAttribute(FIRST_NAME_KEY))
-//                .map(o -> String.format("Здравствуйте, %s", o))
-//                .orElse("Здравствуйте!");
+        int userId;
 
-        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-                .map(o -> String.format("reg-user-own-page/%s.jsp", o)).
-                orElse("test.jsp");
-//                orElse("/WEB-INF/index.jsp");
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
+                .map(o -> true)
+                .orElse(false);
 
-//        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf(ID_KEY)))
-//                .map(o -> true)
-//                .orElse(false);
+        if (b && !((session.getAttribute("email")).equals("null"))) {
+            String email = String.valueOf(session.getAttribute("email"));
 
+            userId = userDao.getUserId(email);
 
-        String jUserLogin = req.getParameter("j_username");
+            req.setAttribute(ALL_USERS_KEY, userDao.getAll());
+            req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
+            req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
+            req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
+            req.setAttribute(MY_THEMES_KEY, wallMessageDao.getMyThemes(userId));
 
-        String jUserPassword = req.getParameter("j_password");
+            req.getRequestDispatcher("reg-user-themes.jsp")
+                    .forward(req, resp);
+        }
+        else {
+            System.out.println("атрибут email из сессии куда-то потерялся");
 
-        String jUserId = req.getParameter("j_id");
+            req.getRequestDispatcher("unreg-forum.jsp")
+                    .forward(req, resp);
+        }
 
-
-        int userId = userDao.getUserId(jUserLogin);
-
-        session.setAttribute("j_username", jUserLogin);
-
-//        req.setAttribute(WELCOME_KEY, s);
-
-        req.setAttribute(ALL_USERS_KEY, userDao.getAll());
-        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
-//        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
-        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
-//        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
-        req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
-        req.setAttribute(MY_THEMES_KEY, wallMessageDao.getMyThemes(userId));
-
-//        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
-//                .forward(req, resp);
-//        }
-//        else {req.getRequestDispatcher("/WEB-INF/unreg-forum.jsp")
-//                .forward(req, resp);
-//        }
-
-//        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
-
-        req.getRequestDispatcher("reg-user-themes.jsp")
-                .forward(req, resp);
     }
 }

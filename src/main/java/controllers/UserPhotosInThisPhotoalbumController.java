@@ -13,13 +13,10 @@ import java.io.IOException;
 import java.util.Optional;
 
 import static java.lang.Integer.parseInt;
-import static model.User.FIRST_NAME_KEY;
-import static model.User.ID_KEY;
-import static model.User.LOGIN_KEY;
 
 
-@WebServlet("/user-photoalbums")
-public class UserPhotoAlbumsController extends HttpServlet {
+@WebServlet("/user-photos-in-photoalbum")
+public class UserPhotosInThisPhotoalbumController extends HttpServlet {
 
     public static final String WELCOME_KEY = "Welcome";
     public static final String ALL_USERS_KEY = "AllUser";
@@ -28,14 +25,14 @@ public class UserPhotoAlbumsController extends HttpServlet {
     public static final String ALL_PHOTOS_KEY = "AllPhotos";
 //    public static final String ALL_PRIVATE_MESSAGES_KEY = "AllPrivateMessages";
 //    public static final String ALL_WALL_MESSAGES_KEY = "AllWallMessages";
-    public static final String USER_PHOTOALBUMS_KEY = "UserPhotoalbums";
+    public static final String USER_PHOTOS_KEY = "UserPhotos";
 
     private UserDao userDao;
-//    private ForumThemeDao forumThemeDao;
+    private ForumThemeDao forumThemeDao;
     private PhotoAlbumDao photoAlbumDao;
     private PhotoDao photoDao;
-//    private PrivateMessageDao privateMessageDao;
-//    private WallMessageDao wallMessageDao;
+    private PrivateMessageDao privateMessageDao;
+    private WallMessageDao wallMessageDao;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -59,6 +56,8 @@ public class UserPhotoAlbumsController extends HttpServlet {
         HttpSession session = req.getSession();
 
         int userId;
+        String photoalbumIdString = req.getParameter("photoalbum_id");
+        int photoalbumId = parseInt(photoalbumIdString);
 
         boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
                 .map(o -> true)
@@ -72,15 +71,15 @@ public class UserPhotoAlbumsController extends HttpServlet {
             req.setAttribute(ALL_USERS_KEY, userDao.getAll());
             req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
             req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
-            req.setAttribute(USER_PHOTOALBUMS_KEY, photoAlbumDao.getUserPhotoAlbums(userId));
+            req.setAttribute(USER_PHOTOS_KEY, photoDao.getUserPhotosInThisPhotoalbum(userId, photoalbumId));
 
-            System.out.println("In UserPhotoAlbumsController: user_id from getUserId(email) - " + userDao.getUserId(email) + ", " +
+            System.out.println("In UserPhotosController: user_id from getUserId(email) - " + userDao.getUserId(email) + ", " +
                     "user_id - " + session.getAttribute("user_id") + "," +
                     " email - " + session.getAttribute("email") + ", " +
                     "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
                     " description - " + req.getParameter("description"));
 
-            req.getRequestDispatcher("reg-user-photoalbums.jsp")
+            req.getRequestDispatcher("reg-user-photos.jsp")
                     .forward(req, resp);
         }
         else {
@@ -93,9 +92,9 @@ public class UserPhotoAlbumsController extends HttpServlet {
             req.setAttribute(ALL_USERS_KEY, userDao.getAll());
             req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
             req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
-            req.setAttribute(USER_PHOTOALBUMS_KEY, photoAlbumDao.getUserPhotoAlbums(someUserId));
+            req.setAttribute(USER_PHOTOS_KEY, photoDao.getUserPhotosInThisPhotoalbum(someUserId, photoalbumId));
 
-            req.getRequestDispatcher("unreg-user-photoalbums.jsp")
+            req.getRequestDispatcher("unreg-user-photos.jsp")
                     .forward(req, resp);
         }
 

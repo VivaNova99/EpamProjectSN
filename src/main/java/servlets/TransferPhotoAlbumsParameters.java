@@ -11,15 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Optional;
+
 import static java.lang.Integer.parseInt;
 
-@WebServlet("/photoalbums_list")
-public class BuildPhotoAlbumsList extends HttpServlet{
+@WebServlet("/photoalbums_parameters")
+public class TransferPhotoAlbumsParameters extends HttpServlet{
 
     public static final String USER_PHOTOALBUMS_KEY = "UserPhotoalbums";
 
@@ -42,24 +38,25 @@ public class BuildPhotoAlbumsList extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession();
+        //TODO: сервлет, чтобы добавились атрибуты в сессию. Проверить, может, будет работать и без него
 
-//        req.setCharacterEncoding("UTF-8");
-//        resp.setContentType("text/html; charset=UTF-8");
+//        String email = req.getParameter("email");
+//
+//        int userId = userDao.getUserId(email);
+//
+//        String userIdString = String.valueOf(userId);
+//
+//        req.setAttribute("user_id", userIdString);
+//        req.setAttribute("email", req.getParameter("email"));
 
-        String userIdString = String.valueOf(session.getAttribute("user_id"));
+        System.out.println("In TransferPhotoAlbumParameter: user_id - " + req.getParameter("user_id") + "," +
+                " email - " + req.getParameter("email") + ", " +
+                "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
+                " description - " + req.getParameter("description"));
 
-        int userId = parseInt(userIdString);
 
+        req.getRequestDispatcher("user-create-photoalbum-form.jsp").forward(req, resp);
 
-        // TODO: добавить нотификацию "Создайте фотоальбом"
-        if((photoAlbumDao.getUserPhotoAlbums(userId)).isEmpty()){
-            req.getRequestDispatcher("user-create-photoalbum-form.jsp").forward(req, resp);
-        }
-        else {req.setAttribute(USER_PHOTOALBUMS_KEY, photoAlbumDao.getUserPhotoAlbums(userId));
-
-            req.getRequestDispatcher("user-upload-photo-form.jsp").forward(req, resp);
-        }
 
     }
 }
