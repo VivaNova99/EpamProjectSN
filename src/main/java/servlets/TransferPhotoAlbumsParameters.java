@@ -14,7 +14,7 @@ import java.io.IOException;
 
 import static java.lang.Integer.parseInt;
 
-@WebServlet("/photoalbums_parameters")
+//@WebServlet("/photoalbums_parameters")
 public class TransferPhotoAlbumsParameters extends HttpServlet{
 
     public static final String USER_PHOTOALBUMS_KEY = "UserPhotoalbums";
@@ -38,8 +38,6 @@ public class TransferPhotoAlbumsParameters extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //TODO: сервлет, чтобы добавились атрибуты в сессию. Проверить, может, будет работать и без него
-
 //        String email = req.getParameter("email");
 //
 //        int userId = userDao.getUserId(email);
@@ -49,10 +47,10 @@ public class TransferPhotoAlbumsParameters extends HttpServlet{
 //        req.setAttribute("user_id", userIdString);
 //        req.setAttribute("email", req.getParameter("email"));
 
-        System.out.println("In TransferPhotoAlbumParameter: user_id - " + req.getParameter("user_id") + "," +
-                " email - " + req.getParameter("email") + ", " +
-                "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
-                " description - " + req.getParameter("description"));
+//        System.out.println("In TransferPhotoAlbumParameter: user_id - " + req.getParameter("user_id") + "," +
+//                " email - " + req.getParameter("email") + ", " +
+//                "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
+//                " description - " + req.getParameter("description"));
 
 
         req.getRequestDispatcher("user-create-photoalbum-form.jsp").forward(req, resp);
