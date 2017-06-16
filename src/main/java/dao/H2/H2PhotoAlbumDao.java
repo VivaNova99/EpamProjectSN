@@ -346,8 +346,6 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
     @SneakyThrows
     public int getPhotoalbumId(String photoalbumName) {
 
-        //        TODO: добавить try with resources
-
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
                      "id FROM PhotoAlbum WHERE name = ?")){

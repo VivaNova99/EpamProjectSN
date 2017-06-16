@@ -5,11 +5,10 @@ import lombok.SneakyThrows;
 import model.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Part;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.io.InputStream;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,9 +25,79 @@ public class H2WallMessageDao implements WallMessageDao {
 
 
     @Override
-    public int save() {
-        return 0;
+    @SneakyThrows
+    public void createWithUserPicture(int senderUserId, String text, Part filePart, Timestamp timestamp,
+                                      int forumThemeId, String messageHeader, boolean isParent, int parentMessageId, MessageStatus messageStatus) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO WallMessage (" +
+                             "sender_user_id, " +
+                             "text, " +
+                             "picture, " +
+                             "date_time, " +
+                             "forum_theme_id, " +
+                             "message_header, " +
+                             "is_parent, " +
+                             "parent_message_id, " +
+                             "status_id) " +
+                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+
+//            // Для вставки фото профиля
+//            File file = new File("/Users/veraivanova/IdeaProjects/EpamProjectSN/src/main/webapp/img/default_large.jpg");
+//            FileInputStream fileInputStream = new FileInputStream(file);
+
+            InputStream fileInputStream = filePart.getInputStream();
+
+            preparedStatement.setObject(1, senderUserId);
+            preparedStatement.setObject(2, text);
+            preparedStatement.setBinaryStream(3, fileInputStream, (int)filePart.getSize());
+            preparedStatement.setObject(4, timestamp);
+            preparedStatement.setObject(5, forumThemeId);
+            preparedStatement.setObject(6, messageHeader);
+            preparedStatement.setObject(7, isParent);
+            preparedStatement.setObject(8, parentMessageId);
+            preparedStatement.setObject(9, messageStatus.ordinal() + 1);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+            }
+        }
+
+
+    @Override
+    @SneakyThrows
+    public void createWithoutPicture(int senderUserId, String text, Timestamp timestamp,
+                                     int forumThemeId, String messageHeader, boolean isParent, int parentMessageId, MessageStatus messageStatus) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO WallMessage (" +
+                             "sender_user_id, " +
+                             "text, " +
+                             "date_time, " +
+                             "forum_theme_id, " +
+                             "message_header, " +
+                             "is_parent, " +
+                             "parent_message_id, " +
+                             "status_id) " +
+                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+
+            preparedStatement.setObject(1, senderUserId);
+            preparedStatement.setObject(2, text);
+            preparedStatement.setObject(3, timestamp);
+            preparedStatement.setObject(4, forumThemeId);
+            preparedStatement.setObject(5, messageHeader);
+            preparedStatement.setObject(6, isParent);
+            preparedStatement.setObject(7, parentMessageId);
+            preparedStatement.setObject(8, messageStatus);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+        }
     }
+
+
 
     @Override
     public void remove(int id) {

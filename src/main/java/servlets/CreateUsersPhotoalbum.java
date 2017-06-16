@@ -88,10 +88,10 @@ public class CreateUsersPhotoalbum extends HttpServlet {
         request.setAttribute("user_id", userIdString);
         request.setAttribute("email", request.getParameter("email"));
 
-        System.out.println("In CreateUsersPhotoalbum: user_id - " + String.valueOf(userId) + "," +
-                " email - " + request.getParameter("email") + ", " +
-                "photoalbum_name - " + request.getParameter("photoalbum_name") + "," +
-                " description - " + request.getParameter("description"));
+//        System.out.println("In CreateUsersPhotoalbum: user_id - " + String.valueOf(userId) + "," +
+//                " email - " + request.getParameter("email") + ", " +
+//                "photoalbum_name - " + request.getParameter("photoalbum_name") + "," +
+//                " description - " + request.getParameter("description"));
 
         request.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
         request.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));

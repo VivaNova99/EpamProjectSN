@@ -6,6 +6,7 @@ import model.ForumTheme;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -57,4 +58,44 @@ public class H2ForumThemeDao implements ForumThemeDao {
             return forumThemes;
         }
     }
+
+    @Override
+    @SneakyThrows
+    public Collection<ForumTheme> getAllForumThemeNames() {
+
+        List<ForumTheme> forumThemes = new ArrayList<>();
+
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT name FROM ForumTheme")) {
+            while (resultSet.next()){
+                forumThemes.add(new ForumTheme(
+                        resultSet.getString("name")
+                ));
+            }
+            return forumThemes;
+        }
+    }
+
+
+    @Override
+    @SneakyThrows
+    public int getForumThemeId(String forumThemeName) {
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+                     "id FROM ForumTheme WHERE name = ?")){
+
+            preparedStatement.setString(1, forumThemeName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+
+            int forumThemeId = resultSet.getInt("id");
+
+            return forumThemeId;
+        }
+    }
+
+
 }

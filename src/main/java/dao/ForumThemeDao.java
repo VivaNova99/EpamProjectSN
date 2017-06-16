@@ -1,5 +1,6 @@
 package dao;
 
+import lombok.SneakyThrows;
 import model.ForumTheme;
 
 import java.util.Collection;
@@ -19,4 +20,10 @@ public interface ForumThemeDao {
     void remove(int id);
 
     Collection<ForumTheme> getAll();
+
+    @SneakyThrows
+    Collection<ForumTheme> getAllForumThemeNames();
+
+    @SneakyThrows
+    int getForumThemeId(String forumThemeName);
 }

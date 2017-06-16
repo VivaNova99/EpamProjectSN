@@ -65,7 +65,8 @@
    message_header VARCHAR(50),
    is_parent BOOLEAN,
    parent_message_id INT,
-   status_id VARCHAR(50),
+   /*status_id VARCHAR(20),*/
+   status_id INT,
 
    FOREIGN KEY (parent_message_id) REFERENCES WallMessage(id),
    FOREIGN KEY (status_id) REFERENCES MessageStatus(id),
