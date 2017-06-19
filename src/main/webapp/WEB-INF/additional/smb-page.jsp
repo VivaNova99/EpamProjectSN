@@ -20,21 +20,21 @@
 <div class="user-page unreg-user-page">
 
     <%
-        User user = (User) request.getAttribute(SmbPageController.SOME_USER_INFO_KEY);
+        User someUser = (User) request.getAttribute(SmbPageController.SOME_USER_INFO_KEY);
     %>
 
-    <div class="user-profile-picture"><img src="users_profile_picture?user_id=<%=user.getId()%>" /></div>
+    <div class="user-profile-picture"><img src="users_profile_picture?users_profile_picture_id=<%=someUser.getId()%>" /></div><br>
 
-    <section class="user-info">
+    <section class="some-user-info">
 
-        <div class="user-name"><%=user.getFirstName()%> <%=user.getLastName()%></div>
-        <div class="user-status-on-wall"><%=user.getStatusOnWall()%></div>
-        <div class="user-dob">День рождения: <%=user.getDateOfBirth()%></div>
-        <div class="user-city">Город: <%=user.getCity()%></div>
+        <div class="user-name"><%=someUser.getFirstName()%> <%=someUser.getLastName()%></div>
+        <div class="user-status-on-wall"><%=someUser.getStatusOnWall()%></div>
+        <div class="user-dob">День рождения: <%=someUser.getDateOfBirth()%></div>
+        <div class="user-city">Город: <%=someUser.getCity()%></div>
     </section>
 
 <%
-    Collection<Photo> last5ForUserPhotos = (Collection<Photo>) request.getAttribute(SmbPageController.LAST_5_FOR_SOME_USER_PHOTOS_KEY);
+    Collection<Photo> last5ForSomeUserPhotos = (Collection<Photo>) request.getAttribute(SmbPageController.LAST_5_FOR_SOME_USER_PHOTOS_KEY);
 %>
 
     <section class="user-photos">
@@ -43,11 +43,11 @@
 
         <ul>
             <%
-                for (Photo last5ForUserPhoto: last5ForUserPhotos) {
+                for (Photo last5ForSomeUserPhoto: last5ForSomeUserPhotos) {
             %>
             <li class="user-last-photo">
-                <a rel="nofollow" target="_blank" href="photo_picture?photo_id=<%=last5ForUserPhoto.getId()%>">
-                    <img height="150" src="photo_picture?photo_id=<%=last5ForUserPhoto.getId()%>">
+                <a rel="nofollow" target="_blank" href="photo_picture?photo_id=<%=last5ForSomeUserPhoto.getId()%>">
+                    <img height="150" src="photo_picture?photo_id=<%=last5ForSomeUserPhoto.getId()%>">
                 </a>
             </li>
             <%
@@ -58,33 +58,33 @@
     </section>
 
 
-    <section class="smb-user-wall-messages">
+    <section class="some-user-wall-messages">
     <%--<textarea class="whats-new" placeholder="Что у Вас нового?"></textarea>--%>
 
         <%
-            Collection<WallMessage> last10ForUserWallMessages = (Collection<WallMessage>) request.getAttribute(UserOwnPageController.LAST_10_FOR_USER_WALL_MESSAGES_KEY);
+            Collection<WallMessage> last10ForSomeUserWallMessages = (Collection<WallMessage>) request.getAttribute(UserOwnPageController.LAST_10_FOR_USER_WALL_MESSAGES_KEY);
         %>
 
         <ul class="my-wall">
             <li class="my-notes"><h1>Записи</h1></li>
             <%
-                for (WallMessage last10ForUserWallMessage: last10ForUserWallMessages) {
+                for (WallMessage last10ForSomeUserWallMessage: last10ForSomeUserWallMessages) {
             %>
             <ul>
                 <li class="header">
-                    <%=last10ForUserWallMessage.getMessageHeader()%>
+                    <%=last10ForSomeUserWallMessage.getMessageHeader()%>
                 </li>
                 <li class="date-time">
-                    <%=last10ForUserWallMessage.getDateTime()%> написал(а):
+                    <%=last10ForSomeUserWallMessage.getDateTime()%> написал(а):
                 </li>
                 <li class="text">
-                    <%=last10ForUserWallMessage.getText()%>
+                    <%=last10ForSomeUserWallMessage.getText()%>
                 </li>
                 <li class="picture">
-                    <img src="wall_message_picture?wall_message_picture_id=<%=last10ForUserWallMessage.getId()%>" />
+                    <img src="wall_message_picture?wall_message_picture_id=<%=last10ForSomeUserWallMessage.getId()%>" />
                 </li>
                 <li class="link">
-                    <a href="forum-this-topic?this_forum_topic_id=<%=last10ForUserWallMessage.getId()%>&email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"> ссылка на обсуждение </a>
+                    <a href="forum-this-topic?this_forum_topic_id=<%=last10ForSomeUserWallMessage.getId()%>&email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"> ссылка на обсуждение </a>
                 </li>
             </ul>
             <%

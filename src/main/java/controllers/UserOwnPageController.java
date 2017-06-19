@@ -56,35 +56,36 @@ public class UserOwnPageController extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        int userId;
+//        int userId;
 
         boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
                 .map(o -> true)
                 .orElse(false);
-
+//
         if (b && !((session.getAttribute("email")).equals("null"))) {
             String email = String.valueOf(session.getAttribute("email"));
 
-            userId = userDao.getUserId(email);
+            String userIdString = String.valueOf(session.getAttribute("user_id"));
+            int userId = parseInt(userIdString);
 
             req.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
             req.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
             req.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
-            req.setAttribute(ALL_USERS_KEY, userDao.getAll());
-            req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
-            req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
+//            req.setAttribute(ALL_USERS_KEY, userDao.getAll());
+//            req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
+//            req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
 
-            System.out.println("In UserOwnPageController: user_id from getUserId(email) - " + userDao.getUserId(email) + ", " +
-                    "user_id - " + session.getAttribute("user_id") + "," +
-                    " email - " + session.getAttribute("email") + ", " +
-                    "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
-                    " description - " + req.getParameter("description"));
+//            System.out.println("In UserOwnPageController: user_id from getUserId(email) - " + userDao.getUserId(email) + ", " +
+//                    "user_id - " + session.getAttribute("user_id") + "," +
+//                    " email - " + session.getAttribute("email") + ", " +
+//                    "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
+//                    " description - " + req.getParameter("description"));
 
             req.getRequestDispatcher("reg-user-own-page.jsp")
                     .forward(req, resp);
         }
         else {
-            System.out.println("атрибут email из сессии куда-то потерялся");
+            System.out.println("незарегистрированный пользователь (нет атрибута email в сессии)");
 
             req.getRequestDispatcher("unreg-forum.jsp")
                     .forward(req, resp);

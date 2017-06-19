@@ -41,7 +41,7 @@ public class ShowUsersProfilePicture extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        String usersProfilePictureIdString = String.valueOf(session.getAttribute("user_id"));
+        String usersProfilePictureIdString = request.getParameter("users_profile_picture_id");
 
         response.setContentType("image/jpg");
 

@@ -20,10 +20,10 @@
 
     <input type="submit" value="Создать альбом">
 
-    <%System.out.println("In user-create-photoalbum-form.jsp: user_id - " + session.getAttribute("user_id") + ", " +
-            "email - " + session.getAttribute("email") + ", " +
-            "photoalbum_name - " + request.getParameter("photoalbum_name") + ", " +
-            "description - " + request.getParameter("description"));%>
+    <%--<%System.out.println("In user-create-photoalbum-form.jsp: user_id - " + session.getAttribute("user_id") + ", " +--%>
+            <%--"email - " + session.getAttribute("email") + ", " +--%>
+            <%--"photoalbum_name - " + request.getParameter("photoalbum_name") + ", " +--%>
+            <%--"description - " + request.getParameter("description"));%>--%>
 
 </form>
 

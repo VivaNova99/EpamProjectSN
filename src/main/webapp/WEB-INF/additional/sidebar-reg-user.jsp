@@ -37,10 +37,10 @@
         <li><a href="my-themes?email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><i class="fa fa-commenting" aria-hidden="true"></i>Мои темы</a></li>
         <li><a href="reg-user-answers?email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><i class="fa fa-commenting-o" aria-hidden="true"></i>Мои ответы</a></li>
         <%--<%System.out.println("In sidebar-reg-user.jsp11111 PARAMS = " + params);%>--%>
-        <%System.out.println("In sidebar-reg-user.jsp: user_id - " + session.getAttribute("user_id") + ", " +
-                "email - " + session.getAttribute("email") + ", " +
-                "photoalbum_name - " + request.getParameter("photoalbum_name") + ", " +
-                "description - " + request.getParameter("description"));%>
+        <%--<%System.out.println("In sidebar-reg-user.jsp: user_id - " + session.getAttribute("user_id") + ", " +--%>
+                <%--"email - " + session.getAttribute("email") + ", " +--%>
+                <%--"photoalbum_name - " + request.getParameter("photoalbum_name") + ", " +--%>
+                <%--"description - " + request.getParameter("description"));%>--%>
     </ul>
 </div>
 <%--<input type="hidden" name="j_id" value="<%=request.getParameter("j_id")%>" />--%>

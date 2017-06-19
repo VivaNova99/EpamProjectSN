@@ -6,10 +6,7 @@ import model.*;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,9 +25,34 @@ public class H2PrivateMessageDao implements PrivateMessageDao {
     }
 
 
+//    @Override
+//    public int save() {
+//        return 0;
+//    }
+
     @Override
-    public int save() {
-        return 0;
+    @SneakyThrows
+    public void create(int senderUserId, int receiverUserId, String text, Timestamp timestamp, MessageStatus privateMessageStatus){
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO PrivateMessage (" +
+                             "sender_user_id, " +
+                             "receiver_user_id," +
+                             "text, " +
+                             "date_time, " +
+                             "status_id) " +
+                             "VALUES (?, ?, ?, ?, ?)")) {
+
+            preparedStatement.setObject(1, senderUserId);
+            preparedStatement.setObject(2, receiverUserId);
+            preparedStatement.setObject(3, text);
+            preparedStatement.setObject(4, timestamp);
+            preparedStatement.setObject(5, privateMessageStatus.ordinal() + 1);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+        }
     }
 
     @Override

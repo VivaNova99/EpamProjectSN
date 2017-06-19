@@ -15,7 +15,7 @@ import static java.lang.Integer.parseInt;
 import static model.User.LOGIN_KEY;
 
 
-//@WebServlet("/login")
+@WebServlet("/login")
 public class AutorizationController extends HttpServlet {
 
     public static final String WELCOME_KEY = "Welcome";
@@ -55,49 +55,68 @@ public class AutorizationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession();
 
-        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
-                .map(o -> String.format("my-page?email=%s", o)).
-                orElse("error.jsp");
+//        String userPageOrNot = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
+//                .map(o -> String.format("my-page?email=%s", o)).
+//                orElse("error.jsp");
 
 
 //            //TODO: добавить проверку пароля и страницу ошибки, если нет такого логина в базе
 
+        int userId;
 
-        String email = req.getParameter("email");
+        boolean b = Optional.ofNullable(req.getSession().getAttribute(String.valueOf("email")))
+                .map(o -> true)
+                .orElse(false);
 
-        int userId = userDao.getUserId(email);
+        if (b && !((session.getAttribute("email")).equals("null"))) {
+            String email = String.valueOf(session.getAttribute("email"));
 
-        String userIdString = String.valueOf(userId);
+            userId = userDao.getUserId(email);
 
-        req.setAttribute("email", req.getParameter("email"));
-        req.setAttribute("user_id", userIdString);
-        req.setAttribute(ALL_USERS_KEY, userDao.getAll());
-//        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
-//        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
-        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
-//        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
-        req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
+            session.setAttribute("user_id", String.valueOf(userId));
 
-        System.out.println("In AutorizationController: user_id - " + req.getParameter("user_id") + "," +
-                " email - " + req.getParameter("email") + ", " +
-                "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
-                " description - " + req.getParameter("description"));
+//            req.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
+//            req.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
+//            req.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
+//            req.setAttribute(ALL_USERS_KEY, userDao.getAll());
+//            req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
+//            req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
+
+//            System.out.println("In AutorizationController: user_id from getUserId(email) - " + userDao.getUserId(email) + ", " +
+//                    "user_id - " + session.getAttribute("user_id") + "," +
+//                    " email - " + session.getAttribute("email") + ", " +
+//                    "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
+//                    " description - " + req.getParameter("description"));
+
+            req.getRequestDispatcher("my-page")
+                    .forward(req, resp);
+        }
+        else {
+            System.out.println("нет такого email");
+
+            req.getRequestDispatcher("unreg-forum.jsp")
+                    .forward(req, resp);
+        }
 
 
-//        if (b) {req.getRequestDispatcher("/WEB-INF/reg-user-own-page.jsp")
-//                .forward(req, resp);
-//        }
-//        else {req.getRequestDispatcher("/WEB-INF/unreg-forum.jsp")
-//                .forward(req, resp);
-//        }
+////        req.setAttribute("email", req.getParameter("email"));
+////        req.setAttribute("user_id", userIdString);
+//        req.setAttribute(ALL_USERS_KEY, userDao.getAll());
+////        req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
+////        req.setAttribute(ALL_PHOTO_ALBUMS_KEY, photoAlbumDao.getAll());
+//        req.setAttribute(ALL_PHOTOS_KEY, photoDao.getAll());
+////        req.setAttribute(ALL_PRIVATE_MESSAGES_KEY, privateMessageDao.getAll());
+//        req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
 
-//        HttpSession session = req.getSession();
-//        session.setAttribute("user_id", req.getParameter("user_id"));
-//        session.setAttribute("email", req.getParameter("email"));
+//        System.out.println("In AutorizationController: user_id - " + req.getParameter("user_id") + "," +
+//                " email - " + req.getParameter("email") + ", " +
+//                "photoalbum_name - " + req.getParameter("photoalbum_name") + "," +
+//                " description - " + req.getParameter("description"));
 
-        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
+
+//        req.getRequestDispatcher(userPageOrNot).forward(req, resp);
 
     }
 }

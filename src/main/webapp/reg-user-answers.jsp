@@ -37,7 +37,7 @@
                 <li class="header"> На Ваш вопрос: <%=answersWallMessage.getMessageHeader()%></li>
                 <li class="forum-theme"> В подфоруме: <%=answersWallMessage.getForumThemeName()%></li>
                 <li class="profile-picture"><a href="smb-page?some_user_id=<%=answersWallMessage.getSenderUserId()%>">
-                    <img src="users_profile_picture?user_id=<%=answersWallMessage.getSenderUserId()%>" /></a></li>
+                    <img src="users_profile_picture?users_profile_picture_id=<%=answersWallMessage.getSenderUserId()%>" /></a></li>
                 <li class="name"><a href="smb-page?some_user_id=<%=answersWallMessage.getSenderUserId()%>&email=<%=request.getParameter("email")%>&user_id=<%=request.getParameter("user_id")%>">
                     <%=answersWallMessage.getSenderUserFirstNameAndLastName()%></a></li>
                 <li class="date-time"><%=answersWallMessage.getDateTime()%> Ответил(а): </li>

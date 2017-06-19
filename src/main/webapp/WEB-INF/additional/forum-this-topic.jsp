@@ -35,7 +35,7 @@
             <ul>
                 <li class="date-time"><%=thisTopicWallMessage.getDateTime()%></li>
                 <li class="profile-picture"><a href="smb-page?some_user_id=<%=thisTopicWallMessage.getSenderUserId()%>">
-                    <img src="users_profile_picture?user_id=<%=thisTopicWallMessage.getSenderUserId()%>" /></a></li>
+                    <img src="users_profile_picture?users_profile_picture_id=<%=thisTopicWallMessage.getSenderUserId()%>" /></a></li>
                 <li><a href="smb-page?some_user_id=<%=thisTopicWallMessage.getSenderUserId()%>&email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>">
                     <%=thisTopicWallMessage.getSenderUserFirstNameAndLastName()%></a>
                     <%=thisTopicWallMessage.getDateTime()%></li>

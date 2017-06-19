@@ -38,7 +38,7 @@
                 <li>
                     <ul class="receiver">
                         <li class="receiver-profile-picture">Получатель: <a href="smb-page?some_user_id=<%=myPrivateMessage.getReceiverUserId()%>">
-                            <img src="users_profile_picture?user_id=<%=myPrivateMessage.getReceiverUserId()%>" /></a></li>
+                            <img src="users_profile_picture?users_profile_picture_id=<%=myPrivateMessage.getReceiverUserId()%>" /></a></li>
                         <li class="receiver-name"><a href="smb-page?some_user_id=<%=myPrivateMessage.getReceiverUserId()%>">
                             <%=myPrivateMessage.getReceiverUserFirstNameAndLastName()%></a></li>
                     </ul>
@@ -46,7 +46,7 @@
                 <li>
                     <ul class="sender">
                         <li class="sender-profile-picture">Отправитель: <a href="smb-page?some_user_id=<%=myPrivateMessage.getSenderUserId()%>">
-                            <img src="users_profile_picture?user_id=<%=myPrivateMessage.getSenderUserId()%>" /></a></li>
+                            <img src="users_profile_picture?users_profile_picture_id=<%=myPrivateMessage.getSenderUserId()%>" /></a></li>
                         <li class="sender-name"><a href="smb-page?some_user_id=<%=myPrivateMessage.getSenderUserId()%>">
                             <%=myPrivateMessage.getSenderUserFirstNameAndLastName()%></a></li>
                     </ul>

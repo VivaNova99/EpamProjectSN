@@ -37,7 +37,7 @@ import="controllers.MyNewsController" %>
         <li>
             <ul>
                 <li class="profile-picture"><a href="smb-page?some_user_id=<%=last10WallMessage.getSenderUserId()%>">
-                    <img src="users_profile_picture?user_id=<%=last10WallMessage.getSenderUserId()%>" /></a></li>
+                    <img src="users_profile_picture?users_profile_picture_id=<%=last10WallMessage.getSenderUserId()%>" /></a></li>
                 <li class="name"><a href="smb-page?some_user_id=<%=last10WallMessage.getSenderUserId()%>&email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>">
                     <%=last10WallMessage.getSenderUserFirstNameAndLastName()%></a></li>
                 <li class="forum-theme">В подфоруме: <%=last10WallMessage.getForumThemeName()%></li>

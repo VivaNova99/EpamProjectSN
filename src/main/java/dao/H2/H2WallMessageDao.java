@@ -89,7 +89,7 @@ public class H2WallMessageDao implements WallMessageDao {
             preparedStatement.setObject(5, messageHeader);
             preparedStatement.setObject(6, isParent);
             preparedStatement.setObject(7, parentMessageId);
-            preparedStatement.setObject(8, messageStatus);
+            preparedStatement.setObject(8, messageStatus.ordinal() + 1);
 
             preparedStatement.executeUpdate();
 

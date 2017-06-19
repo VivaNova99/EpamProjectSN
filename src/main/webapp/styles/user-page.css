@@ -26,7 +26,8 @@ div.user-profile-picture > img {
     /*padding-bottom: 20px;*/
 }
 
-section.user-info {
+section.user-info,
+section.some-user-info{
     margin-left: 450px;
 }
 
@@ -82,7 +83,7 @@ div.user-city {
 
 
 section.wall-messages,
-section.smb-user-wall-messages {
+section.some-user-wall-messages {
     margin-top: 10px;
     margin-bottom: 10px;
     border: solid saddlebrown 1px;
@@ -93,8 +94,8 @@ section.smb-user-wall-messages {
 
 section.wall-messages li.text,
 section.wall-messages li.picture,
-section.smb-user-wall-messages li.text,
-section.smb-user-wall-messages li.picture {
+section.some-user-wall-messages li.text,
+section.some-user-wall-messages li.picture {
     background-color: floralwhite;
     padding-top: 10px;
 }
