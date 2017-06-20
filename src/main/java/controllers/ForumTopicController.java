@@ -69,6 +69,8 @@ public class ForumTopicController extends HttpServlet {
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
         req.setAttribute(THIS_TOPIC_WALL_MESSAGES_KEY, wallMessageDao.getThisForumTopic(thisForumTopicId));
+        req.setAttribute("parent_message_id", thisForumTopicId);
+        req.setAttribute("forum_theme_id", wallMessageDao.getForumThemeId(thisForumTopicId));
 
         if (b && !((session.getAttribute("email")).equals("null"))) {
             req.getRequestDispatcher("/reg-user-forum-this-topic.jsp")

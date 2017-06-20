@@ -36,6 +36,7 @@
         <li><a href="reg-user-forum.jsp?email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><i class="fa fa-comments-o" aria-hidden="true"></i>Форум</a></li>
         <li><a href="my-themes?email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><i class="fa fa-commenting" aria-hidden="true"></i>Мои темы</a></li>
         <li><a href="reg-user-answers?email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><i class="fa fa-commenting-o" aria-hidden="true"></i>Мои ответы</a></li>
+            <li><a href="test-page?email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><i class="fa fa-commenting-o" aria-hidden="true"></i>Тестовая страница</a></li>
         <%--<%System.out.println("In sidebar-reg-user.jsp11111 PARAMS = " + params);%>--%>
         <%--<%System.out.println("In sidebar-reg-user.jsp: user_id - " + session.getAttribute("user_id") + ", " +--%>
                 <%--"email - " + session.getAttribute("email") + ", " +--%>

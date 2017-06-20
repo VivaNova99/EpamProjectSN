@@ -30,6 +30,10 @@ public interface WallMessageDao {
     void createWithoutPicture(int senderUserId, String text, Timestamp timestamp,
                               int forumThemeId, String messageHeader, boolean isParent, int parentMessageId, MessageStatus messageStatus);
 
+    @SneakyThrows
+    void createForumAnswer(int senderUserId, String text, Timestamp timestamp, int forumThemeId,
+                           boolean isParent, int parentMessageId, MessageStatus messageStatus);
+
     // update - если понадобится, делать отдельные апдейты по отдельным полям
     void remove(int id);
 
@@ -56,4 +60,6 @@ public interface WallMessageDao {
     Collection<WallMessage> getMyThemes(int userId);
 
     ResultSet transferWallMessagePicture(int wallMessagePictureId);
+
+    int getForumThemeId(int thisForumTopicId);
 }

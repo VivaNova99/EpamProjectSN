@@ -98,6 +98,37 @@ public class H2WallMessageDao implements WallMessageDao {
     }
 
 
+    @Override
+    @SneakyThrows
+    public void createForumAnswer(int senderUserId, String text, Timestamp timestamp, int forumThemeId,
+                                  boolean isParent, int parentMessageId, MessageStatus messageStatus) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO WallMessage (" +
+                             "sender_user_id, " +
+                             "text, " +
+                             "date_time, " +
+                             "forum_theme_id, " +
+                             "is_parent, " +
+                             "parent_message_id, " +
+                             "status_id) " +
+                             "VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+
+            preparedStatement.setObject(1, senderUserId);
+            preparedStatement.setObject(2, text);
+            preparedStatement.setObject(3, timestamp);
+            preparedStatement.setObject(4, forumThemeId);
+            preparedStatement.setObject(5, isParent);
+            preparedStatement.setObject(6, parentMessageId);
+            preparedStatement.setObject(7, messageStatus.ordinal() + 1);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+        }
+    }
+
+
 
     @Override
     public void remove(int id) {
@@ -415,8 +446,6 @@ public class H2WallMessageDao implements WallMessageDao {
     @SneakyThrows
     public Collection<WallMessage> getThisForumTheme(int thisForumThemeOrder) {
         List<WallMessage> thisThemeWallMessages = new ArrayList<>();
-
-        //TODO: здесь есть try with resources. Добавить так же в остальные!
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
@@ -801,6 +830,19 @@ public class H2WallMessageDao implements WallMessageDao {
             return myThemesWallMessages;
         }
     }
+
+
+    @Override
+    @SneakyThrows
+    public int getForumThemeId(int thisForumTopicId) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT forum_theme_id FROM WallMessage WHERE id = ?")){
+            preparedStatement.setInt(1, thisForumTopicId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt("forum_theme_id");
+        }
+    };
 
 
     @Override
