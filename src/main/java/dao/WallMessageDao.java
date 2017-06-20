@@ -5,7 +5,7 @@ import model.MessageStatus;
 import model.WallMessage;
 
 import javax.servlet.http.Part;
-import java.sql.ResultSet;
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.Collection;
 
@@ -59,7 +59,7 @@ public interface WallMessageDao {
 
     Collection<WallMessage> getMyThemes(int userId);
 
-    ResultSet transferWallMessagePicture(int wallMessagePictureId);
+    InputStream transferWallMessagePicture(int wallMessagePictureId);
 
     int getForumThemeId(int thisForumTopicId);
 }

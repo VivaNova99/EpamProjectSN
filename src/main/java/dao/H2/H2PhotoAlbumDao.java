@@ -7,13 +7,11 @@ import model.PhotoStatus;
 import model.User;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,9 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
-
-import static ch.qos.logback.core.util.OptionHelper.isEmpty;
 
 
 public class H2PhotoAlbumDao implements PhotoAlbumDao {
@@ -361,35 +356,21 @@ public class H2PhotoAlbumDao implements PhotoAlbumDao {
         }
     }
 
+
     @Override
     @SneakyThrows
-    public ResultSet transferPhotoalbumPicture(int photoalbumPictureId) {
+    public InputStream transferPhotoalbumPicture(int photoalbumPictureId) {
+        InputStream is = null;
 
-        //        TODO: добавить try with resources
+        try (
+                Connection connection = dataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT photo_album_picture FROM PhotoAlbum WHERE id = ?") ) {
+            preparedStatement.setInt(1, photoalbumPictureId);
+            ResultSet photoalbumPictureResultSet = preparedStatement.executeQuery();
+            photoalbumPictureResultSet.next();
 
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT photo_album_picture FROM PhotoAlbum WHERE id = ?");
-        preparedStatement.setInt(1, photoalbumPictureId);
-        ResultSet photoalbumPictureResultSet = preparedStatement.executeQuery();
-        photoalbumPictureResultSet.next();
-
-        return photoalbumPictureResultSet;
-
-
-//        try (Connection connection = dataSource.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement("SELECT photo_album_picture FROM PhotoAlbum WHERE id = ?")) {
-//
-//            preparedStatement.setInt(1, photoalbumPictureId);
-//            try (ResultSet photoalbumPictureResultSet = preparedStatement.executeQuery()) {
-//
-//                photoalbumPictureResultSet.next();
-//
-//                return photoalbumPictureResultSet;
-//            }
-//
-//        }
-
+            return photoalbumPictureResultSet.getBinaryStream(1);
+        }
     }
-
 
 }

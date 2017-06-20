@@ -31,10 +31,10 @@
 
         <input type="submit" value="Ответить"/>
 
-        <%System.out.println("In reg-user-forum-this-topic.jsp: user_id - " + session.getAttribute("user_id") + ", " +
-        "email - " + session.getAttribute("email") + ", " +
-        "parent_message_id - " + request.getAttribute("parent_message_id") + ", " +
-        "text - " + request.getParameter("forum_message_text"));%>
+        <%--<%System.out.println("In reg-user-forum-this-topic.jsp: user_id - " + session.getAttribute("user_id") + ", " +--%>
+        <%--"email - " + session.getAttribute("email") + ", " +--%>
+        <%--"parent_message_id - " + request.getAttribute("parent_message_id") + ", " +--%>
+        <%--"text - " + request.getParameter("forum_message_text"));%>--%>
     </form>
 </section>
 

@@ -15,11 +15,11 @@ INSERT INTO MessageStatus (id, description) VALUES (3, 'DELETED');
 
 
 INSERT INTO ForumTheme (theme_order, name)
-VALUES (100, 'Про детей');
+VALUES (100, 'Про детей (не для форума)');
 INSERT INTO ForumTheme (theme_order, name)
-VALUES (200, 'Про взрослых');
+VALUES (200, 'Про взрослых (не для форума)');
 INSERT INTO ForumTheme (theme_order, name)
-VALUES (300, 'Прочее');
+VALUES (300, 'Прочее (не для форума)');
 
 INSERT INTO ForumTheme (theme_order, name)
 VALUES (105, 'Планируем беременность');

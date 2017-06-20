@@ -37,35 +37,27 @@ public class ShowPhotoPicture extends HttpServlet {
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-        String photoPictureIdString = request.getParameter("photo_id");
-
         response.setContentType("image/jpg");
 
+        String photoPictureIdString = request.getParameter("photo_id");
         int photoPictureId = parseInt(photoPictureIdString);
 
-        ResultSet photoPictureResultSet = photoDao.transferPhotoPicture(photoPictureId);
+        try (InputStream inputStream = photoDao.transferPhotoPicture(photoPictureId)) {
 
-        byte[] buffer = new byte[1];
-        int read = 0;
-        InputStream inputStream = null;
-        try {
-            inputStream = photoPictureResultSet.getBinaryStream(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try (OutputStream outputStream = response.getOutputStream()) {
+            byte[] buffer = new byte[1];
+            int read = 0;
 
-            if (inputStream != null) {
-                while ((read = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, read);
+            try (OutputStream outputStream = response.getOutputStream()) {
+
+                if (inputStream != null) {
+                    while ((read = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, read);
+                    }
                 }
+
+                outputStream.flush();
             }
-
-            outputStream.flush();
-//            outputStream.close();
         }
-
 
     }
 

@@ -387,37 +387,19 @@ public class H2PhotoDao implements PhotoDao
         }
     }
 
-
     @Override
     @SneakyThrows
-    public ResultSet transferPhotoPicture(int photoPictureId) {
+    public InputStream transferPhotoPicture(int photoPictureId) {
+        InputStream is = null;
 
-//        TODO: добавить try with resources
+        try (Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT picture FROM Photo WHERE id = ?") ) {
+            preparedStatement.setInt(1, photoPictureId);
+            ResultSet photoPictureResultSet = preparedStatement.executeQuery();
+            photoPictureResultSet.next();
 
-        Connection connection = dataSource.getConnection();
-
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT picture FROM Photo WHERE id = ?");
-        preparedStatement.setInt(1, photoPictureId);
-
-        ResultSet photoPictureResultSet = preparedStatement.executeQuery();
-        photoPictureResultSet.next();
-
-        return photoPictureResultSet;
-
+            return photoPictureResultSet.getBinaryStream(1);
+        }
     }
-
-//    ResultSet photoPictureResultSet;
-//
-//        try (Connection connection = dataSource.getConnection();
-//    PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
-//            "picture FROM Photo WHERE id = ?")) {
-//    preparedStatement.setInt(1, photoPictureId);
-//
-//    photoPictureResultSet = preparedStatement.executeQuery();
-//    while (photoPictureResultSet.next()){}
-//
-//}
-//        return photoPictureResultSet;
-
 
 }

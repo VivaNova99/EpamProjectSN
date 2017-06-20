@@ -41,34 +41,27 @@ public class ShowUsersProfilePicture extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        String usersProfilePictureIdString = request.getParameter("users_profile_picture_id");
-
         response.setContentType("image/jpg");
 
+        String usersProfilePictureIdString = request.getParameter("users_profile_picture_id");
         int usersProfilePictureId = parseInt(usersProfilePictureIdString);
 
-        ResultSet usersProfilePictureResultSet = userDao.transferUsersProfilePicture(usersProfilePictureId);
+        try (InputStream inputStream = userDao.transferUsersProfilePicture(usersProfilePictureId)) {
 
-        byte[] buffer = new byte[1];
-        int read = 0;
-        InputStream inputStream = null;
-        try {
-            inputStream = usersProfilePictureResultSet.getBinaryStream(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try (OutputStream outputStream = response.getOutputStream()) {
+            byte[] buffer = new byte[1];
+            int read = 0;
 
-            if (inputStream != null) {
-                while ((read = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, read);
+            try (OutputStream outputStream = response.getOutputStream()) {
+
+                if (inputStream != null) {
+                    while ((read = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, read);
+                    }
                 }
+
+                outputStream.flush();
             }
-
-            outputStream.flush();
-//            outputStream.close();
         }
-
 
     }
 

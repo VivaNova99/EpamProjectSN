@@ -3,7 +3,6 @@ package dao.H2;
 import dao.UserDao;
 import lombok.SneakyThrows;
 import model.AccessLevel;
-import model.PhotoStatus;
 import model.User;
 
 import javax.servlet.http.Part;
@@ -12,7 +11,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
-import java.sql.Date;
 import java.util.*;
 
 
@@ -471,8 +469,6 @@ public class H2UserDao implements UserDao {
     @SneakyThrows
     public int getUserId(String email) {
 
-        //        TODO: добавить try with resources
-
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
                      "id FROM User WHERE email = ?")){
@@ -491,23 +487,22 @@ public class H2UserDao implements UserDao {
 
     @Override
     @SneakyThrows
-    public ResultSet transferUsersProfilePicture(int usersProfilePictureId) {
+    public InputStream transferUsersProfilePicture(int usersProfilePictureId) {
+        InputStream is = null;
 
-        //TODO: добавить try with resources
+        try (
+                Connection connection = dataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT profile_photo FROM User WHERE id = ?") ) {
+            preparedStatement.setInt(1, usersProfilePictureId);
+            ResultSet usersProfilePicturePictureResultSet = preparedStatement.executeQuery();
+            usersProfilePicturePictureResultSet.next();
 
-        Connection connection = dataSource.getConnection();
-
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT profile_photo FROM User WHERE id = ?");
-        preparedStatement.setInt(1, usersProfilePictureId);
-
-        ResultSet usersProfilePicturePictureResultSet = preparedStatement.executeQuery();
-        usersProfilePicturePictureResultSet.next();
-
-        return usersProfilePicturePictureResultSet;
-
+            return usersProfilePicturePictureResultSet.getBinaryStream(1);
+        }
     }
 
 
+    @Override
     @SneakyThrows
     public void insertUploadedPictureIntoUserProfilePhoto(int id, Part filePart) {
 

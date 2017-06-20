@@ -4,11 +4,9 @@ import lombok.SneakyThrows;
 import model.PhotoAlbum;
 import model.PhotoStatus;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.sql.ResultSet;
+import java.io.InputStream;
 import java.util.Collection;
-import java.util.Optional;
 
 
 public interface PhotoAlbumDao {
@@ -35,6 +33,6 @@ public interface PhotoAlbumDao {
     @SneakyThrows
     int getPhotoalbumId(String photoalbumName);
 
-    ResultSet transferPhotoalbumPicture(int photoalbumPictureId);
+    InputStream transferPhotoalbumPicture(int photoalbumPictureId);
 
 }

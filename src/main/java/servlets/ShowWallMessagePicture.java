@@ -39,32 +39,26 @@ public class ShowWallMessagePicture extends HttpServlet {
     @Override
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String wallMessagePictureIdString = request.getParameter("wall_message_picture_id");
-
         response.setContentType("image/jpg");
 
+        String wallMessagePictureIdString = request.getParameter("wall_message_picture_id");
         int wallMessagePictureId = parseInt(wallMessagePictureIdString);
 
-        ResultSet wallMessagePictureResultSet = wallMessageDao.transferWallMessagePicture(wallMessagePictureId);
+        try (InputStream inputStream = wallMessageDao.transferWallMessagePicture(wallMessagePictureId)) {
 
-        byte[] buffer = new byte[1];
-        int read = 0;
-        InputStream inputStream = null;
-        try {
-            inputStream = wallMessagePictureResultSet.getBinaryStream(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try (OutputStream outputStream = response.getOutputStream()) {
+            byte[] buffer = new byte[1];
+            int read = 0;
 
-            if (inputStream != null) {
-                while ((read = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, read);
+            try (OutputStream outputStream = response.getOutputStream()) {
+
+                if (inputStream != null) {
+                    while ((read = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, read);
+                    }
                 }
-            }
 
-            outputStream.flush();
-//            outputStream.close();
+                outputStream.flush();
+            }
         }
 
 

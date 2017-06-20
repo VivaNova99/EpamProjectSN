@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by veraivanova on 23.03.17.
- */
 public class H2PrivateMessageDao implements PrivateMessageDao {
 
     @Resource(name = "jdbc/TestDB")

@@ -643,10 +643,8 @@ public class H2WallMessageDao implements WallMessageDao {
     public Collection<WallMessage> getLast10ForUser(int someUserId) {
         List<WallMessage> last10ForUserWallMessages = new ArrayList<>();
 
-        //        TODO: добавить try with resources
-
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT " +
                 "wm.id, " +
                 "wm.sender_user_id, " +
                 "u.id, " +
@@ -669,38 +667,39 @@ public class H2WallMessageDao implements WallMessageDao {
                 "JOIN ForumTheme ft ON wm.forum_theme_id = ft.id " +
                 "JOIN WallMessage wmparent ON wm.parent_message_id = wmparent.id " +
                 "WHERE wm.sender_user_id = ? AND wm.id <> 1 AND wm.parent_message_id = 1 " +
-                "ORDER BY date_time DESC LIMIT 10");
+                "ORDER BY date_time DESC LIMIT 10")){
         preparedStatement.setInt(1, someUserId);
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        {
-            while (resultSet.next()){
-                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                last10ForUserWallMessages.add(new WallMessage(
-                        resultSet.getInt("id"),
-                        new User(
-                                resultSet.getInt("sender_user_id"),
-                                resultSet.getBlob("profile_photo"),
-                                resultSet.getString("first_name"),
-                                resultSet.getString("last_name")
-                        ),
-                        resultSet.getString("message_text"),
-                        resultSet.getBlob("picture"),
-                        simpleFormatter.parse(resultSet.getString("date_time")),
-                        new ForumTheme(
-                                resultSet.getString("name")
-                        ),
-                        resultSet.getString("message_header"),
-                        resultSet.getBoolean("is_parent"),
-                        new WallMessage(
-                                resultSet.getString("parent_message_text")
-                        ),
-                        MessageStatus.valueOf(
-                                resultSet.getInt("status_id") - 1)
-                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
-                ));
+            {
+                while (resultSet.next()) {
+                    SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    last10ForUserWallMessages.add(new WallMessage(
+                            resultSet.getInt("id"),
+                            new User(
+                                    resultSet.getInt("sender_user_id"),
+                                    resultSet.getBlob("profile_photo"),
+                                    resultSet.getString("first_name"),
+                                    resultSet.getString("last_name")
+                            ),
+                            resultSet.getString("message_text"),
+                            resultSet.getBlob("picture"),
+                            simpleFormatter.parse(resultSet.getString("date_time")),
+                            new ForumTheme(
+                                    resultSet.getString("name")
+                            ),
+                            resultSet.getString("message_header"),
+                            resultSet.getBoolean("is_parent"),
+                            new WallMessage(
+                                    resultSet.getString("parent_message_text")
+                            ),
+                            MessageStatus.valueOf(
+                                    resultSet.getInt("status_id") - 1)
+                                    .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+                    ));
+                }
+                return last10ForUserWallMessages;
             }
-            return last10ForUserWallMessages;
         }
     }
 
@@ -847,18 +846,18 @@ public class H2WallMessageDao implements WallMessageDao {
 
     @Override
     @SneakyThrows
-    public ResultSet transferWallMessagePicture(int wallMessagePictureId) {
+    public InputStream transferWallMessagePicture(int wallMessagePictureId) {
+        InputStream is = null;
 
-//        TODO: добавить try with resources
+        try (
+            Connection connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT picture FROM WallMessage WHERE id = ?") ) {
+                preparedStatement.setInt(1, wallMessagePictureId);
+                ResultSet wallMessagePictureResultSet = preparedStatement.executeQuery();
+                wallMessagePictureResultSet.next();
 
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT picture FROM WallMessage WHERE id = ?");
-        preparedStatement.setInt(1, wallMessagePictureId);
-        ResultSet wallMessagePictureResultSet = preparedStatement.executeQuery();
-        wallMessagePictureResultSet.next();
-
-        return wallMessagePictureResultSet;
-
+                return wallMessagePictureResultSet.getBinaryStream(1);
+            }
     }
 
 

@@ -5,9 +5,8 @@ import model.Photo;
 import model.PhotoStatus;
 
 import javax.servlet.http.Part;
-import java.sql.ResultSet;
+import java.io.InputStream;
 import java.util.Collection;
-import java.util.Optional;
 
 
 public interface PhotoDao {
@@ -37,7 +36,7 @@ public interface PhotoDao {
     @SneakyThrows
     Collection<Photo> getUserPhotosInThisPhotoalbum(int userId, int photoalbumId);
 
-    ResultSet transferPhotoPicture(int photoPictureId);
+    InputStream transferPhotoPicture(int photoPictureId);
 
 //    @SneakyThrows
 //    void insertUploadedPictureIntoUserPhotos(int userId, int photoAlbumId, Part filePart, String photoDescription, java.util.Date date, PhotoStatus photoStatus);

@@ -36,32 +36,48 @@ public class ShowPhotoAlbumPicture extends HttpServlet {
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String photoalbumPictureIdString = request.getParameter("photoalbum_id");
-
         response.setContentType("image/jpg");
 
+        String photoalbumPictureIdString = request.getParameter("photoalbum_id");
         int photoalbumPictureId = parseInt(photoalbumPictureIdString);
 
-        ResultSet photoalbumPictureResultSet = photoAlbumDao.transferPhotoalbumPicture(photoalbumPictureId);
+        try (InputStream inputStream = photoAlbumDao.transferPhotoalbumPicture(photoalbumPictureId)) {
 
-        byte[] buffer = new byte[1];
+            byte[] buffer = new byte[1];
             int read = 0;
-        InputStream inputStream = null;
-        try {
-            inputStream = photoalbumPictureResultSet.getBinaryStream(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try (OutputStream outputStream = response.getOutputStream()) {
 
-            if (inputStream != null) {
-                while ((read = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, read);
+            try (OutputStream outputStream = response.getOutputStream()) {
+
+                if (inputStream != null) {
+                    while ((read = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, read);
+                    }
                 }
-            }
 
-            outputStream.flush();
+                outputStream.flush();
+            }
         }
+
+//        ResultSet photoalbumPictureResultSet = photoAlbumDao.transferPhotoalbumPicture(photoalbumPictureId);
+//
+//        byte[] buffer = new byte[1];
+//            int read = 0;
+//        InputStream inputStream = null;
+//        try {
+//            inputStream = photoalbumPictureResultSet.getBinaryStream(1);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        try (OutputStream outputStream = response.getOutputStream()) {
+//
+//            if (inputStream != null) {
+//                while ((read = inputStream.read(buffer)) != -1) {
+//                    outputStream.write(buffer, 0, read);
+//                }
+//            }
+//
+//            outputStream.flush();
+//        }
 
 
     }
