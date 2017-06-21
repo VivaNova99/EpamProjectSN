@@ -27,21 +27,21 @@ import static java.lang.Integer.parseInt;
 @MultipartConfig
 public class UploadUsersPhotoPicture extends HttpServlet {
 
-    public static final String USER_INFO_KEY = "UserInfo";
-    public static final String LAST_10_FOR_USER_WALL_MESSAGES_KEY = "Last10ForUserWallMessages";
-    public static final String LAST_5_FOR_USER_PHOTOS_KEY = "Last5ForUserPhotos";
+//    public static final String USER_INFO_KEY = "UserInfo";
+//    public static final String LAST_10_FOR_USER_WALL_MESSAGES_KEY = "Last10ForUserWallMessages";
+//    public static final String LAST_5_FOR_USER_PHOTOS_KEY = "Last5ForUserPhotos";
 
     private UserDao userDao;
     private PhotoDao photoDao;
     private PhotoAlbumDao photoAlbumDao;
-    private WallMessageDao wallMessageDao;
+//    private WallMessageDao wallMessageDao;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         userDao = (UserDao) config.getServletContext().getAttribute("UserDao");
         photoDao = (PhotoDao) config.getServletContext().getAttribute("PhotoDao");
         photoAlbumDao = (PhotoAlbumDao) config.getServletContext().getAttribute("PhotoAlbumDao");
-        wallMessageDao = (WallMessageDao) config.getServletContext().getAttribute("WallMessageDao");
+//        wallMessageDao = (WallMessageDao) config.getServletContext().getAttribute("WallMessageDao");
     }
 
 
@@ -70,12 +70,13 @@ public class UploadUsersPhotoPicture extends HttpServlet {
 
         photoDao.create(userId, photoAlbumId, request.getPart("upfile"), photoDescription, timestamp, photoStatus);
 
-        request.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
-        request.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
-        request.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
+//        request.setAttribute(USER_INFO_KEY, userDao.getUser(userId));
+//        request.setAttribute(LAST_10_FOR_USER_WALL_MESSAGES_KEY, wallMessageDao.getLast10ForUser(userId));
+//        request.setAttribute(LAST_5_FOR_USER_PHOTOS_KEY, photoDao.getLast5(userId));
 
 
-        request.getRequestDispatcher("reg-user-own-page.jsp").forward(request, response);
+//        request.getRequestDispatcher("reg-user-own-page.jsp").forward(request, response);
+        request.getRequestDispatcher("user-photos").forward(request, response);
 //        request.getRequestDispatcher("my-page").forward(request, response);
 
     }
