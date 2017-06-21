@@ -19,7 +19,7 @@
 <div class="header-reg-user">
 
     <ul>
-        <li class="logo">W-only</li>
+        <li class="logo"><a href="my-page">W-only</a></li>
         <li class="exit"><a href="logout">Выйти<i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
     </ul>
     <%--<input type="hidden" name="j_id" value="<%=session.getAttribute("j_id")%>">--%>

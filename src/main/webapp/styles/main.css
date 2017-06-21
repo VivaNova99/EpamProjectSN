@@ -24,3 +24,10 @@ li {
     font-size: 60px;
     color: darkgreen;
 }
+
+.logo > a {
+    padding-left: 10px;
+    font-family: 'Spirax', cursive;
+    font-size: 60px;
+    color: darkgreen;
+}

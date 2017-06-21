@@ -14,7 +14,7 @@
 
 <div class="header-unreg">
     <ul>
-        <li class="logo">W-only</li>
+        <li class="logo"><a href="/">W-only</a></li>
         <li class="please_register">Пожалуйста, <a href="user-login-form.jsp">войдите</a> или <a href="user-registration-form.jsp">зарегистрируйтесь</a></li>
         <%--<li class="please_enter">Пожалуйста, войдите <a href="user-login-form.jsp"></a>--%>
             <%--<textarea class="enter-login" placeholder="login"></textarea>--%>
