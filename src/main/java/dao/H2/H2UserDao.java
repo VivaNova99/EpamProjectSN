@@ -180,9 +180,21 @@ public class H2UserDao implements UserDao {
     }
 
 
+    @SneakyThrows
     @Override
-    public void remove(User user) {
+    public void deleteUser(int id) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM User WHERE id = ?"
+             )){
 
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        }
     }
 
     @Override
@@ -230,51 +242,51 @@ public class H2UserDao implements UserDao {
         }
     }
 
-    @Override
-    @SneakyThrows
-    public List<User> getAllFriends() {
-        List<User> friends = new ArrayList<>();
-
-        try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT " +
-                     "id, " +
-                     "first_name, " +
-                     "last_name, " +
-                     "date_of_birth, " +
-                     "access_level_id, " +
-                     "email, " +
-                     "password, " +
-                     "profile_photo, " +
-                     "status_on_wall, " +
-                     "city FROM User WHERE id <> 1")) {
-
-            while (resultSet.next()) {
-
-                //                Для выгрузки фотографий из базы данных при помощи временных файлов
-//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
-//                h2SavePictureFromDatabase.saveUserProfilePhotoFromDatabaseIntoFile(resultSet);
-
-                friends.add(new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getDate("date_of_birth").toLocalDate(),
-//                        resultSet.getInt("access_level_id"), -достанет только id
-                        AccessLevel.valueOf(
-                                resultSet.getInt("access_level_id") - 1)
-                                .orElseThrow(() -> new RuntimeException("нет такого уровня доступа")),
-                        resultSet.getString("email"),
-                        resultSet.getString("password"),// todo вообще убрать вывод пароля?
-                        // сделать отдельный кейс по проверке соответствия пользователя паролю?
-                        resultSet.getBlob("profile_photo"),
-                        resultSet.getString("status_on_wall"),
-                        resultSet.getString("city")
-                ));
-            }
-            return friends;
-        }
-    }
+//    @Override
+//    @SneakyThrows
+//    public List<User> getAllFriends() {
+//        List<User> friends = new ArrayList<>();
+//
+//        try (Connection connection = dataSource.getConnection();
+//             Statement statement = connection.createStatement();
+//             ResultSet resultSet = statement.executeQuery("SELECT " +
+//                     "id, " +
+//                     "first_name, " +
+//                     "last_name, " +
+//                     "date_of_birth, " +
+//                     "access_level_id, " +
+//                     "email, " +
+//                     "password, " +
+//                     "profile_photo, " +
+//                     "status_on_wall, " +
+//                     "city FROM User WHERE id <> 1")) {
+//
+//            while (resultSet.next()) {
+//
+//                //                Для выгрузки фотографий из базы данных при помощи временных файлов
+////                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+////                h2SavePictureFromDatabase.saveUserProfilePhotoFromDatabaseIntoFile(resultSet);
+//
+//                friends.add(new User(
+//                        resultSet.getInt("id"),
+//                        resultSet.getString("first_name"),
+//                        resultSet.getString("last_name"),
+//                        resultSet.getDate("date_of_birth").toLocalDate(),
+////                        resultSet.getInt("access_level_id"), -достанет только id
+//                        AccessLevel.valueOf(
+//                                resultSet.getInt("access_level_id") - 1)
+//                                .orElseThrow(() -> new RuntimeException("нет такого уровня доступа")),
+//                        resultSet.getString("email"),
+//                        resultSet.getString("password"),// todo вообще убрать вывод пароля?
+//                        // сделать отдельный кейс по проверке соответствия пользователя паролю?
+//                        resultSet.getBlob("profile_photo"),
+//                        resultSet.getString("status_on_wall"),
+//                        resultSet.getString("city")
+//                ));
+//            }
+//            return friends;
+//        }
+//    }
 
 
     @Override

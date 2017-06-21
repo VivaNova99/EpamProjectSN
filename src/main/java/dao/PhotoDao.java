@@ -20,20 +20,18 @@ public interface PhotoDao {
     @SneakyThrows
     void create(int userId, int photoAlbumId, Part filePart, String photoDescription, java.sql.Timestamp timestamp, PhotoStatus photoStatus);
 
-    // update - если понадобится, делать отдельные апдейты по отдельным полям
-    void remove(int id);
+    void deletePhoto(int id);
 
     Collection<Photo> getAll();
 
-    Collection<Photo> getLast5();
+//    Collection<Photo> getLast5();
 
     Collection<Photo> getLast5(int someUserId);
 
-    Collection<Photo> getUserPhotos();
+//    Collection<Photo> getUserPhotos();
 
     Collection<Photo> getUserPhotos(int userId);
 
-    @SneakyThrows
     Collection<Photo> getUserPhotosInThisPhotoalbum(int userId, int photoalbumId);
 
     InputStream transferPhotoPicture(int photoPictureId);

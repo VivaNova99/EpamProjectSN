@@ -1,4 +1,4 @@
-section.all-user-photoalbums {
+section.all-user-photoalbums, section.create-photoalbum {
     padding-top: 15px;
     margin-left: 250px;
     padding-left: 15px;
@@ -32,6 +32,6 @@ section.all-user-photoalbums li.description {
     padding-bottom: 40px;
 }
 
-.unreg section.all-user-photoalbums {
+.unreg section.all-user-photoalbums, section.create-photoalbum {
     margin-left: 0;
 }

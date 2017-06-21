@@ -58,8 +58,21 @@ public class H2PhotoDao implements PhotoDao
     }
 
 
+    @SneakyThrows
     @Override
-    public void remove(int id) {
+    public void deletePhoto(int id) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM Photo WHERE id = ?"
+             )){
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        }
     }
 
     @Override
@@ -113,57 +126,57 @@ public class H2PhotoDao implements PhotoDao
     }
 
 
-    @Override
-    @SneakyThrows
-    public Collection<Photo> getLast5() {
-        List<Photo> last5Photos = new ArrayList<>();
-
-        try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT " +
-                     "p.id, " +
-                     "p.user_id, " +
-                     "u.profile_photo, " +
-                     "u.first_name, " +
-                     "u.last_name, " +
-                     "p.photo_album_id, " +
-                     "pa.name," +
-                     "p.picture, " +
-                     "p.description, " +
-                     "p.date_time, " +
-                     "p.status_id " +
-                     "FROM Photo p " +
-                     "JOIN User u ON p.user_id = u.id " +
-                     "JOIN PhotoAlbum pa ON p.photo_album_id = pa.id " +
-                     "WHERE p.user_id = 1 " +
-                     "ORDER BY date_time DESC LIMIT 5")) {
-            while (resultSet.next()){
-
-                //                Для выгрузки фотографий из базы данных при помощи временных файлов
-//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
-//                h2SavePictureFromDatabase.savePhotoFromDatabaseIntoFile(resultSet);
-
-                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                last5Photos.add(new Photo(
-                        resultSet.getInt("id"),
-                        new User(
-                                resultSet.getInt("user_id"),
-                                resultSet.getBlob("profile_photo"),
-                                resultSet.getString("first_name"),
-                                resultSet.getString("last_name")
-                        ),
-                        new PhotoAlbum(resultSet.getString("name")),
-                        resultSet.getBlob("picture"),
-                        resultSet.getString("description"),
-                        simpleFormatter.parse(resultSet.getString("date_time")),
-                        PhotoStatus.valueOf(
-                                resultSet.getInt("status_id") - 1)
-                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
-                ));
-            }
-            return last5Photos;
-        }
-    }
+//    @Override
+//    @SneakyThrows
+//    public Collection<Photo> getLast5() {
+//        List<Photo> last5Photos = new ArrayList<>();
+//
+//        try (Connection connection = dataSource.getConnection();
+//             Statement statement = connection.createStatement();
+//             ResultSet resultSet = statement.executeQuery("SELECT " +
+//                     "p.id, " +
+//                     "p.user_id, " +
+//                     "u.profile_photo, " +
+//                     "u.first_name, " +
+//                     "u.last_name, " +
+//                     "p.photo_album_id, " +
+//                     "pa.name," +
+//                     "p.picture, " +
+//                     "p.description, " +
+//                     "p.date_time, " +
+//                     "p.status_id " +
+//                     "FROM Photo p " +
+//                     "JOIN User u ON p.user_id = u.id " +
+//                     "JOIN PhotoAlbum pa ON p.photo_album_id = pa.id " +
+//                     "WHERE p.user_id = 1 " +
+//                     "ORDER BY date_time DESC LIMIT 5")) {
+//            while (resultSet.next()){
+//
+//                //                Для выгрузки фотографий из базы данных при помощи временных файлов
+////                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+////                h2SavePictureFromDatabase.savePhotoFromDatabaseIntoFile(resultSet);
+//
+//                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                last5Photos.add(new Photo(
+//                        resultSet.getInt("id"),
+//                        new User(
+//                                resultSet.getInt("user_id"),
+//                                resultSet.getBlob("profile_photo"),
+//                                resultSet.getString("first_name"),
+//                                resultSet.getString("last_name")
+//                        ),
+//                        new PhotoAlbum(resultSet.getString("name")),
+//                        resultSet.getBlob("picture"),
+//                        resultSet.getString("description"),
+//                        simpleFormatter.parse(resultSet.getString("date_time")),
+//                        PhotoStatus.valueOf(
+//                                resultSet.getInt("status_id") - 1)
+//                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+//                ));
+//            }
+//            return last5Photos;
+//        }
+//    }
 
 
     @Override
@@ -222,57 +235,57 @@ public class H2PhotoDao implements PhotoDao
     }
 
 
-    @Override
-    @SneakyThrows
-    public Collection<Photo> getUserPhotos() {
-        List<Photo> UserPhotos = new ArrayList<>();
-
-        try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT " +
-                     "p.id, " +
-                     "p.user_id, " +
-                     "u.profile_photo, " +
-                     "u.first_name, " +
-                     "u.last_name, " +
-                     "p.photo_album_id, " +
-                     "pa.name," +
-                     "p.picture, " +
-                     "p.description, " +
-                     "p.date_time, " +
-                     "p.status_id " +
-                     "FROM Photo p " +
-                     "JOIN User u ON p.user_id = u.id " +
-                     "JOIN PhotoAlbum pa ON p.photo_album_id = pa.id " +
-                     "WHERE p.user_id = 1 " +
-                     "ORDER BY date_time DESC")) {
-            while (resultSet.next()){
-
-                //                Для выгрузки фотографий из базы данных при помощи временных файлов
-//                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
-//                h2SavePictureFromDatabase.savePhotoFromDatabaseIntoFile(resultSet);
-
-                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                UserPhotos.add(new Photo(
-                        resultSet.getInt("id"),
-                        new User(
-                                resultSet.getInt("user_id"),
-                                resultSet.getBlob("profile_photo"),
-                                resultSet.getString("first_name"),
-                                resultSet.getString("last_name")
-                        ),
-                        new PhotoAlbum(resultSet.getString("name")),
-                        resultSet.getBlob("picture"),
-                        resultSet.getString("description"),
-                        simpleFormatter.parse(resultSet.getString("date_time")),
-                        PhotoStatus.valueOf(
-                                resultSet.getInt("status_id") - 1)
-                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
-                ));
-            }
-            return UserPhotos;
-        }
-    }
+//    @Override
+//    @SneakyThrows
+//    public Collection<Photo> getUserPhotos() {
+//        List<Photo> UserPhotos = new ArrayList<>();
+//
+//        try (Connection connection = dataSource.getConnection();
+//             Statement statement = connection.createStatement();
+//             ResultSet resultSet = statement.executeQuery("SELECT " +
+//                     "p.id, " +
+//                     "p.user_id, " +
+//                     "u.profile_photo, " +
+//                     "u.first_name, " +
+//                     "u.last_name, " +
+//                     "p.photo_album_id, " +
+//                     "pa.name," +
+//                     "p.picture, " +
+//                     "p.description, " +
+//                     "p.date_time, " +
+//                     "p.status_id " +
+//                     "FROM Photo p " +
+//                     "JOIN User u ON p.user_id = u.id " +
+//                     "JOIN PhotoAlbum pa ON p.photo_album_id = pa.id " +
+//                     "WHERE p.user_id = 1 " +
+//                     "ORDER BY date_time DESC")) {
+//            while (resultSet.next()){
+//
+//                //                Для выгрузки фотографий из базы данных при помощи временных файлов
+////                H2SavePictureFromDatabase h2SavePictureFromDatabase = new H2SavePictureFromDatabase();
+////                h2SavePictureFromDatabase.savePhotoFromDatabaseIntoFile(resultSet);
+//
+//                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                UserPhotos.add(new Photo(
+//                        resultSet.getInt("id"),
+//                        new User(
+//                                resultSet.getInt("user_id"),
+//                                resultSet.getBlob("profile_photo"),
+//                                resultSet.getString("first_name"),
+//                                resultSet.getString("last_name")
+//                        ),
+//                        new PhotoAlbum(resultSet.getString("name")),
+//                        resultSet.getBlob("picture"),
+//                        resultSet.getString("description"),
+//                        simpleFormatter.parse(resultSet.getString("date_time")),
+//                        PhotoStatus.valueOf(
+//                                resultSet.getInt("status_id") - 1)
+//                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+//                ));
+//            }
+//            return UserPhotos;
+//        }
+//    }
 
 
     @Override

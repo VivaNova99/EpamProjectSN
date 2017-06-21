@@ -22,11 +22,13 @@ public interface PhotoAlbumDao {
     void createWithDefaultPicture(String photoAlbumName, int userId, String photoAlbumDescription, java.sql.Timestamp timestamp, PhotoStatus photoAlbumStatus);
 
     // update - если понадобится, делать отдельные апдейты по отдельным полям
-    void remove(int id);
+//    void remove(int id);
+
+    void deletePhotoalbum(int id);
 
     Collection<PhotoAlbum> getAll();
 
-    Collection<PhotoAlbum> getUserPhotoAlbums();
+//    Collection<PhotoAlbum> getUserPhotoAlbums();
 
     Collection<PhotoAlbum> getUserPhotoAlbums(int userId);
 

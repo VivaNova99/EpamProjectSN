@@ -1,5 +1,6 @@
 package dao;
 
+import lombok.SneakyThrows;
 import model.User;
 
 import javax.servlet.http.Part;
@@ -25,12 +26,14 @@ public interface UserDao {
 
     void update(User user);
 
-    void remove(User user); //удаление в базе той сущности, которая соответствует данному объекту,
-    // объект остается
+//    void remove(User user); //удаление в базе той сущности, которая соответствует данному объекту,
+//    // объект остается
+
+    void deleteUser(int id);
 
     List<User> getAll();
 
-    List<User> getAllFriends();
+//    List<User> getAllFriends();
 
     List<User> getAllFriends(int userId);
 

@@ -52,10 +52,24 @@ public class H2PrivateMessageDao implements PrivateMessageDao {
         }
     }
 
-    @Override
-    public void remove(int id) {
 
+    @SneakyThrows
+    @Override
+    public void deletePrivateMessage(int id) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM PrivateMessage WHERE id = ?"
+             )){
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        }
     }
+
 
     @Override
     @SneakyThrows
@@ -110,59 +124,59 @@ public class H2PrivateMessageDao implements PrivateMessageDao {
     }
 
 
-    @Override
-    @SneakyThrows
-    public Collection<PrivateMessage> getMyPrivateMessages() {
-        List<PrivateMessage> myPrivateMessages = new ArrayList<>();
-
-        try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT " +
-                     "pm.id, " +
-                     "pm.sender_user_id, " +
-                     "u1.id as sender_user_id, " +
-                     "u1.profile_photo as sender_profile_photo, " +
-                     "u1.first_name as sender_first_name, " +
-                     "u1.last_name as sender_last_name, " +
-                     "pm.receiver_user_id," +
-                     "u2.id as receiver_user_id, " +
-                     "u2.profile_photo as receiver_profile_photo, " +
-                     "u2.first_name as receiver_first_name, " +
-                     "u2.last_name as receiver_last_name, " +
-                     "text," +
-                     "date_time, " +
-                     "status_id " +
-                     "FROM PrivateMessage pm " +
-                     "JOIN User u1 ON pm.sender_user_id = u1.id " +
-                     "JOIN User u2 ON pm.receiver_user_id = u2.id " +
-                     "WHERE pm.sender_user_id = 1 OR pm.receiver_user_id = 1 " +
-                     "ORDER BY date_time DESC")) {
-            while (resultSet.next()){
-                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                myPrivateMessages.add(new PrivateMessage(
-                        resultSet.getInt("id"),
-                        new User(
-                                resultSet.getInt("sender_user_id"),
-                                resultSet.getBlob("sender_profile_photo"),
-                                resultSet.getString("sender_first_name"),
-                                resultSet.getString("sender_last_name")
-                        ),
-                        new User(
-                                resultSet.getInt("receiver_user_id"),
-                                resultSet.getBlob("receiver_profile_photo"),
-                                resultSet.getString("receiver_first_name"),
-                                resultSet.getString("receiver_last_name")
-                        ),
-                        resultSet.getString("text"),
-                        simpleFormatter.parse(resultSet.getString("date_time")),
-                        MessageStatus.valueOf(
-                                resultSet.getInt("status_id") - 1)
-                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
-                ));
-            }
-            return myPrivateMessages;
-        }
-    }
+//    @Override
+//    @SneakyThrows
+//    public Collection<PrivateMessage> getMyPrivateMessages() {
+//        List<PrivateMessage> myPrivateMessages = new ArrayList<>();
+//
+//        try (Connection connection = dataSource.getConnection();
+//             Statement statement = connection.createStatement();
+//             ResultSet resultSet = statement.executeQuery("SELECT " +
+//                     "pm.id, " +
+//                     "pm.sender_user_id, " +
+//                     "u1.id as sender_user_id, " +
+//                     "u1.profile_photo as sender_profile_photo, " +
+//                     "u1.first_name as sender_first_name, " +
+//                     "u1.last_name as sender_last_name, " +
+//                     "pm.receiver_user_id," +
+//                     "u2.id as receiver_user_id, " +
+//                     "u2.profile_photo as receiver_profile_photo, " +
+//                     "u2.first_name as receiver_first_name, " +
+//                     "u2.last_name as receiver_last_name, " +
+//                     "text," +
+//                     "date_time, " +
+//                     "status_id " +
+//                     "FROM PrivateMessage pm " +
+//                     "JOIN User u1 ON pm.sender_user_id = u1.id " +
+//                     "JOIN User u2 ON pm.receiver_user_id = u2.id " +
+//                     "WHERE pm.sender_user_id = 1 OR pm.receiver_user_id = 1 " +
+//                     "ORDER BY date_time DESC")) {
+//            while (resultSet.next()){
+//                SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                myPrivateMessages.add(new PrivateMessage(
+//                        resultSet.getInt("id"),
+//                        new User(
+//                                resultSet.getInt("sender_user_id"),
+//                                resultSet.getBlob("sender_profile_photo"),
+//                                resultSet.getString("sender_first_name"),
+//                                resultSet.getString("sender_last_name")
+//                        ),
+//                        new User(
+//                                resultSet.getInt("receiver_user_id"),
+//                                resultSet.getBlob("receiver_profile_photo"),
+//                                resultSet.getString("receiver_first_name"),
+//                                resultSet.getString("receiver_last_name")
+//                        ),
+//                        resultSet.getString("text"),
+//                        simpleFormatter.parse(resultSet.getString("date_time")),
+//                        MessageStatus.valueOf(
+//                                resultSet.getInt("status_id") - 1)
+//                                .orElseThrow(() -> new RuntimeException("нет такого статуса"))
+//                ));
+//            }
+//            return myPrivateMessages;
+//        }
+//    }
 
 
     @Override

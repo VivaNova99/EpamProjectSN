@@ -1,4 +1,4 @@
-section.all-user-photos {
+section.all-user-photos, section.create-photo {
     padding-top: 15px;
     margin-left: 250px;
     padding-left: 15px;
@@ -34,4 +34,8 @@ section.all-user-photos li.date-time {
 
 section.all-user-photos li.description {
     padding-bottom: 40px;
+}
+
+.unreg section.all-user-photos, section.create-photo {
+    margin-left: 0;
 }

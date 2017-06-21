@@ -16,12 +16,12 @@ public interface PrivateMessageDao {
 //                .filter(privateMessage -> privateMessage.getId() == id)
 //                .findAny();
 //    };
-    // update - если понадобится, делать отдельные апдейты по отдельным полям
-    void remove(int id);
+
+    void deletePrivateMessage(int id);
 
     Collection<PrivateMessage> getAll();
 
-    Collection<PrivateMessage> getMyPrivateMessages();
+//    Collection<PrivateMessage> getMyPrivateMessages();
 
     Collection<PrivateMessage> getMyPrivateMessages(int userId);
 
