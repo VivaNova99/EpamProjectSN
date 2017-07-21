@@ -1,6 +1,7 @@
 package controllers;
 
 import dao.*;
+import model.WallMessage;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static java.lang.Integer.parseInt;
 import static model.User.FIRST_NAME_KEY;
@@ -25,7 +28,7 @@ public class ForumThemeController extends HttpServlet {
     public static final String ALL_USERS_KEY = "AllUser";
     public static final String ALL_FORUM_THEMES_KEY = "AllForumThemes";
     public static final String ALL_WALL_MESSAGES_KEY = "AllWallMessages";
-    public static final String THIS_THEME_WALL_MESSAGES_KEY = "ThisThemeWallMessages";
+//    public static final String THIS_THEME_WALL_MESSAGES_KEY = "ThisThemeWallMessages";
 
 
     private UserDao userDao;
@@ -57,10 +60,33 @@ public class ForumThemeController extends HttpServlet {
 //        req.setAttribute("user_id", req.getParameter("user_id"));
 //        req.setAttribute("email", req.getParameter("email"));
 
+//        List thisForumTheme = (List)wallMessageDao.getThisForumTheme(thisForumThemeOrder);
+//        List<WallMessage> thisThemeWallMessages = new ArrayList<WallMessage>(thisForumTheme.size());
+//        for (Object message : thisForumTheme){
+//            WallMessage wallMessage = new WallMessage();
+//            wallMessage.setId(message.get)
+//        }
+
+        Collection<WallMessage> messages = (Collection<WallMessage>)wallMessageDao.getThisForumTheme(thisForumThemeOrder);
+        List<WallMessage> thisThemeWallMessages = new ArrayList<>(messages.size());
+        SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for (WallMessage message : messages) {
+            WallMessage wm = new WallMessage();
+            wm.setId(message.getId());
+            wm.setMessageHeader(message.getMessageHeader());
+//            wm.setSenderUserFirstNameAndLastName(message.getSenderUserFirstNameAndLastName());
+            try {
+                wm.setDateTime(simpleFormatter.parse(message.getDateTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
-        req.setAttribute(THIS_THEME_WALL_MESSAGES_KEY, wallMessageDao.getThisForumTheme(thisForumThemeOrder));
+//        req.setAttribute(THIS_THEME_WALL_MESSAGES_KEY, wallMessageDao.getThisForumTheme(thisForumThemeOrder));
+        req.setAttribute("thisThemeWallMessages", thisThemeWallMessages);
 
 
         if (b && !((req.getParameter("email")).equals("null")) ) {

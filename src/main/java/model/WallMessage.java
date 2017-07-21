@@ -31,6 +31,9 @@ public class WallMessage {
         this.text = text;
     }
 
+    public WallMessage(int id, User user, String message_text, Blob picture, Date date_time, ForumTheme name, String message_header, boolean is_parent, WallMessage wallMessage, MessageStatus messageStatus) {
+    }
+
     public String getDateTime() {
         try {
             return new SimpleDateFormat("dd.MM.yyyy hh:mm").format(this.dateTime);
@@ -39,6 +42,8 @@ public class WallMessage {
             return "Дата и время не определены";
         }
     }
+
+    private String senderUserFirstNameAndLastName;
 
     public int getSenderUserId() { return senderUser.getId(); }
 
@@ -56,6 +61,10 @@ public class WallMessage {
 
     public boolean getParent() {
         return parent;
+    }
+
+    public void setSenderUserFirstNameAndLastName(String senderUserFirstNameAndLastName) {
+        this.senderUserFirstNameAndLastName = senderUserFirstNameAndLastName;
     }
 }
 
