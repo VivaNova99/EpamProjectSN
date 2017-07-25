@@ -22,59 +22,60 @@
 
 <section class="forum-this-theme">
 
-    <c:forEach var="thisThemeWallMessage" items="${thisThemeWallMessages}" varStatus="counter">
-        <c:set var="subforumName" scope="page" value="${thisThemeWallMessage.getForumThemeName()}"/>
+    <%--<c:forEach var="thisThemeWallMessage" items="${requestScope.thisThemeWallMessages}" varStatus="counter">--%>
+        <%--&lt;%&ndash;<c:set var="subforumName" scope="page" value="${thisThemeWallMessage.getForumThemeName()}"/>&ndash;%&gt;--%>
 
-    <%--<%--%>
-        <%--Collection<WallMessage> thisThemeWallMessages = (Collection<WallMessage>) request.getAttribute(ForumThemeController.THIS_THEME_WALL_MESSAGES_KEY);--%>
-        <%--String subforumName = null;--%>
-    <%--%>--%>
-
-    <ul>
-
-        <li>
-            <ul>
-                <li class="header"><a href="forum-this-topic?this_forum_topic_id=<c:out value="${counter.id}"/>&email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><c:out value="${counter.messageHeader}"/></a></li>
-                <li class="name"><c:out value="${counter.senderUserFirstNameAndLastName}"/></li>
-                <li class="date-time"><c:out value="${counter.dateTime}"/></li>
-            </ul>
-
-        </li>
-
-
-        <li class="forum-theme"><h1><c:out value="subforumName"/></h1></li>
-
-    </ul>
-
-
-
-   </c:forEach>
-
-    <%--<%--%>
-        <%--Collection<WallMessage> thisThemeWallMessages = (Collection<WallMessage>) request.getAttribute(ForumThemeController.THIS_THEME_WALL_MESSAGES_KEY);--%>
-        <%--String subforumName = null;--%>
-    <%--%>--%>
+    <%--&lt;%&ndash;&lt;%&ndash;%>--%>
+        <%--&lt;%&ndash;Collection<WallMessage> thisThemeWallMessages = (Collection<WallMessage>) request.getAttribute(ForumThemeController.THIS_THEME_WALL_MESSAGES_KEY);&ndash;%&gt;--%>
+        <%--&lt;%&ndash;String subforumName = null;&ndash;%&gt;--%>
+    <%--&lt;%&ndash;%>&ndash;%&gt;--%>
 
     <%--<ul>--%>
-        <%--<%--%>
-            <%--for (WallMessage thisThemeWallMessage: thisThemeWallMessages) {--%>
-        <%--%>--%>
+
         <%--<li>--%>
             <%--<ul>--%>
-                <%--<li class="header"><a href="forum-this-topic?this_forum_topic_id=<%=thisThemeWallMessage.getId()%>&email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><%=thisThemeWallMessage.getMessageHeader()%></a></li>--%>
-                <%--<li class="name"><%=thisThemeWallMessage.getSenderUserFirstNameAndLastName()%></li>--%>
-                <%--<li class="date-time"><%=thisThemeWallMessage.getDateTime()%></li>--%>
+                <%--<li class="topic-header"><a href="forum-this-topic?this_forum_topic_id=<c:out value="${thisThemeWallMessage.id}"/>&email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><c:out value="${thisThemeWallMessage.messageHeader}"/></a></li>--%>
+                <%--<li class="name"><c:out value="${thisThemeWallMessage.senderUserFirstNameAndLastName}"/></li>--%>
+                <%--<li class="date-time"><c:out value="${thisThemeWallMessage.dateTime}"/></li>--%>
             <%--</ul>--%>
 
         <%--</li>--%>
-        <%--<%--%>
-                <%--subforumName = thisThemeWallMessage.getForumThemeName();--%>
-            <%--}--%>
-        <%--%>--%>
 
-        <%--<li class="forum-theme"><h1><%=subforumName%></h1></li>--%>
+
+        <%--&lt;%&ndash;<li class="forum-theme"><h1><c:out value="subforumName"/></h1></li>&ndash;%&gt;--%>
 
     <%--</ul>--%>
+
+
+
+   <%--</c:forEach>--%>
+
+    <%
+//        Collection<WallMessage> thisThemeWallMessages = (Collection<WallMessage>) request.getAttribute(ForumThemeController.THIS_THEME_WALL_MESSAGES_KEY);
+        Collection<WallMessage> thisThemeWallMessages = (Collection<WallMessage>) request.getAttribute("thisThemeWallMessages1");
+        String subforumName = null;
+    %>
+
+    <ul>
+        <%
+            for (WallMessage thisThemeWallMessage: thisThemeWallMessages) {
+        %>
+        <li>
+            <ul>
+                <li class="header"><a href="forum-this-topic?this_forum_topic_id=<%=thisThemeWallMessage.getId()%>&email=<%=session.getAttribute("email")%>&user_id=<%=session.getAttribute("user_id")%>"><%=thisThemeWallMessage.getMessageHeader()%></a></li>
+                <li class="name"><%=thisThemeWallMessage.getSenderUserFirstNameAndLastName()%></li>
+                <li class="date-time"><%=thisThemeWallMessage.getDateTime()%></li>
+            </ul>
+
+        </li>
+        <%
+                subforumName = thisThemeWallMessage.getForumThemeName();
+            }
+        %>
+
+        <li class="forum-theme"><h1><%=subforumName%></h1></li>
+
+    </ul>
 
 </section>
 

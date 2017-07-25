@@ -67,26 +67,31 @@ public class ForumThemeController extends HttpServlet {
 //            wallMessage.setId(message.get)
 //        }
 
-        Collection<WallMessage> messages = (Collection<WallMessage>)wallMessageDao.getThisForumTheme(thisForumThemeOrder);
-        List<WallMessage> thisThemeWallMessages = new ArrayList<>(messages.size());
-        SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        for (WallMessage message : messages) {
-            WallMessage wm = new WallMessage();
-            wm.setId(message.getId());
-            wm.setMessageHeader(message.getMessageHeader());
-//            wm.setSenderUserFirstNameAndLastName(message.getSenderUserFirstNameAndLastName());
-            try {
-                wm.setDateTime(simpleFormatter.parse(message.getDateTime()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
+//        Collection<WallMessage> messages = (Collection<WallMessage>)wallMessageDao.getThisForumTheme(thisForumThemeOrder);
+//        List<WallMessage> thisThemeWallMessages = new ArrayList<>(messages.size());
+//        SimpleDateFormat simpleFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        System.out.println("in ForumThemeController.java");
+//        for (WallMessage message : messages) {
+//            WallMessage wm = new WallMessage();
+//            wm.setId(message.getId());
+//            System.out.println("id - " + message.getId());
+//            wm.setMessageHeader(message.getMessageHeader());
+//            System.out.println("header - " + message.getMessageHeader());
+////            wm.setSenderUserFirstNameAndLastName(message.getSenderUserFirstNameAndLastName());
+//            try {
+//                wm.setDateTime(simpleFormatter.parse(message.getDateTime()));
+//                System.out.println("date - " + message.getDateTime());
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         req.setAttribute(ALL_USERS_KEY, userDao.getAll());
         req.setAttribute(ALL_FORUM_THEMES_KEY, forumThemeDao.getAll());
         req.setAttribute(ALL_WALL_MESSAGES_KEY, wallMessageDao.getAll());
 //        req.setAttribute(THIS_THEME_WALL_MESSAGES_KEY, wallMessageDao.getThisForumTheme(thisForumThemeOrder));
-        req.setAttribute("thisThemeWallMessages", thisThemeWallMessages);
+//        req.setAttribute("thisThemeWallMessages", thisThemeWallMessages);
+        req.setAttribute("thisThemeWallMessages1", wallMessageDao.getThisForumTheme(thisForumThemeOrder));
 
 
         if (b && !((req.getParameter("email")).equals("null")) ) {
